@@ -69,7 +69,7 @@ const breakpoints = {
 }
 </script>
 <template>
-  <section class="mt-28 mb-12 pt-12">
+  <section class="my-20">
     <div class="container text-center mb-8">
       <div class="border-title mb-2 mx-auto"></div>
       <p class="mb-6 tracking-widest font-bold">

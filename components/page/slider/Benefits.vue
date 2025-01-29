@@ -26,7 +26,7 @@ const breakpoints = {
 </script>
 
 <template>
-  <section class="bg-secondary mt-28 mb-12 bg-opacity-10 py-6 rounded-md m-3">
+  <section class="bg-secondary my-20 bg-opacity-10 py-6 rounded-md m-3">
     <div class="container">
       <div class="relative inset-y-10 items-center justify-between w-full flex lg:hidden ">
         <div>

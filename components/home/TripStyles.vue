@@ -45,8 +45,8 @@ const curatedTrips = [
 ]
 </script>
 <template>
-  <section class="bg-secondary bg-opacity-30 mt-28 mb-12 py-12">
-    <div class="p-8 container">
+  <section class="bg-secondary bg-opacity-30 my-20 py-12 rounded-md m-3">
+    <div class="p-8 container ">
       <div class="text-center mb-8">
         <div class="border-title mb-2 mx-auto"></div>
         <p class="mb-6 tracking-widest font-bold">

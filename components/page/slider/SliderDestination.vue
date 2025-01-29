@@ -14,10 +14,10 @@ const slides = [
 ];
 </script>
 <template>
-  <section class="mt-28 mb-12">
+  <section class="my-20">
     <carousel :items-to-show="1.2" :gap="200">
       <slide v-for="(slide, index) in slides" :key="index">
-        <img :src="slide.image" alt="Slide Image" class="w-full h-[60vh] object-cover rounded-md" />
+        <img :src="slide.image" alt="Slide Image" class="w-full h-[60vh] object-cover p-12 rounded-md" />
         <div class="absolute inset-0 flex flex-col items-start justify-center p-8 md:p-16 lg:p-24">
           <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold font-playfair">
             {{ slide.title }}
@@ -27,6 +27,9 @@ const slides = [
           </button>
         </div>
       </slide>
+      <template #addons>
+        <CarouselPagination />
+      </template>
     </Carousel>
   </section>
 </template>

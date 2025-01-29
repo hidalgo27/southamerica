@@ -25,7 +25,7 @@ const posts = ref([
 </script>
 
 <template>
-  <section class="container mt-28 mb-12">
+  <section class="container my-20">
     <div class="text-center mb-8 md:text-start">
       <h2 class="mb-6 tracking-widest font-bold">
         Get Inspired

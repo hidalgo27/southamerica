@@ -2,7 +2,7 @@
   <section class="container ">
     <div class="block border-b border-gray-200 w-full mb-8"></div>
   </section>
-  <section class="container mt-28 mb-12">
+  <section class="container my-20">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="text-center grid grid-cols-2">
         <img src="https://picsum.photos/400/300" alt="icon" class="w-full rounded-md" />

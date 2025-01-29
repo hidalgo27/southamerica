@@ -4,7 +4,6 @@ import SliderPackages from '~/components/page/slider/SliderPackages.vue'
 import SliderDestination from '~/components/page/slider/SliderDestination.vue'
 import TripStyles from '~/components/home/TripStyles.vue'
 import TopPlaces from '~/components/home/TopPlaces.vue'
-import CardSlider from '~/components/page/slider/CardSlider.vue'
 import TravelStories from '~/components/home/TravelStories.vue'
 import Reviews from '~/components/home/Reviews.vue'
 import Newsletter from '~/components/home/Newsletter.vue'
@@ -53,7 +52,7 @@ onMounted(async () => {
     </div>
   </section>
 
-  <section class="container mt-28 mb-12">
+  <section class="container my-20">
     <div class="text-center ">
       <div class="border-title mb-2 mx-auto"></div>
       <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide"> Why South America Company?</h1>
@@ -68,7 +67,7 @@ onMounted(async () => {
 
   <Benefits></Benefits>
 
-  <div class="flex flex-col items-center justify-center mt-28 mb-12 bg-white" id="app">
+  <div class="flex flex-col items-center justify-center my-20 bg-white" id="app">
     <div class="border-title mb-2 mx-auto"></div>
     <p class="mb-6 tracking-widest font-bold">
       As featured in
@@ -89,7 +88,7 @@ onMounted(async () => {
 
   <TopPlaces></TopPlaces>
 
-  <section class="container mt-28 mb-12">
+  <section class="container my-20">
     <div class=" flex items-center justify-center ">
       <div class="flex flex-col md:flex-row bg-white overflow-hidden w-full gap-6">
         <div class="bg-secondary bg-opacity-10 py-32 px-16 rounded-md">

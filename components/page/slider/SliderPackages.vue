@@ -2,33 +2,32 @@
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide, Navigation as CarouselNavigation } from "vue3-carousel";
 
-const activeIndex = ref(0);
 const listPackages = [
   {
     titulo: 'Machu Picchu & Galapagos Islands',
     imagen: 'https://picsum.photos/400/300',
     duracion: 7,
-    url: 'machu-picchu-galapagos-islands',
+    url: '#',
     precio_paquetes: 0,
   },
   {
     titulo: 'Machu Picchu & Galapagos Islands',
     imagen: 'https://picsum.photos/400/300',
-    url: 'machu-picchu-galapagos-islands',
+    url: '#',
     duracion: 7,
     precio_paquetes: 0,
   },
   {
     titulo: 'Machu Picchu & Galapagos Islands',
-    imagen: 'https://picsum.photos/400/300',
-    url: 'machu-picchu-galapagos-islands',
+    imagen: 'https://picsum.photos/400/700',
+    url: '#',
     duracion: 7,
     precio_paquetes: 0,
   },
   {
     titulo: 'Machu Picchu & Galapagos Islands',
-    imagen: 'https://picsum.photos/400/300',
-    url: 'machu-picchu-galapagos-islands',
+    imagen: 'https://picsum.photos/400/500',
+    url: '#',
     duracion: 7,
     precio_paquetes: 1,
   },
@@ -51,7 +50,7 @@ const breakpoints = {
 </script>
 
 <template>
-  <section class="container mt-28 mb-12">
+  <section class="container my-20">
     <div class="text-center tracking-widest font-bold">
       <div class="border-title mb-2 mx-auto"></div>
       <p class="mb-6 tracking-widest font-bold">Top Trip Experiences</p>
@@ -59,14 +58,14 @@ const breakpoints = {
       </h1>
     </div>
     <carousel :breakpoints="breakpoints">
-      <slide v-for="(packages, index) in listPackages" :key="index">
-        <nuxt-link :to="'/peru-travel-packages/' + packages.url"
-          class="bg-white content-between overflow-hidden rounded-md border group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out h-full">
+      <slide v-for="(packages, index) in listPackages" :key="index" class="flex-grow" :gap="20">
+        <nuxt-link :to="packages.url"
+          class=" w-full bg-white rounded-md border group flex-grow cursor-pointer hover:shadow-lg transition duration-500 ease-in-out">
           <div>
             <div class="overflow-hidden relative">
               <div class="absolute inset-0 gradient-cicle-beige z-10"></div>
               <nuxt-img :src="packages.imagen" :alt="packages.titulo"
-                class="w-[400px] object-cover h-[300px] transition duration-500 ease-in-out transform group-hover:scale-105" />
+                class="w-full object-cover h-[300px] transition duration-500 ease-in-out transform group-hover:scale-105" />
               <span class="absolute bottom-0 left-0 p-1 m-3 rounded-md z-20 backdrop-blur-lg font-normal text-white">
                 {{ packages.duracion }} days
               </span>

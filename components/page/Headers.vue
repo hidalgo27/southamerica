@@ -42,6 +42,7 @@
         <nav class="container flex justify-center text-center">
           <nuxt-link to="#" class="menu-list" active-class="active">Peru Travel Packages</nuxt-link>
           <nuxt-link to="/destinations" class="menu-list" active-class="active">Destinations</nuxt-link>
+          <nuxt-link to="/experiences" class="menu-list" active-class="active">Experiences</nuxt-link>
         </nav>
       </div>
 

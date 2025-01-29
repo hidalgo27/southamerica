@@ -22,7 +22,7 @@ const reviews = ref([
 
 </script>
 <template>
-  <section class="container mt-28 mb-12">
+  <section class="container my-20">
     <div class="flex flex-col lg:flex-row items-center justify-center w-full">
       <div class="relative flex-1 lg:w-1/2 h-96 lg:h-auto">
         <img alt="Hot air balloons over a rocky landscape" class="w-full h-full object-cover rounded-md"

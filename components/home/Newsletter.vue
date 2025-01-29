@@ -2,7 +2,7 @@
 
 </script>
 <template>
-  <section class="flex items-center justify-center mt-28 mb-12 container">
+  <section class="flex items-center justify-center my-20 container">
     <div class="bg-tertiary bg-opacity-10 p-10 md:p-20  rounded-md w-full">
       <div class="flex flex-col md:flex-row items-center">
         <div class="flex-1">
