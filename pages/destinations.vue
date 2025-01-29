@@ -175,8 +175,8 @@ const continentes = [
 </script>
 <template>
   <section>
-    <div class="relative w-full h-screen 2xl:h-[70vh] px-3">
-      <div class="overflow-hidden h-full relative rounded-md">
+    <div class="relative w-full h-screen 2xl:h-[70vh] ">
+      <div class="overflow-hidden h-full relative ">
         <div class="mask gradient-cicle-gray items-center flex justify-center">
           <div v-if="loading" class="mt-40 text-center">
             Cargando ..
@@ -184,7 +184,7 @@ const continentes = [
         </div>
         <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>
         <div class="relative z-10 flex items-center  w-full h-full text-center">
-          <nav class="absolute top-0 left-0 text-gray-50 text-sm p-4">
+          <nav class="absolute top-0 md:top-40 left-0 text-gray-50 text-md p-4 backdrop-blur-md rounded-md">
             <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
             <span v-if="breadcrumbs.length"> / </span>
             <span v-for="(crumb, index) in breadcrumbs" :key="index">

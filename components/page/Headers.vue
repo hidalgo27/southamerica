@@ -1,8 +1,7 @@
 <template>
-  <div class="p-3 transition-transform duration-300 ${
-      isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
-    }">
-    <div :class="`rounded-md ${bgColor} bg-opacity-10 hidden sm:block`">
+  <div
+    :class="`${position} top-0 left-0 w-full ${zIndex} transition-transform duration-300 ${isHeaderVisible ? '-translate-y-0' : '-translate-y-full'}`">
+    <div :class="`rounded-md ${bgColor} hidden sm:block m-3`">
       <div class="border-b border-secondary border-opacity-20">
         <div class="p-12 flex justify-between py-5 items-center">
           <div class="flex items-center gap-4">
@@ -27,7 +26,6 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
           </div>
-          <!--      <Nav></Nav>-->
           <div class="flex gap-3 items-center">
             <div class="leading-5 text-right">
               <span class="font-semibold block">+1 (202) 4911478</span>
@@ -49,54 +47,56 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
-import { usePackageStore } from "~/stores/packages";
-import Nav from "~/components/page/Nav.vue";
-import Typing from "~/components/page/Typing.vue";
-const packageStore = usePackageStore()
+import { useRoute } from 'vue-router';
 
-const route = useRoute()
-const bgColor = ref('bg-gray-500') // Color de fondo inicial
-
-const isHeaderVisible = ref(true); // Controla la visibilidad del header
+const route = useRoute();
+const bgColor = ref('bg-gray-500');
+const position = ref('fixed');
+const zIndex = ref();
+const isHeaderVisible = ref(true);
 let lastScrollPosition = 0;
+let ticking = false;
 
 // Función para verificar la ruta y establecer el color
 const updateBgColor = () => {
-  if (route.path === '/why-book-with-us' || route.path === '/hotels' || route.path === '/about-us') {
-    bgColor.value = 'bg-tertiary' // Color específico para estas rutas
+  if (['/why-book-with-us', '/hotels', '/about-us'].includes(route.path)) {
+    bgColor.value = 'bg-tertiary';
+  } else if (route.path === '/peru-travel-packages') {
+    bgColor.value = 'bg-white/50';
+  } else {
+    bgColor.value = 'bg-secondary';
   }
-  else if (route.path === '/peru-travel-packages') {
-    bgColor.value = 'bg-white/50'
+  console.log(route.path);
+  if (route.path !== '/') {
+    position.value = 'fixed';
+    zIndex.value = 'z-50';
   }
-  else {
-    bgColor.value = 'bg-secondary' // Color para otras rutas
-  }
-}
+};
 
 const handleScroll = () => {
   const currentScrollPosition = window.scrollY;
-  if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 50) {
-    isHeaderVisible.value = false;
-  } else {
-    isHeaderVisible.value = true;
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      isHeaderVisible.value = currentScrollPosition <= lastScrollPosition || currentScrollPosition < 50;
+      lastScrollPosition = currentScrollPosition;
+      ticking = false;
+    });
+    ticking = true;
   }
-  lastScrollPosition = currentScrollPosition;
 };
 
 // Llama a la función en el montaje inicial
 onMounted(() => {
-  updateBgColor()
+  updateBgColor();
   window.addEventListener('scroll', handleScroll);
-})
+});
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
-})
+});
 
 // Observa cambios en route.path para detectar correctamente cambios de ruta
-watch(() => route.path, () => {
-  updateBgColor()
-})
-
+watch(() => route.path, updateBgColor);
 </script>
