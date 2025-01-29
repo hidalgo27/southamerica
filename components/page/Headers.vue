@@ -22,7 +22,7 @@
           </div>
           <div class="md:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="w-6 h-6" @click="packageStore.showModalMenu = !packageStore.showModalMenu">
+              stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
           </div>
@@ -36,9 +36,9 @@
         </div>
       </div>
 
-      <div class=" ">
+      <div class="">
         <nav class="container flex justify-center text-center">
-          <nuxt-link to="#" class="menu-list" active-class="active">Peru Travel Packages</nuxt-link>
+          <nuxt-link to="/travel-packages" class="menu-list" active-class="active">Peru Travel Packages</nuxt-link>
           <nuxt-link to="/destinations" class="menu-list" active-class="active">Destinations</nuxt-link>
           <nuxt-link to="/experiences" class="menu-list" active-class="active">Experiences</nuxt-link>
         </nav>

@@ -1,10 +1,4 @@
 <script lang="ts" setup>
-import ListExperiences from '~/components/experiences/ListExperiences.vue';
-import Newsletter from '~/components/home/Newsletter.vue';
-import Reviews from '~/components/home/Reviews.vue';
-import TripStyles from '~/components/home/TripStyles.vue';
-import SliderPackages from '~/components/page/slider/SliderPackages.vue';
-
 const route = useRoute();
 const breadcrumbs = route.path
   .split('/')
@@ -70,15 +64,8 @@ onMounted(async () => {
       </div>
     </div>
   </section>
-
-  <TripStyles></TripStyles>
-
-  <section>
-    <ListExperiences></ListExperiences>
-  </section>
-  <SliderPackages></SliderPackages>
-
-  <Newsletter></Newsletter>
-  <Reviews></Reviews>
 </template>
+
+
+
 <style></style>
