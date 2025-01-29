@@ -1,5 +1,19 @@
 <script lang="ts" setup>
 import CardDestination from '@/components/destinations/CardDestination.vue';
+import WorldMap from '@/components/destinations/WorldMap.vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const breadcrumbs = route.path
+  .split('/')
+  .filter(Boolean)
+  .map((segment, index, array) => {
+    return {
+      name: segment.replace(/-/g, ' '),
+      path: '/' + array.slice(0, index + 1).join('/'),
+      isActive: index === array.length - 1,
+    };
+  });
 
 const loading = ref(true)
 const video = ref()
@@ -169,7 +183,18 @@ const continentes = [
         </div>
         <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>
         <div class="relative z-10 flex items-center  w-full h-full text-center">
-          <div class=" container ">
+          <nav class="absolute top-0 left-0 text-gray-50 text-sm p-4">
+            <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
+            <span v-if="breadcrumbs.length"> / </span>
+            <span v-for="(crumb, index) in breadcrumbs" :key="index">
+              <span v-if="crumb.isActive" class="cursor-default capitalize">{{ crumb.name }}</span>
+              <NuxtLink v-else :to="crumb.path" class="hover:underline capitalize">
+                {{ crumb.name }}
+              </NuxtLink>
+              <span v-if="index < breadcrumbs.length - 1"> / </span>
+            </span>
+          </nav>
+          <div class="container">
             <h1
               class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight text-5xl 2xl:text-7xl tracking-wide font-semibold font-playfair-display">
               Design Your Peru Discovery.</h1>
@@ -195,7 +220,6 @@ const continentes = [
       </div>
     </div>
   </section>
-
   <CardDestination :destinations="continentes"></CardDestination>
 
 </template>
