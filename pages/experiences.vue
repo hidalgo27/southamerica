@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import ListExperiences from '~/components/experiences/ListExperiences.vue';
 import TripStyles from '~/components/home/TripStyles.vue';
 import SliderPackages from '~/components/page/slider/SliderPackages.vue';
 
@@ -70,6 +71,9 @@ onMounted(async () => {
 
   <TripStyles></TripStyles>
 
+  <section>
+    <ListExperiences></ListExperiences>
+  </section>
   <SliderPackages></SliderPackages>
 </template>
 <style></style>
