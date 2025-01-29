@@ -1,4 +1,47 @@
 <template>
+  <section class="container ">
+    <div class="block border-b border-gray-200 w-full mb-8"></div>
+  </section>
+  <section class="container mt-28 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="text-center grid grid-cols-2">
+        <img src="https://picsum.photos/400/300" alt="icon" class="w-full rounded-md" />
+        <div class="self-center pl-2">
+          <h3 class="text-lg font-semibold">New Specials</h3>
+          <div class="group self-center justify-items-center">
+            <a href="#" class="">Discover</a>
+            <div
+              class="border border-primary center mt-1 w-16 mx-auto transition-all duration-700 ease-in-out group-hover:w-0">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center grid grid-cols-2">
+        <img src="https://picsum.photos/400/300" alt="icon" class="w-full rounded-md" />
+        <div class="self-center pl-2">
+          <h3 class="text-lg font-semibold">Start Planning</h3>
+          <div class="group self-center justify-items-center">
+            <a href="#" class="">Discover All Trips</a>
+            <div
+              class="border border-primary center mt-1 w-32 mx-auto transition-all duration-700 ease-in-out group-hover:w-0">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center grid grid-cols-2">
+        <img src="https://picsum.photos/400/300" alt="icon" class="w-full rounded-md" />
+        <div class="self-center">
+          <h3 class="text-lg font-semibold">Follow Along</h3>
+          <div class="group self-center justify-items-center">
+            <a href="#" class="">@gotoperu</a>
+            <div
+              class="border border-primary center mt-1 w-20 mx-auto transition-all duration-700 ease-in-out group-hover:w-0">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <footer class="relative bg-gray-800 text-gray-500 pb-16">
     <div class="container pt-12">
       <div class="mb-10 flex items-center justify-center">
@@ -21,11 +64,13 @@
           </p>
           <ul class="mt-2 space-y-2">
             <li>
-              <nuxt-link to="/peru-travel-packages" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Peru Travel Packages</nuxt-link>
+              <nuxt-link to="/peru-travel-packages"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Peru Travel
+                Packages</nuxt-link>
             </li>
-<!--            <li>-->
-<!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Days Tours</a>-->
-<!--            </li>-->
+            <!--            <li>-->
+            <!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Days Tours</a>-->
+            <!--            </li>-->
 
           </ul>
         </div>
@@ -35,39 +80,46 @@
           </p>
           <ul class="mt-2 space-y-2">
             <li>
-              <nuxt-link to="/destinations/cusco" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Cusco</nuxt-link>
+              <nuxt-link to="/destinations/cusco"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Cusco</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/destinations/machupicchu" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Machu Picchu</nuxt-link>
+              <nuxt-link to="/destinations/machupicchu"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Machu
+                Picchu</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/destinations/sacred-valley" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Sacred Valley</nuxt-link>
+              <nuxt-link to="/destinations/sacred-valley"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Sacred
+                Valley</nuxt-link>
             </li>
-<!--            <li>-->
-<!--              <nuxt-link to="/destinations/galapagos" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Galapagos</nuxt-link>-->
-<!--            </li>-->
+            <!--            <li>-->
+            <!--              <nuxt-link to="/destinations/galapagos" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Galapagos</nuxt-link>-->
+            <!--            </li>-->
             <li>
-              <nuxt-link to="/destinations" class="transition-colors duration-300 italic underline text-sm text-deep-purple-50 hover:text-teal-accent-400">View Other</nuxt-link>
+              <nuxt-link to="/destinations"
+                class="transition-colors duration-300 italic underline text-sm text-deep-purple-50 hover:text-teal-accent-400">View
+                Other</nuxt-link>
             </li>
           </ul>
         </div>
-<!--        <div>-->
-<!--          <p class="font-semibold tracking-wide text-secondary mb-6">Hotels</p>-->
-<!--          <ul class="mt-2 space-y-2">-->
-<!--            <li>-->
-<!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">2 stars</a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">3 stars</a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">4 stars</a>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">5 stars</a>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--        </div>-->
+        <!--        <div>-->
+        <!--          <p class="font-semibold tracking-wide text-secondary mb-6">Hotels</p>-->
+        <!--          <ul class="mt-2 space-y-2">-->
+        <!--            <li>-->
+        <!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">2 stars</a>-->
+        <!--            </li>-->
+        <!--            <li>-->
+        <!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">3 stars</a>-->
+        <!--            </li>-->
+        <!--            <li>-->
+        <!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">4 stars</a>-->
+        <!--            </li>-->
+        <!--            <li>-->
+        <!--              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">5 stars</a>-->
+        <!--            </li>-->
+        <!--          </ul>-->
+        <!--        </div>-->
 
         <div>
           <p class="font-semibold tracking-wide text-secondary mb-6">
@@ -75,19 +127,28 @@
           </p>
           <ul class="mt-2 space-y-2">
             <li>
-              <nuxt-link to="/why-book-with-us" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Why book with us</nuxt-link>
+              <nuxt-link to="/why-book-with-us"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Why book with
+                us</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/travel-with-confidence" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Travel with confidence</nuxt-link>
+              <nuxt-link to="/travel-with-confidence"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Travel with
+                confidence</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/booking-terms-and-conditions" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Booking terms</nuxt-link>
+              <nuxt-link to="/booking-terms-and-conditions"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Booking
+                terms</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/about-us" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">About us</nuxt-link>
+              <nuxt-link to="/about-us"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">About
+                us</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/frequently-asked-questions" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">FAQ</nuxt-link>
+              <nuxt-link to="/frequently-asked-questions"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">FAQ</nuxt-link>
             </li>
           </ul>
         </div>
@@ -97,7 +158,9 @@
           </p>
           <ul>
             <li>
-              <a href="/frequently-asked-questions" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Terms and conditions</a>
+              <a href="/frequently-asked-questions"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Terms and
+                conditions</a>
             </li>
           </ul>
           <p class="font-semibold tracking-wide text-secondary mb-6">
@@ -120,7 +183,8 @@
 
       <div class="flex flex-col justify-between pt-5 border-t border-gray-500 sm:flex-row">
         <p class="text-sm dark:text-gray-300">
-          © Copyright 2022 Machu Picchu Company. All rights reserved. | GOTOPERU COMPANY EIRL - RUC 20609225441 - Avenida El Sol 449 - Cusco - Cusco - Peru
+          © Copyright 2022 Machu Picchu Company. All rights reserved. | GOTOPERU COMPANY EIRL - RUC 20609225441 -
+          Avenida El Sol 449 - Cusco - Cusco - Peru
         </p>
         <div class="flex items-center mt-4 space-x-4 sm:mt-0">
         </div>

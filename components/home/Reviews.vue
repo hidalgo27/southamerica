@@ -95,7 +95,6 @@ const reviews = ref([
         </Carousel>
       </div>
     </div>
-    <div class="block border-b border-gray-200 w-full my-8"></div>
   </section>
 </template>
 
