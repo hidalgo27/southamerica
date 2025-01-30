@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Benefits from '~/components/page/slider/Benefits.vue'
-import SliderPackages from '~/components/page/slider/SliderPackages.vue'
-import TripStyles from '~/components/home/TripStyles.vue'
-import TopPlaces from '~/components/home/TopPlaces.vue'
+import SliderPackages from '~/components/travel-packages/SliderPackages.vue'
+import TripStyles from '~/components/experiences/TripStyles.vue'
+import TopPlaces from '~/components/destinations/TopPlaces.vue'
 import TravelStories from '~/components/home/TravelStories.vue'
 import Reviews from '~/components/home/Reviews.vue'
 import Newsletter from '~/components/home/Newsletter.vue'

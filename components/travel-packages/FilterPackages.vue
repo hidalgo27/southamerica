@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import CardPackage from '~/components/page/CardPackage.vue';
+import CardPackage from './CardPackage.vue';
 
 defineProps({
   packageData: {

@@ -2,8 +2,8 @@
 import ListExperiences from '~/components/experiences/ListExperiences.vue';
 import Newsletter from '~/components/home/Newsletter.vue';
 import Reviews from '~/components/home/Reviews.vue';
-import TripStyles from '~/components/home/TripStyles.vue';
-import SliderPackages from '~/components/page/slider/SliderPackages.vue';
+import TripStyles from '~/components/experiences/TripStyles.vue';
+import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 </script>
 <template>

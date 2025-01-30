@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide, Pagination as CarouselPagination } from "vue3-carousel";
-import CardPackage from '../CardPackage.vue';
+import CardPackage from './CardPackage.vue';
 
 const listPackages = [
   {
