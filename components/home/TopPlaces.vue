@@ -56,7 +56,7 @@ const breakpoints = {
   },
   1000: {
     itemsToShow: 3,
-    snapAlign: 'start',
+    snapAlign: 'center',
   },
   1400: {
     itemsToShow: 4,
@@ -64,7 +64,7 @@ const breakpoints = {
   },
   1600: {
     itemsToShow: 5,
-    snapAlign: 'start',
+    snapAlign: 'center',
   }
 }
 </script>
@@ -84,18 +84,21 @@ const breakpoints = {
         Explorar Destinos
       </nuxt-link>
     </div>
-    <Carousel wrap-around :autoplay="2000" :snap-align="center" :breakpoints="breakpoints" class="gap-4">
+    <Carousel wrap-around pauseAutoplayOnHover :transition="40000" :autoplay="1000"
+      :items-to-scroll="destinations.length" :breakpoints="breakpoints">
       <Slide v-for="(destinations, index) in destinations" :key="index"
-        class="w-full justify-center items-center overflow-hidden">
+        class="justify-center items-center overflow-hidden p-6 w-full">
         <NuxtLink :to="'/' + destinations.url"
-          class="bg-white flex items-center p-4 content-between overflow-hidden rounded-md border group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out h-full">
+          class="grid grid-cols-2 items-center overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out w-fit">
           <div class="overflow-hidden relative rounded-md">
             <nuxt-img :src="destinations.image" :alt="destinations.title"
-              class="w-36 h-36 rounded-mg object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
+              class="w-full h-36 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
           </div>
-          <h2 class="mx-3 text-xl font-playfair-display font-semibold text-gray-800">
-            {{ destinations.title }}
-          </h2>
+          <div class="w-full relative ">
+            <h2 class="text-xl font-semibold text-gray-800 w-full font-playfair-display">
+              {{ destinations.title }}
+            </h2>
+          </div>
         </NuxtLink>
       </Slide>
     </Carousel>
