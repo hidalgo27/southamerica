@@ -1,35 +1,51 @@
 <script setup lang="ts">
 import 'vue3-carousel/dist/carousel.css';
-import { Carousel, Slide, Navigation as CarouselNavigation } from "vue3-carousel";
+import { Carousel, Slide, Pagination as CarouselPagination } from "vue3-carousel";
+import CardPackage from '../CardPackage.vue';
 
 const listPackages = [
   {
     titulo: 'Machu Picchu & Galapagos Islands',
+    country: 'Peru & Ecuador',
+    specials: true,
     imagen: 'https://picsum.photos/400/300',
     duracion: 7,
     url: '#',
-    precio_paquetes: 0,
+    precio_paquetes: 4129,
+    ahorro: 600,
+    etiquetas: ['Premium', 'Escorted Touring', 'Nature'],
+    reserva: 'Feb 28, 2025',
   },
   {
-    titulo: 'Machu Picchu & Galapagos Islands',
-    imagen: 'https://picsum.photos/400/300',
+    titulo: 'Amazon Rainforest Adventure',
+    specials: true,
+    imagen: 'https://picsum.photos/400/350',
+    duracion: 10,
     url: '#',
-    duracion: 7,
-    precio_paquetes: 0,
+    precio_paquetes: 3299,
+    ahorro: 500,
+    reserva: 'Mar 15, 2025',
   },
   {
-    titulo: 'Machu Picchu & Galapagos Islands',
-    imagen: 'https://picsum.photos/400/700',
+    titulo: 'Patagonia Explorer',
+    country: 'Argentina',
+    imagen: 'https://picsum.photos/400/400',
+    duracion: 12,
     url: '#',
-    duracion: 7,
-    precio_paquetes: 0,
+    precio_paquetes: 4999,
+    ahorro: 800,
+    etiquetas: ['Deluxe', 'Hiking', 'Expedition'],
+    reserva: 'Apr 10, 2025',
   },
   {
-    titulo: 'Machu Picchu & Galapagos Islands',
-    imagen: 'https://picsum.photos/400/500',
+    titulo: 'Peru Cultural Discovery',
+    imagen: 'https://picsum.photos/400/450',
+    duracion: 9,
     url: '#',
-    duracion: 7,
-    precio_paquetes: 1,
+    precio_paquetes: 2899,
+    ahorro: 300,
+    etiquetas: ['Premium', 'History', 'Local Experience'],
+    reserva: 'May 5, 2025',
   },
 ];
 
@@ -50,44 +66,21 @@ const breakpoints = {
 </script>
 
 <template>
-  <section class="container my-20">
-    <div class="text-center tracking-widest font-bold">
+  <section class="container">
+    <div class="text-center tracking-widest font-bold pb-6">
       <div class="border-title mb-2 mx-auto"></div>
       <p class="mb-6 tracking-widest font-bold">Top Trip Experiences</p>
       <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide">Memories won't make themselves.
       </h1>
     </div>
-    <carousel :breakpoints="breakpoints">
-      <slide v-for="(packages, index) in listPackages" :key="index" class="flex-grow" :gap="20">
-        <nuxt-link :to="packages.url"
-          class=" w-full bg-white rounded-md border group flex-grow cursor-pointer hover:shadow-lg transition duration-500 ease-in-out">
-          <div>
-            <div class="overflow-hidden relative">
-              <div class="absolute inset-0 gradient-cicle-beige z-10"></div>
-              <nuxt-img :src="packages.imagen" :alt="packages.titulo"
-                class="w-full object-cover h-[300px] transition duration-500 ease-in-out transform group-hover:scale-105" />
-              <span class="absolute bottom-0 left-0 p-1 m-3 rounded-md z-20 backdrop-blur-lg font-normal text-white">
-                {{ packages.duracion }} days
-              </span>
-            </div>
-            <div class="p-6">
-              <div class="border-title mb-2 "></div>
-              <h2 class="text-xl mb-4 font-playfair-display tracking-wide">
-                {{ packages.titulo }}
-              </h2>
-            </div>
-          </div>
-          <div class="border-t px-6 py-5">
-            <span class="text-red-500">Inquire</span>
-          </div>
-        </nuxt-link>
+    <carousel :breakpoints="breakpoints" class="-m-3">
+      <slide v-for="(packages, index) in listPackages" :key="index" class="px-3">
+        <CardPackage :packageData="packages"></CardPackage>
       </slide>
+      <template #addons>
+        <CarouselPagination></CarouselPagination>
+      </template>
     </carousel>
-    <div class="relative w-full h-2 bg-gray-300 mt-4 rounded-full overflow-hidden">
-      <div class="absolute top-0 h-full bg-red-500 transition-all duration-500" :style="{ width: '10%' }"></div>
-    </div>
-
-    <!-- Botón "Ver todos los paquetes" -->
     <div class="text-center mt-6">
       <nuxt-link to="#" class="px-6 py-3 btn-secondary-outline rounded-md hover:bg-red-600 w-full">
         Ver todos los paquetes

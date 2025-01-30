@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import Benefits from '~/components/page/slider/Benefits.vue'
 import SliderPackages from '~/components/page/slider/SliderPackages.vue'
-import SliderDestination from '~/components/page/slider/SliderDestination.vue'
 import TripStyles from '~/components/home/TripStyles.vue'
 import TopPlaces from '~/components/home/TopPlaces.vue'
 import TravelStories from '~/components/home/TravelStories.vue'
 import Reviews from '~/components/home/Reviews.vue'
 import Newsletter from '~/components/home/Newsletter.vue'
+import SliderBanner from '~/components/page/slider/SliderBanner.vue'
 
 const loading = ref(true)
 const video = ref()
@@ -82,13 +82,13 @@ onMounted(async () => {
 
   <SliderPackages></SliderPackages>
 
-  <SliderDestination></SliderDestination>
+  <SliderBanner></SliderBanner>
 
   <TripStyles></TripStyles>
 
   <TopPlaces></TopPlaces>
 
-  <section class="container my-20">
+  <section class="container">
     <div class=" flex items-center justify-center ">
       <div class="flex flex-col md:flex-row bg-white overflow-hidden w-full gap-6">
         <div class="bg-secondary bg-opacity-10 py-32 px-16 rounded-md">
