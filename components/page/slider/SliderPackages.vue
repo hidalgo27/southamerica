@@ -82,7 +82,7 @@ const breakpoints = {
       </template>
     </carousel>
     <div class="text-center mt-6">
-      <nuxt-link to="#" class="px-6 py-3 btn-secondary-outline rounded-md hover:bg-red-600 w-full">
+      <nuxt-link to="/travel-packages" class="px-6 py-3 btn-secondary-outline rounded-md hover:bg-red-600 w-full">
         Ver todos los paquetes
       </nuxt-link>
     </div>

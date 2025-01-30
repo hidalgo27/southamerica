@@ -80,7 +80,7 @@ const breakpoints = {
       </h1>
     </div>
     <div class="text-center my-6">
-      <nuxt-link to="#" class="px-6 py-3 btn-secondary-outline rounded-md hover:bg-red-600 text-xl">
+      <nuxt-link to="/destinations" class="px-6 py-3 btn-secondary-outline rounded-md hover:bg-red-600 text-xl">
         Explorar Destinos
       </nuxt-link>
     </div>
