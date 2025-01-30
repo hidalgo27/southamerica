@@ -2,40 +2,39 @@
   <section class="container ">
     <div class="block border-b border-gray-200 w-full mb-8"></div>
   </section>
-  <section class="container my-20">
+  <section class="container my-20 text-left">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="text-center grid grid-cols-2">
-        <img src="https://picsum.photos/400/300" alt="icon" class="w-full rounded-md" />
-        <div class="self-center pl-2">
+      <div class="grid grid-cols-2">
+        <img src="https://picsum.photos/400/300" alt="icon" class="w-full h-full rounded-md" />
+        <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">New Specials</h3>
-          <div class="group self-center justify-items-center">
+          <div class="group">
             <a href="#" class="">Discover</a>
             <div
-              class="border border-primary center mt-1 w-16 mx-auto transition-all duration-700 ease-in-out group-hover:w-0">
+              class="border border-primary center mt-1 w-16  transition-all duration-700 ease-in-out group-hover:w-0">
             </div>
           </div>
         </div>
       </div>
-      <div class="text-center grid grid-cols-2">
+      <div class="grid grid-cols-2">
         <img src="https://picsum.photos/400/300" alt="icon" class="w-full rounded-md" />
-        <div class="self-center pl-2">
+        <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Start Planning</h3>
-          <div class="group self-center justify-items-center">
+          <div class="group">
             <a href="#" class="">Discover All Trips</a>
-            <div
-              class="border border-primary center mt-1 w-32 mx-auto transition-all duration-700 ease-in-out group-hover:w-0">
+            <div class="border border-primary center mt-1 w-32 transition-all duration-700 ease-in-out group-hover:w-0">
             </div>
           </div>
         </div>
       </div>
-      <div class="text-center grid grid-cols-2">
+      <div class="grid grid-cols-2">
         <img src="https://picsum.photos/400/300" alt="icon" class="w-full rounded-md" />
-        <div class="self-center">
+        <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Follow Along</h3>
-          <div class="group self-center justify-items-center">
+          <div class="group self-center ">
             <a href="#" class="">@gotoperu</a>
             <div
-              class="border border-primary center mt-1 w-20 mx-auto transition-all duration-700 ease-in-out group-hover:w-0">
+              class="border border-primary center mt-1 w-20  transition-all duration-700 ease-in-out group-hover:w-0">
             </div>
           </div>
         </div>
