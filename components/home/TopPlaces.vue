@@ -92,7 +92,7 @@ const breakpoints = {
           class="grid grid-cols-2 items-center overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out w-fit">
           <div class="overflow-hidden relative rounded-md">
             <nuxt-img :src="destinations.image" :alt="destinations.title"
-              class="w-full h-36 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
+              class="w-full h-40 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
           </div>
           <div class="w-full relative ">
             <h2 class="text-xl font-semibold text-gray-800 w-full font-playfair-display">
