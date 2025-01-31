@@ -57,7 +57,7 @@ const curatedTrips = [
         </h1>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <nuxt-link v-for="(trip, index) in curatedTrips" :key="index" :to="trip.url"
+        <nuxt-link v-for="(trip, index) in curatedTrips" :key="index" :to="'/experiences' + trip.url"
           class="relative block hover:shadow-lg transition duration-500 ease-in-out h-full bg-white content-between overflow-hidden rounded-md border group">
           <div class="relative overflow-hidden rounded-md">
             <img :alt="trip.alt" :src="trip.image"
