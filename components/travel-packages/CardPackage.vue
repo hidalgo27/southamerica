@@ -10,7 +10,7 @@ defineProps({
   <div
     class="bg-white rounded-md border overflow-hidden w-full h-full group flex-grow hover:shadow-xl hover:border-transparent transition duration-500 ease-in-out">
     <div class="relative overflow-hidden cursor-pointer">
-      <NuxtLink :to="packageData.url">
+      <NuxtLink :to="'/travel-packages' + packageData.url">
         <NuxtImg :src="packageData.imagen" :alt="packageData.titulo"
           class="w-full h-72 object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
       </NuxtLink>
