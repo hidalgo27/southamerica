@@ -31,6 +31,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <section class="w-full h-40 mb-2"></section>
   <section>
     <div class="relative w-full h-screen 2xl:h-[70vh] px-3">
       <div class="overflow-hidden h-full relative rounded-md">
