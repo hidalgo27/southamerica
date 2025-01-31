@@ -8,6 +8,7 @@ import Reviews from '~/components/home/Reviews.vue'
 import Newsletter from '~/components/home/Newsletter.vue'
 import SliderBanner from '~/components/page/slider/SliderBanner.vue'
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue'
+import TextDescription from '~/components/home/DescriptionWithLine.vue'
 
 const loading = ref(true)
 const video = ref()
@@ -54,18 +55,7 @@ onMounted(async () => {
     </div>
   </section>
 
-  <section class="container my-20">
-    <div class="text-center ">
-      <div class="border-title mb-2 mx-auto"></div>
-      <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide"> Why South America Company?</h1>
-      <div class="w-1/2 mx-auto my-8">
-        <p class="tracking-widest font-light">At South America Company, we specialize in tailor-made trips that
-          immortalize the best days exploring Peru and South America. Every detail is meticulously designed to offer the
-          maximum comfort, exclusivity, and luxury. From private villas and luxury cruises to customized itineraries, we
-          make sure you only worry about enjoying your luxury vacation.</p>
-      </div>
-    </div>
-  </section>
+  <TextDescription></TextDescription>
 
   <Benefits></Benefits>
 

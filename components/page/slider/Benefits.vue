@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from "vue3-carousel"
+import gsap from 'gsap';
 
 const breakpoints = {
   // 500px and up
@@ -23,12 +24,35 @@ const breakpoints = {
   },
 };
 
+const carouselRef = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  if (!carouselRef.value) return;
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          gsap.from('.slide', {
+            y: 25,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+            stagger: 0.3,
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+  );
+
+  observer.observe(carouselRef.value);
+});
 </script>
 
 <template>
-  <section class="bg-secondary bg-opacity-10 py-6 rounded-md m-3">
+  <section ref="carouselRef" class="bg-secondary bg-opacity-10 py-6 rounded-md m-3">
     <div class="container">
-      <div class="relative inset-y-10 items-center justify-between w-full flex lg:hidden ">
+      <div class="relative inset-y-10 items-center justify-between w-full flex lg:hidden">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
             class="h-4 w-4">
@@ -42,8 +66,8 @@ const breakpoints = {
           </svg>
         </div>
       </div>
-      <carousel ref="carouselRef" :wrap-around="true" :breakpoints="breakpoints">
-        <slide :key="1">
+      <carousel :wrap-around="true" :breakpoints="breakpoints">
+        <slide :key="1" class="slide">
           <div class="text-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
               stroke="currentColor" class="mx-auto h-12 mb-2">
@@ -53,7 +77,7 @@ const breakpoints = {
             <h4 class="text-sm">Tailor-made vacations as unique as you are</h4>
           </div>
         </slide>
-        <slide :key="2">
+        <slide :key="2" class="slide">
           <div class="text-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
               stroke="currentColor" class="mx-auto h-12 mb-2">
@@ -63,7 +87,7 @@ const breakpoints = {
             <h4 class="text-sm">24/7/365 support to ensure your trip is perfect</h4>
           </div>
         </slide>
-        <slide :key="3">
+        <slide :key="3" class="slide">
           <div class="text-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
               stroke="currentColor" class="mx-auto h-12 mb-2">
@@ -73,7 +97,7 @@ const breakpoints = {
             <h4 class="text-sm">Authentic experts who know your destinations</h4>
           </div>
         </slide>
-        <slide :key="4">
+        <slide :key="4" class="slide">
           <div class="text-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
               stroke="currentColor" class="mx-auto h-12 mb-2">
@@ -83,7 +107,7 @@ const breakpoints = {
             <h4 class="text-sm">Global adventures to 115 destinations, your way</h4>
           </div>
         </slide>
-        <slide :key="5">
+        <slide :key="5" class="slide">
           <div class="text-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
               stroke="currentColor" class="mx-auto h-12 mb-2">
