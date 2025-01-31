@@ -89,7 +89,8 @@ const reviews = ref([
         </div>
       </div>
       <div class="flex-1 lg:w-1/2 mt-8 lg:mt-0 lg:ml-8">
-        <Carousel ref="carouselRef" v-model="carouselSlide" wrap-around :items-to-show="1">
+        <Carousel ref="carouselRef" v-model="carouselSlide" wrap-around :autoplay="8000" :transition="2000"
+          :items-to-show="1">
           <Slide v-for="(review, index) in reviews" :key="index">
             <div class="text-start p-4">
               <h1 class="font-semibold text-3xl md:text-5xl mb-6 title font-playfair-display tracking-wide">{{
