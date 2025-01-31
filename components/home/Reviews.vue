@@ -1,6 +1,12 @@
 <script lang="ts" setup>
 import 'vue3-carousel/dist/carousel.css';
-import { Carousel, Slide, Navigation as CarouselNavigation } from 'vue3-carousel';
+import { Carousel, Slide } from 'vue3-carousel';
+
+const carouselRef = ref();
+const carouselSlide = ref(1);
+
+const next = () => carouselRef.value.next();
+const prev = () => carouselRef.value.prev();
 
 const reviews = ref([
   {
@@ -83,7 +89,7 @@ const reviews = ref([
         </div>
       </div>
       <div class="flex-1 lg:w-1/2 mt-8 lg:mt-0 lg:ml-8">
-        <Carousel wrap-around :items-to-show="1">
+        <Carousel ref="carouselRef" v-model="carouselSlide" wrap-around :items-to-show="1">
           <Slide v-for="(review, index) in reviews" :key="index">
             <div class="text-start p-4">
               <h1 class="font-semibold text-3xl md:text-5xl mb-6 title font-playfair-display tracking-wide">{{
@@ -93,6 +99,20 @@ const reviews = ref([
             </div>
           </Slide>
         </Carousel>
+        <div>
+          <button @click="prev" class="p-2 rounded-full border ml-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+            </svg>
+          </button>
+          <button @click="next" class="p-2 rounded-full border ml-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
