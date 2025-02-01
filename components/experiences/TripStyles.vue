@@ -76,7 +76,7 @@ const curatedTrips = [
         </nuxt-link>
       </div>
       <div class="text-center mt-6">
-        <nuxt-link to="/experiences" class="px-6 py-3 btn-secondary-outline rounded-md hover:bg-red-600 w-full">
+        <nuxt-link to="/experiences" class="px-6 py-3 btn-secondary-outline rounded-md">
           Ver todas las experiencias
         </nuxt-link>
       </div>
