@@ -80,12 +80,12 @@ const breakpoints = {
       </h1>
     </div>
     <div class="text-center my-6">
-      <nuxt-link to="/destinations" class="px-6 py-3 btn-secondary-outline rounded-md hover:bg-red-600 text-xl">
+      <nuxt-link to="/destinations" class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700">
         Explorar Destinos
       </nuxt-link>
     </div>
-    <Carousel wrap-around pauseAutoplayOnHover :transition="40000" :autoplay="1000"
-      :items-to-scroll="destinations.length" :breakpoints="breakpoints">
+    <Carousel wrap-around pause :transition="40000" :autoplay="1000" :items-to-scroll="destinations.length"
+      :breakpoints="breakpoints">
       <Slide v-for="(destinations, index) in destinations" :key="index"
         class="justify-center items-center overflow-hidden p-6 w-full">
         <NuxtLink :to="'/' + destinations.url"

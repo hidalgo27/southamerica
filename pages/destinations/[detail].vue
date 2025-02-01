@@ -9,6 +9,7 @@ import TravelStories from '~/components/home/TravelStories.vue';
 import Newsletter from '~/components/home/Newsletter.vue';
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
 import TextDescription from '~/components/home/TextDescription.vue';
+import MiniReviews from '~/components/home/MiniReviews.vue';
 
 const destinationStore = useDestinationStore();
 
@@ -32,5 +33,6 @@ const destination = computed(() =>
 
   <TravelStories></TravelStories>
   <Newsletter></Newsletter>
+  <MiniReviews></MiniReviews>
 </template>
 <style></style>

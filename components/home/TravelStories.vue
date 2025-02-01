@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import gsap from 'gsap';
+
 const sectionRef = ref<HTMLElement | null>(null);
 const posts = ref([
   {
@@ -7,24 +8,43 @@ const posts = ref([
     imageAlt: 'A delicious dish with a wooden background',
     category: 'Food & Drink',
     title: "Prague's Culinary Renaissance",
-    excerpt: "People gravitate to Prague for its enchanting cobblestone streets flanked by stunning Baroque and Gothic buildings and for its palate-pleasing..."
+    excerpt: "People gravitate to Prague for its enchanting cobblestone streets flanked by stunning Baroque and Gothic buildings and for its palate-pleasing...",
+    liked: ref(false),
   },
   {
     imageUrl: 'https://picsum.photos/400/300',
     imageAlt: 'An elderly woman looking thoughtful',
     category: 'Wellness',
     title: 'The Blue Zone Blueprint',
-    excerpt: 'American longevity researcher Dan Buettner uses the term “Blue Zone” to define five regions worldwide where people live the longest,...'
+    excerpt: 'American longevity researcher Dan Buettner uses the term “Blue Zone” to define five regions worldwide where people live the longest,...',
+    liked: ref(false),
   },
   {
     imageUrl: 'https://picsum.photos/400/300',
     imageAlt: 'A group of people on bicycles with a scenic background',
     category: 'Journeys',
     title: 'Best of 2025: Up and Coming Group Travel Destinations',
-    excerpt: 'Welcome to 2025—a new year brimming with exciting possibilities and new travel potential! This is the perfect time to set...'
+    excerpt: 'Welcome to 2025—a new year brimming with exciting possibilities and new travel potential! This is the perfect time to set...',
+    liked: ref(false),
   }
 ])
+// Inicializamos likedPosts con falsos (ningún post está likeado inicialmente)
 
+const toggleLike = (post: any, event: MouseEvent) => {
+  post.liked = !post.liked;
+
+  const heart = event.currentTarget as HTMLElement;
+  const plusOne = heart.querySelector(".plus-one");
+
+  if (post.liked) {
+    gsap.to(heart, { scale: 1.2, duration: 0.2, yoyo: true, repeat: 1 });
+    gsap.to(plusOne, { y: -20, opacity: 1, duration: 0.5, ease: "power2.out" });
+    gsap.to(plusOne, { opacity: 0, duration: 0.5, delay: 0.5 });
+    gsap.to(plusOne, { y: 0, duration: 0 });
+  } else {
+    gsap.to(heart, { scale: 1, duration: 0.2 });
+  }
+};
 onMounted(() => {
   if (!sectionRef.value) return;
   const observer = new IntersectionObserver(
@@ -73,11 +93,17 @@ onMounted(() => {
             <span class="absolute top-2 left-2 bg-white text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">
               {{ post.category }}
             </span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="absolute top-2 right-2 text-white w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-            </svg>
+            <div class="absolute top-2 right-2 cursor-pointer" @click="toggleLike(post, $event)">
+              <svg xmlns="http://www.w3.org/2000/svg" :fill="post.liked ? 'white' : 'none'" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" class="text-white w-8 h-8 transition-all duration-300">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+              </svg>
+              <span
+                class="plus-one absolute top-0 left-1/2 transform -translate-x-1/2 text-white text-lg font-bold opacity-0">
+                +1
+              </span>
+            </div>
           </div>
           <div class="pt-4">
             <h3 class="text-lg font-semibold mb-2">{{ post.title }}</h3>

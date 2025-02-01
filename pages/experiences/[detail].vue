@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
+import MiniReviews from '~/components/home/MiniReviews.vue';
 import Newsletter from '~/components/home/Newsletter.vue';
 import TravelStories from '~/components/home/TravelStories.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
@@ -102,5 +103,6 @@ const listPackages = [
   <EspecialistLetter></EspecialistLetter>
   <TravelStories></TravelStories>
   <Newsletter></Newsletter>
+  <MiniReviews></MiniReviews>
 </template>
 <style></style>

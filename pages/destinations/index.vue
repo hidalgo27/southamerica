@@ -2,6 +2,7 @@
 import CardDestination from '@/components/destinations/CardDestination.vue';
 import WorldMap from '@/components/destinations/WorldMap.vue';
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
+import MiniReviews from '~/components/home/MiniReviews.vue';
 import Newsletter from '~/components/home/Newsletter.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 
@@ -33,6 +34,7 @@ const destinationStore = useDestinationStore();
 
   <Newsletter></Newsletter>
 
+  <MiniReviews></MiniReviews>
 </template>
 
 <style></style>
