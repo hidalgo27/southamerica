@@ -107,7 +107,7 @@ const progressWidth = computed(() => {
 </script>
 
 <template>
-  <section class=" my-20 container">
+  <section class="my-20 container">
     <div class="container text-center tracking-widest font-bold pb-6">
       <div class="border-title mb-2 mx-auto"></div>
       <p class="mb-6 tracking-widest font-bold">Top Trip Experiences</p>
@@ -121,7 +121,8 @@ const progressWidth = computed(() => {
       <template #addons="{ currentSlide }">
         <CarouselNavigation>
           <template #prev>
-            <div v-if="currentSlide > 0" class="absolute -translate-x-8 p-2 rounded-full border hidden md:block">
+            <div v-if="currentSlide > 0"
+              class="absolute -translate-x-8 lg:-translate-x-10 p-1 lg:p-2 rounded-full border hidden md:block">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-4 lg:size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
@@ -129,7 +130,8 @@ const progressWidth = computed(() => {
             </div>
           </template>
           <template #next>
-            <div v-if="progressWidth !== 100" class="absolute translate-x-8  p-2 rounded-full border hidden md:block">
+            <div v-if="progressWidth !== 100"
+              class="absolute translate-x-8 lg:translate-x-10 p-1 lg:p-2 rounded-full border hidden md:block">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-4 lg:size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />

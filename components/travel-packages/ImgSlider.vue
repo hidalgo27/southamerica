@@ -10,8 +10,19 @@ const images = [
   { src: 'https://picsum.photos/400/300', alt: 'Sicily' },
   { src: 'https://picsum.photos/400/300', alt: 'Milan' },
   { src: 'https://picsum.photos/400/300', alt: 'Naples' },
-  { src: 'https://picsum.photos/400/300', alt: 'Turin' },
 ];
+
+const breakpoints = {
+  600: {
+    itemsToShow: 2,
+    snapAlign: 'start',
+  },
+  // 1024 and up
+  1024: {
+    itemsToShow: 3,
+    snapAlign: 'start',
+  },
+};
 
 const currentSlide = ref(0);
 const itemsToShow = ref(1);
@@ -45,8 +56,8 @@ const progressWidth = computed(() => {
 
 <template>
   <section class="my-20">
-    <Carousel :items-to-show="itemsToShow" class="" @update:modelValue="updateProgress">
-      <Slide v-for="(image, index) in images" :key="index" class="px-3">
+    <Carousel :breakpoints="breakpoints" @update:modelValue="updateProgress">
+      <Slide v-for="(image, index) in images" :key="index" class="px-3 relative">
         <img :src="image.src" :alt="image.alt" class="w-full rounded-md" />
       </Slide>
     </Carousel>
