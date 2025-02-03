@@ -43,7 +43,7 @@ const content = {
   <section class="container mb-20">
     <div class="w-full mx-auto">
       <!-- Tabs -->
-      <div class="flex justify-center space-x-6 border-b ">
+      <div class="flex justify-center md:space-x-6 border-b text-[0.65rem] md:text-lg">
         <button v-for="tab in tabs" :key="tab.key" @click="activeTab = tab.key"
           class="p-6 text-center border-b-2 transition"
           :class="activeTab === tab.key ? 'border-orange-500 text-orange-500' : 'border-transparent text-gray-500'">
@@ -52,28 +52,32 @@ const content = {
       </div>
 
       <!-- Content -->
-      <div class="mt-6 ">
+      <div class="mt-6">
         <!-- Departures -->
-        <div v-if="activeTab === 'departures'" class="flex items-center space-x-12">
-          <img :src="content.departures.image" alt="Image" class="w-96 rounded-md" />
-          <div>
-            <h2 class="text-xl font-playfair-display font-semibold mb-6">{{ content.departures.title }}</h2>
+        <div v-if="activeTab === 'departures'"
+          class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-12">
+          <img :src="content.departures.image" alt="Image" class="w-full md:w-96 rounded-md" />
+          <div class="text-center md:text-left">
+            <h2 class="text-xl font-playfair-display font-semibold mb-4 md:mb-6">{{ content.departures.title }}</h2>
             <p class="text-gray-600">{{ content.departures.description }}</p>
-            <p class="text-gray-500">{{ content.departures.days }}</p>
+            <p class="text-gray-500 mt-2">{{ content.departures.days }}</p>
           </div>
         </div>
 
         <!-- Inclusions -->
-        <div v-if="activeTab === 'inclusions'" class="grid grid-cols-2 gap-6 text-lg">
-          <div class="border-r-2 border-gray-200 pr-6 ml-12">
-            <h3 class="text-lg font-playfair-display font-semibold text-green-600 my-12">Included</h3>
-            <ul class="list-disc pl-5 text-gray-600 space-y-6">
+        <div v-if="activeTab === 'inclusions'" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
+          <div class="border-b-2 md:border-r-2 border-gray-200 pb-6 md:pb-0 md:pr-6 md:ml-12">
+            <h3
+              class="text-lg font-playfair-display font-semibold text-green-600 my-6 md:my-12 text-center md:text-left">
+              Included</h3>
+            <ul class="list-disc pl-5 text-gray-600 space-y-4 md:space-y-6">
               <li v-for="item in content.inclusions.includes" :key="item">{{ item }}</li>
             </ul>
           </div>
-          <div class="ml-12">
-            <h3 class="text-lg font-playfair-display font-semibold text-red-600 my-12">Not Included</h3>
-            <ul class="list-disc pl-5 text-gray-600 space-y-6">
+          <div class="md:ml-12">
+            <h3 class="text-lg font-playfair-display font-semibold text-red-600 my-6 md:my-12 text-center md:text-left">
+              Not Included</h3>
+            <ul class="list-disc pl-5 text-gray-600 space-y-4 md:space-y-6">
               <li v-for="item in content.inclusions.excludes" :key="item">{{ item }}</li>
             </ul>
           </div>
@@ -81,8 +85,9 @@ const content = {
 
         <!-- Terms and Conditions -->
         <div v-if="activeTab === 'terms'" class="text-start">
-          <h2 class="text-xl font-playfair-display font-semibold my-12">{{ content.terms.title }}</h2>
-          <p class="text-gray-600 mt-2">{{ content.terms.description }}</p>
+          <h2 class="text-xl font-playfair-display font-semibold my-6 md:my-12 text-center md:text-left">{{
+            content.terms.title }}</h2>
+          <p class="text-gray-600 mt-2 text-center md:text-left">{{ content.terms.description }}</p>
         </div>
       </div>
     </div>

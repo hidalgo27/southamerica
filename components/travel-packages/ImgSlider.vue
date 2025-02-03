@@ -45,7 +45,7 @@ const progressWidth = computed(() => {
 
 <template>
   <section class="my-20">
-    <Carousel :items-to-show="itemsToShow" class="-mx-3" @update:modelValue="updateProgress">
+    <Carousel :items-to-show="itemsToShow" class="" @update:modelValue="updateProgress">
       <Slide v-for="(image, index) in images" :key="index" class="px-3">
         <img :src="image.src" :alt="image.alt" class="w-full rounded-md" />
       </Slide>

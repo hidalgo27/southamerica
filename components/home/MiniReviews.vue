@@ -68,31 +68,26 @@ const reviews = [
 ]
 
 const breakpoints = {
-  // 500px and up
-  350: {
-    itemsToShow: 2,
-    snapAlign: 'start',
-  },
+
   // 700px and up
   700: {
-    itemsToShow: 3,
+    itemsToShow: 2,
+    itemsToScroll: 2,
     snapAlign: 'center',
   },
   // 1024 and up
   1024: {
     itemsToShow: 4,
     snapAlign: 'start',
-    enabled: false,
-    mouseDrag: false,
-    touchDrag: false,
+    itemsToScroll: 4,
   },
 };
 
 </script>
 <template>
-  <section class="container my-40">
-    <div class="grid grid-cols-5 gap-8">
-      <div class="col-span-1 inset-0 flex items-center justify-center">
+  <section class="container my-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-6 md:gap-6">
+      <div class="md:col-span-1 ">
         <div class="bg-white p-8 rounded-md shadow-md ">
           <p class="text-xl font-semibold mb-2 text-center">
             Excellent
@@ -146,7 +141,7 @@ const breakpoints = {
           </p>
         </div>
       </div>
-      <Carousel :items-to-show="4" :breakpoints="breakpoints" :items-to-scroll="4" class="col-span-4 ">
+      <Carousel :breakpoints="breakpoints" class="col-span-1 md:col-span-2 lg:col-span-4">
         <Slide v-for="(reviews, index) in reviews" :key="index" class="px-3 relative">
           <div class="text-start">
             <div class="flex  items-center mb-2">
@@ -207,7 +202,7 @@ const breakpoints = {
         <template #addons>
           <CarouselNavigation>
             <template #prev>
-              <div class="absolute -translate-x-8 p-2">
+              <div class="absolute -translate-x-7">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                   stroke="currentColor" class="size-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
@@ -215,7 +210,7 @@ const breakpoints = {
               </div>
             </template>
             <template #next>
-              <div class="absolute translate-x-2 p-2">
+              <div class="absolute translate-x-7">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                   stroke="currentColor" class="size-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
