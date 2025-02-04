@@ -1,3 +1,165 @@
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+import 'floating-vue/dist/style.css';
+import { Dropdown, Menu, Popper } from 'floating-vue';
+
+const route = useRoute();
+const bgColor = ref('bg-gray-500');
+const position = ref('fixed');
+const zIndex = ref();
+const isHeaderVisible = ref(true);
+let lastScrollPosition = 0;
+let ticking = false;
+
+// Función para verificar la ruta y establecer el color
+const updateBgColor = () => {
+  if (['/why-book-with-us', '/hotels', '/about-us'].includes(route.path)) {
+    bgColor.value = 'bg-tertiary';
+  } else if (route.path === '/peru-travel-packages') {
+    bgColor.value = 'bg-white/50';
+  } else {
+    bgColor.value = 'bg-secondary';
+  }
+  console.log(route.path);
+  if (route.path !== '/') {
+    position.value = 'fixed';
+    zIndex.value = 'z-50';
+  }
+};
+
+
+
+// Observa cambios en route.path para detectar correctamente cambios de ruta
+watch(() => route.path, updateBgColor);
+
+const menus = ref([
+  {
+    title: "Destinations", open: false,
+    items: [
+      {
+        name: "Argentina",
+        popularCountries: [
+          {
+            name: "Buenos Aires",
+            link: "/buenos-aires"
+          },
+          {
+            name: "Iguazu Falls",
+            link: "/iguazu-falls"
+          },
+          {
+            name: "Patagonia",
+            link: "/patagonia"
+          }
+        ],
+        popularDestinations: [
+          {
+            name: "Bariloche",
+            link: "/bariloche"
+          },
+          {
+            name: "Mendoza",
+            link: "/mendoza"
+          },
+          {
+            name: "Salta",
+            link: "/salta"
+          }
+        ],
+        link: "/argentina",
+        image: "https://picsum.photos/200/300"
+      },
+      {
+        name: "Peru",
+        popularCountries: [
+          {
+            name: "Cusco",
+            link: "/cusco"
+          },
+          {
+            name: "Lima",
+            link: "/lima"
+          },
+          {
+            name: "Machu Picchu",
+            link: "/machu-picchu"
+          }
+        ],
+        popularDestinations: [
+          {
+            name: "Arequipa",
+            link: "/arequipa"
+          },
+          {
+            name: "Ica",
+            link: "/ica"
+          },
+          {
+            name: "Puno",
+            link: "/puno"
+          }
+        ],
+        link: "/peru",
+        image: "https://picsum.photos/200/300"
+
+      }]
+  },
+  {
+    title: "Experiences", open: false,
+    items: [{ name: "Travel Style", link: "/safari" }, { name: "Ways to Travel", link: "/diving" }]
+  },
+  { title: "Specials", open: false, items: [{ name: "Argentina", link: "/argentina" }, { name: "Peru", link: "/peru" }] },
+  { title: "Our Experts", open: false, items: [{ name: "Meet the Team", link: "/team" }] },
+  { title: "Groups Only", open: false, items: [{ name: "Private Tours", link: "/private-tours" }] },
+  { title: "About Us", open: false, items: [{ name: "Company Info", link: "/info" }] },
+  { title: "Travel Packages", open: false, items: [{ name: "Luxury Trips", link: "/luxury" }] },
+])
+
+const toggleMenu = (index: number) => {
+  console.log(index)
+  menus.value = menus.value.map((menu, idx) => ({
+    ...menu,
+    open: idx === index ? !menu.open : false,
+  }));
+}
+
+const closeMenus = () => {
+  menus.value = menus.value.map((menu) => ({ ...menu, open: false }));
+};
+
+const activeItem = ref(null);
+
+const setActiveItem = (item: null) => {
+  activeItem.value = item;
+};
+
+const handleScroll = () => {
+  const currentScrollPosition = window.scrollY;
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      isHeaderVisible.value = currentScrollPosition <= lastScrollPosition || currentScrollPosition < 50;
+      lastScrollPosition = currentScrollPosition;
+      ticking = false;
+    });
+    ticking = true;
+  }
+  closeMenus();
+};
+
+// Llama a la función en el montaje inicial
+onMounted(() => {
+  updateBgColor();
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+
+watch(route, () => {
+  closeMenus();
+});
+</script>
 <template>
   <div
     :class="`${position} top-0 left-0 w-full ${zIndex} transition-transform duration-300 ${isHeaderVisible ? '-translate-y-0' : '-translate-y-full'}`">
@@ -36,67 +198,38 @@
         </div>
       </div>
 
-      <div class="">
-        <nav class="container flex justify-center text-center">
-          <nuxt-link to="/travel-packages" class="menu-list" active-class="active">Peru Travel Packages</nuxt-link>
-          <nuxt-link to="/destinations" class="menu-list" active-class="active">Destinations</nuxt-link>
-          <nuxt-link to="/experiences" class="menu-list" active-class="active">Experiences</nuxt-link>
+      <div>
+        <nav class="container flex justify-center text-start">
+          <div v-for="(menu, index) in menus" :key="index" class="relative">
+            <Menu>
+              <button class="menu-list px-4 py-2 focus:outline-none">
+                {{ menu.title }}
+              </button>
+              <template #popper>
+                <div v-for="(item, idx) in menu.items" :key="idx" class="p-4 py-2 bg-white text-gray-800">
+                  <template v-if="item.popularCountries">
+                    <Menu placement="right">
+                      <button class="">
+                        {{ item.name }}
+                      </button>
+                      <template #popper>
+                        <ul class="submenu">
+                          <li v-for="sub in item.popularCountries" :key="sub.name"
+                            class="p-4 py-2 bg-white text-gray-800">
+                            <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
+                          </li>
+                        </ul>
+                      </template>
+                    </Menu>
+                  </template>
+
+                </div>
+              </template>
+            </Menu>
+          </div>
         </nav>
       </div>
-
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useRoute } from 'vue-router';
-
-const route = useRoute();
-const bgColor = ref('bg-gray-500');
-const position = ref('fixed');
-const zIndex = ref();
-const isHeaderVisible = ref(true);
-let lastScrollPosition = 0;
-let ticking = false;
-
-// Función para verificar la ruta y establecer el color
-const updateBgColor = () => {
-  if (['/why-book-with-us', '/hotels', '/about-us'].includes(route.path)) {
-    bgColor.value = 'bg-tertiary';
-  } else if (route.path === '/peru-travel-packages') {
-    bgColor.value = 'bg-white/50';
-  } else {
-    bgColor.value = 'bg-secondary';
-  }
-  console.log(route.path);
-  if (route.path !== '/') {
-    position.value = 'fixed';
-    zIndex.value = 'z-50';
-  }
-};
-
-const handleScroll = () => {
-  const currentScrollPosition = window.scrollY;
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      isHeaderVisible.value = currentScrollPosition <= lastScrollPosition || currentScrollPosition < 50;
-      lastScrollPosition = currentScrollPosition;
-      ticking = false;
-    });
-    ticking = true;
-  }
-};
-
-// Llama a la función en el montaje inicial
-onMounted(() => {
-  updateBgColor();
-  window.addEventListener('scroll', handleScroll);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
-
-// Observa cambios en route.path para detectar correctamente cambios de ruta
-watch(() => route.path, updateBgColor);
-</script>
+<style></style>
