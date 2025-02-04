@@ -23,24 +23,7 @@ onMounted(() => {
     { threshold: 0.2 }
   );
 
-  const observer1 = new IntersectionObserver(
-    (entries, observer1) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          gsap.to(animatedPath.value, {
-            strokeDashoffset: 0,
-            duration: 2,
-            ease: "power2.out",
-          });
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
-
   observer.observe(animatedDiv.value);
-  observer1.observe(animatedPath.value);
 });
 </script>
 <template>
