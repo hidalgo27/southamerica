@@ -125,7 +125,6 @@ const activeTab = ref(0)
   </section>
   <DescriptionWithLine></DescriptionWithLine>
   <section class="container my-20">
-    <!-- Botones de Navegación -->
     <div class="flex justify-center md:space-x-6 border-b text-sm md:text-lg">
       <button v-for="(item, index) in social_responsability" :key="index" @click="activeTab = index"
         class="p-4 text-center border-b-2 transition cursor-pointer"
@@ -134,7 +133,6 @@ const activeTab = ref(0)
       </button>
     </div>
 
-    <!-- Contenido del Timeline -->
     <div class="flex gap-6 mt-10">
       <div v-if="social_responsability[activeTab]"
         class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 justify-between w-full">
