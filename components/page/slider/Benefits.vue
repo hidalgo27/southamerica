@@ -50,7 +50,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="carouselRef" class="bg-secondary bg-opacity-10 py-6 rounded-md m-3">
+  <section ref="carouselRef" class=" py-6 rounded-md m-3">
     <div class="container">
       <div class="relative inset-y-10 items-center justify-between w-full flex lg:hidden">
         <div>
