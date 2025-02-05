@@ -21,7 +21,7 @@ const items = ref([
 ]);
 </script>
 <template>
-  <div class="bg-tertiary bg-opacity-30 my-20">
+  <div class="bg-tertiary bg-opacity-30">
     <div class="container py-32 text-center">
       <div class="text-center mb-8">
         <div class="border-title mb-2 mx-auto"></div>
