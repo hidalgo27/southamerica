@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import BannerPosition from '~/components/experts/BannerPosition.vue';
+import CardBlue from '~/components/experts/CardBlue.vue';
 import MiniReviews from '~/components/home/MiniReviews.vue';
 import TextDescription from '~/components/home/TextDescription.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
@@ -76,31 +77,7 @@ onMounted(() => {
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
-  <section class="container my-20">
-    <div class="px-4 py-8 flex flex-col lg:flex-row items-center">
-      <div class="bg-blue-100 p-8 rounded-lg lg:w-1/2 lg:mr-8">
-        <h1 class="text-3xl font-bold text-blue-900 mb-4">
-          We’re passionate travellers, just like you.
-        </h1>
-        <p class="text-blue-900 mb-4">
-          We’re driven by a love of travel, and one of the joys of exploring the world is sharing our passion with
-          others.
-          Keep scrolling to see more about what makes Goway’s Destination Specialists unique.
-        </p>
-        <p class="text-blue-900 mb-6">
-          Are you ready to get serious about planning your next trip? You can also explore all of the destinations that
-          Goway travels to.
-        </p>
-        <button class="bg-white text-blue-900 border border-blue-900 py-2 px-4 rounded">
-          Start Planning
-        </button>
-      </div>
-      <div class="lg:w-1/2 mt-8 lg:mt-0">
-        <img alt="Three women taking a selfie and smiling, enjoying their travel experience" class="rounded-lg"
-          height="400" src="https://picsum.photos/400/300" width="600" />
-      </div>
-    </div>
-  </section>
+  <CardBlue></CardBlue>
   <TextDescription></TextDescription>
   <section class="container my-20">
 
