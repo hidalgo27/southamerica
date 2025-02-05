@@ -28,8 +28,6 @@ const sections = [
     buttonLabel: "Explore Careers",
     url: "/careers"
   }
-
-
 ]
 </script>
 <template>
