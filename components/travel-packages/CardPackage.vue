@@ -4,11 +4,8 @@ import gsap from 'gsap';
 const animatedDiv = ref<HTMLElement | null>(null);
 const imageDiv = ref<HTMLElement | null>(null);
 
-defineProps({
-  packageData: {
-    type: Object,
-    required: true,
-  },
+const props = defineProps({
+  packageData: { Object, required: true }
 });
 
 onMounted(() => {
@@ -46,14 +43,18 @@ onMounted(() => {
     }
   });
 });
+
+
 </script>
 <template>
   <div ref="imageDiv"
     class="bg-white rounded-md border overflow-hidden w-full h-full group flex-grow hover:shadow-xl hover:border-transparent transition duration-500 ease-in-out">
     <div class="relative overflow-hidden cursor-pointer">
       <NuxtLink :to="'/travel-packages' + packageData.url" class="block">
-        <NuxtImg :src="packageData.imagen" :alt="packageData.titulo"
-          class="w-full h-72 object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
+        <div class="w-full h-96">
+          <NuxtImg :src="packageData.imagen" :alt="packageData.titulo"
+            class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
+        </div>
         <div class="absolute top-4 left-4 flex space-x-2">
           <span v-if="packageData.specials"
             class="bg-white text-secondary text-xs font-semibold px-2 py-1 rounded-full">
@@ -99,9 +100,9 @@ onMounted(() => {
         <div class="block border-l border-gray-200 h-8 mx-6"></div>
         <div class="flex justify-between items-center">
           <span class="block text-gray-700 mr-2">
-            From US$ {{ packageData.precio_paquetes.toLocaleString() }}
+            From US$ {{ packageData.precio_tours.toLocaleString() }}
           </span>
-          <span v-if="packageData.ahorro" class="block text-red-500">
+          <span v-if="packageData.descuento" class="block text-red-500">
             savings US$ {{ packageData.ahorro.toLocaleString() }}
           </span>
         </div>

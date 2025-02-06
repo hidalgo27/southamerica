@@ -10,12 +10,22 @@ import SliderBanner from '~/components/page/slider/SliderBanner.vue'
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue'
 import TextDescription from '~/components/home/DescriptionWithLine.vue'
 
+import { usePackageStore } from '~/stores/packages'
+
+const packageStore = usePackageStore()
+const listPackages = ref([])
+const getPackage = async () => {
+  const res: any = await packageStore.getPackageTop()
+  listPackages.value = res
+}
 const loading = ref(true)
 const video = ref()
 const { onLoaded } = useScriptVimeoPlayer()
 
 let player: any
 onMounted(async () => {
+  await getPackage()
+  console.log('listPackages', listPackages.value)
   onLoaded(({ Vimeo }) => {
     player = new Vimeo.Player(video.value, {
       id: 1028540009,
@@ -29,6 +39,8 @@ onMounted(async () => {
     })
   })
 });
+
+
 </script>
 
 <template>
@@ -72,7 +84,7 @@ onMounted(async () => {
     </div>
   </div>
 
-  <SliderPackages></SliderPackages>
+  <SliderPackages :listPackages="listPackages"></SliderPackages>
 
   <SliderBanner></SliderBanner>
 
