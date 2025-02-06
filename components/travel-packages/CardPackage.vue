@@ -50,7 +50,7 @@ onMounted(() => {
   <div ref="imageDiv"
     class="bg-white rounded-md border overflow-hidden w-full h-full group flex-grow hover:shadow-xl hover:border-transparent transition duration-500 ease-in-out">
     <div class="relative overflow-hidden cursor-pointer">
-      <NuxtLink :to="'/travel-packages' + packageData.url" class="block">
+      <NuxtLink :to="'/travel-packages/' + packageData.url" class="block">
         <div class="w-full h-96">
           <NuxtImg :src="packageData.imagen" :alt="packageData.titulo"
             class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
@@ -100,10 +100,10 @@ onMounted(() => {
         <div class="block border-l border-gray-200 h-8 mx-6"></div>
         <div class="flex justify-between items-center">
           <span class="block text-gray-700 mr-2">
-            From US$ {{ packageData.precio_tours.toLocaleString() }}
+            From US$ {{ packageData.precio_tours }}
           </span>
           <span v-if="packageData.descuento" class="block text-red-500">
-            savings US$ {{ packageData.ahorro.toLocaleString() }}
+            savings US$ {{ packageData.ahorro }}
           </span>
         </div>
       </div>

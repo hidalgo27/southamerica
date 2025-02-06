@@ -53,16 +53,8 @@ const progressWidth = computed(() => {
   return totalVisibleSlides > 0
     ? ((currentSlide.value / totalVisibleSlides) * 100)
     : '100';
-  return 0
 });
 
-watch(
-  () => props.listPackages,
-  (newVal) => {
-    console.log("Updated listPackages:", props.listPackages);
-  },
-  { deep: true }
-);
 </script>
 
 <template>
