@@ -275,6 +275,7 @@ onUnmounted(() => {
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                               </svg>
                             </button>
+
                             <template #popper>
                               <div class="rounded-md bg-white text-gray-800 p-6 flex md:flex-col lg:flex-row">
                                 <div>
@@ -310,12 +311,17 @@ onUnmounted(() => {
                               </div>
                             </template>
                           </Menu>
+
                         </template>
                         <template v-else>
                           <div class="py-2 text-gray-800 hover:text-orange-500 duration-300">
                             <NuxtLink :to="item.link">{{ item.name }}</NuxtLink>
                           </div>
                         </template>
+                        <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations'"
+                          class=" bg-secondary w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-orange-300 duration-300 group">
+                          Explore all Destinations
+                        </NuxtLink>
                       </div>
                     </div>
                   </div>
