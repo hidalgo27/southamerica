@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-
+import InquireNowForm from "~/components/form/InquireNowForm.vue";
+const isOpen = ref(false);
 </script>
 <template>
   <section class="container my-20">
@@ -17,12 +18,13 @@
             Specialists to craft the trip that’s right for you.
           </p>
           <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
-            <button class="px-4 py-2 border btn-primary-outline rounded-md">
+            <button class="px-4 py-2 border btn-primary-outline rounded-md" @click="isOpen = true">
               Request a Quote
             </button>
-            <button class="px-4 py-2 border btn-secondary-outline rounded-md">
+            <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
+            <NuxtLink to="/about-us/meet-the-team" class="px-4 py-2 border btn-secondary-outline rounded-md">
               Meet the Team
-            </button>
+            </NuxtLink>
           </div>
         </div>
         <div class="relative w-full rounded-md">

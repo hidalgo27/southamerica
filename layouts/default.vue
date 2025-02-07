@@ -5,7 +5,7 @@
 
     <Footer></Footer>
 
-    <Float></Float>
+    <!-- <Float></Float> -->
 
   </div>
 </template>

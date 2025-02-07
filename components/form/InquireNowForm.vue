@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+import { usePackageStore } from "~/stores/packages";
 const props = defineProps({
   isOpen: Boolean,
 });
@@ -8,7 +9,7 @@ const emit = defineEmits(["close"]);
 const closeForm = () => {
   emit("close");
 };
-
+const packageStore = usePackageStore();
 
 const formData = ref({
   firstName: "",
@@ -39,6 +40,24 @@ watchEffect(() => {
     document.body.style.overflow = props.isOpen ? "hidden" : "auto";
   }
 });
+
+const route = useRoute();
+const packageDetail = ref(null);
+const getPackageDetail = async () => {
+  const res: any = await packageStore.getPackages();
+  packageDetail.value = res.find((item: any) => item.url === route.path.split('/')[2]);
+};
+
+onMounted(async () => {
+  if (route.path.split('/')[2] && route.path.includes('/travel-packages/')) await getPackageDetail();
+});
+
+watch(() => route.path, async () => {
+  if (route.path.split('/')[2] && route.path.includes('/travel-packages/'))
+    await getPackageDetail();
+  else
+    packageDetail.value = null;
+});
 </script>
 <template>
   <Teleport to="body" class="overflow-hidden-scroll">
@@ -56,7 +75,13 @@ watchEffect(() => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
         </button>
-
+        <div v-if="packageDetail" class="w-11/12 bg-blue-50 h-24 mb-6 rounded-md flex items-center p-4 shadow-md ">
+          <NuxtImg :src="packageDetail.imagen" alt="Trip Image" class="w-16 h-16 rounded-md object-cover" />
+          <div class="ml-4">
+            <p class="text-xs text-gray-500">Selected Trip Itinerary</p>
+            <p class="text-md font-semibold text-gray-800">{{ packageDetail.titulo }}</p>
+          </div>
+        </div>
         <h2 class="text-2xl font-semibold mb-4 font-playfair-display">Start planning with Goway</h2>
 
         <form @submit.prevent="submitForm" class="space-y-4 text-sm">
@@ -143,7 +168,7 @@ watchEffect(() => {
           </div>
 
           <!-- País de interés -->
-          <div>
+          <div v-if="!packageDetail">
             <label class="block text-sm font-medium">Country of Interest *</label>
             <select v-model="formData.country" class="input-field">
               <option value="">Select</option>
@@ -156,7 +181,7 @@ watchEffect(() => {
           </div>
 
           <!-- Estilos de viaje -->
-          <div>
+          <div v-if="!packageDetail">
             <label class="block text-sm font-medium">Which travel style(s) are you most interested in? (Max 3)
               *</label>
             <select v-model="formData.travelStyle" multiple class="input-field">
@@ -169,7 +194,7 @@ watchEffect(() => {
           </div>
 
           <!-- Presupuesto -->
-          <div>
+          <div v-if="!packageDetail">
             <label class="block text-sm font-medium">Estimated Per Person Budget *</label>
             <select v-model="formData.budget" class="input-field">
               <option>Select your budget</option>
@@ -188,7 +213,7 @@ watchEffect(() => {
           <fieldset class="mb-6">
             <div class="flex flex-col gap-2">
               <label class="flex items-center gap-2">
-                <input type="checkbox" v-model="selectedOptions" value="" class="h-5 w-5 text-red-500">
+                <input type="checkbox" value="" class="h-5 w-5 text-red-500">
                 Subscribe to our newsletter and offers
               </label>
             </div>
