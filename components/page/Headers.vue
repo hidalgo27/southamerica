@@ -185,7 +185,7 @@ const menus = ref([
   },
   {
     title: "Travel Packages",
-    items: [{ name: "Travel Packages", link: "/travel-packages" }, { name: "Special Offers", link: "/special-offers" }]
+    items: [{ name: "All Packages", link: "/travel-packages" }, { name: "Special Offers", link: "/special-offers" }]
   },
 ])
 

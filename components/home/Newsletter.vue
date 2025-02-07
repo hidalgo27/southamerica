@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+import SignUpForm from '../form/SignUpForm.vue';
 
+const isModalOpen = ref(false);
 </script>
 <template>
   <section class="flex items-center justify-center my-20 container">
@@ -11,8 +13,12 @@
           </h1>
           <p class="mb-20">Sign up to our newsletter to unlock travel Specials, Inspiration, and Expert
             Guides right to your inbox.</p>
-          <button class="btn-ternary py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700">Sign Up
-            Today</button>
+          <button @click="isModalOpen = true"
+            class="btn-ternary py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700">
+            Sign UpToday
+          </button>
+          <SignUpForm :isOpen="isModalOpen" @close="isModalOpen = false">
+          </SignUpForm>
         </div>
         <div class="hidden md:block border-l border-gray-200 h-96 mx-8"></div>
         <div class="block md:hidden border-b border-gray-200 w-full my-8"></div>
