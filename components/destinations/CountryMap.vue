@@ -34,6 +34,7 @@ onMounted(() => {
       fill: am5.color(0xaaaaaa),
     });
 
+
     countrySeries.mapPolygons.template.states.create("hover", {
       fill: am5.color(0x677935),
     });
@@ -136,6 +137,20 @@ onMounted(() => {
       "Puno", "San Martín", "Tacna", "Tumbes", "Ucayali"
     ];
 
+
+    countrySeries.mapPolygons.template.events.on("click", (ev) => {
+      const regionName = ev.target.dataItem?.dataContext.name;
+      if (regionName) {
+        const newRoute = `/destinations/peru/${regionName.toLowerCase().replace(/ /g, "-")}`;
+        if (router.currentRoute.value.path === newRoute) {
+          router.replace({ path: "/redirect" }).then(() => {
+            router.replace(newRoute);
+          });
+        } else {
+          router.push(newRoute);
+        }
+      }
+    });
     // Distribuir los botones en los dos contenedores
     regions.forEach((region, index) => {
       if (index % 2 === 0) {
@@ -143,6 +158,7 @@ onMounted(() => {
       } else {
         createRegionButton(region, rightButtons);
       }
+
     });
   }
 });

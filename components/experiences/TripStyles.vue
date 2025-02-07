@@ -3,42 +3,42 @@ const curatedTrips = [
   {
     title: 'Safari & Wildlife Vacations',
     alt: 'Safari vehicle with zebras in a wildlife setting',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf',
     url: '/safari-wildlife',
     icon: 'fas fa-paw',
   },
   {
     title: 'Classic Vacations',
     alt: 'Colosseum in Rome at sunset',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg',
     url: '/classic-vacations',
     icon: 'fas fa-landmark',
   },
   {
     title: 'Solo & Women Travel',
     alt: 'Two women looking at a map in a city',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ',
     url: '/solo-women-travel',
     icon: 'fas fa-female',
   },
   {
     title: 'Beach & Island Getaways',
     alt: 'Aerial view of boats in blue water',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT',
     url: '/beach-island-getaways',
     icon: 'fas fa-umbrella-beach',
   },
   {
     title: 'Adventure Travel',
     alt: 'Person hiking in a desert landscape',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Auckland_Hotel_Wing/img_HeritageAuckland_Exterior.jpg',
     url: '/adventure-travel',
     icon: 'fas fa-hiking',
   },
   {
     title: 'Luxury Resorts',
     alt: 'Tropical resort with a pool',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg',
     url: '/luxury-resorts',
     icon: 'fas fa-spa',
   },
@@ -59,9 +59,9 @@ const curatedTrips = [
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <nuxt-link v-for="(trip, index) in curatedTrips" :key="index" :to="'/experiences' + trip.url"
           class="relative block hover:shadow-lg transition duration-500 ease-in-out h-full bg-white content-between overflow-hidden rounded-md border group">
-          <div class="relative overflow-hidden rounded-md">
+          <div class="relative overflow-hidden rounded-md h-[40vh]">
             <img :alt="trip.alt" :src="trip.image"
-              class="w-full h-auto rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
+              class="w-full h-full rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
           </div>
           <div class="absolute bottom-0 left-0 right-0 bg-white p-4 flex justify-between items-center rounded-b-md">
             <span>

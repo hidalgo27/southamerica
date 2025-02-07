@@ -9,7 +9,7 @@ const sections = [
   {
     title: "Our Story",
     text: "We are a team of travel enthusiasts who love to explore the world and share our experiences with others. Our mission is to help you plan your next adventure and make it a memorable one. Whether you are looking for a relaxing beach vacation or an action-packed adventure, we have you covered. Our team of experts will help you find the perfect destination and create a customized itinerary that suits your needs. So why wait? Start planning your next trip with us today!",
-    imgSrc: "https://picsum.photos/500/300",
+    imgSrc: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Discover Our Story",
     url: "/our-story"
@@ -17,7 +17,7 @@ const sections = [
   {
     title: "Why Goway",
     text: "We know a thing or two about travel at Goway. Our team of Destination Specialists have been tailoring dream vacations for nearly 55 years. We handle every part of the travel journey, from flights to tours to accommodations. Let us do the hard work so you can sit back, relax, and take in the world. Rely on personalized travel planning, elevated experiences, and legendary customer service.",
-    imgSrc: "https://picsum.photos/500/300",
+    imgSrc: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Learn More",
     url: "/why-goway"
@@ -25,7 +25,7 @@ const sections = [
   {
     title: "Careers",
     text: "Are you interested in an exciting career? Come work with us! We've spent over 50 years building a rich culture of passionate travel professionals. We accomplish this with values built upon taking care of our people, our customers and the communities in which we operate. We have remote opportunities, as well as in our offices in Toronto, Vancouver, Los Angeles, Manila, and Sydney. ",
-    imgSrc: "https://picsum.photos/500/500",
+    imgSrc: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Auckland_Hotel_Wing/img_HeritageAuckland_Exterior.jpg",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Explore Careers",
     url: "/careers"
@@ -63,12 +63,12 @@ const social_responsability = [
   {
     title: 'Tourism Cares',
     text: 'We give back with Tourism Cares, the travel and tourism industry’s leading community for giving and volunteering. Our support is helping to preserve and enrich the travel experience in the US, Canada, and around the world. Together, we bring the industry’s talent, resources, and influence to help destinations in need, as well as support the next generation of travel professionals. ',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ',
   },
   {
     title: 'Doctors Without Borders/Médecins Sans Frontières (MSF)',
     text: 'MSF provides emergency medical humanitarian assistance to people facing conflict, epidemics, disasters or exclusion from healthcare in more than 70 countries around the world. Goway believes travel not only enriches the lives of individuals but can also positively impact communities around the world.Through our collective partnership with MSF, your travel will directly contribute to MSF’s general emergency fund and help support people facing humanitarian crises.With every travel purchase, you will help provide MSF teams with the flexibility to respond quickly and effectively wherever people’s healthcare needs are greatest.We invite our customers to join us in our goal to promote sustainable and responsible travel while supporting a meaningful cause.',
-    image: 'https://picsum.photos/400/600',
+    image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg',
   }
 ]
 const activeTab = ref(0)

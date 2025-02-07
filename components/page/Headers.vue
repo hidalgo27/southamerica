@@ -64,7 +64,7 @@ const menus = ref([
           ]
         },
         link: "/peru",
-        image: "https://picsum.photos/200/300"
+        image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg"
       }]
   },
   {
@@ -90,7 +90,7 @@ const menus = ref([
           ]
         },
         link: "/experiences",
-        image: "https://picsum.photos/200/300"
+        image: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg"
       },
       {
         name: "Ways to travel",
@@ -118,13 +118,13 @@ const menus = ref([
   {
     title: "Specials",
     items: [{ name: "Argentina", link: "/special-offers/argentina" }, { name: "Peru", link: "/special-offers/peru" }, { name: "Ecuador", link: "/special-offers/ecuador" }],
-    image: "https://picsum.photos/200/300",
+    image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
     url: "/special-offers"
   },
   {
     title: "Our Experts",
     items: [{ name: "Argentina", link: "/our-experts/argentina" }, { name: "Peru", link: "/our-experts/peru" }, { name: "Ecuador", link: "/our-experts/ecuador" }],
-    image: "https://picsum.photos/200/300",
+    image: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
     url: "/our-experts"
   },
   {
@@ -150,7 +150,7 @@ const menus = ref([
           ]
         },
         link: "/groups",
-        image: "https://picsum.photos/200/300"
+        image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg"
       },
       {
         name: "Groups Destination",
@@ -174,7 +174,7 @@ const menus = ref([
   {
     title: "About Us",
     items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
-    image: "https://picsum.photos/200/300"
+    image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg"
   },
   {
     title: "Travel Packages",
@@ -249,7 +249,7 @@ onUnmounted(() => {
         <nav class="container flex justify-center text-start">
           <div v-for="(menu, index) in menus" :key="index" class="relative">
             <Dropdown>
-              <button class="menu-list px-4 py-2 focus:outline-none">
+              <button class="menu-list text-sm px-4 py-2 focus:outline-none">
                 {{ menu.title }}
               </button>
               <template #popper>
@@ -260,7 +260,7 @@ onUnmounted(() => {
                     <div :class="menu.image ? 'grid grid-cols-3 gap-x-10 ' : ''">
                       <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800 ">
                         <template v-if="item.firstTitle">
-                          <Menu placement="right-start" :skidding="-40" :distance="20">
+                          <Menu placement="right-start" :skidding="-40" :distance="20" :popperTriggers="['hover']">
                             <button
                               class="w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-gray-100 group">
                               {{ item.name }}
@@ -294,12 +294,12 @@ onUnmounted(() => {
                                     </div>
                                   </div>
                                   <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations' + item.link"
-                                    class="text-semibold duration-300">
+                                    class="text-semibold duration-300 text-md">
                                     Explore all {{ item.name }}
                                   </NuxtLink>
                                 </div>
                                 <div v-if="item.image"
-                                  class="m-0 md:mt-2 lg:ml-6 w-full h-64 lg:w-52 lg:h-80 rounded-md overflow-hidden">
+                                  class="m-0 md:mt-2 lg:ml-6 w-full h-full lg:w-52 lg:h-80 rounded-md overflow-hidden">
                                   <NuxtImg :src="item.image" class="w-full h-full "></NuxtImg>
                                 </div>
                               </div>
@@ -308,7 +308,7 @@ onUnmounted(() => {
 
                         </template>
                         <template v-else>
-                          <div class="py-2 text-gray-800 hover:text-orange-500 duration-300">
+                          <div class="py-2 text-gray-800 hover:text-orange-500 duration-300 text-md">
                             <NuxtLink :to="item.link">{{ item.name }}</NuxtLink>
                           </div>
                         </template>

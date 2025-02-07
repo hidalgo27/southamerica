@@ -32,7 +32,7 @@ const reviews = ref([
     <div class="flex flex-col lg:flex-row items-center justify-center w-full">
       <div class="relative flex-1 lg:w-1/2 h-96 lg:h-auto">
         <img alt="Hot air balloons over a rocky landscape" class="w-full h-full object-cover rounded-md"
-          src="https://picsum.photos/800/600" />
+          src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
         <div class="absolute inset-0 flex items-center justify-center">
           <div class="bg-white p-8 rounded-md shadow-md text-center">
             <p class="text-xl font-semibold mb-2">

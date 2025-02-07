@@ -4,47 +4,47 @@ import { Carousel, Slide } from 'vue3-carousel';
 const destinations = [
   {
     title: 'Machu Picchu',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT',
     url: 'machu-picchu',
   },
   {
     title: 'Galapagos Islands',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Auckland_Hotel_Wing/img_HeritageAuckland_Exterior.jpg',
     url: 'galapagos-islands',
   },
   {
     title: 'Amazon Rainforest',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg',
     url: 'amazon-rainforest',
   },
   {
     title: 'Lake Titicaca',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj',
     url: 'lake-titicaca',
   },
   {
     title: 'Nazca Lines',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf',
     url: 'nazca-lines',
   },
   {
     title: 'Colca Canyon',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/iStock-1387834068.jpg?h=5940005b&itok=J9Q1AHMz',
     url: 'colca-canyon',
   },
   {
     title: 'Sacred Valley',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg',
     url: 'sacred-valley',
   },
   {
     title: 'Uyuni Salt Flats',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/iStock-1387834068.jpg?h=5940005b&itok=J9Q1AHMz',
     url: 'uyuni-salt-flats',
   },
   {
     title: 'Torres del Paine',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf',
     url: 'torres-del-paine',
   }
 ];

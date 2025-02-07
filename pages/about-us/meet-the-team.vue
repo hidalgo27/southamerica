@@ -51,7 +51,7 @@ const activeTab = ref(0);
 
     <div class="grid grid-cols-1 gap-6 ">
       <div v-for="member in team[activeTab].members" :key="member.name"
-        class="bg-white p-4 grid grid-cols-1 md:grid-cols-2 gap-6 items-center w-1/2 h-1/2 text-center">
+        class="bg-white p-4 grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-self-center w-1/2 h-1/2 text-center">
         <div class="relative p-6 w-full rounded-md h-full">
           <img :src="member.imgSrc" class="rounded-md  w-full h-full object-cover">
         </div>

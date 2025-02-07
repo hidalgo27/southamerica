@@ -6,7 +6,7 @@ const sections = [
   {
     title: "Consumer Protection Plans",
     text: "When the unthinkable happens, you’re covered by Goway’s various consumer protection plans and programs across Canada and the United States. Rest easy when your travel.",
-    imgSrc: "https://picsum.photos/500/300",
+    imgSrc: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Read More",
     url: "#"
@@ -14,7 +14,7 @@ const sections = [
   {
     title: "Terms and Conditions",
     text: "It’s never fun reading the fine print, but we’ve got the full legal details of booking with Goway that will keep you informed and offer you peace of mind.",
-    imgSrc: "https://picsum.photos/500/300",
+    imgSrc: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Read More",
     url: "#"
@@ -22,7 +22,7 @@ const sections = [
   {
     title: "Privacy Policy",
     text: "Your data is safe with us whether you’re browsing our website or subscribing to our newsletters. Keep informed about how Goway uses your data and protects your privacy. ",
-    imgSrc: "https://picsum.photos/500/500",
+    imgSrc: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Read More",
     url: "#"
@@ -30,7 +30,7 @@ const sections = [
   {
     title: "Commitment to Accessibility",
     text: "We strive to provide a website that is accessible for travellers from all walks of life. Learn more about the steps we’re actively taking to help share our love of travel with as wide a community as possible.",
-    imgSrc: "https://picsum.photos/500/500",
+    imgSrc: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Auckland_Hotel_Wing/img_HeritageAuckland_Exterior.jpg",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Read More",
     url: "#"

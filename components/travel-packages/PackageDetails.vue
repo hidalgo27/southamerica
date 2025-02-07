@@ -13,7 +13,7 @@ const content = {
     title: 'Departures',
     description: 'Departs from Rome',
     days: 'Sunday, Monday, Tuesday, Wednesday & Friday',
-    image: 'https://picsum.photos/400/300'
+    image: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf'
   },
   inclusions: {
     title: 'Trip Inclusions and Exclusions',

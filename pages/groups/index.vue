@@ -77,7 +77,8 @@ const destination = {
             and interests, while keeping in mind those special touches needed for smooth group travel.</p>
         </div>
         <div class="relative w-full rounded-md h-full">
-          <img class="w-full h-full object-cover rounded-md" src="https://picsum.photos/400/300" />
+          <img class="w-full h-full object-cover rounded-md"
+            src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
         </div>
       </div>
     </div>

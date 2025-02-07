@@ -11,7 +11,7 @@ const listPackages = [
     titulo: 'Machu Picchu & Galapagos Islands',
     country: 'Peru & Ecuador',
     specials: true,
-    imagen: 'https://picsum.photos/400/300',
+    imagen: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj',
     duracion: 7,
     url: '/machu-picchu-galapagos-islands',
     precio_paquetes: 4129,
@@ -22,7 +22,7 @@ const listPackages = [
   {
     titulo: 'Amazon Rainforest Adventure',
     specials: true,
-    imagen: 'https://picsum.photos/400/350',
+    imagen: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf',
     duracion: 10,
     url: '/amazon-rainforest-adventure',
     precio_paquetes: 3299,
@@ -32,7 +32,7 @@ const listPackages = [
   {
     titulo: 'Patagonia Explorer',
     country: 'Argentina',
-    imagen: 'https://picsum.photos/400/400',
+    imagen: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg',
     duracion: 12,
     url: '/patagonia-explorer',
     precio_paquetes: 4999,
@@ -42,7 +42,7 @@ const listPackages = [
   },
   {
     titulo: 'Peru Cultural Discovery',
-    imagen: 'https://picsum.photos/400/450',
+    imagen: 'https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Radisson_Blu_Plaza_Hotel_Sydney/img_RadissonBluPlazaHotelSydney_Exterior.jpg',
     duracion: 9,
     url: '/peru-cultural-discovery',
     precio_paquetes: 2899,
@@ -78,7 +78,8 @@ const listPackages = [
 
         </div>
         <div class="relative w-full rounded-md h-full">
-          <img class="w-full h-full object-cover rounded-md" src="https://picsum.photos/400/300" />
+          <img class="w-full h-full object-cover rounded-md"
+            src="https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg" />
         </div>
       </div>
     </div>

@@ -45,9 +45,13 @@ const items = ref([
               {{ item.text }}
             </span>
           </div>
-          <img v-if="selectedItem === index" :class="'image-' + index" alt="Imagen de referencia"
-            class="absolute left-2/3 top-1/2 transform -translate-y-1/2 w-32 h-32 z-50 object-cover rounded-lg shadow-lg"
-            src="https://picsum.photos/400/300" />
+          <div
+            class="absolute left-2/3 top-1/2 transform -translate-y-1/2 w-32 h-32 z-50 object-cover rounded-lg shadow-lg">
+            <img v-if="selectedItem === index" :class="'image-' + index" alt="Imagen de referencia"
+              class="w-full h-full rounded-md"
+              src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
+          </div>
+
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6 ml-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
