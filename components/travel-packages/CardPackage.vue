@@ -81,7 +81,7 @@ onMounted(() => {
             {{ tag }}
           </span>
         </div>
-        <NuxtLink :to="'/travel-packages' + packageData.url"
+        <NuxtLink :to="'/travel-packages/' + packageData.url"
           class="text-2xl font-semibold font-playfair-display tracking-wide mb-3 block">
           {{ packageData.titulo }}
         </NuxtLink>

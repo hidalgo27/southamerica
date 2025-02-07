@@ -177,7 +177,6 @@ const menus = ref([
         link: "/safari",
       },
     ],
-    image: "https://picsum.photos/200/300"
   },
   {
     title: "About Us",
