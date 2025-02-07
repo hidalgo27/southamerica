@@ -108,13 +108,10 @@ onMounted(() => {
           <div class="pt-4">
             <h3 class="text-lg font-semibold mb-2">{{ post.title }}</h3>
             <p class="mb-4">{{ post.excerpt }}</p>
-            <div class="group">
-              <a class="font-semibold" href="#">
-                Read More
-              </a>
-              <div class="border border-primary mt-1 w-20 transition-all duration-700 ease-in-out group-hover:w-0">
-              </div>
-            </div>
+            <a class=" relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0 "
+              href="#">
+              Read More
+            </a>
           </div>
         </div>
       </div>

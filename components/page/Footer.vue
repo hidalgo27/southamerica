@@ -9,10 +9,8 @@
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">New Specials</h3>
           <div class="group">
-            <a href="#" class="">Discover</a>
-            <div
-              class="border border-primary center mt-1 w-16  transition-all duration-700 ease-in-out group-hover:w-0">
-            </div>
+            <a href="#"
+              class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover</a>
           </div>
         </div>
       </div>
@@ -21,9 +19,9 @@
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Start Planning</h3>
           <div class="group">
-            <a href="#" class="">Discover All Trips</a>
-            <div class="border border-primary center mt-1 w-32 transition-all duration-700 ease-in-out group-hover:w-0">
-            </div>
+            <a href="#"
+              class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover
+              All Trips</a>
           </div>
         </div>
       </div>
@@ -32,10 +30,8 @@
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Follow Along</h3>
           <div class="group self-center ">
-            <a href="#" class="">@gotoperu</a>
-            <div
-              class="border border-primary center mt-1 w-20  transition-all duration-700 ease-in-out group-hover:w-0">
-            </div>
+            <a href="#"
+              class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">@gotoperu</a>
           </div>
         </div>
       </div>
