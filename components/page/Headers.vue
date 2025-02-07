@@ -2,11 +2,13 @@
 import { useRoute } from 'vue-router';
 import 'floating-vue/dist/style.css';
 import { Dropdown, Menu } from 'floating-vue';
+import InquireNowForm from '../form/InquireNowForm.vue';
 
 const route = useRoute();
 const bgColor = ref('bg-gray-500');
 const position = ref('fixed');
 const zIndex = ref();
+const isOpen = ref(false);
 const isHeaderVisible = ref(true);
 let lastScrollPosition = 0;
 let ticking = false;
@@ -18,12 +20,12 @@ const updateBgColor = () => {
   } else if (route.path === '/peru-travel-packages') {
     bgColor.value = 'bg-white/50';
   } else {
-    bgColor.value = 'bg-secondary';
+    bgColor.value = 'bg-orange-100';
   }
   console.log(route.path);
   if (route.path !== '/') {
     position.value = 'fixed';
-    zIndex.value = 'z-50';
+    zIndex.value = 'z-30';
   }
 };
 
@@ -245,7 +247,9 @@ onUnmounted(() => {
               <span class="font-semibold block">+1 (202) 4911478</span>
               <span class="text-sm">Or contact your travel advisor</span>
             </div>
-            <a class="btn-primary-outline" href="#form-dream-adventure">Get a Quote</a>
+            <button @click="isOpen = true" class="btn-primary-outline bg-orange-50 "
+              href="#form-dream-adventure">Inquire Now</button>
+            <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
           </div>
         </div>
       </div>

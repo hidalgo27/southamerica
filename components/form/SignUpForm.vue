@@ -7,7 +7,9 @@ const closeModal = () => {
 };
 
 watchEffect(() => {
-  //document.body.style.overflow = props.isOpen ? "hidden" : "auto";
+  if (typeof document !== "undefined") {
+    document.body.style.overflow = props.isOpen ? "hidden" : "auto";
+  }
 });
 const selectedTitle = ref("");
 const firstName = ref("");
@@ -29,7 +31,8 @@ const handleSubmit = () => {
 };
 </script>
 <template>
-  <div v-if="isOpen" class="fixed inset-0 flex items-center z-50 justify-center bg-gray-800 bg-opacity-50  scroll">
+  <div v-if="isOpen" class="fixed inset-0 flex items-center z-50 justify-center bg-gray-800 bg-opacity-50 scroll"
+    @click.self="closeModal">
     <div class="bg-white rounded-lg shadow-lg w-5/6 h-screen md:h-3/4 relative overflow-y-auto sm:overflow-y-auto">
       <button @click="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
         ✕
