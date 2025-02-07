@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import NavDestination from '~/components/destinations/NavDestination.vue';
 import ListExperiences from '~/components/experiences/ListExperiences.vue';
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
 import MiniReviews from '~/components/home/MiniReviews.vue';

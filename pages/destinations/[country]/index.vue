@@ -10,6 +10,7 @@ import Newsletter from '~/components/home/Newsletter.vue';
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
 import TextDescription from '~/components/home/TextDescription.vue';
 import MiniReviews from '~/components/home/MiniReviews.vue';
+import CountryMap from '~/components/destinations/CountryMap.vue';
 
 const destinationStore = useDestinationStore();
 
@@ -33,11 +34,10 @@ onMounted(async () => {
     <AllMiniCards v-if="destination" :destination="destination"></AllMiniCards>
   </section>
   <TextDescription v-if="destination" :destination="destination"></TextDescription>
-
+  <CountryMap></CountryMap>
   <TextDescription v-if="destination" :destination="destination"></TextDescription>
   <PropertyDestination></PropertyDestination>
   <!-- <SliderPackages></SliderPackages> -->
-
   <EspecialistLetter></EspecialistLetter>
 
   <TravelStories></TravelStories>
