@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 </script>
 <template>
   <section class="my-20">
@@ -16,9 +15,10 @@
           <h1 class="text-5xl font-bold text-gray-800 mb-16 font-playfair-display">
             Join our growing team at Goway.
           </h1>
-          <button class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700 w-full">
+          <NuxtLink to="/about-us/careers"
+            class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700 w-full">
             Explore Open Positions
-          </button>
+          </NuxtLink>
         </div>
       </div>
     </div>

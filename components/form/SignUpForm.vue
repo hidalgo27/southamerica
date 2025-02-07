@@ -33,7 +33,7 @@ const handleSubmit = () => {
 <template>
   <div v-if="isOpen" class="fixed inset-0 flex items-center z-50 justify-center bg-gray-800 bg-opacity-50 scroll"
     @click.self="closeModal">
-    <div class="bg-white rounded-lg shadow-lg w-5/6 h-screen md:h-3/4 relative overflow-y-auto sm:overflow-y-auto">
+    <div class="bg-white rounded-lg shadow-lg w-5/6 h-screen md:h-auto relative overflow-y-auto sm:overflow-y-auto">
       <button @click="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
         ✕
       </button>
@@ -66,7 +66,7 @@ const handleSubmit = () => {
               Trending Guides</li>
           </ul>
         </div>
-        <form @submit.prevent="handleSubmit" class="flex-auto p-6 md:p-10 text-xs">
+        <form @submit.prevent="handleSubmit" class="flex-auto p-6 md:p-10 text-xs ">
           <!-- Botones de título -->
           <label for="title" class="block text-gray-600 mb-2">Title *</label>
           <div id="title" class="flex gap-3 mb-4">

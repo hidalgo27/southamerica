@@ -88,7 +88,7 @@ const breakpoints = {
       :breakpoints="breakpoints">
       <Slide v-for="(destinations, index) in destinations" :key="index"
         class="justify-center items-center overflow-hidden p-6 w-full">
-        <NuxtLink :to="'/' + destinations.url"
+        <NuxtLink :to="'/destinations/' + destinations.url"
           class="p-2 grid grid-cols-2 items-center overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out w-fit">
           <div class="overflow-hidden relative rounded-md">
             <nuxt-img :src="destinations.image" :alt="destinations.title"

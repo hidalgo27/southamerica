@@ -11,7 +11,8 @@ const props = defineProps({
   <h1 class="mb-6 tracking-widest font-bold"> Explore {{ destination.destino.length }} Destinations
   </h1>
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-12 w-full">
-    <NuxtLink v-for="(country, cIndex) in destination.destino" :key="cIndex" :to="'/' + country.url"
+    <NuxtLink v-for="(country, cIndex) in destination.destino" :key="cIndex"
+      :to="'/destinations/' + destination.url + '/' + country.url"
       class="bg-white grid grid-cols-2 items-center p-4 content-between overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out h-full">
       <div class="overflow-hidden relative rounded-md">
         <nuxt-img :src="country.imagen" :alt="country.nombre"

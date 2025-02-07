@@ -60,14 +60,14 @@ watch(() => route.path, async () => {
 });
 </script>
 <template>
-  <Teleport to="body" class="overflow-hidden-scroll">
+  <Teleport to="body">
     <!-- Overlay -->
     <div v-if="isOpen" class="fixed inset-0 bg-black bg-opacity-50 z-50" @click="closeForm"></div>
 
     <!-- Formulario Deslizable -->
     <transition name="slide">
       <div v-if="isOpen"
-        class="fixed top-0 right-0 w-full max-w-2xl h-screen bg-white shadow-xl p-6 z-50 overflow-y-auto">
+        class="fixed top-0 right-0 w-full max-w-2xl h-screen bg-white shadow-xl p-6 px-12 z-50 overflow-y-auto">
         <button @click="closeForm"
           class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 rounded-full p-2 border">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -75,7 +75,7 @@ watch(() => route.path, async () => {
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
         </button>
-        <div v-if="packageDetail" class="w-11/12 bg-blue-50 h-24 mb-6 rounded-md flex items-center p-4 shadow-md ">
+        <div v-if="packageDetail" class="w-11/12 bg-blue-50 h-24 mb-6 rounded-md flex items-center p-2 shadow-md ">
           <NuxtImg :src="packageDetail.imagen" alt="Trip Image" class="w-16 h-16 rounded-md object-cover" />
           <div class="ml-4">
             <p class="text-xs text-gray-500">Selected Trip Itinerary</p>

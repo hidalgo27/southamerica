@@ -7,7 +7,6 @@ import InquireNowForm from '../form/InquireNowForm.vue';
 const route = useRoute();
 const bgColor = ref('bg-gray-500');
 const position = ref('fixed');
-const zIndex = ref();
 const isOpen = ref(false);
 const isHeaderVisible = ref(true);
 let lastScrollPosition = 0;
@@ -15,13 +14,6 @@ let ticking = false;
 
 // Función para verificar la ruta y establecer el color
 const updateBgColor = () => {
-  if (['/why-book-with-us', '/hotels', '/about-us'].includes(route.path)) {
-    bgColor.value = 'bg-tertiary';
-  } else if (route.path === '/peru-travel-packages') {
-    bgColor.value = 'bg-white/50';
-  } else {
-    bgColor.value = 'bg-orange-100';
-  }
   console.log(route.path);
   if (route.path !== '/') {
     position.value = 'fixed';
@@ -131,7 +123,7 @@ const menus = ref([
   },
   {
     title: "Our Experts",
-    items: [{ name: "Meet the Team", link: "/team" }, { name: "Argentina", link: "/our-experts/argentina" }, { name: "Peru", link: "/our-experts/peru" }, { name: "Ecuador", link: "/our-experts/ecuador" }],
+    items: [{ name: "Argentina", link: "/our-experts/argentina" }, { name: "Peru", link: "/our-experts/peru" }, { name: "Ecuador", link: "/our-experts/ecuador" }],
     image: "https://picsum.photos/200/300",
     url: "/our-experts"
   },
@@ -145,19 +137,19 @@ const menus = ref([
           items: [
             {
               name: "Adventure",
-              link: "/adventure"
+              link: "/groups"
             },
             {
               name: "Cruises",
-              link: "/cruises"
+              link: "/groups"
             },
             {
               name: "Family",
-              link: "/family"
+              link: "/groups"
             }
           ]
         },
-        link: "/safari",
+        link: "/groups",
         image: "https://picsum.photos/200/300"
       },
       {
@@ -167,15 +159,15 @@ const menus = ref([
           items: [
             {
               name: "Group Specialists",
-              link: "/adventure"
+              link: "/groups"
             },
             {
               name: "Why Group Travel",
-              link: "/cruises"
+              link: "/groups"
             },
           ]
         },
-        link: "/safari",
+        link: "/groups",
       },
     ],
   },
@@ -216,7 +208,7 @@ onUnmounted(() => {
 <template>
   <div
     :class="`${position} top-0 left-0 w-full z-30 transition-transform duration-300 ${isHeaderVisible ? '-translate-y-0' : '-translate-y-full'}`">
-    <div :class="`rounded-md ${bgColor} hidden sm:block m-3`">
+    <div :class="`rounded-md bg-orange-50 hidden sm:block m-3`">
       <div class="border-b border-secondary border-opacity-20">
         <div class="p-12 flex justify-between py-5 items-center">
           <div class="flex items-center gap-4">

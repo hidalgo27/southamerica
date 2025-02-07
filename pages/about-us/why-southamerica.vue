@@ -32,6 +32,10 @@ const sections = [
   }
 ]
 
+const destination = {
+  nombre: "South America",
+  descripcion: "South America is a continent of superlatives: the highest, the largest, the longest, the deepest, the remotest. Discover the continent's most iconic destinations, from the Amazon rainforest to the Andes Mountains, from the beaches of Rio de Janeiro to the glaciers of Patagonia. Whether you're looking for adventure, culture, or relaxation, South America has something for everyone.",
+}
 const awards = [
   {
     year: 2024,
@@ -71,7 +75,7 @@ const activeTab = ref(0)
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
-  <TextDescription></TextDescription>
+  <TextDescription v-if="destination" :destination="destination"></TextDescription>
   <Benefits></Benefits>
   <DescriptionWithLine></DescriptionWithLine>
   <section class="container my-20 space-y-6">

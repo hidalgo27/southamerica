@@ -91,7 +91,7 @@ const teammates = [
       </div>
       <div class="text-center mt-6">
         <nuxt-link class="px-6 py-3 btn-secondary-outline w-full rounded-md">
-          Ver todas los perfiles
+          Ver todos los perfiles
         </nuxt-link>
       </div>
     </div>

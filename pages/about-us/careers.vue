@@ -125,9 +125,9 @@ const positions = [
     <div class="container p-6">
       <div class="flex justify-between items-center mb-8">
         <h1 class="text-sm font-medium text-gray-500">Explore Open Positions</h1>
-        <button class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700">
+        <NuxtLink to="/about-us/careers" class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700">
           View All Open Positions
-        </button>
+        </NuxtLink>
       </div>
 
       <h2 class="text-4xl font-bold mb-12">Let's grow together.</h2>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import CardDestination from '@/components/destinations/CardDestination.vue';
-import WorldMap from '~/components/destinations/SouthAmericaMap.vue';
+import SouthAmericaMap from '~/components/destinations/SouthAmericaMap.vue';
 import DescriptionWithLine from '~/components/home/DescriptionWithLine.vue';
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
 import MiniReviews from '~/components/home/MiniReviews.vue';
@@ -25,7 +25,7 @@ onMounted(async () => {
   <HeaderImgNav></HeaderImgNav>
   <DescriptionWithLine></DescriptionWithLine>
 
-  <WorldMap></WorldMap>
+  <SouthAmericaMap></SouthAmericaMap>
 
   <CardDestination :destinations="destinations"></CardDestination>
 

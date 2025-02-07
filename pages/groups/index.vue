@@ -54,6 +54,11 @@ const content = {
     ]
   }
 };
+
+const destination = {
+  nombre: "South America",
+  descripcion: "South America is a continent of superlatives: the highest, the largest, the longest, the deepest, the remotest. Discover the continent's most iconic destinations, from the Amazon rainforest to the Andes Mountains, from the beaches of Rio de Janeiro to the glaciers of Patagonia. Whether you're looking for adventure, culture, or relaxation, South America has something for everyone.",
+}
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
@@ -77,7 +82,7 @@ const content = {
       </div>
     </div>
   </section>
-  <TextDescription></TextDescription>
+  <TextDescription v-if="destination" :destination="destination"></TextDescription>
   <Benefits></Benefits>
   <CardBlue></CardBlue>
   <TripStyles></TripStyles>
