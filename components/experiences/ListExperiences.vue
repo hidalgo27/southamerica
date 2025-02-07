@@ -21,8 +21,8 @@ const items = ref([
 ]);
 </script>
 <template>
-  <div class="bg-tertiary bg-opacity-30 ">
-    <div class="container py-12 text-center">
+  <div class="bg-tertiary bg-opacity-30">
+    <div class="container py-32 text-center">
       <div class="text-center mb-8">
         <div class="border-title mb-2 mx-auto"></div>
         <p class="mb-6 tracking-widest font-bold">
@@ -37,12 +37,11 @@ const items = ref([
         <NuxtLink to="#" v-for="(item, index) in items" :key="index"
           class="group flex justify-between p-4 rounded-md border-gray-500 transition-all duration-300 hover:bg-gray-100 hover:scale-[1.02]"
           @mouseenter="selectedItem = index; animateImage(index)" @mouseleave="selectedItem = null">
-
-          <div class="flex items-center w-3/5">
+          <div class="flex items-center md:w-3/5">
             <span class="text-gray-400 text-md md:text-lg w-8">
               {{ String(index + 1).padStart(2, '0') }}
             </span>
-            <span class="ml-4 text-3xl transition-all duration-300 group-hover:translate-x-2">
+            <span class="md:ml-4 text-sm md:text-3xl transition-all duration-300 group-hover:translate-x-2">
               {{ item.text }}
             </span>
           </div>

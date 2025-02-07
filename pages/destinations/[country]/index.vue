@@ -13,21 +13,30 @@ import MiniReviews from '~/components/home/MiniReviews.vue';
 
 const destinationStore = useDestinationStore();
 
-const destination = computed(() =>
-  destinationStore.destinations.find((dest) => dest.url === 'africa')
-);
+const route = useRoute();
+
+const destination = ref(null);
+const getDestination = async () => {
+  const res: any = await destinationStore.getCountries()
+  destination.value = res.find((dest: any) => dest.url === route.path.split('/')[2]);
+};
+
+onMounted(async () => {
+  await getDestination();
+  console.log('destination', destination.value);
+});
 
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
   <section class="container my-20">
-    <AllMiniCards :destination="destination"></AllMiniCards>
+    <AllMiniCards v-if="destination" :destination="destination"></AllMiniCards>
   </section>
-  <TextDescription></TextDescription>
+  <TextDescription v-if="destination" :destination="destination"></TextDescription>
 
-  <TextDescription></TextDescription>
+  <TextDescription v-if="destination" :destination="destination"></TextDescription>
   <PropertyDestination></PropertyDestination>
-  <SliderPackages></SliderPackages>
+  <!-- <SliderPackages></SliderPackages> -->
 
   <EspecialistLetter></EspecialistLetter>
 

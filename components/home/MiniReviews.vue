@@ -85,7 +85,7 @@ const breakpoints = {
 
 </script>
 <template>
-  <section class="container my-20">
+  <section class="container my-32">
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-6 md:gap-6">
       <div class="md:col-span-1 ">
         <div class="bg-white p-8 rounded-md shadow-md ">

@@ -8,10 +8,18 @@ import Newsletter from '~/components/home/Newsletter.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 
 import { useDestinationStore } from '~/stores/destination';
-
-const destinations = computed(() => destinationStore.destinations);
 const destinationStore = useDestinationStore();
 
+const destinations = ref([]);
+const getCountries = async () => {
+  const res: any = await destinationStore.getCountries();
+  destinations.value = res;
+};
+
+onMounted(async () => {
+  await getCountries();
+  console.log('destinations', destinations.value);
+});
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>

@@ -8,7 +8,7 @@
         class="absolute  w-full h-full  object-cover" src="https://picsum.photos/1200/300" />
       <div class="absolute inset-0 bg-black opacity-50">
       </div>
-      <div class="relative flex items-center justify-end right-72 h-full">
+      <div class="relative flex items-center justify-end m-6 md:right-72 h-full">
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-md text-start">
           <p class="text-gray-500 mb-6">
             Get Started

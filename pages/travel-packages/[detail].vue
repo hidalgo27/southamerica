@@ -8,6 +8,16 @@ import OverviewPackage from '~/components/travel-packages/OverviewPackage.vue';
 import PackageDetails from '~/components/travel-packages/PackageDetails.vue';
 import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
 
+import { usePackageStore } from '~/stores/packages';
+
+const packageStore = usePackageStore();
+
+const listPackages = ref([]);
+const getPackage = async () => {
+  const res: any = await packageStore.getPackageTop();
+  listPackages.value = res;
+};
+
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
@@ -15,7 +25,7 @@ import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
   <ImgSlider></ImgSlider>
   <Itinerary></Itinerary>
   <PackageDetails></PackageDetails>
-  <SliderPackages></SliderPackages>
+  <SliderPackages :listPackages="listPackages"></SliderPackages>
   <EspecialistLetter></EspecialistLetter>
   <MiniReviews></MiniReviews>
 </template>

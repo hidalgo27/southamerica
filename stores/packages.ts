@@ -2,8 +2,6 @@ import { defineStore } from 'pinia'
 
 export const usePackageStore = defineStore('PackageStore', () => {
 	const config = useRuntimeConfig()
-	const showModalMenu = ref(false)
-	const code_w = ref('')
 
 	const getPackageTop = async () => {
 		let headers = new Headers();
@@ -18,7 +16,7 @@ export const usePackageStore = defineStore('PackageStore', () => {
 				const data = await res.json()
 				if (data) {
 					resolve(data)
-				}else {
+				} else {
 					reject(data)
 				}
 			} catch (error) {
@@ -27,7 +25,7 @@ export const usePackageStore = defineStore('PackageStore', () => {
 		})
 	}
 
-	const getPackage = async () => {
+	const getPackages = async () => {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
@@ -40,7 +38,7 @@ export const usePackageStore = defineStore('PackageStore', () => {
 				const data = await res.json()
 				if (data) {
 					resolve(data)
-				}else {
+				} else {
 					reject(data)
 				}
 			} catch (error) {
@@ -49,20 +47,20 @@ export const usePackageStore = defineStore('PackageStore', () => {
 		})
 	}
 
-	const getItinerary = async (url:any) => {
+	const getOffers = async () => {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
 		return new Promise(async (resolve, reject) => {
 			try {
-				const res = await fetch(config.public.apiBase + "/ecuador-travel-packages/"+url, {
+				const res = await fetch(config.public.apiBase + "/packages-offers", {
 					method: 'GET',
 					headers: headers,
 				})
 				const data = await res.json()
 				if (data) {
 					resolve(data)
-				}else {
+				} else {
 					reject(data)
 				}
 			} catch (error) {
@@ -71,103 +69,10 @@ export const usePackageStore = defineStore('PackageStore', () => {
 		})
 	}
 
-	const getTeam = async () => {
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-
-		return new Promise(async (resolve, reject) => {
-			try {
-				const res = await fetch(config.public.apiBase + "/team", {
-					method: 'GET',
-					headers: headers,
-				})
-				const data = await res.json()
-				if (data) {
-					resolve(data)
-				}else {
-					reject(data)
-				}
-			} catch (error) {
-				reject(error)
-			}
-		})
-	}
-
-	const getDestinations = async () => {
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-
-		return new Promise(async (resolve, reject) => {
-			try {
-				const res = await fetch(config.public.apiBase + "/destinations/peru", {
-					method: 'GET',
-					headers: headers,
-				})
-				const data = await res.json()
-				if (data) {
-					resolve(data)
-				}else {
-					reject(data)
-				}
-			} catch (error) {
-				reject(error)
-			}
-		})
-	}
-
-	const getCountryShow = async (urlDestino:any) => {
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-
-		return new Promise(async (resolve, reject) => {
-			try {
-				const res = await fetch(config.public.apiBase + "/destinations/ecuador/"+urlDestino, {
-					method: 'GET',
-					headers: headers,
-				})
-				const data = await res.json()
-				if (data) {
-					resolve(data)
-				}else {
-					reject(data)
-				}
-			} catch (error) {
-				reject(error)
-			}
-		})
-	}
-	const getPais = async () => {
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-
-		return new Promise(async (resolve, reject) => {
-			try {
-				const res = await fetch(config.public.apiBase + "/pais", {
-					method: 'GET',
-					headers: headers,
-				})
-				const data = await res.json()
-				if (data) {
-					resolve(data)
-				}else {
-					reject(data)
-				}
-			} catch (error) {
-				reject(error)
-			}
-		})
-	}
-
-	return{
-		showModalMenu,
+	return {
 		getPackageTop,
-		getPackage,
-		getItinerary,
-		getDestinations,
-		getCountryShow,
-		getPais,
-		code_w,
-		getTeam
+		getPackages,
+		getOffers,
 	}
 
-}, {persist: true,})
+}, { persist: true, })

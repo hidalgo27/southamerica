@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       // meta: [
       //   { name: 'description', content: 'My amazing site.' }
       // ],
-      script: [ { src: 'https://cdn.wetravel.com/widgets/embed_checkout.js' } ],
+      script: [{ src: 'https://cdn.wetravel.com/widgets/embed_checkout.js' }],
       link: [
         { rel: 'apple-touch-icon', sizes: '48x48', href: '/favicon/favicon.png' },
         { rel: 'apple-touch-icon', sizes: '192x192', href: '/favicon/android-chrome-192x192.png' },
@@ -31,7 +31,7 @@ export default defineNuxtConfig({
 
 
   modules: [// needed
-  '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', "@nuxt/image", "@nuxtjs/google-fonts", 'floating-vue/nuxt', '@hypernym/nuxt-gsap', '@nuxt/scripts', '@nuxtjs/device', '@samk-dev/nuxt-vcalendar'],
+    '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', "@nuxt/image", "@nuxtjs/google-fonts", 'floating-vue/nuxt', '@hypernym/nuxt-gsap', '@nuxt/scripts', '@nuxtjs/device', '@samk-dev/nuxt-vcalendar'],
   // gsap: {
   //   composables: true,
   //   provide: false,
@@ -57,7 +57,7 @@ export default defineNuxtConfig({
     storage: 'localStorage'
   },
   css: [
-      '~/assets/css/main.css',
+    '~/assets/css/main.css',
     '~/assets/css/page.css'
   ],
   postcss: {
@@ -67,12 +67,12 @@ export default defineNuxtConfig({
     },
   },
   build: {
-    transpile: ['vue3-carousel','@pinia-plugin-persistedstate']
+    transpile: ['vue3-carousel', '@pinia-plugin-persistedstate']
   },
   runtimeConfig: {
     apiSecret: '',
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || "https://api.machupicchu.company/api",
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || "https://api.southamerica.company/api",
       apiInquire: process.env.useNuxtApp || "https://api.gotoecuador.com/api/store/inquire",
       // apiBaseTest: process.env.API_BASE_TEST || "https://app.gotolatam.travel/api",
       apiBaseTest: '',

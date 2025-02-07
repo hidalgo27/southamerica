@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import 'floating-vue/dist/style.css';
-import { Dropdown, Menu, Popper } from 'floating-vue';
+import { Dropdown, Menu } from 'floating-vue';
 
 const route = useRoute();
 const bgColor = ref('bg-gray-500');
@@ -27,111 +27,168 @@ const updateBgColor = () => {
   }
 };
 
-
-
 // Observa cambios en route.path para detectar correctamente cambios de ruta
 watch(() => route.path, updateBgColor);
 
 const menus = ref([
   {
-    title: "Destinations", open: false,
+    title: "Destinations",
     items: [
       {
-        name: "Argentina",
-        popularCountries: [
-          {
-            name: "Buenos Aires",
-            link: "/buenos-aires"
-          },
-          {
-            name: "Iguazu Falls",
-            link: "/iguazu-falls"
-          },
-          {
-            name: "Patagonia",
-            link: "/patagonia"
-          }
-        ],
-        popularDestinations: [
-          {
-            name: "Bariloche",
-            link: "/bariloche"
-          },
-          {
-            name: "Mendoza",
-            link: "/mendoza"
-          },
-          {
-            name: "Salta",
-            link: "/salta"
-          }
-        ],
-        link: "/argentina",
-        image: "https://picsum.photos/200/300"
-      },
-      {
         name: "Peru",
-        popularCountries: [
-          {
-            name: "Cusco",
-            link: "/cusco"
-          },
-          {
-            name: "Lima",
-            link: "/lima"
-          },
-          {
-            name: "Machu Picchu",
-            link: "/machu-picchu"
-          }
-        ],
-        popularDestinations: [
-          {
-            name: "Arequipa",
-            link: "/arequipa"
-          },
-          {
-            name: "Ica",
-            link: "/ica"
-          },
-          {
-            name: "Puno",
-            link: "/puno"
-          }
-        ],
+        firstTitle: {
+          name: "Popular Countries",
+          items: [
+            {
+              name: "Cusco",
+              link: "/destinations/peru/cusco"
+            },
+            {
+              name: "Lima",
+              link: "/destinations/peru/lima"
+            },
+            {
+              name: "Machu Picchu",
+              link: "/destinations/peru/machu-picchu"
+            }
+          ]
+        },
+        secondTitle: {
+          name: "Popular Destinations",
+          items: [
+            {
+              name: "Arequipa",
+              link: "/destinations/peru/arequipa"
+            },
+            {
+              name: "Ica",
+              link: "/destinations/peru/ica"
+            },
+            {
+              name: "Puno",
+              link: "/destinations/peru/puno"
+            }
+          ]
+        },
         link: "/peru",
         image: "https://picsum.photos/200/300"
-
       }]
   },
   {
-    title: "Experiences", open: false,
-    items: [{ name: "Travel Style", link: "/safari" }, { name: "Ways to Travel", link: "/diving" }]
+    title: "Experiences",
+    items: [
+      {
+        name: "Travel Styles",
+        firstTitle: {
+          name: "Explore",
+          items: [
+            {
+              name: "Adventure",
+              link: "/experiences/adventure"
+            },
+            {
+              name: "Cruises",
+              link: "/experiences/cruises"
+            },
+            {
+              name: "Family",
+              link: "/experiences/family"
+            }
+          ]
+        },
+        link: "/experiences",
+        image: "https://picsum.photos/200/300"
+      },
+      {
+        name: "Ways to travel",
+        firstTitle: {
+          name: "Explore",
+          items: [
+            {
+              name: "Escorted Touring",
+              link: "/experiences/escorted-touring"
+            },
+            {
+              name: "Rail Vacations",
+              link: "/experiences/rail-vacations"
+            },
+            {
+              name: "Vacation Packages with Air",
+              link: "/experiences/vacation-packages-with-air"
+            },
+          ]
+        },
+        link: "/experiences",
+      },
+    ],
   },
-  { title: "Specials", open: false, items: [{ name: "Argentina", link: "/argentina" }, { name: "Peru", link: "/peru" }] },
-  { title: "Our Experts", open: false, items: [{ name: "Meet the Team", link: "/team" }] },
-  { title: "Groups Only", open: false, items: [{ name: "Private Tours", link: "/private-tours" }] },
-  { title: "About Us", open: false, items: [{ name: "Company Info", link: "/info" }] },
-  { title: "Travel Packages", open: false, items: [{ name: "Luxury Trips", link: "/luxury" }] },
+  {
+    title: "Specials",
+    items: [{ name: "Argentina", link: "/special-offers/argentina" }, { name: "Peru", link: "/special-offers/peru" }, { name: "Ecuador", link: "/special-offers/ecuador" }],
+    image: "https://picsum.photos/200/300",
+    url: "/special-offers"
+  },
+  {
+    title: "Our Experts",
+    items: [{ name: "Meet the Team", link: "/team" }, { name: "Argentina", link: "/our-experts/argentina" }, { name: "Peru", link: "/our-experts/peru" }, { name: "Ecuador", link: "/our-experts/ecuador" }],
+    image: "https://picsum.photos/200/300",
+    url: "/our-experts"
+  },
+  {
+    title: "Groups Only",
+    items: [
+      {
+        name: "Travel Styles",
+        firstTitle: {
+          name: "Why Group Travel",
+          items: [
+            {
+              name: "Adventure",
+              link: "/adventure"
+            },
+            {
+              name: "Cruises",
+              link: "/cruises"
+            },
+            {
+              name: "Family",
+              link: "/family"
+            }
+          ]
+        },
+        link: "/safari",
+        image: "https://picsum.photos/200/300"
+      },
+      {
+        name: "Groups Destination",
+        firstTitle: {
+          name: "Explore",
+          items: [
+            {
+              name: "Group Specialists",
+              link: "/adventure"
+            },
+            {
+              name: "Why Group Travel",
+              link: "/cruises"
+            },
+          ]
+        },
+        link: "/safari",
+      },
+    ],
+    image: "https://picsum.photos/200/300"
+  },
+  {
+    title: "About Us",
+    items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
+    image: "https://picsum.photos/200/300"
+  },
+  {
+    title: "Travel Packages",
+    items: [{ name: "Travel Packages", link: "/travel-packages" }, { name: "Special Offers", link: "/special-offers" }]
+  },
 ])
-
-const toggleMenu = (index: number) => {
-  console.log(index)
-  menus.value = menus.value.map((menu, idx) => ({
-    ...menu,
-    open: idx === index ? !menu.open : false,
-  }));
-}
-
-const closeMenus = () => {
-  menus.value = menus.value.map((menu) => ({ ...menu, open: false }));
-};
-
-const activeItem = ref(null);
-
-const setActiveItem = (item: null) => {
-  activeItem.value = item;
-};
 
 const handleScroll = () => {
   const currentScrollPosition = window.scrollY;
@@ -143,7 +200,6 @@ const handleScroll = () => {
     });
     ticking = true;
   }
-  closeMenus();
 };
 
 // Llama a la función en el montaje inicial
@@ -156,9 +212,6 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 
-watch(route, () => {
-  closeMenus();
-});
 </script>
 <template>
   <div
@@ -201,31 +254,84 @@ watch(route, () => {
       <div>
         <nav class="container flex justify-center text-start">
           <div v-for="(menu, index) in menus" :key="index" class="relative">
-            <Menu>
+            <Dropdown>
               <button class="menu-list px-4 py-2 focus:outline-none">
                 {{ menu.title }}
               </button>
               <template #popper>
-                <div v-for="(item, idx) in menu.items" :key="idx" class="p-4 py-2 bg-white text-gray-800">
-                  <template v-if="item.popularCountries">
-                    <Menu placement="right">
-                      <button class="">
-                        {{ item.name }}
-                      </button>
-                      <template #popper>
-                        <ul class="submenu">
-                          <li v-for="sub in item.popularCountries" :key="sub.name"
-                            class="p-4 py-2 bg-white text-gray-800">
-                            <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
-                          </li>
-                        </ul>
-                      </template>
-                    </Menu>
-                  </template>
+                <div class="bg-white text-gray-800 rounded-md p-4 w-72 flex flex-row"
+                  :class="menu.image ? 'flex-row w-[60vh]' : 'flex-col'">
+                  <div class="w-full" :class="menu.image ? 'w-4/6' : ''">
+                    <span class="text-xs ">{{ menu.title }}</span>
+                    <div :class="menu.image ? 'grid grid-cols-3 gap-x-10 ' : ''">
+                      <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800 ">
+                        <template v-if="item.firstTitle">
+                          <Menu placement="right-start" :skidding="-40" :distance="20">
+                            <button
+                              class="w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-gray-100 group">
+                              {{ item.name }}
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-4 hidden group-hover:block">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                              </svg>
+                            </button>
 
+                            <template #popper>
+                              <div class="rounded-md bg-white text-gray-800 p-6 flex md:flex-col lg:flex-row">
+                                <div>
+                                  <div class="h-72">
+                                    <div v-if="item.firstTitle">
+                                      <span class="text-xs">{{ item.firstTitle.name }}</span>
+                                      <div class="grid grid-cols-3 gap-x-10">
+                                        <div v-for="sub in item.firstTitle.items" :key="sub.name"
+                                          class="py-2 text-gray-800 hover:text-orange-500 duration-300">
+                                          <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div v-if="item.secondTitle">
+                                      <span class="text-xs">{{ item.secondTitle.name }}</span>
+                                      <div class="grid grid-cols-3 gap-10 ">
+                                        <div v-for="sub in item.secondTitle.items" :key="sub.name"
+                                          class="py-2 text-gray-800 hover:text-orange-500 duration-300">
+                                          <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations' + item.link"
+                                    class="text-semibold duration-300">
+                                    Explore all {{ item.name }}
+                                  </NuxtLink>
+                                </div>
+                                <div v-if="item.image"
+                                  class="m-0 md:mt-2 lg:ml-6 w-full h-64 lg:w-52 lg:h-80 rounded-md overflow-hidden">
+                                  <NuxtImg :src="item.image" class="w-full h-full "></NuxtImg>
+                                </div>
+                              </div>
+                            </template>
+                          </Menu>
+
+                        </template>
+                        <template v-else>
+                          <div class="py-2 text-gray-800 hover:text-orange-500 duration-300">
+                            <NuxtLink :to="item.link">{{ item.name }}</NuxtLink>
+                          </div>
+                        </template>
+                        <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations'"
+                          class=" bg-secondary w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-orange-300 duration-300 group">
+                          Explore all Destinations
+                        </NuxtLink>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="menu.image"
+                    class="m-0 md:mt-2 lg:ml-6 w-full h-64 lg:w-52 lg:h-80 rounded-md overflow-hidden">
+                    <NuxtImg :src="menu.image" class="w-full h-full "></NuxtImg>
+                  </div>
                 </div>
               </template>
-            </Menu>
+            </Dropdown>
           </div>
         </nav>
       </div>

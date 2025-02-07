@@ -2,6 +2,13 @@
 import gsap from 'gsap';
 const animatedDiv = ref<HTMLElement | null>(null);
 
+const props = defineProps({
+  destination: {
+    type: Object,
+    required: true,
+  },
+});
+
 onMounted(() => {
   if (!animatedDiv.value) return;
   const observer = new IntersectionObserver(
@@ -28,19 +35,13 @@ onMounted(() => {
   <section class="container mt-28 mb-12">
     <div class="text-center ">
       <p class="mb-6 tracking-widest font-bold">
-        Trips to Africa
+        Trips to {{ destination.nombre }}
       </p>
-      <h1 class="font-semibold text-5xl w-3/4 mx-auto mb-6 title font-playfair-display tracking-wide"> Explore Africa
-        your way
-        on a
-        tailor-made trip with Goway
+      <h1 class="font-semibold text-4xl w-3/4 mx-auto mb-6 title font-playfair-display tracking-wide">
+        Explore {{ destination.nombre }} your way on a tailor-made trip with SouthAmerica
       </h1>
-      <div ref="animatedDiv" class="w-1/2 mx-auto my-8">
-        <p class="tracking-widest font-light">There’s a special place in our heart for Africa. Since our earliest days,
-          we’ve showcased the treasures of this mighty continent, from the iconic wildlife of East Africa to the ancient
-          artifcats of North Africa. An African vacation with Goway showcases not only these wonders, but also the
-          underrated and startling pleasures of the continent, from the culinary scene of Southern Africa to the
-          bustling cities that define the new century.</p>
+      <div ref="animatedDiv" class="w-2/3 mx-auto my-8">
+        <div v-html="destination.descripcion"></div>
       </div>
     </div>
   </section>
