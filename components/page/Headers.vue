@@ -163,7 +163,7 @@ watch(route, () => {
 <template>
   <div
     :class="`${position} top-0 left-0 w-full ${zIndex} transition-transform duration-300 ${isHeaderVisible ? '-translate-y-0' : '-translate-y-full'}`">
-    <div :class="`rounded-md ${bgColor} hidden sm:block m-3`">
+    <div :class="`rounded-md ${bgColor} hidden  sm:block m-3`">
       <div class="border-b border-secondary border-opacity-20">
         <div class="p-12 flex justify-between py-5 items-center">
           <div class="flex items-center gap-4">
