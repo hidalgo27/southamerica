@@ -25,6 +25,7 @@ onMounted(async () => {
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
+  <NavDestination></NavDestination>
   <section class="container my-20 w-2/3 px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
     <div>
       <p class="my-6">Overview</p>
