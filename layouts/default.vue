@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen ">
-    <Headers class="w-full z-50"></Headers>
+    <Headers class="w-full z-40"></Headers>
     <slot />
 
     <Footer></Footer>

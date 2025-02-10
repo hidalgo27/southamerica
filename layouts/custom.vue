@@ -1,11 +1,11 @@
 <template>
   <div class="h-screen">
-    <Headers class="top-0 absolute w-full  z-50"></Headers>
+    <Headers class="top-0 absolute w-full  z-40"></Headers>
     <slot></slot>
-<!--    <section class="py-2  mt-12 relative z-10">-->
+    <!--    <section class="py-2  mt-12 relative z-10">-->
 
-<!--      <FormFooterInquireDetail></FormFooterInquireDetail>-->
-<!--    </section>-->
+    <!--      <FormFooterInquireDetail></FormFooterInquireDetail>-->
+    <!--    </section>-->
 
     <section class=" relative z-10  h-auto overflow-hidden">
       <div class="md:absolute md:inset-0 mt-0 2xl:mt-96">
@@ -15,7 +15,7 @@
     </section>
 
     <Footer></Footer>
-<!--    <Float></Float>-->
+    <!--    <Float></Float>-->
   </div>
 </template>
 
