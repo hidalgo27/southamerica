@@ -19,7 +19,7 @@ const route = useRoute();
 const destination = ref(null);
 const getDestination = async () => {
   const res: any = await destinationStore.getCountries()
-  destination.value = res.find((dest: any) => dest.url === route.path.split('/')[2]);
+  destination.value = res.find((dest: any) => dest.url === route.params.country);
 };
 
 onMounted(async () => {

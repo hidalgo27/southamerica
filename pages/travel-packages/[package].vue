@@ -22,7 +22,7 @@ const getPackage = async () => {
 const packageDetail = ref([]);
 const getPackageDetail = async () => {
   const res: any = await packageStore.getPackages();
-  packageDetail.value = res.find((item: any) => item.url === route.path.split('/')[2]);
+  packageDetail.value = res.find((item: any) => item.url === route.params.package);
 };
 onMounted(async () => {
   await getPackage();
