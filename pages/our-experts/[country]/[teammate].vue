@@ -22,8 +22,8 @@ const toggle = (index: null) => {
       <div id="imageContainer"
         class="relative w-full lg:w-1/3 bottom-1/2 flex justify-center lg:justify-start mb-8 lg:mb-0">
         <img alt="Illustration of a woman with long black hair, wearing a black top and a gold necklace"
-          class="rounded-lg bg-gray-100 transition-all duration-300 w-96 h-[50vh] xl:h-[30vh]"
-          src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
+          class="rounded-lg bg-gray-100 transition-all duration-300 w-full h-full"
+          src="https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/JessicaKidd.png?h=826e7b48&itok=WKAP-LzM" />
       </div>
       <div class="w-full lg:w-2/3 lg:pl-12">
         <div class="flex space-x-2 mb-4">

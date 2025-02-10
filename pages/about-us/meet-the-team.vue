@@ -7,28 +7,28 @@ import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 const team = [
   {
     title: 'Leadership Board', members: [
-      { name: 'Bruce Hodge', position: 'Founder & President', imgSrc: 'https://picsum.photos/200/200' },
-      { name: 'Claire Newell', position: 'General Manager', imgSrc: 'https://picsum.photos/200/200' },
-      { name: 'Randy Durband', position: 'CEO', imgSrc: 'https://picsum.photos/200/200' },
-      { name: 'Steve Spivak', position: 'Vice President', imgSrc: 'https://picsum.photos/200/200' }
+      { name: 'Bruce Hodge', position: 'Founder & President', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/StefanShaloff.png?h=c42dabf0&itok=WUgvN02_' },
+      { name: 'Claire Newell', position: 'General Manager', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/ShanazDarr.png?h=6e3d84a6&itok=resVHYTp' },
+      { name: 'Randy Durband', position: 'CEO', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/Shamsheer_cottar_illustration.png?VersionId=SjgWomsqcyjOHrXp5nBFUO.408lvH1qU&h=826e7b48&itok=Vj0PNAvo' },
+      { name: 'Steve Spivak', position: 'Vice President', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/JessicaKidd.png?h=826e7b48&itok=WKAP-LzM' }
     ]
   },
   {
     title: 'Leadership Team', members: [
-      { name: 'Claire Newell', position: 'General Manager', imgSrc: 'https://picsum.photos/200/200' },
-      { name: 'Bruce Hodge', position: 'Founder & President', imgSrc: 'https://picsum.photos/200/200' }
+      { name: 'Claire Newell', position: 'General Manager', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/JessicaKidd.png?h=826e7b48&itok=WKAP-LzM' },
+      { name: 'Bruce Hodge', position: 'Founder & President', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/Shamsheer_cottar_illustration.png?VersionId=SjgWomsqcyjOHrXp5nBFUO.408lvH1qU&h=826e7b48&itok=Vj0PNAvo' }
     ]
   },
   {
     title: 'Product Management', members: [
-      { name: 'Randy Durband', position: 'CEO', imgSrc: 'https://picsum.photos/200/200' },
-      { name: 'Steve Spivak', position: 'Vice President', imgSrc: 'https://picsum.photos/200/200' }
+      { name: 'Randy Durband', position: 'CEO', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/Shamsheer_cottar_illustration.png?VersionId=SjgWomsqcyjOHrXp5nBFUO.408lvH1qU&h=826e7b48&itok=Vj0PNAvo' },
+      { name: 'Steve Spivak', position: 'Vice President', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/JessicaKidd.png?h=826e7b48&itok=WKAP-LzM' }
     ]
   },
   {
     title: 'Account Management', members: [
-      { name: 'Claire Newell', position: 'General Manager', imgSrc: 'https://picsum.photos/200/200' },
-      { name: 'Bruce Hodge', position: 'Founder & President', imgSrc: 'https://picsum.photos/200/200' }
+      { name: 'Claire Newell', position: 'General Manager', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/JessicaKidd.png?h=826e7b48&itok=WKAP-LzM' },
+      { name: 'Bruce Hodge', position: 'Founder & President', imgSrc: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/Shamsheer_cottar_illustration.png?VersionId=SjgWomsqcyjOHrXp5nBFUO.408lvH1qU&h=826e7b48&itok=Vj0PNAvo' }
     ]
   }
 ];
