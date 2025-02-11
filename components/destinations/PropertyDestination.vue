@@ -24,14 +24,15 @@ const sections = [
 <template>
   <section class="container my-20 space-y-2">
     <div v-for="(section, index) in sections" :key="index"
-      class="flex flex-col md:flex-row items-center justify-center bg-white"
-      :class="{ 'md:flex-row-reverse': index % 2 !== 0 }">
-      <div class="md:w-1/2 p-6">
-        <h1 class="text-4xl font-bold font-playfair-display tracking-wide mb-12">{{ section.title }}</h1>
-        <p class="text-lg text-gray-700">{{ section.text }}</p>
-      </div>
-      <div class="md:w-1/2 h-full p-2">
+      class="grid md:grid-cols-2 items-center justify-center bg-white md:gap-6 ">
+      <div class="w-full h-full xl:h-[40vh] " :class="{ 'md:order-2': index % 2 !== 1 }">
         <img :alt="section.alt" class="w-full h-full rounded-lg shadow-lg" :src="section.imgSrc" />
+      </div>
+      <div class="p-6" :class="{ 'md:order-1': index % 2 !== 0 }">
+        <h1 class="text-4xl font-bold font-playfair-display tracking-wide my-12 items-center">
+          {{ section.title }}
+        </h1>
+        <p class="text-lg text-gray-700">{{ section.text }}</p>
       </div>
     </div>
   </section>

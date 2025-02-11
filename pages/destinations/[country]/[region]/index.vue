@@ -9,17 +9,29 @@ import ImgSlider from '~/components/travel-packages/ImgSlider.vue';
 import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
 
 import { usePackageStore } from '~/stores/packages';
+import { useDestinationStore } from '~/stores/destination';
 
 const packageStore = usePackageStore();
+const destinationStore = useDestinationStore();
+
+const route = useRoute();
 const listPackages = ref([]);
+const region = ref([])
 
 const getPackages = async () => {
-  const res = await packageStore.getPackageTop();
+  const res: any = await packageStore.getPackageTop();
   listPackages.value = res;
 };
 
+const getRegion = async () => {
+  const res: any = await destinationStore.getRegion(route.params.country as string, route.params.region as string);
+  region.value = res;
+};
+
+
 onMounted(async () => {
   await getPackages();
+  await getRegion();
   console.log('listPackages', listPackages.value);
 });
 </script>
