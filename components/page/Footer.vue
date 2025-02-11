@@ -12,7 +12,7 @@
           <h3 class="text-lg font-semibold">New Specials</h3>
           <div class="group">
             <a href="/special-offers"
-              class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover</a>
+              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover</a>
           </div>
         </div>
       </div>
@@ -24,8 +24,9 @@
           <h3 class="text-lg font-semibold">Start Planning</h3>
           <div class="group">
             <a href="/travel-packages"
-              class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover
-              All Trips</a>
+              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover
+              All
+              Trips</a>
           </div>
         </div>
       </div>
@@ -37,7 +38,7 @@
           <h3 class="text-lg font-semibold">Follow Along</h3>
           <div class="group self-center ">
             <a href="#"
-              class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">@gotoperu</a>
+              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">@gotoperu</a>
           </div>
         </div>
       </div>

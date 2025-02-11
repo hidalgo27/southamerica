@@ -22,10 +22,10 @@ const slides = [
           <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold font-playfair">
             {{ slide.title }}
           </h1>
-          <button
+          <NuxtLink to="/destinations"
             class="translate-y-20 lg:translate-y-44 px-6 py-3 bg-white text-gray-800 text-lg font-semibold rounded shadow hover:bg-gray-100">
             {{ slide.buttonText }}
-          </button>
+          </NuxtLink>
         </div>
       </slide>
     </Carousel>
