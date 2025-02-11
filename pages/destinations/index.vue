@@ -18,7 +18,6 @@ const getCountries = async () => {
 
 onMounted(async () => {
   await getCountries();
-  console.log('destinations', destinations.value);
 });
 </script>
 <template>

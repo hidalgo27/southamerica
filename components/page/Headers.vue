@@ -14,7 +14,6 @@ let ticking = false;
 
 // Función para verificar la ruta y establecer el color
 const updateBgColor = () => {
-  console.log(route.path);
   if (route.path !== '/') {
     position.value = 'fixed';
   }
@@ -248,84 +247,86 @@ onUnmounted(() => {
       <div>
         <nav class="container flex justify-center text-start">
           <div v-for="(menu, index) in menus" :key="index" class="relative">
-            <Dropdown>
-              <button class="menu-list text-sm px-4 py-2 focus:outline-none">
-                {{ menu.title }}
-              </button>
-              <template #popper>
-                <div class="bg-white text-gray-800 rounded-md p-4 w-72 flex flex-row"
-                  :class="menu.image ? 'flex-row w-[60vh]' : 'flex-col'">
-                  <div class="w-full" :class="menu.image ? 'w-4/6' : ''">
-                    <span class="text-xs ">{{ menu.title }}</span>
-                    <div :class="menu.image ? 'grid grid-cols-3 gap-x-10 ' : ''">
-                      <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800 ">
-                        <template v-if="item.firstTitle">
-                          <Menu placement="right-start" :skidding="-40" :distance="20" :popperTriggers="['hover']">
-                            <button
-                              class="w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-gray-100 group">
-                              {{ item.name }}
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="size-4 hidden group-hover:block">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                              </svg>
-                            </button>
+            <client-only>
+              <Dropdown>
+                <button class="menu-list text-sm px-4 py-2 focus:outline-none">
+                  {{ menu.title }}
+                </button>
+                <template #popper>
+                  <div class="bg-white text-gray-800 rounded-md p-4 w-72 flex flex-row"
+                    :class="menu.image ? 'flex-row w-[60vh]' : 'flex-col'">
+                    <div class="w-full" :class="menu.image ? 'w-4/6' : ''">
+                      <span class="text-xs ">{{ menu.title }}</span>
+                      <div :class="menu.image ? 'grid grid-cols-3 gap-x-10 ' : ''">
+                        <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800 ">
+                          <template v-if="item.firstTitle">
+                            <Menu placement="right-start" :skidding="-40" :distance="20" :popperTriggers="['hover']">
+                              <button
+                                class="w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-gray-100 group">
+                                {{ item.name }}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                  stroke-width="1.5" stroke="currentColor" class="size-4 hidden group-hover:block">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                </svg>
+                              </button>
 
-                            <template #popper>
-                              <div class="rounded-md bg-white text-gray-800 p-6 flex md:flex-col lg:flex-row">
-                                <div>
-                                  <div class="h-72">
-                                    <div v-if="item.firstTitle">
-                                      <span class="text-xs">{{ item.firstTitle.name }}</span>
-                                      <div class="grid grid-cols-3 gap-x-10">
-                                        <div v-for="sub in item.firstTitle.items" :key="sub.name"
-                                          class="py-2 text-gray-800 hover:text-orange-500 duration-300">
-                                          <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
+                              <template #popper>
+                                <div class="rounded-md bg-white text-gray-800 p-6 flex md:flex-col lg:flex-row">
+                                  <div>
+                                    <div class="h-72">
+                                      <div v-if="item.firstTitle">
+                                        <span class="text-xs">{{ item.firstTitle.name }}</span>
+                                        <div class="grid grid-cols-3 gap-x-10">
+                                          <div v-for="sub in item.firstTitle.items" :key="sub.name"
+                                            class="py-2 text-gray-800 hover:text-orange-500 duration-300">
+                                            <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div v-if="item.secondTitle">
+                                        <span class="text-xs">{{ item.secondTitle.name }}</span>
+                                        <div class="grid grid-cols-3 gap-10 ">
+                                          <div v-for="sub in item.secondTitle.items" :key="sub.name"
+                                            class="py-2 text-gray-800 hover:text-orange-500 duration-300">
+                                            <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                    <div v-if="item.secondTitle">
-                                      <span class="text-xs">{{ item.secondTitle.name }}</span>
-                                      <div class="grid grid-cols-3 gap-10 ">
-                                        <div v-for="sub in item.secondTitle.items" :key="sub.name"
-                                          class="py-2 text-gray-800 hover:text-orange-500 duration-300">
-                                          <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
-                                        </div>
-                                      </div>
-                                    </div>
+                                    <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations' + item.link"
+                                      class="text-semibold duration-300 text-md">
+                                      Explore all {{ item.name }}
+                                    </NuxtLink>
                                   </div>
-                                  <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations' + item.link"
-                                    class="text-semibold duration-300 text-md">
-                                    Explore all {{ item.name }}
-                                  </NuxtLink>
+                                  <div v-if="item.image"
+                                    class="m-0 md:mt-2 lg:ml-6 w-full h-full lg:w-52 lg:h-80 rounded-md overflow-hidden">
+                                    <NuxtImg :src="item.image" class="w-full h-full "></NuxtImg>
+                                  </div>
                                 </div>
-                                <div v-if="item.image"
-                                  class="m-0 md:mt-2 lg:ml-6 w-full h-full lg:w-52 lg:h-80 rounded-md overflow-hidden">
-                                  <NuxtImg :src="item.image" class="w-full h-full "></NuxtImg>
-                                </div>
-                              </div>
-                            </template>
-                          </Menu>
+                              </template>
+                            </Menu>
 
-                        </template>
-                        <template v-else>
-                          <div class="py-2 text-gray-800 hover:text-orange-500 duration-300 text-md">
-                            <NuxtLink :to="item.link">{{ item.name }}</NuxtLink>
-                          </div>
-                        </template>
-                        <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations'"
-                          class=" bg-secondary w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-orange-300 duration-300 group">
-                          Explore all Destinations
-                        </NuxtLink>
+                          </template>
+                          <template v-else>
+                            <div class="py-2 text-gray-800 hover:text-orange-500 duration-300 text-md">
+                              <NuxtLink :to="item.link">{{ item.name }}</NuxtLink>
+                            </div>
+                          </template>
+                          <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations'"
+                            class=" bg-secondary w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-orange-300 duration-300 group">
+                            Explore all Destinations
+                          </NuxtLink>
+                        </div>
                       </div>
                     </div>
+                    <div v-if="menu.image"
+                      class="m-0 md:mt-2 lg:ml-6 w-full h-64 lg:w-52 lg:h-80 rounded-md overflow-hidden">
+                      <NuxtImg :src="menu.image" class="w-full h-full "></NuxtImg>
+                    </div>
                   </div>
-                  <div v-if="menu.image"
-                    class="m-0 md:mt-2 lg:ml-6 w-full h-64 lg:w-52 lg:h-80 rounded-md overflow-hidden">
-                    <NuxtImg :src="menu.image" class="w-full h-full "></NuxtImg>
-                  </div>
-                </div>
-              </template>
-            </Dropdown>
+                </template>
+              </Dropdown>
+            </client-only>
           </div>
         </nav>
       </div>

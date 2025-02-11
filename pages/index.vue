@@ -25,7 +25,6 @@ const { onLoaded } = useScriptVimeoPlayer()
 let player: any
 onMounted(async () => {
   await getPackage()
-  console.log('listPackages', listPackages.value)
   onLoaded(({ Vimeo }) => {
     player = new Vimeo.Player(video.value, {
       id: 1028540009,

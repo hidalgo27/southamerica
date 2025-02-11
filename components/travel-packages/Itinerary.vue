@@ -40,7 +40,7 @@ const listPackages = [
 
 const openIndexes = ref<number[]>([]); // Abre solo el primer día al cargar
 const contentRefs = ref<HTMLElement[]>([]); // Almacena referencias de contenido
-
+const currentItem = ref(null)
 // Establece referencias para cada contenido
 const setContentRef = (el: HTMLElement | null, index: number) => {
   if (el) {

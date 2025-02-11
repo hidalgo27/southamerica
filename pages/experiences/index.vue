@@ -12,13 +12,12 @@ const packageStore = usePackageStore();
 const listPackages = ref([]);
 
 const getPackages = async () => {
-  const res = await packageStore.getPackageTop();
+  const res: any = await packageStore.getPackageTop();
   listPackages.value = res;
 };
 
 onMounted(async () => {
   await getPackages();
-  console.log('listPackages', listPackages.value);
 });
 </script>
 <template>

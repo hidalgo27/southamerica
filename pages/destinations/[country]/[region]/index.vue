@@ -32,7 +32,6 @@ const getRegion = async () => {
 onMounted(async () => {
   await getPackages();
   await getRegion();
-  console.log('listPackages', listPackages.value);
 });
 </script>
 <template>

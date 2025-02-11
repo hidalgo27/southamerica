@@ -66,7 +66,7 @@
           </p>
           <ul class="mt-2 space-y-2">
             <li>
-              <nuxt-link to="/peru-travel-packages"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Peru Travel
                 Packages</nuxt-link>
             </li>
@@ -129,17 +129,17 @@
           </p>
           <ul class="mt-2 space-y-2">
             <li>
-              <nuxt-link to="/why-book-with-us"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Why book with
                 us</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/travel-with-confidence"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Travel with
                 confidence</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/booking-terms-and-conditions"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Booking
                 terms</nuxt-link>
             </li>
@@ -149,7 +149,7 @@
                 us</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/frequently-asked-questions"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">FAQ</nuxt-link>
             </li>
           </ul>
@@ -160,8 +160,8 @@
           </p>
           <ul>
             <li>
-              <a href="/frequently-asked-questions"
-                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Terms and
+              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Terms
+                and
                 conditions</a>
             </li>
           </ul>

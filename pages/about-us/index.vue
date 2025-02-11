@@ -18,7 +18,7 @@ const sections = [
     imgSrc: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Learn More",
-    url: "/why-goway"
+    url: "/why-southamerica"
   },
   {
     title: "Careers",

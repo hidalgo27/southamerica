@@ -16,7 +16,6 @@ const getPackages = async () => {
 
 onMounted(async () => {
   await getPackages();
-  console.log('listPackages', listPackages.value);
 });
 </script>
 <template>

@@ -69,24 +69,25 @@ onUnmounted(() => {
     </nuxt-link>
     <div class="flex justify-center items-center">
       <div v-for="(button, index) in buttons" :key="index" class="inline-block px-4 ">
-        <Dropdown v-if="button.items">
-          <template #default>
-            <span class="cursor-pointer">{{ button.name }}</span>
-          </template>
-          <template #popper>
-            <div
-              class="v-popper p-2 bg-white text-gray-800 rounded-md grid grid-cols max-h-48 overflow-y-auto shadow-md border">
-              <NuxtLink v-for="(item, i) in button.items" :key="i" class="py-2 px-4 hover:bg-gray-100"
-                :to="`/destinations/${route.params.country}/${route.params.region}/${item.url}`">
-                <span>{{ item.name }}</span>
-              </NuxtLink>
-            </div>
-          </template>
-        </Dropdown>
-
-        <NuxtLink v-else :to="`/destinations/${route.params.country}/${route.params.region}/${button.url}`"
-          class="relative after:block after:w-0 after:h-[2px] after:bg-secondary after:transition-all after:duration-700 after:origin-left hover:after:w-full">
-          {{ button.name }}</NuxtLink>
+        <client-only>
+          <Dropdown v-if="button.items">
+            <template #default>
+              <span class="cursor-pointer">{{ button.name }}</span>
+            </template>
+            <template #popper>
+              <div
+                class="v-popper p-2 bg-white text-gray-800 rounded-md grid grid-cols max-h-48 overflow-y-auto shadow-md border">
+                <NuxtLink v-for="(item, i) in button.items" :key="i" class="py-2 px-4 hover:bg-gray-100"
+                  :to="`/destinations/${route.params.country}/${route.params.region}/${item.url}`">
+                  <span>{{ item.name }}</span>
+                </NuxtLink>
+              </div>
+            </template>
+          </Dropdown>
+          <NuxtLink v-else :to="`/destinations/${route.params.country}/${route.params.region}/${button.url}`"
+            class="relative after:block after:w-0 after:h-[2px] after:bg-secondary after:transition-all after:duration-700 after:origin-left hover:after:w-full">
+            {{ button.name }}</NuxtLink>
+        </client-only>
       </div>
     </div>
     <button v-if="isFixed" @click="isOpen = true"

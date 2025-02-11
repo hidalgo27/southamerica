@@ -33,7 +33,6 @@ const getPackages = async () => {
 onMounted(async () => {
   await getDestination();
   await getPackages();
-  console.log('destination', destination.value);
 });
 
 </script>
