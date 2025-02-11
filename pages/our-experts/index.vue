@@ -53,6 +53,11 @@ const curatedTrips = [
 
 const animatedDiv = ref<HTMLElement | null>(null);
 
+const destination = {
+  nombre: 'Want to explore the whole world your way? We’re the experts.',
+  descripcion: "Goway's team of born globetrotters have lived, worked, and travelled the world extensively, from our management to our Destination Specialists and support staff. We share your passion for travel, whether you're a culinary explorer seeking new flavours in the bustling markets of Marrakech, an adventurer searching for new summits in the Swiss Alps or dive sites along the Great Barrier Reef, or a family making lifelong memories in the enchanting streets of Kyoto or on the Maldives' white-sand beaches. Come meet our team and make your dream travel plans a reality together.",
+}
+
 onMounted(() => {
   if (!animatedDiv.value) return;
   const observer = new IntersectionObserver(
@@ -78,7 +83,7 @@ onMounted(() => {
 <template>
   <HeaderImgNav></HeaderImgNav>
   <CardBlue></CardBlue>
-  <TextDescription></TextDescription>
+  <TextDescription :destination="destination"></TextDescription>
   <section class="container my-20">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

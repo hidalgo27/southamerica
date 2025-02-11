@@ -53,10 +53,12 @@ const content = {
       <!-- Content -->
       <div class="mt-6">
         <!-- Departures -->
-        <div v-if="activeTab === 'departures'"
-          class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-12">
-          <img :src="content.departures.image" alt="Image" class="w-full md:w-96 rounded-md" />
-          <div class="text-center md:text-left">
+        <div v-if="activeTab === 'departures'" class="grid md:grid-cols-2 items-center  justify-center ">
+          <div class="w-full lg:w-2/3 h-full p-6 mx-auto">
+            <img :src="content.departures.image" alt="Image" class="w-full  h-full rounded-md" />
+          </div>
+
+          <div class="text-start md:text-left">
             <h2 class="text-xl font-playfair-display font-semibold mb-4 md:mb-6">{{ content.departures.title }}</h2>
             <p class="text-gray-600">{{ content.departures.description }}</p>
             <p class="text-gray-500 mt-2">{{ content.departures.days }}</p>
@@ -65,18 +67,18 @@ const content = {
 
         <!-- Inclusions -->
         <div v-if="activeTab === 'inclusions'" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
-          <div class="border-b-2 md:border-r-2 border-gray-200 pb-6 md:pb-0 md:pr-6 md:ml-12">
+          <div class="border-b-2 md:border-b-0 md:border-r-2 border-gray-200 pb-6 md:pb-0 md:pr-6 md:ml-12">
             <h3
               class="text-lg font-playfair-display font-semibold text-green-600 my-6 md:my-12 text-center md:text-left">
               Included</h3>
-            <ul class="list-disc pl-5 text-gray-600 space-y-4 md:space-y-6">
+            <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6">
               <li v-for="item in content.inclusions.includes" :key="item">{{ item }}</li>
             </ul>
           </div>
           <div class="md:ml-12">
             <h3 class="text-lg font-playfair-display font-semibold text-red-600 my-6 md:my-12 text-center md:text-left">
               Not Included</h3>
-            <ul class="list-disc pl-5 text-gray-600 space-y-4 md:space-y-6">
+            <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6">
               <li v-for="item in content.inclusions.excludes" :key="item">{{ item }}</li>
             </ul>
           </div>
