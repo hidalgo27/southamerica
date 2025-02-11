@@ -6,19 +6,19 @@ const isOpen = ref(false);
   <section class="container my-20">
     <div class=" flex items-center justify-center ">
       <div class="flex flex-col md:flex-row bg-white overflow-hidden w-full gap-6">
-        <div class="bg-secondary bg-opacity-10 py-32 px-16 rounded-md">
+        <div class="bg-secondary bg-opacity-10 py-8 px-6 md:py-32 md:px-16 rounded-md">
           <p class="mb-8 tracking-widest font-bold">
             Destination Specialists
           </p>
-          <h1 class="font-semibold text-4xl mb-8 title font-playfair-display tracking-wide  ">
+          <h1 class="font-semibold text-2xl md:text-4xl mb-8 title font-playfair-display tracking-wide  ">
             The experts in tailor-made travel.
           </h1>
-          <p class="mb-8">
+          <p class="mb-8 text-sm md:text-md">
             When working with Goway, you dream it, we plan it. Rely on the passion and expertise of our Destination
             Specialists to craft the trip that’s right for you.
           </p>
-          <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
-            <button class="px-4 py-2 border btn-primary-outline rounded-md" @click="isOpen = true">
+          <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 text-sm md:text-md">
+            <button class="px-4 py-2 border btn-primary-outline text-start rounded-md" @click="isOpen = true">
               Request a Quote
             </button>
             <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>

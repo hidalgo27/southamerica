@@ -49,11 +49,11 @@ const getPackageDetail = async () => {
 };
 
 onMounted(async () => {
-  if (route.path.split('/')[2] && route.path.includes('/travel-packages/')) await getPackageDetail();
+  if (route.params.package) await getPackageDetail();
 });
 
 watch(() => route.path, async () => {
-  if (route.path.split('/')[2] && route.path.includes('/travel-packages/'))
+  if (route.params.package)
     await getPackageDetail();
   else
     packageDetail.value = null;

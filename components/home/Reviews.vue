@@ -29,12 +29,14 @@ const reviews = ref([
 </script>
 <template>
   <section class="container my-20">
-    <div class="flex flex-col lg:flex-row items-center justify-center w-full">
-      <div class="relative flex-1 lg:w-1/2 h-96 lg:h-auto">
-        <img alt="Hot air balloons over a rocky landscape" class="w-full h-full object-cover rounded-md"
-          src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
+    <div class="flex flex-col md:flex-row items-center justify-center w-full h-[40vh] lg:h-96">
+      <div class="relative flex-1 w-full h-full">
+        <div class="w-full h-full">
+          <img alt="Hot air balloons over a rocky landscape" class="w-full h-full object-cover rounded-md"
+            src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
+        </div>
         <div class="absolute inset-0 flex items-center justify-center">
-          <div class="bg-white p-8 rounded-md shadow-md text-center">
+          <NuxtLink to="#" class="bg-white p-8 rounded-md shadow-md text-center">
             <p class="text-xl font-semibold mb-2">
               Excellent
             </p>
@@ -85,17 +87,17 @@ const reviews = ref([
             <p class="text-green-500 font-semibold">
               TripAdvisor
             </p>
-          </div>
+          </NuxtLink>
         </div>
       </div>
-      <div class="flex-1 lg:w-1/2 mt-8 lg:mt-0 lg:ml-8">
+      <div class="flex-1 w-full mt-8 xl:mt-0 xl:ml-8">
         <Carousel ref="carouselRef" v-model="carouselSlide" wrap-around :autoplay="8000" :transition="2000"
           :items-to-show="1">
-          <Slide v-for="(review, index) in reviews" :key="index">
-            <div class="text-start p-4">
-              <h1 class="font-semibold text-3xl md:text-5xl mb-6 title font-playfair-display tracking-wide">{{
+          <Slide v-for="(review, index) in reviews" :key="index" class="w-full">
+            <div class="text-start md:p-4">
+              <h1 class="font-semibold text-xl lg:text-5xl mb-6 title font-playfair-display tracking-wide">{{
                 review.titulo }}</h1>
-              <p class="text-gray-700 mb-4">{{ review.descripcion }}</p>
+              <p class="text-gray-700 ">{{ review.descripcion }}</p>
               <p class="text-gray-700 ">- {{ review.name }}</p>
             </div>
           </Slide>
