@@ -3,6 +3,7 @@ import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import TrendingCard from '~/components/inspiration/TrendingCard.vue';
 import CardPackage from '~/components/travel-packages/CardPackage.vue';
 import Newsletter from '~/components/home/Newsletter.vue';
+import NavInspiration from '~/components/inspiration/NavInspiration.vue';
 
 const articles = [
   {
@@ -95,7 +96,7 @@ const journeys = [
 
 <template>
   <HeaderImgNav />
-
+  <NavInspiration></NavInspiration>
   <section class="container my-20">
     <div class="flex justify-between items-center mb-20">
       <h1 class="text-4xl font-bold font-playfair-display">Trending</h1>
