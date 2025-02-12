@@ -54,7 +54,7 @@ const items = ref([
             </span>
           </div>
           <div v-if="animatingItem === index"
-            class="absolute left-2/3 md:left-1/2 top-1/2 transform -translate-y-1/2 w-24 h-28 md:w-48 md:h-52 z-10">
+            class="absolute left-2/3 md:left-1/2 top-1/2 transform lg:translate-x-24 -translate-y-1/2 w-24 h-28 md:w-48 md:h-52 z-10">
             <img :class="'image-' + index" alt="Imagen de referencia" class="w-full h-full rounded-md"
               src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
           </div>

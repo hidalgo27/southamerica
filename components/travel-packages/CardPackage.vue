@@ -85,7 +85,7 @@ onMounted(() => {
           class="text-2xl font-semibold font-playfair-display tracking-wide mb-3 block">
           {{ packageData.titulo }}
         </NuxtLink>
-        <p class="text-gray-500 my-6 flex">
+        <p v-if="packageData.reserva" class="text-gray-500 my-6 flex">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6 text-secondary">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -94,16 +94,24 @@ onMounted(() => {
         </p>
       </div>
       <div class="flex items-center border-t pt-4 text-sm">
-        <span class="text-gray-700">
+        <span v-if="packageData.duracion" class="text-gray-700">
           {{ packageData.duracion }} days
         </span>
+        <span v-if="packageData.date" class="text-gray-700">
+          {{ packageData.date }}
+        </span>
         <div class="block border-l border-gray-200 h-8 mx-6"></div>
-        <div class="flex justify-between items-center">
+        <div v-if="packageData.precio_tours || packageData.ahorro" class="flex justify-between items-center">
           <span class="block text-gray-700 mr-2">
             From US$ {{ packageData.precio_tours }}
           </span>
           <span v-if="packageData.descuento" class="block text-red-500">
             savings US$ {{ packageData.ahorro }}
+          </span>
+        </div>
+        <div v-if="packageData.author" class="flex justify-between items-center">
+          <span class="block text-gray-700 mr-2">
+            By {{ packageData.author }}
           </span>
         </div>
       </div>
