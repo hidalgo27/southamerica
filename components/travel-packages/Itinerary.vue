@@ -1,42 +1,12 @@
 <script lang="ts" setup>
 const { $gsap } = useNuxtApp()
 
-const listPackages = [
-  {
-    url: 'machu-picchu-galapagos-islands',
-    paquete_itinerario: [
-      {
-        itinerarios:
-        {
-          titulo: 'Arrival in Lima',
-          resumen: 'Upon arrival in Lima, you will be met by our representative and transferred to your hotel. The rest of the day is at leisure.'
-        },
-      },
-      {
-        itinerarios:
-        {
-          titulo: 'Lima to Cusco',
-          resumen: 'Fly to Cusco, the ancient Inca capital. Upon arrival, you will be met and transferred to your hotel. The rest of the day is at leisure.'
-        },
-      },
-      {
-        itinerarios:
-        {
-          titulo: 'Cusco',
-          resumen: 'Morning at leisure. In the afternoon, enjoy a guided tour of Cusco and nearby ruins.'
-        },
-      },
-      {
-        itinerarios:
-        {
-          titulo: 'Cusco to Sacred Valley',
-          resumen: 'Travel to the Sacred Valley of the Incas. En route, visit the Awanacancha textile center and Pisac Market.'
-        },
-      },
-    ],
-    duracion: 7,
-  }
-];
+const props = defineProps({
+  packageDetail: {
+    type: Object,
+    required: true,
+  },
+});
 
 const openIndexes = ref<number[]>([]); // Abre solo el primer día al cargar
 const contentRefs = ref<HTMLElement[]>([]); // Almacena referencias de contenido
@@ -61,8 +31,10 @@ const isOpen = (index: number) => openIndexes.value.includes(index);
 
 // Función para expandir todo
 const expandAll = () => {
-  openIndexes.value = listPackages.flatMap((packageData) => packageData.paquete_itinerario.map((_, i) => i)); // Abrimos todos los días
+  if (!props.packageDetail || !props.packageDetail.paquete_itinerario) return;
+  openIndexes.value = props.packageDetail.paquete_itinerario.map((_: any, i: any) => i);
 
+  console.log(openIndexes.value)
   nextTick(() => {
     contentRefs.value.forEach((ref, index) => {
       if (ref) {
@@ -113,6 +85,10 @@ const toggleWithGSAP = (index: number) => {
     openIndexes.value.push(index);
   }
 };
+
+onMounted(() => {
+  console.log('mounted', props.packageDetail)
+})
 </script>
 
 <template>
@@ -123,11 +99,11 @@ const toggleWithGSAP = (index: number) => {
         <p class="mb-6 tracking-widest font-bold">
           Itinerary Details
         </p>
-        <h1 class="font-semibold text-4xl md:text-7xl mb-6 title font-playfair-display tracking-wide">
-          Belize Rainforest and Caribbean Beach Tranquility
+        <h1 class="font-semibold text-2xl md:text-5xl mb-6 title font-playfair-display tracking-wide">
+          {{ packageDetail.titulo }}
         </h1>
       </div>
-      <article class="my-12" id="itinerary" v-for="packages in listPackages" :key="packages.url">
+      <article class="my-12">
         <div class="mb-4 text-center">
           <button @click="expandAll" class="px-6 py-3  text-md border border-r-0 border-gray-700 ">
             Expand all
@@ -138,13 +114,12 @@ const toggleWithGSAP = (index: number) => {
         </div>
 
         <div class="w-full mx-auto relative">
-          <!-- Ajuste en el bucle v-for -->
-          <div v-for="(itinerary, index) in packages.paquete_itinerario" :key="index" class="flex item">
+          <div v-for="(itinerary, index) in packageDetail.paquete_itinerario" :key="index" class="flex item">
             <div class="relative w-20 text-center gap-12">
               <div class="absolute -z-10 left-1/2 top-0 bottom-0 border-l-2 border-dashed border-slate-300"></div>
               <div class="py-2 font-bold text-xs" :class="[currentItem == index ? 'text-secondary' : 'text-slate-500']">
-                DAY <span class="rounded-full px-2 py-1 text-white"
-                  :class="{ 'bg-red-700': packages.duracion == index + 1, 'bg-primary': index + 1 == 1, 'bg-gray-500': index + 1 > 1 }">{{
+                <span class="hidden md:inline">DAY</span> <span class="rounded-full px-2 py-1 text-white"
+                  :class="{ 'bg-red-700': packageDetail.duracion == index + 1, 'bg-primary': index + 1 == 1, 'bg-gray-500': index + 1 > 1 }">{{
                     index + 1 }}</span>
               </div>
             </div>
