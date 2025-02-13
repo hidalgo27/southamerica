@@ -1,185 +1,167 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
 import 'floating-vue/dist/style.css';
 import { Dropdown, Menu } from 'floating-vue';
 import InquireNowForm from '../form/InquireNowForm.vue';
 
-const route = useRoute();
-const bgColor = ref('bg-gray-500');
+import { useDestinationStore } from '~/stores/destination';
+
+const destinationStore = useDestinationStore();
+
+const countries = ref([]);
+const getCountries = async () => {
+  const res: any = await destinationStore.getCountries();
+
+  countries.value = res.map((country: any) => ({
+    nombre: country.nombre,
+    url: country.url,
+    imagen: country.imagen,
+    destinos: country.destino ? country.destino.map((dest: any) => ({
+      nombre: dest.nombre,
+      url: dest.url
+    })) : []
+  }));
+};
+
 const position = ref('fixed');
 const isOpen = ref(false);
 const isHeaderVisible = ref(true);
 let lastScrollPosition = 0;
 let ticking = false;
+const menus = ref([])
 
-// Función para verificar la ruta y establecer el color
-const updateBgColor = () => {
-  if (route.path !== '/') {
-    position.value = 'fixed';
-  }
-};
-
-// Observa cambios en route.path para detectar correctamente cambios de ruta
-watch(() => route.path, updateBgColor);
-
-const menus = ref([
-  {
-    title: "Destinations",
-    items: [
-      {
-        name: "Peru",
+const updateMenu = () => {
+  menus.value = [
+    {
+      title: "Destinations",
+      items: countries.value.map((country: any) => ({
+        name: country.nombre,
         firstTitle: {
           name: "Popular Countries",
-          items: [
-            {
-              name: "Cusco",
-              link: "/destinations/peru/cusco"
-            },
-            {
-              name: "Lima",
-              link: "/destinations/peru/lima"
-            },
-            {
-              name: "Machu Picchu",
-              link: "/destinations/peru/machu-picchu"
-            }
-          ]
+          items: country.destinos.map((dest: any) => ({
+            name: dest.nombre,
+            link: `/destinations/${country.url}/${dest.url}`
+          }))
         },
-        secondTitle: {
-          name: "Popular Destinations",
-          items: [
-            {
-              name: "Arequipa",
-              link: "/destinations/peru/arequipa"
-            },
-            {
-              name: "Ica",
-              link: "/destinations/peru/ica"
-            },
-            {
-              name: "Puno",
-              link: "/destinations/peru/puno"
-            }
-          ]
+        link: country.url,
+        image: country.imagen
+      }))
+    },
+    {
+      title: "Experiences",
+      items: [
+        {
+          name: "Travel Styles",
+          firstTitle: {
+            name: "Explore",
+            items: [
+              {
+                name: "Adventure",
+                link: "/experiences/adventure"
+              },
+              {
+                name: "Cruises",
+                link: "/experiences/cruises"
+              },
+              {
+                name: "Family",
+                link: "/experiences/family"
+              }
+            ]
+          },
+          link: "/experiences",
+          image: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg"
         },
-        link: "/peru",
-        image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg"
-      }]
-  },
-  {
-    title: "Experiences",
-    items: [
-      {
-        name: "Travel Styles",
-        firstTitle: {
-          name: "Explore",
-          items: [
-            {
-              name: "Adventure",
-              link: "/experiences/adventure"
-            },
-            {
-              name: "Cruises",
-              link: "/experiences/cruises"
-            },
-            {
-              name: "Family",
-              link: "/experiences/family"
-            }
-          ]
+        {
+          name: "Ways to travel",
+          firstTitle: {
+            name: "Explore",
+            items: [
+              {
+                name: "Escorted Touring",
+                link: "/experiences/escorted-touring"
+              },
+              {
+                name: "Rail Vacations",
+                link: "/experiences/rail-vacations"
+              },
+              {
+                name: "Vacation Packages with Air",
+                link: "/experiences/vacation-packages-with-air"
+              },
+            ]
+          },
+          link: "/experiences",
         },
-        link: "/experiences",
-        image: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg"
-      },
-      {
-        name: "Ways to travel",
-        firstTitle: {
-          name: "Explore",
-          items: [
-            {
-              name: "Escorted Touring",
-              link: "/experiences/escorted-touring"
-            },
-            {
-              name: "Rail Vacations",
-              link: "/experiences/rail-vacations"
-            },
-            {
-              name: "Vacation Packages with Air",
-              link: "/experiences/vacation-packages-with-air"
-            },
-          ]
+      ],
+    },
+    {
+      title: "Specials",
+      items: [{ name: "Argentina", link: "/special-offers/argentina" }, { name: "Peru", link: "/special-offers/peru" }, { name: "Ecuador", link: "/special-offers/ecuador" }],
+      image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
+      url: "/special-offers"
+    },
+    {
+      title: "Our Experts",
+      items: [{ name: "Argentina", link: "/our-experts/argentina" }, { name: "Peru", link: "/our-experts/peru" }, { name: "Ecuador", link: "/our-experts/ecuador" }],
+      image: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
+      url: "/our-experts"
+    },
+    {
+      title: "Groups Only",
+      items: [
+        {
+          name: "Travel Styles",
+          firstTitle: {
+            name: "Why Group Travel",
+            items: [
+              {
+                name: "Adventure",
+                link: "/groups"
+              },
+              {
+                name: "Cruises",
+                link: "/groups"
+              },
+              {
+                name: "Family",
+                link: "/groups"
+              }
+            ]
+          },
+          link: "/groups",
+          image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg"
         },
-        link: "/experiences",
-      },
-    ],
-  },
-  {
-    title: "Specials",
-    items: [{ name: "Argentina", link: "/special-offers/argentina" }, { name: "Peru", link: "/special-offers/peru" }, { name: "Ecuador", link: "/special-offers/ecuador" }],
-    image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
-    url: "/special-offers"
-  },
-  {
-    title: "Our Experts",
-    items: [{ name: "Argentina", link: "/our-experts/argentina" }, { name: "Peru", link: "/our-experts/peru" }, { name: "Ecuador", link: "/our-experts/ecuador" }],
-    image: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
-    url: "/our-experts"
-  },
-  {
-    title: "Groups Only",
-    items: [
-      {
-        name: "Travel Styles",
-        firstTitle: {
-          name: "Why Group Travel",
-          items: [
-            {
-              name: "Adventure",
-              link: "/groups"
-            },
-            {
-              name: "Cruises",
-              link: "/groups"
-            },
-            {
-              name: "Family",
-              link: "/groups"
-            }
-          ]
+        {
+          name: "Groups Destination",
+          firstTitle: {
+            name: "Explore",
+            items: [
+              {
+                name: "Group Specialists",
+                link: "/groups"
+              },
+              {
+                name: "Why Group Travel",
+                link: "/groups"
+              },
+            ]
+          },
+          link: "/groups",
         },
-        link: "/groups",
-        image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg"
-      },
-      {
-        name: "Groups Destination",
-        firstTitle: {
-          name: "Explore",
-          items: [
-            {
-              name: "Group Specialists",
-              link: "/groups"
-            },
-            {
-              name: "Why Group Travel",
-              link: "/groups"
-            },
-          ]
-        },
-        link: "/groups",
-      },
-    ],
-  },
-  {
-    title: "About Us",
-    items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
-    image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg"
-  },
-  {
-    title: "Travel Packages",
-    items: [{ name: "All Packages", link: "/travel-packages" }, { name: "Special Offers", link: "/special-offers" }]
-  },
-])
+      ],
+    },
+    {
+      title: "About Us",
+      items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
+      image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg"
+    },
+    {
+      title: "Travel Packages",
+      items: [{ name: "All Packages", link: "/travel-packages" }, { name: "Special Offers", link: "/special-offers" }]
+    },
+  ]
+}
+
 
 const handleScroll = () => {
   const currentScrollPosition = window.scrollY;
@@ -194,8 +176,9 @@ const handleScroll = () => {
 };
 
 // Llama a la función en el montaje inicial
-onMounted(() => {
-  updateBgColor();
+onMounted(async () => {
+  await getCountries();
+  updateMenu();
   window.addEventListener('scroll', handleScroll);
 });
 
@@ -293,7 +276,7 @@ onUnmounted(() => {
                                         </div>
                                       </div>
                                     </div>
-                                    <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations' + item.link"
+                                    <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations/' + item.link"
                                       class="text-semibold duration-300 text-md">
                                       Explore all {{ item.name }}
                                     </NuxtLink>
@@ -312,11 +295,12 @@ onUnmounted(() => {
                               <NuxtLink :to="item.link">{{ item.name }}</NuxtLink>
                             </div>
                           </template>
-                          <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations'"
-                            class=" bg-secondary w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-orange-300 duration-300 group">
-                            Explore all Destinations
-                          </NuxtLink>
+
                         </div>
+                        <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations'"
+                          class=" bg-secondary w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-orange-300 duration-300 group">
+                          Explore all Destinations
+                        </NuxtLink>
                       </div>
                     </div>
                     <div v-if="menu.image"
