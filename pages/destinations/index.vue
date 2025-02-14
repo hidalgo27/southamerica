@@ -16,13 +16,17 @@ const getCountries = async () => {
   destinations.value = res;
 };
 
+const text = {
+  title: 'Where Are You Headed To Next?',
+  description: 'Experience all that the world has to offer in just the way you want. Our team of Destination Specialists have been tailoring dream vacations for over 50 years. We handle every part of the travel journey, from flights to tours to accommodations to group travel. Let us do the hard work so you can sit back, relax, and take in the world. Rely on personalized travel planning and enjoy elevated experiences in destination. Follow your fancy and explore new parts of the world in new ways.',
+}
 onMounted(async () => {
   await getCountries();
 });
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
-  <DescriptionWithLine></DescriptionWithLine>
+  <DescriptionWithLine :text="text"></DescriptionWithLine>
 
   <SouthAmericaMap></SouthAmericaMap>
 

@@ -64,7 +64,7 @@ onMounted(() => {
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          gsap.from(entry.target, {
+          $gsap.from(entry.target, {
             y: 100,
             opacity: 0,
             duration: 2,

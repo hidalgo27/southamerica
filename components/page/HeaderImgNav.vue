@@ -34,7 +34,7 @@ onMounted(async () => {
 
 <template>
   <section>
-    <div class="relative w-full h-screen 2xl:h-[70vh] ">
+    <div class="relative w-full h-screen ">
       <div class="overflow-hidden h-full relative ">
         <div class="mask gradient-cicle-gray items-center flex justify-center">
           <div v-if="loading" class="mt-40 text-center">

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import gsap from 'gsap';
+const { $gsap } = useNuxtApp();
 
 const animatedDiv = ref<HTMLElement | null>(null);
 const imageDiv = ref<HTMLElement | null>(null);
@@ -10,18 +10,18 @@ const props = defineProps({
 
 onMounted(() => {
   if (!imageDiv.value) return;
-  gsap.set(animatedDiv.value, { opacity: 0, y: 100 });
+  $gsap.set(animatedDiv.value, { opacity: 0, y: 100 });
 
   // Activar la animación cuando el mouse pasa sobre el div
   const handleMouseEnter = () => {
-    gsap.to(
+    $gsap.to(
       animatedDiv.value,
       { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
     );
   };
 
   const handleMouseLeave = () => {
-    gsap.to(
+    $gsap.to(
       animatedDiv.value,
       { opacity: 0, y: 100, duration: 0.5, ease: "power2.out" }
     );

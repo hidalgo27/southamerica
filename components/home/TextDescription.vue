@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import gsap from 'gsap';
+const { $gsap } = useNuxtApp();
 const animatedDiv = ref<HTMLElement | null>(null);
 
 const props = defineProps({
@@ -15,7 +15,7 @@ onMounted(() => {
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          gsap.from(entry.target, {
+          $gsap.from(entry.target, {
             y: 100,
             opacity: 0,
             duration: 2,

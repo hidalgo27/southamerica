@@ -35,6 +35,11 @@ const positions = [
   { title: 'Sales Support Specialist (Manila, Philippines - Remote/Hybrid)', link: '#' },
   { title: 'Vice President - Africa (Toronto, Canada - Hybrid)', link: '#' },
 ];
+
+const text = {
+  title: 'The SouthAmerica Culture',
+  description: 'At Goway, you’ll enjoy industry-leading work/life balance with competitive vacation, paid personal days, and paid volunteer days to make a difference in your community. You’ll also get your birthday off!\nWe’re a community of passionate globetrotters, so you’ll get travel perks, discounted worldwide travel, work abroad opportunities, and the chance to win free trips.  \nWhether you work remotely or in one of our offices, you’ll find a rich, open, and supportive culture that connects all our teams around the globe.We’re growth- minded and entrepreneurial, supporting our teams in achieving their goals and advancing within the organization.We value teamwork, integrity, and accountability – working together to help our clients realize their travel dreams.  \nOur benefits package also includes retirement savings support, a comprehensive health and dental package, and short - and long - term disability, should you ever need it.'
+}
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
@@ -65,7 +70,7 @@ const positions = [
       </div>
     </div>
   </section>
-  <DescriptionWithLine></DescriptionWithLine>
+  <DescriptionWithLine :text="text"></DescriptionWithLine>
   <section class="bg-gray-100 my-20">
     <div class="container py-32">
       <p class="text-gray-600 mb-8">Personal and professional growth </p>

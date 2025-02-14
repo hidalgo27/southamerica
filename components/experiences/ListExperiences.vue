@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, nextTick } from "vue";
-import gsap from "gsap";
+const { $gsap } = useNuxtApp();
 
 const selectedItem = ref<number | null>(null);
 const animatingItem = ref<number | null>(null);
@@ -11,10 +11,10 @@ const animateImage = async (index: number) => {
   await nextTick(); // Esperamos a que Vue actualice el DOM
 
   const randomRotation = (Math.random() * 20) - 10;
-  gsap.fromTo(
+  $gsap.fromTo(
     `.image-${index}`,
     { opacity: 0, y: 50, autoAlpha: 0, rotate: 0 },
-    { opacity: 1, y: 0, autoAlpha: 1, rotate: 0, duration: 0.5, ease: "power2.inOut", rotate: randomRotation }
+    { opacity: 1, y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.inOut", rotate: randomRotation }
   );
 };
 

@@ -72,12 +72,20 @@ const social_responsability = [
   }
 ]
 const activeTab = ref(0)
+const southamerica = {
+  title: 'The SouthAmerica Difference',
+  description: 'We’re not only passionate about exploring the world. We’re also passionate about sharing it with you and providing the best possible experience, from that first phone call or online quote to your final landing back home. Enjoy personalized service and enthusiastic advice from people who are excited to help you live out your travel dreams.'
+}
+const responsability_text = {
+  title: 'Social Responsibility',
+  description: 'We’re committed to supporting the communities in our destinations around the world and to ensuring the places we send travellers to remain healthy and vibrant for generations to come. Part of this is accomplished by ensuring ethical travel practices on our trips. Another part is accomplished by supporting organizations that are leading the way when it comes to environmental and social assistance in countries around the world. \nWe’re proud to partner with the following organizations in their efforts to make a more sustainable and peaceful world for all.'
+}
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
   <TextDescription v-if="destination" :destination="destination"></TextDescription>
   <Benefits></Benefits>
-  <DescriptionWithLine></DescriptionWithLine>
+  <DescriptionWithLine :text="southamerica"></DescriptionWithLine>
   <section class="container my-20 space-y-6">
     <div v-for="(section, index) in sections" :key="index"
       class="grid grid-cols-2 md:grid-rows-1 items-center justify-center bg-white h-[50vh] gap-6">
@@ -127,7 +135,7 @@ const activeTab = ref(0)
       </div>
     </div>
   </section>
-  <DescriptionWithLine></DescriptionWithLine>
+  <DescriptionWithLine :text="responsability_text"></DescriptionWithLine>
   <section class="container my-20">
     <div class="flex justify-center md:space-x-6 border-b text-sm md:text-lg">
       <button v-for="(item, index) in social_responsability" :key="index" @click="activeTab = index"

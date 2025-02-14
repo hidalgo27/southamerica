@@ -4,6 +4,7 @@ import { Dropdown, Menu } from 'floating-vue';
 import InquireNowForm from '../form/InquireNowForm.vue';
 
 import { useDestinationStore } from '~/stores/destination';
+import { DataItem } from '@amcharts/amcharts5';
 
 const destinationStore = useDestinationStore();
 
@@ -27,7 +28,36 @@ const isOpen = ref(false);
 const isHeaderVisible = ref(true);
 let lastScrollPosition = 0;
 let ticking = false;
-const menus = ref([])
+const menus = ref([
+  {
+    title: "Destinations",
+    items: [],
+  },
+  {
+    title: "Experiences",
+    items: [],
+  },
+  {
+    title: "Specials",
+    items: [],
+  },
+  {
+    title: "Our Experts",
+    items: [],
+  },
+  {
+    title: "Groups Only",
+    items: [],
+  },
+  {
+    title: "About Us",
+    items: [],
+  },
+  {
+    title: "Travel Packages",
+    items: [],
+  }
+])
 
 const updateMenu = () => {
   menus.value = [

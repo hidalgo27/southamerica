@@ -8,7 +8,7 @@ import Reviews from '~/components/home/Reviews.vue'
 import Newsletter from '~/components/home/Newsletter.vue'
 import SliderBanner from '~/components/page/slider/SliderBanner.vue'
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue'
-import TextDescription from '~/components/home/DescriptionWithLine.vue'
+import DescriptionWithLine from '~/components/home/DescriptionWithLine.vue'
 
 import { usePackageStore } from '~/stores/packages'
 
@@ -22,6 +22,10 @@ const loading = ref(true)
 const video = ref()
 const { onLoaded } = useScriptVimeoPlayer()
 
+const welcome_text = {
+  title: 'Why South America Company?',
+  description: 'At South America Company, we specialize in tailor-made trips that immortalize the best days exploring Peru and South America. Every detail is meticulously designed to offer the maximum comfort, exclusivity, and luxury. From private villas and luxury cruises to customized itineraries, we make sure you only worry about enjoying your luxury vacation.',
+}
 let player: any
 onMounted(async () => {
   await getPackage()
@@ -64,7 +68,7 @@ onMounted(async () => {
     </div>
   </section>
 
-  <TextDescription></TextDescription>
+  <DescriptionWithLine :text="welcome_text"></DescriptionWithLine>
 
   <Benefits></Benefits>
 

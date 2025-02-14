@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from "vue3-carousel"
-import gsap from 'gsap';
+
+const { $gsap } = useNuxtApp()
 
 const breakpoints = {
   // 500px and up
@@ -32,7 +33,7 @@ onMounted(() => {
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          gsap.from('.slide', {
+          $gsap.from('.slide', {
             y: 25,
             opacity: 0,
             duration: 1,
