@@ -23,7 +23,6 @@ const packageDetail = ref([]);
 const getPackageDetail = async () => {
   const res: any = await packageStore.getPackage(route.params.package as string);
   packageDetail.value = res
-  console.log(packageDetail.value)
 };
 onMounted(async () => {
   await getPackage();
@@ -36,10 +35,13 @@ const isOpen = ref(false);
 <template>
   <HeaderImgNav></HeaderImgNav>
   <div
-    class="fixed bottom-0 md:bottom-12 space-x-2 w-full z-40 md:w-2/3 lg:w-1/2 md:translate-x-1/4 lg:translate-x-1/2 md:rounded-md bg-blue-900 text-white flex justify-between items-center p-4 shadow-md">
+    class="fixed bottom-0 md:bottom-12 space-x-2 w-full z-40 md:w-2/3 lg:w-1/2 md:translate-x-1/4 lg:translate-x-1/2 md:rounded-md bg-blue-900 text-white flex justify-between items-center p-4 shadow-md"
+    v-if="packageDetail.length > 0">
     <div class="space-y-2">
-      <p class="font-bold" v-if="packageDetail.length > 0">{{ packageDetail[0].titulo }}</p>
-      <p class="text-sm" v-if="packageDetail.length > 0">
+      <p class="font-bold">
+        {{ packageDetail[0].titulo }}
+      </p>
+      <p class="text-sm">
         {{ packageDetail[0].duracion }} days - From
         <span class="font-semibold">US$ {{ packageDetail[0].precio_tours }}</span>
         <span v-if="packageDetail[0].descuento" class="opacity-70">
@@ -53,10 +55,15 @@ const isOpen = ref(false);
     </button>
     <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
   </div>
-  <OverviewPackage v-if="packageDetail[0]" :packageDetail="packageDetail[0]"></OverviewPackage>
-  <ImgSlider></ImgSlider>
-  <Itinerary v-if="packageDetail[0]" :packageDetail="packageDetail[0]"></Itinerary>
-  <PackageDetails v-if="packageDetail[0]" :packageDetail="packageDetail[0]"></PackageDetails>
+  <div v-if="packageDetail && packageDetail.length > 0">
+    <OverviewPackage :packageDetail="packageDetail[0]" />
+    <ImgSlider v-if="packageDetail[0].imagen_paquetes" :imagen_paquetes="packageDetail[0].imagen_paquetes" />
+    <Itinerary :packageDetail="packageDetail[0]" />
+    <PackageDetails :packageDetail="packageDetail[0]" />
+  </div>
+  <div v-else>
+    <p>Cargando datos del paquete...</p>
+  </div>
   <SliderPackages :listPackages="listPackages"></SliderPackages>
   <EspecialistLetter></EspecialistLetter>
   <MiniReviews></MiniReviews>

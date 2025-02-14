@@ -75,20 +75,16 @@ const toggleWithGSAP = (index: number) => {
     $gsap.fromTo(contentRef, { height: fullHeight }, { height: 0, padding: 0, opacity: 0, duration: 0.5, ease: 'power2.inOut' });
     openIndexes.value = openIndexes.value.filter(i => i !== index);
   } else {
-    const fullHeight = contentRef.scrollHeight + 40;
+    const fullHeight = contentRef.scrollHeight;
     $gsap.fromTo(contentRef, { height: 0, opacity: 0 }, {
       height: fullHeight, opacity: 1, duration: 0.5, ease: 'power2.inOut', onComplete() {
-        contentRef.style.padding = '20px 6px'; // Añade relleno después de la animación
+        contentRef.style.padding = '1.5rem 0.5rem'; // Añade relleno después de la animación
         contentRef.style.height = 'auto'; // Establece la altura a 'auto' después de la animación
       }
     });
     openIndexes.value.push(index);
   }
 };
-
-onMounted(() => {
-  console.log('mounted', props.packageDetail)
-})
 </script>
 
 <template>
@@ -139,7 +135,7 @@ onMounted(() => {
                 </button>
 
                 <div :ref="el => setContentRef(el, index)" class="overflow-hidden rounded-b-md"
-                  v-html="itinerary.itinerarios.resumen" :class="{ 'bg-white': isOpen(index) }">
+                  v-html="itinerary.itinerarios.resumen" :class="{ 'bg-white ': isOpen(index) }">
                 </div>
               </div>
             </div>

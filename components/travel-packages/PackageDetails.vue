@@ -14,10 +14,6 @@ const tabs = [
   { key: 'terms', label: 'Terms and Conditions' }
 ];
 
-onMounted(() => {
-  console.log('PackageDetails mounted', props.packageDetail);
-  console.log('PackageDetails keys', props.packageDetail.value.keys());
-});
 </script>
 
 <template>
@@ -62,7 +58,7 @@ onMounted(() => {
               Included
             </h3>
             <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6">
-              <li v-for="item in packageDetail.incluye" :key="item">{{ item }}</li>
+              <div v-html="packageDetail.incluye"></div>
             </ul>
           </div>
 
@@ -71,7 +67,7 @@ onMounted(() => {
               Not Included
             </h3>
             <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6">
-              <li v-for="item in packageDetail.noincluye" :key="item">{{ item }}</li>
+              <div v-html="packageDetail.noincluye"></div>
             </ul>
           </div>
         </div>
