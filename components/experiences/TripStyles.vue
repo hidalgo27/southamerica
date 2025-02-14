@@ -1,4 +1,43 @@
 <script lang="ts" setup>
+const { $gsap } = useNuxtApp();
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+$gsap.registerPlugin(ScrollTrigger);
+
+const animatedSvg2 = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  if (animatedSvg2.value) {
+    $gsap.fromTo(
+      animatedSvg2.value,
+      {
+        clipPath: "inset(0% 0% 0% 100%)"
+      },
+      {
+        clipPath: "inset(0% 0% 0% 0%)",
+        duration: 2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: animatedSvg2.value,
+          start: "top 60%",
+          end: "top 0%",
+          scrub: true,
+        },
+      }
+    );
+    $gsap.to(animatedSvg2.value, {
+      clipPath: "none",
+      scrollTrigger: {
+        trigger: animatedSvg2.value.querySelector("g"),
+        start: "top 50%",
+        end: "top 30%",
+        toggleActions: "play none none reverse",
+        scrub: true,
+      },
+    });
+  }
+});
+
 const curatedTrips = [
   {
     title: 'Safari & Wildlife Vacations',
@@ -45,14 +84,32 @@ const curatedTrips = [
 ]
 </script>
 <template>
-  <section class="bg-secondary bg-opacity-30 py-12 ">
-    <div class="p-8 container ">
+  <section class="bg-secondary bg-opacity-30 py-20 ">
+    <svg ref="animatedSvg2" class="absolute right-0 translate-y-48 w-1/3 overflow-visible" viewBox="0 0 800 300">
+      <path
+        d="M785.428 1.301C756.23 37.4045 731.395 80.1763 693.122 106.756C640.695 143.166 585.853 141.377 532.484 135.109C494.542 130.653 455.604 129.089 417.179 126.451C367.602 123.048 318.162 119.825 266.295 135.462C214.189 151.172 165.575 184.569 120.382 219.264C94.4555 239.168 66.3735 265.321 45.5039 291.126"
+        fill="none" stroke="#F05B2A" stroke-width="2" stroke-dasharray="0.1 10" stroke-linecap="round"></path>
+      <path
+        d="M785.428 1.301C756.23 37.4045 731.395 80.1763 693.122 106.756C640.695 143.166 585.853 141.377 532.484 135.109C494.542 130.653 455.604 129.089 417.179 126.451C367.602 123.048 318.162 119.825 266.295 135.462C214.189 151.172 165.575 184.569 120.382 219.264C94.4555 239.168 66.3735 265.321 45.5039 291.126"
+        fill="none" stroke="#F9F4E8" stroke-width="3" stroke-dasharray="849" stroke-dashoffset="1698"
+        style="stroke-dashoffset: 849px;"></path>
+      <g>
+        <path
+          d="M46.8784 314.001C42.4652 326.5 28.7555 333.055 16.2569 328.641C3.75837 324.228 -2.79611 310.518 1.61709 298.02C6.03029 285.521 19.74 278.967 32.2386 283.38C44.7371 287.793 51.2916 301.503 46.8784 314.001Z"
+          fill="#F8BCAA" fill-opacity="0.15"></path>
+        <path
+          d="M28.8197 307.825C28.0841 309.908 25.7992 311 23.7161 310.265C21.633 309.529 20.5406 307.244 21.2761 305.161C22.0116 303.078 24.2966 301.985 26.3797 302.721C28.4628 303.457 29.5552 305.742 28.8197 307.825Z"
+          fill="#F05B2A"></path>
+      </g>
+    </svg>
+
+    <div class="p-8 container z-10">
       <div class="text-center mb-8">
         <div class="border-title mb-2 mx-auto"></div>
         <p class="mb-6 tracking-widest font-bold">
           Curated Trip Styles
         </p>
-        <h1 class="font-semibold text-4xl md:text-7xl mb-6 title font-playfair-display tracking-wide">
+        <h1 class="font-semibold text-4xl md:text-8xl my-20 title font-playfair-display tracking-wide">
           Explore the world your way.
         </h1>
       </div>
@@ -63,7 +120,7 @@ const curatedTrips = [
             <img :alt="trip.alt" :src="trip.image"
               class="w-full h-full rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
           </div>
-          <div class="absolute bottom-0 left-0 right-0 bg-white p-4 flex justify-between items-center rounded-b-md">
+          <div class="absolute bottom-6 left-4 bg-white p-4 flex justify-between items-center rounded-md w-11/12">
             <span>
               {{ trip.title }}
             </span>
