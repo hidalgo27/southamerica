@@ -26,7 +26,7 @@ onMounted(async () => {
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
-  <DescriptionWithLine :text="text"></DescriptionWithLine>
+  <DescriptionWithLine :text="text" :line="2"></DescriptionWithLine>
 
   <SouthAmericaMap></SouthAmericaMap>
 

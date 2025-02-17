@@ -3,7 +3,6 @@ const { $gsap } = useNuxtApp();
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 $gsap.registerPlugin(ScrollTrigger);
-const sectionRef = ref<HTMLElement | null>(null);
 const posts = ref([
   {
     imageUrl: 'https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT',
@@ -30,45 +29,37 @@ const posts = ref([
     liked: ref(false),
   }
 ])
-// Inicializamos likedPosts con falsos (ningún post está likeado inicialmente)
 
 const toggleLike = (post: any, event: MouseEvent) => {
   post.liked = !post.liked;
 
   const heart = event.currentTarget as HTMLElement;
-  const plusOne = heart.querySelector(".plus-one");
 
   if (post.liked) {
     $gsap.to(heart, { scale: 1.2, duration: 0.2, yoyo: true, repeat: 1 });
-    $gsap.to(plusOne, { y: -20, opacity: 1, duration: 0.5, ease: "power2.out" });
-    $gsap.to(plusOne, { opacity: 0, duration: 0.5, delay: 0.5 });
-    $gsap.to(plusOne, { y: 0, duration: 0 });
+    $gsap.to('.plus-one', { y: -20, opacity: 1, duration: 0.5, ease: "power2.out" });
+    $gsap.to('.plus-one', { opacity: 0, duration: 0.5, delay: 0.5 });
+    $gsap.to('.plus-one', { y: 0, duration: 0 });
   } else {
     $gsap.to(heart, { scale: 1, duration: 0.2 });
   }
 };
 onMounted(() => {
-  if (!sectionRef.value) return;
-
-  const ctx = $gsap.context(() => {
-    $gsap.set('.slide', { opacity: 0, y: 100 });
-
-    ScrollTrigger.batch('.slide', {
-      onEnter: (batch) => {
-        $gsap.to(batch, {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          ease: "power2.out",
-          stagger: 0.3
-        });
+  $gsap.fromTo('.slide-story',
+    { opacity: 0, y: 50 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.3,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.slide-story',
+        start: 'top 60%',
+        toggleActions: 'play none none none',
       },
-      start: "top 50%",
-      once: true,
-    });
-  }, sectionRef.value);
-
-  onUnmounted(() => ctx.revert());
+    }
+  )
 });
 </script>
 
@@ -86,10 +77,10 @@ onMounted(() => {
       </button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref="sectionRef">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <div v-for="(post, index) in posts" :key="index"
         class="content-between overflow-hidden rounded-md group cursor-pointer transition duration-500 ease-in-out h-full ">
-        <div class="slide">
+        <div class="slide-story">
           <div class="overflow-hidden relative rounded-md ">
             <img :alt="post.imageAlt"
               class="w-full h-80 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105"

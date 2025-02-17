@@ -26,6 +26,7 @@ const getPackages = async () => {
 const getRegion = async () => {
   const res: any = await destinationStore.getRegion(route.params.country as string, route.params.region as string);
   region.value = res;
+  console.log(region.value);
 };
 
 
@@ -89,7 +90,7 @@ onMounted(async () => {
     </div>
   </section>
   <SliderPackages :listPackages="listPackages"></SliderPackages>
-  <ImgSlider></ImgSlider>
+  <!-- <ImgSlider></ImgSlider> -->
   <ListExperiences></ListExperiences>
   <section class="container my-20">
     <div class="flex items-center justify-center mt-28 mb-12">

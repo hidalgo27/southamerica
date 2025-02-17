@@ -103,7 +103,7 @@ onMounted(() => {
         <div class="block border-l border-gray-200 h-8 mx-6"></div>
         <div v-if="packageData.precio_paquetes[0].precio_d || packageData.ahorro"
           class="flex justify-between items-center">
-          <span class="block text-gray-700 mr-2">
+          <span v-if="packageData.precio_paquetes[0].precio_d" class="block text-gray-700 mr-2">
             From US$ {{ packageData.precio_paquetes[0].precio_d }}
           </span>
           <span v-if="packageData.descuento" class="block text-red-500">

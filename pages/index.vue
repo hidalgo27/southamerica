@@ -13,6 +13,7 @@ import DescriptionWithLine from '~/components/home/DescriptionWithLine.vue'
 import { Dropdown } from 'floating-vue'
 
 import { usePackageStore } from '~/stores/packages'
+import Stephome from '~/components/home/Stephome.vue'
 
 const packageStore = usePackageStore()
 const listPackages = ref([])
@@ -243,8 +244,7 @@ onMounted(async () => {
       </div>
     </div>
   </section>
-
-  <DescriptionWithLine :text="welcome_text"></DescriptionWithLine>
+  <DescriptionWithLine :text="welcome_text" :line="1"></DescriptionWithLine>
 
   <Benefits></Benefits>
 
