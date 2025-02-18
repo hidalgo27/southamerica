@@ -45,17 +45,17 @@ const toggleLike = (post: any, event: MouseEvent) => {
   }
 };
 onMounted(() => {
-  $gsap.fromTo('.slide-story',
+  $gsap.fromTo('.story',
     { opacity: 0, y: 50 },
     {
       opacity: 1,
       y: 0,
-      duration: 1,
+      duration: 2,
       stagger: 0.3,
       ease: 'power3.out',
       scrollTrigger: {
-        trigger: '.slide-story',
-        start: 'top 60%',
+        trigger: '.story',
+        start: 'top 80%',
         toggleActions: 'play none none none',
       },
     }
@@ -80,7 +80,7 @@ onMounted(() => {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <div v-for="(post, index) in posts" :key="index"
         class="content-between overflow-hidden rounded-md group cursor-pointer transition duration-500 ease-in-out h-full ">
-        <div class="slide-story">
+        <div class="story">
           <div class="overflow-hidden relative rounded-md ">
             <img :alt="post.imageAlt"
               class="w-full h-80 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105"
