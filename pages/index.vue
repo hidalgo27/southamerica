@@ -23,19 +23,43 @@ const getPackage = async () => {
 const loading = ref(true)
 const video = ref()
 const { onLoaded } = useScriptVimeoPlayer()
-const countries = ref(["Peru", "Ecuador"]);
+const countries = ref(["Peru", "Ecuador"])
 const budget = ref([
   { range: [0, 2500], label: "$$" },
   { range: [1000, 4000], label: "$$$" },
   { range: [3000, 7000], label: "$$$$" },
   { range: [4000, 10000], label: "$$$$+" }
-]);
+])
 const durations = ref([
-  "Less than 5 days",
-  "5 to 10 days",
-  "10 to 15 days",
-  "15 or more days"
-]);
+  { label: "Less than 5 days", range: "0-5" },
+  { label: "5 to 10 days", range: "5-10" },
+  { label: "10 to 15 days", range: "10-15" },
+  { label: "15 or more days", range: "15-100" }
+])
+
+// Convertir el presupuesto a rango numérico
+const budgetRange = computed(() => {
+  const budgetItem = budget.value.find(b => b.label === selectedBudget.value)
+  return budgetItem ? `${budgetItem.range[0]}-${budgetItem.range[1]}` : null
+})
+
+// Convertir la duración a rango numérico
+const durationRange = computed(() => {
+  const durationItem = durations.value.find(d => d.label === selectedDuration.value)
+  return durationItem ? durationItem.range : null
+})
+
+const filteredQuery = computed(() => {
+  const query = {
+    country: selectedCountry.value,
+    budget: budgetRange.value,
+    duration: durationRange.value
+  }
+
+  return Object.fromEntries(
+    Object.entries(query).filter(([_, v]) => v !== null && v !== undefined && v !== "")
+  )
+})
 
 const searchTerms = ref({
   countries: "",
@@ -43,17 +67,17 @@ const searchTerms = ref({
 const filteredItems = (list: string[], term: string) => {
   return list.filter((item) => item.toLowerCase().includes(term.toLowerCase()));
 };
-const selectedCountry = ref("Search Country");
-const selectedBudget = ref("Select price per person");
-const selectedDuration = ref("Select trip duration");
+const selectedCountry = ref(null);
+const selectedBudget = ref(null);
+const selectedDuration = ref(null);
 
-const selectCountry = (country: string) => {
+const selectCountry = (country: any) => {
   selectedCountry.value = country;
 }
-const selectBudget = (budgetLabel: string) => {
+const selectBudget = (budgetLabel: any) => {
   selectedBudget.value = budgetLabel;
 };
-const selectDuration = (duration: string) => {
+const selectDuration = (duration: any) => {
   selectedDuration.value = duration;
 };
 
@@ -113,12 +137,11 @@ onMounted(async () => {
                       <div class="flex items-center">
                         <div class="text-start ml-2">
                           <span class=" font-semibold">Countries</span>
-                          <p v-if="selectedCountry" class=" text-md ">
-                            {{ selectedCountry }}
+                          <p class=" text-md ">
+                            {{ selectedCountry || "Select country" }}
                           </p>
                         </div>
-                        <button v-if="selectedCountry !== 'Search Country'"
-                          @click.stop="selectedCountry = 'Search Country'"
+                        <button v-if="selectedCountry" @click.stop="selectedCountry = null"
                           class="ml-2 p-1 text-red-500 hover:text-red-700 focus:outline-none">
                           ✕
                         </button>
@@ -126,15 +149,17 @@ onMounted(async () => {
                     </button>
                     <template #popper>
                       <div
-                        class="mt-2 w-full rounded-md shadow-lg max-h-64 overflow-y-auto bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
+                        class="md:w-48 lg:w-64 rounded-md shadow-lg max-h-64 overflow-y-auto bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
                         <input v-model="searchTerms.countries"
                           class="block w-full px-4 py-2 text-gray-800 border rounded-md border-gray-300 focus:outline-none"
                           type="text" placeholder="Search Country" autocomplete="off" />
-                        <a v-for="item in filteredItems(countries, searchTerms.countries)" :key="item" href="#"
-                          @click.prevent="selectCountry(item)"
-                          class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
-                          {{ item }}
-                        </a>
+                        <div class="overflow-y-auto max-h-40 space-y-1">
+                          <button v-for="item in filteredItems(countries, searchTerms.countries)" :key="item" href="#"
+                            @click.prevent="selectCountry(item)"
+                            class="flex w-full px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
+                            {{ item }}
+                          </button>
+                        </div>
                       </div>
                     </template>
                   </Dropdown>
@@ -152,12 +177,11 @@ onMounted(async () => {
                       <div class="flex items-center">
                         <div class="text-start ml-2">
                           <span class=" font-semibold">Budget</span>
-                          <p v-if="selectedBudget" class=" text-md ">
-                            {{ selectedBudget }}
+                          <p class=" text-md ">
+                            {{ selectedBudget || "Select price per person" }}
                           </p>
                         </div>
-                        <button v-if="selectedBudget !== 'Select price per person'"
-                          @click.stop="selectedBudget = 'Select price per person'"
+                        <button v-if="selectedBudget" @click.stop="selectedBudget = null"
                           class="ml-2 p-1 text-red-500 hover:text-red-700 focus:outline-none">
                           ✕
                         </button>
@@ -165,14 +189,15 @@ onMounted(async () => {
                     </button>
                     <template #popper>
                       <div
-                        class="mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
+                        class="md:w-48 lg:w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
                         <div class="text-start p-4 text-gray-400 border-b-2">
                           <span class="font-semibold text-xs">Price (USD) per person</span>
                         </div>
-                        <a v-for="item in budget" :key="item.label" href="#" @click.prevent="selectBudget(item.label)"
-                          class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
+                        <button v-for="item in budget" :key="item.label" href="#"
+                          @click.prevent="selectBudget(item.label)"
+                          class="flex w-full px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
                           {{ item.label }}
-                        </a>
+                        </button>
                       </div>
                     </template>
                   </Dropdown>
@@ -189,12 +214,11 @@ onMounted(async () => {
                       <div class="flex items-center">
                         <div class="text-start ml-2">
                           <span class="ml-2 font-semibold">Duration</span>
-                          <p v-if="selectedDuration" class="ml-2 text-md ">
-                            {{ selectedDuration }}
+                          <p class="ml-2 text-md ">
+                            {{ selectedDuration || "Select trip duration" }}
                           </p>
                         </div>
-                        <button v-if="selectedDuration !== 'Select trip duration'"
-                          @click.stop="selectedDuration = 'Select trip duration'"
+                        <button v-if="selectedDuration" @click.stop="selectedDuration = null"
                           class="ml-2 p-1 text-red-500 hover:text-red-700 focus:outline-none">
                           ✕
                         </button>
@@ -202,34 +226,34 @@ onMounted(async () => {
                     </button>
                     <template #popper>
                       <div
-                        class="mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
+                        class="md:w-48 lg:w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
                         <div class="text-start p-4 text-gray-400 border-b-2">
                           <span class="font-semibold text-xs">Length of trip</span>
                         </div>
-                        <a v-for="item in durations" :key="item" href="#" @click.prevent="selectDuration(item)"
-                          class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
-                          {{ item }}
-                        </a>
+                        <button v-for="(item, idx) in durations" :key="idx" @click.prevent="selectDuration(item.label)"
+                          class="flex w-full px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
+                          {{ item.label }}
+                        </button>
                       </div>
                     </template>
                   </Dropdown>
                 </client-only>
               </div>
               <div class="px-6">
-                <button
+                <NuxtLink :to="{
+                  path: '/travel-packages',
+                  query: filteredQuery
+                }"
                   class="group bg-orange-500 hover:bg-orange-600 text-white rounded-full flex items-center transition-all duration-300 ease-in-out w-12 hover:w-32 px-3 py-3 overflow-hidden">
-                  <!-- SVG SIEMPRE visible -->
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5 flex-shrink-0">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
-
-                  <!-- Texto oculto inicialmente, aparece sin mover el SVG -->
                   <span
                     class="opacity-0 whitespace-nowrap transition-all duration-300 ease-in-out group-hover:opacity-100">
                     Search
                   </span>
-                </button>
+                </NuxtLink>
               </div>
             </div>
             <div class="mt-6 justify-center flex">
