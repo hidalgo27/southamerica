@@ -22,7 +22,7 @@ onMounted(async () => {
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
-  <FilterPackages :package-data="listPackages"></FilterPackages>
+  <FilterPackages v-if="listPackages" :package-data="listPackages"></FilterPackages>
   <Newsletter></Newsletter>
   <MiniReviews></MiniReviews>
 </template>

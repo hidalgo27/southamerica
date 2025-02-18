@@ -5,7 +5,7 @@ import CardPackage from './CardPackage.vue';
 const route = useRoute();
 const props = defineProps({
   packageData: {
-    type: Object,
+    type: Array,
     required: true,
   },
 });
@@ -29,6 +29,66 @@ const filteredItems = (list: string[], term: string) => {
 };
 
 const isMobileMenuOpen = ref(false);
+
+const itemsPerPage = 9;
+const currentPage = ref(1);
+
+watch(() => props.packageData, (newValue) => {
+  if (newValue && Array.isArray(newValue)) {
+    currentPage.value = 1; // Reinicia la paginación cuando los datos cambian
+  }
+}, { immediate: true });
+
+const totalPages = computed(() => {
+  return props.packageData ? Math.ceil((props.packageData.length || 0) / itemsPerPage) : 0;
+});
+
+const paginatedData = computed(() => {
+  if (!props.packageData || !Array.isArray(props.packageData)) return [];
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return props.packageData.slice(start, start + itemsPerPage);
+});
+
+// Generar la paginación con puntos suspensivos
+const paginationRange = computed(() => {
+  if (totalPages.value <= 7) return Array.from({ length: totalPages.value }, (_, i) => i + 1);
+
+  const range = [];
+  if (currentPage.value > 4) range.push(1, "...");
+
+  const start = Math.max(2, currentPage.value - 2);
+  const end = Math.min(totalPages.value - 1, currentPage.value + 2);
+
+  for (let i = start; i <= end; i++) range.push(i);
+
+  if (currentPage.value < totalPages.value - 3) range.push("...", totalPages.value);
+
+  return range;
+});
+
+const scrollToTop = () => {
+  const gridElement = document.querySelector(".results");
+  if (gridElement) {
+    gridElement.scrollIntoView({ behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
+
+const setPage = (page: number) => {
+  currentPage.value = page;
+  scrollToTop();
+};
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) currentPage.value++;
+  scrollToTop();
+};
+
+const prevPage = () => {
+  if (currentPage.value > 1) currentPage.value--;
+  scrollToTop();
+};
 </script>
 <template>
   <section class="container">
@@ -316,17 +376,17 @@ const isMobileMenuOpen = ref(false);
         </svg>
       </div>
     </button>
-    <div class="p-4">
-      <div class="flex justify-between items-center">
-        <span>Results {{ packageData.length }}</span>
+    <div class="py-6 mb-32">
+      <div class="results text-xs flex justify-between items-center">
+        <span>Results ({{ packageData.length }})</span>
         <div class="flex space-x-4">
           <div v-if="!route.path.includes('special-offers', 1)"
-            class="flex items-center space-x-2 border px-4 py-2 rounded-md">
+            class="flex items-center space-x-2 border px-8 py-4 rounded-md">
             <span>Special Offer</span>
             <input type="checkbox" class="form-checkbox">
           </div>
           <div class="hidden md:block relative">
-            <button class="bg-white border border-gray-300 rounded-md px-4 py-2">
+            <button class="bg-white border border-gray-200 rounded-md px-8 py-4">
               Sort By <i class="fas fa-chevron-down"></i>
             </button>
           </div>
@@ -334,8 +394,32 @@ const isMobileMenuOpen = ref(false);
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <CardPackage v-for="(packages, index) in packageData" :key="index" :packageData="packages"></CardPackage>
+    <div>
+      <div v-if="packageData.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <CardPackage v-for="pkg in paginatedData" :key="pkg.id" :packageData="pkg" />
+      </div>
+
+      <div class="flex items-center gap-2 justify-center mt-4">
+        <!-- Botón Anterior -->
+        <button @click="prevPage" :disabled="currentPage === 1" class="p-2 text-gray-500 disabled:text-gray-300">
+          ←
+        </button>
+
+        <!-- Paginación Dinámica -->
+        <template v-for="page in paginationRange" :key="page">
+          <button v-if="page !== '...'" @click="setPage(page)"
+            :class="['px-3 py-1 rounded-full', { 'bg-gray-200 font-bold': page === currentPage }]">
+            {{ page }}
+          </button>
+          <span v-else class="px-2">...</span>
+        </template>
+
+        <!-- Botón Siguiente -->
+        <button @click="nextPage" :disabled="currentPage === totalPages"
+          class="p-2 text-gray-500 disabled:text-gray-300">
+          →
+        </button>
+      </div>
     </div>
   </section>
 </template>
