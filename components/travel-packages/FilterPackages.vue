@@ -91,23 +91,45 @@ const currentPage = ref(1);
 const showSpecialOffers = ref(false);
 const selectedCountry = ref("");
 const selectedRegion = ref("");
+const sortCriteria = ref({ field: null, order: null });
 
 // Filtra los paquetes según el checkbox
 const filteredPackages = computed(() => {
-  return props.packageData.filter((pkg: any) => {
+  let packages = props.packageData.filter((pkg) => {
     const matchesOffers = showSpecialOffers.value ? pkg.offers_home === 1 : true;
     const matchesCountry = selectedCountry.value
-      ? pkg.paquetes_destinos?.some((dest: any) => dest.destinos?.pais?.nombre === selectedCountry.value)
+      ? pkg.paquetes_destinos?.some((dest) => dest.destinos?.pais?.nombre === selectedCountry.value)
       : true;
     const matchesRegion = selectedRegion.value
-      ? pkg.paquetes_destinos?.some((dest: any) => dest.destinos?.region?.nombre === selectedRegion.value)
+      ? pkg.paquetes_destinos?.some((dest) => dest.destinos?.nombre === selectedRegion.value)
       : true;
     const matchesPrice = pkg.precio_paquetes?.length > 0 &&
       pkg.precio_paquetes[0].precio_d >= priceRange.value.min &&
       pkg.precio_paquetes[0].precio_d <= priceRange.value.max;
     const matchesDuration = pkg.duracion >= durationRange.value.min && pkg.duracion <= durationRange.value.max;
-    return matchesOffers && matchesCountry && matchesRegion && matchesPrice && matchesDuration;
+
+    return matchesOffers && matchesCountry && matchesRegion && matchesDuration;
   });
+
+  // Aplicar ordenación si hay un criterio definido
+  if (sortCriteria.value.field) {
+    packages.sort((a, b) => {
+      let valueA, valueB;
+
+      if (sortCriteria.value.field === 'price') {
+        valueA = a.precio_paquetes?.[0]?.precio_d ?? Infinity;
+        valueB = b.precio_paquetes?.[0]?.precio_d ?? Infinity;
+      } else if (sortCriteria.value.field === 'duration') {
+        valueA = a.duracion ?? 0;
+        valueB = b.duracion ?? 0;
+      } else {
+        return 0;
+      }
+
+      return sortCriteria.value.order === 'asc' ? valueA - valueB : valueB - valueA;
+    });
+  }
+  return packages;
 });
 
 // Se reinicia la paginación cuando cambian los datos o el filtro
@@ -166,6 +188,18 @@ const nextPage = () => {
 const prevPage = () => {
   if (currentPage.value > 1) currentPage.value--;
   scrollToResult();
+};
+
+const sortBy = (field: any, order: any) => {
+  sortCriteria.value = { field, order };
+};
+
+const clearFilters = () => {
+  selectedCountry.value = "";
+  selectedRegion.value = "";
+  priceRange.value = { min: 100, max: 10000 };
+  durationRange.value = { min: 1, max: 30 };
+  showSpecialOffers.value = false;
 };
 
 onMounted(() => {
@@ -540,18 +574,77 @@ onMounted(() => {
     </button> -->
     <div class="py-6 mb-32">
       <div class="results text-xs flex justify-between items-center">
-        <span>Results ({{ filteredPackages.length }})</span>
+        <div class="flex flex-col space-y-4">
+          <span>Results ({{ filteredPackages.length }})</span>
+          <div class="flex flex-row space-x-2 text-xs items-center">
+            <button v-if="selectedCountry" class="flex items-center space-x-2 border-2 px-4 py-2 rounded-full"
+              @click="selectedCountry = ''">
+              <span>{{ selectedCountry }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <button v-if="selectedRegion" class="flex items-center space-x-2 border-2 px-2 py-2 rounded-full"
+              @click="selectedRegion = ''">
+              <span>{{ selectedRegion }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <button v-if="priceRange.min !== 100 || priceRange.max !== 10000"
+              class="flex items-center space-x-2 border-2 px-2 py-2 rounded-full"
+              @click="priceRange = { min: 100, max: 10000 }">
+              <span>${{ priceRange.min }} - ${{ priceRange.max }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <button v-if="durationRange.min !== 1 || durationRange.max !== 30"
+              class="flex items-center space-x-2 border-2 px-2 py-2 rounded-full"
+              @click="durationRange = { min: 1, max: 30 }">
+              <span>{{ durationRange.min }} - {{ durationRange.max }} days</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <button
+              v-if="selectedCountry || selectedRegion || (priceRange.min !== 100 || priceRange.max !== 10000) || durationRange.min !== 1 || (durationRange.max !== 30)"
+              class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0"
+              @click="clearFilters">
+              Remove all
+            </button>
+          </div>
+        </div>
         <div class="flex space-x-4">
           <div v-if="!route.path.includes('special-offers', 1)"
             class="flex items-center space-x-2 border px-8 py-4 rounded-md">
             <span>Special Offer</span>
             <input type="checkbox" class="form-checkbox cursor-pointer" v-model="showSpecialOffers">
           </div>
-          <div class="hidden md:block relative">
-            <button class="bg-white border border-gray-200 rounded-md px-8 py-4">
-              Sort By <i class="fas fa-chevron-down"></i>
-            </button>
-          </div>
+          <Dropdown class="hidden md:block relative">
+            <template #default="{ shown }">
+              <button class="bg-white border border-gray-200 rounded-md px-8 py-4 flex items-center space-x-2">
+                <span>Sort By</span>
+                <i :class="['fas', shown ? 'fa-chevron-up' : 'fa-chevron-down']"></i>
+              </button>
+            </template>
+            <template #popper>
+              <div class="bg-white border border-gray-200 text-gray-800 rounded-md shadow-lg p-2 text-sm">
+                <button @click="sortBy('price', 'desc')"
+                  class="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">Price: High to Low</button>
+                <button @click="sortBy('price', 'asc')"
+                  class="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">Price: Low to High</button>
+                <button @click="sortBy('duration', 'desc')"
+                  class="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">Duration: High to Low</button>
+                <button @click="sortBy('duration', 'asc')"
+                  class="block w-full text-left px-4 py-2 rounded-md hover:bg-gray-100">Duration: Low to High</button>
+              </div>
+            </template>
+          </Dropdown>
         </div>
       </div>
     </div>
@@ -568,7 +661,6 @@ onMounted(() => {
         <button @click="prevPage" :disabled="currentPage === 1" class="p-2 text-gray-500 disabled:text-gray-300">
           ←
         </button>
-
         <template v-for="page in paginationRange" :key="page">
           <button v-if="page !== '...'" @click="setPage(page)"
             :class="['px-3 py-1 rounded-full', { 'bg-gray-200 font-bold': page === currentPage }]">
@@ -576,7 +668,6 @@ onMounted(() => {
           </button>
           <span v-else class="px-2">...</span>
         </template>
-
         <button @click="nextPage" :disabled="currentPage === totalPages"
           class="p-2 text-gray-500 disabled:text-gray-300">
           →
