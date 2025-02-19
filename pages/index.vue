@@ -121,7 +121,7 @@ onMounted(async () => {
               Design Your Peru Discovery.</h1>
             <p class="text-white text-xl 2xl:text-lg tracking-widest font-light mt-5 ">Uncover the secrets of Machu
               Picchu and the wonders of Peru on a journey tailored just for you.</p>
-            <div class="bg-white w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center">
+            <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center">
               <div class="grid grid-cols-3 w-full">
                 <client-only>
                   <Dropdown class="w-full border-r border-gray-300">
@@ -137,7 +137,7 @@ onMounted(async () => {
                       <div class="flex items-center">
                         <div class="text-start ml-2">
                           <span class=" font-semibold">Countries</span>
-                          <p class=" text-md ">
+                          <p class="text-xs lg:text-md">
                             {{ selectedCountry || "Select country" }}
                           </p>
                         </div>
@@ -177,7 +177,7 @@ onMounted(async () => {
                       <div class="flex items-center">
                         <div class="text-start ml-2">
                           <span class=" font-semibold">Budget</span>
-                          <p class=" text-md ">
+                          <p class="text-xs lg:text-md">
                             {{ selectedBudget || "Select price per person" }}
                           </p>
                         </div>
@@ -213,8 +213,8 @@ onMounted(async () => {
                       </svg>
                       <div class="flex items-center">
                         <div class="text-start ml-2">
-                          <span class="ml-2 font-semibold">Duration</span>
-                          <p class="ml-2 text-md ">
+                          <span class="font-semibold">Duration</span>
+                          <p class="text-xs lg:text-md">
                             {{ selectedDuration || "Select trip duration" }}
                           </p>
                         </div>
@@ -244,15 +244,17 @@ onMounted(async () => {
                   path: '/travel-packages',
                   query: filteredQuery
                 }"
-                  class="group bg-orange-500 hover:bg-orange-600 text-white rounded-full flex items-center transition-all duration-300 ease-in-out w-12 hover:w-32 px-3 py-3 overflow-hidden">
+                  class="group bg-orange-500 hover:bg-orange-600 text-white rounded-full flex items-center transition-all duration-300 ease-in-out w-12 hover:w-24 px-3 py-3 overflow-hidden">
+
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5 flex-shrink-0">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                   <span
-                    class="opacity-0 whitespace-nowrap transition-all duration-300 ease-in-out group-hover:opacity-100">
+                    class=" opacity-0 whitespace-nowrap transition-all duration-300 ease-in-out group-hover:opacity-100">
                     Search
                   </span>
+
                 </NuxtLink>
               </div>
             </div>
