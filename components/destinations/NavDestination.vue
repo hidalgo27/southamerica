@@ -33,7 +33,7 @@ const isOpen = ref(false);
 const isFixed = ref(false);
 
 const handleScroll = () => {
-  if (window.scrollY > 600) {
+  if (window.scrollY > window.screen.height - 100) {
     isFixed.value = true;
   } else {
     isFixed.value = false;
@@ -50,7 +50,7 @@ onUnmounted(() => {
 </script>
 <template>
   <nav class="py-6 border-y-2 flex justify-center space-x-72 text-xs mb-20" :class="{
-    'fixed top-0 w-full bg-white shadow-md z-10 py-1': isFixed,
+    'fixed top-0 w-full bg-white shadow-md z-20 py-1': isFixed,
     'relative': !isFixed
   }">
     <nuxt-link v-if="isFixed" to="/" class="flex items-center">
