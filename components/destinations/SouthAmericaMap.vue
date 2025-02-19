@@ -157,10 +157,12 @@ onBeforeUnmount(() => {
 
 <template>
   <section class="container my-20">
-    <div ref="chartDiv" class="hidden md:block map-container rounded-md w-full h-[65vh]"></div>
+    <div ref="chartDiv" class="hidden md:block map-container rounded-md w-full h-[70vh]"></div>
     <div class="flex flex-wrap  justify-center items-center text-center my-10 mx-auto gap-2 text-xs md:hidden">
-      <button v-for="country in countries" class="rounded-full border py-2 px-4 flex flex-wrap"> {{ country
-      }}</button>
+      <NuxtLink v-for="country in countries" class="rounded-full border py-2 px-4 flex flex-wrap"
+        :to="'/destinations/' + country.toLowerCase()">
+        {{ country }}
+      </NuxtLink>
     </div>
   </section>
 </template>
