@@ -10,10 +10,18 @@ const chartDiv = ref<HTMLElement | null>(null);
 const router = useRouter();
 let root: am5.Root | null = null;
 
+const countries = [
+  "Brazil", "Argentina", "Peru", "Chile", "Colombia", "Ecuador",
+  "Bolivia", "Paraguay", "Uruguay", "Venezuela", "Guyana",
+  "Suriname", "French Guiana", "Falkland Islands"
+];
+
 onMounted(() => {
   if (chartDiv.value) {
     root = am5.Root.new(chartDiv.value);
-    root.setThemes([am5themes_Animated.new(root)]);
+    let myTheme = am5themes_Animated.new(root);
+
+    root.setThemes([myTheme]);
 
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
@@ -31,8 +39,10 @@ onMounted(() => {
 
     polygonSeries.mapPolygons.template.setAll({
       tooltipHTML: `<div class="font-bold tracking-wide"> {name} </div>`,
-      interactive: true,
       cursorOverStyle: "pointer",
+      fill: am5.color(0xdae7f1),
+      stroke: am5.color(0xffffff),
+      strokeWidth: 1.5,
     });
 
     polygonSeries.mapPolygons.template.events.on("click", (ev) => {
@@ -43,7 +53,7 @@ onMounted(() => {
     });
 
     polygonSeries.mapPolygons.template.states.create("hover", {
-      fill: am5.color(0x677935),
+      fill: am5.color(0x31456b),
     });
 
     function createButtonContainer(position: "left" | "right") {
@@ -58,9 +68,10 @@ onMounted(() => {
           paddingRight: 8,
           paddingBottom: 5,
           paddingLeft: 8,
+
           background: am5.RoundedRectangle.new(root!, {
-            fill: am5.color(0xffffff),
-            fillOpacity: 0.3,
+            fill: am5.color(0xf3f3f3),
+            fillOpacity: 0,
           }),
           visible: window.innerWidth >= 768, // Oculta en móviles
         })
@@ -69,12 +80,6 @@ onMounted(() => {
 
     const leftButtons = createButtonContainer("left");
     const rightButtons = createButtonContainer("right");
-
-    const countries = [
-      "Brazil", "Argentina", "Peru", "Chile", "Colombia", "Ecuador",
-      "Bolivia", "Paraguay", "Uruguay", "Venezuela", "Guyana",
-      "Suriname", "French Guiana", "Falkland Islands"
-    ];
 
     function createCountryButton(countryName: string, container: am5.Container) {
       const button = container.children.push(
@@ -87,18 +92,31 @@ onMounted(() => {
           centerX: am5.p50,
           width: 130,
           cursorOverStyle: "pointer",
+          marginBottom: 5,
+
+          background: am5.RoundedRectangle.new(root!, {
+            fill: am5.color(0xffffff),
+            fillOpacity: 1,
+            cornerRadiusTL: 50,
+            cornerRadiusTR: 50,
+            cornerRadiusBL: 50,
+            cornerRadiusBR: 50,
+            stroke: am5.color(0x31456b),
+            strokeWidth: 0.3,
+          }),
           label: am5.Label.new(root!, {
             text: countryName,
             fontSize: 14,
             textAlign: "center",
+            fill: am5.color(0x31456b),
           }),
         })
       );
-
       button.events.on("pointerover", () => {
         polygonSeries.mapPolygons.each((polygon) => {
           if (polygon.dataItem?.dataContext.name === countryName) {
-            polygon.set("fill", am5.color(0x677935));
+            polygon.set("fill", am5.color(0x31456b));
+
           }
         });
       });
@@ -106,7 +124,7 @@ onMounted(() => {
       button.events.on("pointerout", () => {
         polygonSeries.mapPolygons.each((polygon) => {
           if (polygon.dataItem?.dataContext.name === countryName) {
-            polygon.set("fill", am5.color(0x6794DC));
+            polygon.set("fill", am5.color(0xdae7f1));
           }
         });
       });
@@ -116,7 +134,6 @@ onMounted(() => {
       });
     }
 
-    // Distribuir países en dos columnas si es tablet
     if (window.innerWidth >= 768) {
       countries.forEach((country, index) => {
         if (index % 2 === 0) {
@@ -125,25 +142,8 @@ onMounted(() => {
           createCountryButton(country, rightButtons);
         }
       });
-    } else {
-      // En móviles, solo un contenedor con los botones de países
-      const mobileButtons = chart.children.push(
-        am5.Container.new(root, {
-          y: am5.p100,
-          centerY: am5.p100,
-          layout: root.verticalLayout,
-          paddingTop: 5,
-          paddingRight: 8,
-          paddingBottom: 5,
-          paddingLeft: 8,
-          background: am5.RoundedRectangle.new(root, {
-            fill: am5.color(0xffffff),
-            fillOpacity: 0.3,
-          }),
-        })
-      );
-      countries.forEach((country) => createCountryButton(country, mobileButtons));
     }
+
   }
 });
 
@@ -157,13 +157,12 @@ onBeforeUnmount(() => {
 
 <template>
   <section class="container my-20">
-    <div ref="chartDiv" class="map-container rounded-md"></div>
+    <div ref="chartDiv" class="hidden md:block map-container rounded-md w-full h-[65vh]"></div>
+    <div class="flex flex-wrap  justify-center items-center text-center my-10 mx-auto gap-2 text-xs md:hidden">
+      <button v-for="country in countries" class="rounded-full border py-2 px-4 flex flex-wrap"> {{ country
+      }}</button>
+    </div>
   </section>
 </template>
 
-<style scoped>
-.map-container {
-  width: 100%;
-  @apply h-[65vh];
-}
-</style>
+<style scoped></style>

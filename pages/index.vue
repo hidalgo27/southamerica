@@ -251,10 +251,9 @@ onMounted(async () => {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                   <span
-                    class=" opacity-0 whitespace-nowrap transition-all duration-300 ease-in-out group-hover:opacity-100">
+                    class="opacity-0 whitespace-nowrap transition-all duration-300 ease-in-out group-hover:opacity-100">
                     Search
                   </span>
-
                 </NuxtLink>
               </div>
             </div>

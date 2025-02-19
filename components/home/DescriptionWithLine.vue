@@ -76,7 +76,7 @@ onMounted(async () => {
           opacity: 1,
           scrollTrigger: {
             trigger: '.g-svg-down',
-            start: "top 40%",
+            start: "top 60%",
             end: "top 0%",
             toggleActions: "play none none reverse",
             scrub: true,

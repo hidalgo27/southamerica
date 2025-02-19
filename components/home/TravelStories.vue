@@ -52,10 +52,10 @@ onMounted(() => {
       y: 0,
       duration: 2,
       stagger: 0.3,
-      ease: 'power3.out',
+      ease: 'power2.out',
       scrollTrigger: {
         trigger: '.story',
-        start: 'top 80%',
+        start: 'top 60%',
         toggleActions: 'play none none none',
       },
     }

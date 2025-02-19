@@ -61,7 +61,7 @@ onMounted(() => {
       ease: 'power3.out',
       scrollTrigger: {
         trigger: '.slide',
-        start: 'top 40%',
+        start: 'top 60%',
         toggleActions: 'play none none none',
       },
     })
