@@ -72,7 +72,7 @@ onMounted(() => {
         </div>
       </NuxtLink>
     </div>
-    <div class="p-6 text-left ">
+    <div class="p-6 text-left">
       <div class="h-64">
         <div class="flex flex-wrap gap-2 my-4">
           <span v-for="(tag, i) in packageData.etiquetas" :key="i"
