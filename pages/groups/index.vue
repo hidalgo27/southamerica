@@ -54,6 +54,11 @@ const content = {
     ]
   }
 };
+
+const destination = {
+  nombre: "South America",
+  descripcion: "South America is a continent of superlatives: the highest, the largest, the longest, the deepest, the remotest. Discover the continent's most iconic destinations, from the Amazon rainforest to the Andes Mountains, from the beaches of Rio de Janeiro to the glaciers of Patagonia. Whether you're looking for adventure, culture, or relaxation, South America has something for everyone.",
+}
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
@@ -72,12 +77,13 @@ const content = {
             and interests, while keeping in mind those special touches needed for smooth group travel.</p>
         </div>
         <div class="relative w-full rounded-md h-full">
-          <img class="w-full h-full object-cover rounded-md" src="https://picsum.photos/400/300" />
+          <img class="w-full h-full object-cover rounded-md"
+            src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
         </div>
       </div>
     </div>
   </section>
-  <TextDescription></TextDescription>
+  <TextDescription v-if="destination" :destination="destination"></TextDescription>
   <Benefits></Benefits>
   <CardBlue></CardBlue>
   <TripStyles></TripStyles>

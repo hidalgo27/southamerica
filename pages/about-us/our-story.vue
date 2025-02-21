@@ -14,7 +14,7 @@ const timeline = [
       'By the late 70s, Goway had become a pioneer operator of overland camping tours across the Americas',
 
     ],
-    image: 'https://picsum.photos/400/300'
+    image: 'https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT'
   },
   {
     year: 1980,
@@ -24,7 +24,7 @@ const timeline = [
       'We continually innovated, invested in new technology, and challenged the status quo.',
       'Bruce’s wife, son, and daughter have played key roles in our growth.'
     ],
-    image: 'https://picsum.photos/400/300'
+    image: 'https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Radisson_Blu_Plaza_Hotel_Sydney/img_RadissonBluPlazaHotelSydney_Exterior.jpg'
   },
   {
     year: 1990,
@@ -35,7 +35,7 @@ const timeline = [
       'We’re powered by a 600-person team utilizing cutting-edge technology.',
       'We traded camping tours for 4 and 5-star tailor-made travel experiences to over 100 countries around the world.'
     ],
-    image: 'https://picsum.photos/400/300'
+    image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj'
   },
   {
     year: 2000,
@@ -45,7 +45,7 @@ const timeline = [
       'Bruce worked evenings in a peanut butter factory to make cash flow and grew the company to promote European Camping Tours for 18 to 30-somethings, Adventures in Australia, and Overland Expeditions across Asia and Africa.',
       'By the late 70s, Goway had become a pioneer operator of overland camping tours across the Americas',
     ],
-    image: 'https://picsum.photos/400/300'
+    image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ'
   },
   {
     year: 2010,
@@ -55,7 +55,7 @@ const timeline = [
       'Bruce worked evenings in a peanut butter factory to make cash flow and grew the company to promote European Camping Tours for 18 to 30-somethings, Adventures in Australia, and Overland Expeditions across Asia and Africa.',
       'By the late 70s, Goway had become a pioneer operator of overland camping tours across the Americas',
     ],
-    image: 'https://picsum.photos/400/300'
+    image: 'https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg'
   },
   {
     year: 2020,
@@ -65,7 +65,7 @@ const timeline = [
       'Bruce worked evenings in a peanut butter factory to make cash flow and grew the company to promote European Camping Tours for 18 to 30-somethings, Adventures in Australia, and Overland Expeditions across Asia and Africa.',
       'By the late 70s, Goway had become a pioneer operator of overland camping tours across the Americas',
     ],
-    image: 'https://picsum.photos/400/300'
+    image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg'
   }
 ]
 const activeTab = ref(0)
@@ -102,7 +102,8 @@ const activeTab = ref(0)
           <p class="text-gray-600 ">Founder & President</p>
         </div>
         <div class="relative w-full rounded-md h-full">
-          <img class="w-full h-full object-cover rounded-md" src="https://picsum.photos/400/300" />
+          <img class="w-full h-full object-cover rounded-md"
+            src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj" />
         </div>
       </div>
     </div>
@@ -151,8 +152,8 @@ const activeTab = ref(0)
     <!-- Contenido del Timeline -->
     <div class="flex gap-6 mt-10">
       <div v-if="timeline[activeTab]"
-        class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 justify-between w-full">
-        <div class="relative p-6 w-full rounded-md h-full">
+        class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 justify-between w-full items-center">
+        <div class="relative p-6 w-full rounded-md h-[50vh]">
           <img :src="timeline[activeTab].image" alt="Image for {{ timeline[activeTab].year }}"
             class="rounded-md  w-full h-full object-cover">
         </div>

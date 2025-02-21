@@ -6,6 +6,7 @@ import FilterPackages from '~/components/travel-packages/FilterPackages.vue';
 
 import { usePackageStore } from '~/stores/packages';
 
+const route = useRoute();
 const packageStore = usePackageStore();
 
 const listPackages = ref([]);
@@ -17,13 +18,27 @@ const getPackage = async () => {
 
 onMounted(async () => {
   await getPackage();
-  console.log('listPackages', listPackages.value);
 });
+
+const selectedCountry = ref(route.query.country || null);
+const selectedBudget = ref(route.query.budget
+  ? route.query.budget.split('-').map(Number)
+  : null);
+const selectedDuration = ref(route.query.duration
+  ? route.query.duration.split('-').map(Number)
+  : null);
+
+// Objeto con los filtros
+const filters = computed(() => ({
+  country: selectedCountry.value,
+  budget: selectedBudget.value,
+  duration: selectedDuration.value
+}));
 
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
-  <FilterPackages :package-data="listPackages"></FilterPackages>
+  <FilterPackages v-if="listPackages" :filters="filters" :package-data="listPackages"></FilterPackages>
   <Newsletter></Newsletter>
   <MiniReviews></MiniReviews>
 </template>

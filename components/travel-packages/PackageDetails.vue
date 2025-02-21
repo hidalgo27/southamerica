@@ -1,6 +1,12 @@
 <script setup lang="ts">
 
-const activeTab = ref('departures');
+const props = defineProps({
+  packageDetail: {
+    type: Object,
+    required: true,
+  },
+});
+const activeTab = ref('terms');
 
 const tabs = [
   { key: 'departures', label: 'Departures' },
@@ -8,34 +14,6 @@ const tabs = [
   { key: 'terms', label: 'Terms and Conditions' }
 ];
 
-const content = {
-  departures: {
-    title: 'Departures',
-    description: 'Departs from Rome',
-    days: 'Sunday, Monday, Tuesday, Wednesday & Friday',
-    image: 'https://picsum.photos/400/300'
-  },
-  inclusions: {
-    title: 'Trip Inclusions and Exclusions',
-    includes: [
-      'Private arrival and departure airport transfers',
-      '3 nights first-class accommodations in Rome',
-      '2 nights first-class accommodations in Florence',
-      '2 nights first-class accommodations in Venice',
-      'Train tickets in 2nd class between Rome, Florence and Venice'
-    ],
-    excludes: [
-      'Travel insurance',
-      'International, domestic airfare & airfare taxes',
-      'Meals and beverages not explicitly listed as included',
-      'Gratuities'
-    ]
-  },
-  terms: {
-    title: 'Terms and Conditions',
-    description: 'Prices are "from" per person based on twin/double share accommodation and for travel in low season. Seasonal surcharges and blackout dates may apply. Limited seat/spaces and all pricing is subject to change and availability. Rates for single or triple travellers are available on request - please enquire.'
-  }
-};
 </script>
 
 <template>
@@ -50,43 +28,59 @@ const content = {
         </button>
       </div>
 
-      <!-- Content -->
       <div class="mt-6">
-        <!-- Departures -->
-        <div v-if="activeTab === 'departures'"
-          class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-12">
-          <img :src="content.departures.image" alt="Image" class="w-full md:w-96 rounded-md" />
-          <div class="text-center md:text-left">
-            <h2 class="text-xl font-playfair-display font-semibold mb-4 md:mb-6">{{ content.departures.title }}</h2>
-            <p class="text-gray-600">{{ content.departures.description }}</p>
-            <p class="text-gray-500 mt-2">{{ content.departures.days }}</p>
+        <div v-if="activeTab === 'departures' && packageDetail?.departures"
+          class="grid md:grid-cols-2 items-center justify-center">
+          <div class="w-full lg:w-2/3 h-full p-6 mx-auto">
+            <img v-if="packageDetail.departures.image" :src="packageDetail.departures.image" alt="Image"
+              class="w-full h-full rounded-md" />
+          </div>
+
+          <div class="text-start md:text-left">
+            <h2 v-if="packageDetail.departures.title" class="text-xl font-playfair-display font-semibold mb-4 md:mb-6">
+              {{ packageDetail.departures.title }}
+            </h2>
+            <p v-if="packageDetail.departures.description" class="text-gray-600">
+              {{ packageDetail.departures.description }}
+            </p>
+            <p v-if="packageDetail.departures.days" class="text-gray-500 mt-2">
+              {{ packageDetail.departures.days }}
+            </p>
           </div>
         </div>
 
-        <!-- Inclusions -->
-        <div v-if="activeTab === 'inclusions'" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
-          <div class="border-b-2 md:border-r-2 border-gray-200 pb-6 md:pb-0 md:pr-6 md:ml-12">
+        <div v-if="activeTab === 'inclusions' && (packageDetail?.incluye?.length || packageDetail?.noincluye?.length)"
+          class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
+          <div v-if="packageDetail.incluye?.length"
+            class="border-b-2 md:border-b-0 md:border-r-2 border-gray-200 pb-6 md:pb-0 md:pr-6 md:ml-12">
             <h3
               class="text-lg font-playfair-display font-semibold text-green-600 my-6 md:my-12 text-center md:text-left">
-              Included</h3>
-            <ul class="list-disc pl-5 text-gray-600 space-y-4 md:space-y-6">
-              <li v-for="item in content.inclusions.includes" :key="item">{{ item }}</li>
+              Included
+            </h3>
+            <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6">
+              <div v-html="packageDetail.incluye"></div>
             </ul>
           </div>
-          <div class="md:ml-12">
+
+          <div v-if="packageDetail.noincluye?.length" class="md:ml-12">
             <h3 class="text-lg font-playfair-display font-semibold text-red-600 my-6 md:my-12 text-center md:text-left">
-              Not Included</h3>
-            <ul class="list-disc pl-5 text-gray-600 space-y-4 md:space-y-6">
-              <li v-for="item in content.inclusions.excludes" :key="item">{{ item }}</li>
+              Not Included
+            </h3>
+            <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6">
+              <div v-html="packageDetail.noincluye"></div>
             </ul>
           </div>
         </div>
 
-        <!-- Terms and Conditions -->
         <div v-if="activeTab === 'terms'" class="text-start">
-          <h2 class="text-xl font-playfair-display font-semibold my-6 md:my-12 text-center md:text-left">{{
-            content.terms.title }}</h2>
-          <p class="text-gray-600 mt-2 text-center md:text-left">{{ content.terms.description }}</p>
+          <h2 class="text-xl font-playfair-display font-semibold my-6 md:my-12 text-center md:text-left">
+            Terms and Conditions
+          </h2>
+          <p class="text-gray-600 mt-2 text-center md:text-left">
+            Prices are "from" per person based on twin/double share accommodation and for travel in low season. Seasonal
+            surcharges and blackout dates may apply. Limited seat/spaces and all pricing is subject to change and
+            availability. Rates for single or triple travellers are available on request - please inquire.
+          </p>
         </div>
       </div>
     </div>

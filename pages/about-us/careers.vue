@@ -11,17 +11,17 @@ const community_commitment = [
   {
     title: 'Growing Together',
     text: 'At Goway, we are committed to building a workforce that reflects the communities we operate within and to promote a diverse, anti- racist, inclusive, accessible, merit - based, respectful and equitable workplace.',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT',
   },
   {
     title: 'Better Together',
     text: 'We invite all interested individuals to apply and encourage applications from people with disabilities, Indigenous, Black, and racialized individuals, as well as people from diverse ethnic and cultural origins, sexual orientations, gender identities and expressions.',
-    image: 'https://picsum.photos/400/600',
+    image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg',
   },
   {
     title: 'Equal Opportunity',
     text: 'Goway provides equal opportunities for all applicants and is committed to fostering an inclusive, accessible environment, where all employees feel valued, respected and supported throughout the recruitment and employment process. If you require accommodation, we will work with you to meet your needs. For more information on our committment to accessibility, contact us at access@goway.com',
-    image: 'https://picsum.photos/400/400',
+    image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg',
   }
 ]
 
@@ -35,6 +35,11 @@ const positions = [
   { title: 'Sales Support Specialist (Manila, Philippines - Remote/Hybrid)', link: '#' },
   { title: 'Vice President - Africa (Toronto, Canada - Hybrid)', link: '#' },
 ];
+
+const text = {
+  title: 'The SouthAmerica Culture',
+  description: 'At Goway, you’ll enjoy industry-leading work/life balance with competitive vacation, paid personal days, and paid volunteer days to make a difference in your community. You’ll also get your birthday off!\nWe’re a community of passionate globetrotters, so you’ll get travel perks, discounted worldwide travel, work abroad opportunities, and the chance to win free trips.  \nWhether you work remotely or in one of our offices, you’ll find a rich, open, and supportive culture that connects all our teams around the globe.We’re growth- minded and entrepreneurial, supporting our teams in achieving their goals and advancing within the organization.We value teamwork, integrity, and accountability – working together to help our clients realize their travel dreams.  \nOur benefits package also includes retirement savings support, a comprehensive health and dental package, and short - and long - term disability, should you ever need it.'
+}
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
@@ -59,12 +64,13 @@ const positions = [
             positions</button>
         </div>
         <div class="relative w-full rounded-md h-full">
-          <img class="w-full h-full object-cover rounded-md" src="https://picsum.photos/400/300" />
+          <img class="w-full h-full object-cover rounded-md"
+            src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj" />
         </div>
       </div>
     </div>
   </section>
-  <DescriptionWithLine></DescriptionWithLine>
+  <DescriptionWithLine :text="text"></DescriptionWithLine>
   <section class="bg-gray-100 my-20">
     <div class="container py-32">
       <p class="text-gray-600 mb-8">Personal and professional growth </p>
@@ -105,7 +111,9 @@ const positions = [
     <div class="container">
       <div class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-between w-full">
         <div class="relative p-6 w-full rounded-md h-[50vh]">
-          <img src="https://picsum.photos/400/300" class="rounded-md  w-full h-full object-cover">
+          <img
+            src="https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg"
+            class="rounded-md  w-full h-full object-cover">
         </div>
 
         <div class="space-y-4 ml-20">
@@ -125,9 +133,9 @@ const positions = [
     <div class="container p-6">
       <div class="flex justify-between items-center mb-8">
         <h1 class="text-sm font-medium text-gray-500">Explore Open Positions</h1>
-        <button class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700">
+        <NuxtLink to="/about-us/careers" class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700">
           View All Open Positions
-        </button>
+        </NuxtLink>
       </div>
 
       <h2 class="text-4xl font-bold mb-12">Let's grow together.</h2>

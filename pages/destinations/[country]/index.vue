@@ -1,29 +1,39 @@
 <script lang="ts" setup>
-import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import AllMiniCards from '~/components/destinations/AllMiniCards.vue';
 import PropertyDestination from '~/components/destinations/PropertyDestination.vue';
+import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
+import CountryMap from '~/components/destinations/CountryMap.vue';
+import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
+import MiniReviews from '~/components/home/MiniReviews.vue';
+import Newsletter from '~/components/home/Newsletter.vue';
+import TextDescription from '~/components/home/TextDescription.vue';
+import TravelStories from '~/components/home/TravelStories.vue';
+import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
 
 import { useDestinationStore } from '~/stores/destination';
-import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
-import TravelStories from '~/components/home/TravelStories.vue';
-import Newsletter from '~/components/home/Newsletter.vue';
-import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
-import TextDescription from '~/components/home/TextDescription.vue';
-import MiniReviews from '~/components/home/MiniReviews.vue';
+import { usePackageStore } from '~/stores/packages';
 
 const destinationStore = useDestinationStore();
+const packageStore = usePackageStore();
 
 const route = useRoute();
 
 const destination = ref(null);
+const packagesTop = ref([]);
 const getDestination = async () => {
   const res: any = await destinationStore.getCountries()
-  destination.value = res.find((dest: any) => dest.url === route.path.split('/')[2]);
+  destination.value = res.find((dest: any) => dest.url === route.params.country as string);
+  console.log(destination.value);
+};
+
+const getPackages = async () => {
+  const res: any = await packageStore.getPackageTop();
+  packagesTop.value = res;
 };
 
 onMounted(async () => {
   await getDestination();
-  console.log('destination', destination.value);
+  await getPackages();
 });
 
 </script>
@@ -33,11 +43,10 @@ onMounted(async () => {
     <AllMiniCards v-if="destination" :destination="destination"></AllMiniCards>
   </section>
   <TextDescription v-if="destination" :destination="destination"></TextDescription>
-
+  <CountryMap></CountryMap>
   <TextDescription v-if="destination" :destination="destination"></TextDescription>
   <PropertyDestination></PropertyDestination>
-  <!-- <SliderPackages></SliderPackages> -->
-
+  <SliderPackages :listPackages="packagesTop"></SliderPackages>
   <EspecialistLetter></EspecialistLetter>
 
   <TravelStories></TravelStories>

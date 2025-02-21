@@ -4,56 +4,56 @@ const teammates = [
     name: 'Juan Pedro',
     ocuppation: 'Travel Specialist',
     alt: 'Safari vehicle with zebras in a wildlife setting',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/StefanShaloff.png?h=c42dabf0&itok=WUgvN02_',
     url: '/juan-pedro',
   },
   {
     name: 'Andy Huamani',
     ocuppation: 'Travel Specialist',
     alt: 'Colosseum in Rome at sunset',
-    image: 'https://picsum.photos/400/600',
+    image: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/Shamsheer_cottar_illustration.png?VersionId=SjgWomsqcyjOHrXp5nBFUO.408lvH1qU&h=826e7b48&itok=Vj0PNAvo',
     url: '/andy-huamani',
   },
   {
     name: 'Juan Pedro',
     ocuppation: 'Travel Specialist',
     alt: 'Safari vehicle with zebras in a wildlife setting',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/ShanazDarr.png?h=6e3d84a6&itok=resVHYTp',
     url: '/juan-pedro',
   },
   {
     name: 'Andy Huamani',
     ocuppation: 'Travel Specialist',
     alt: 'Colosseum in Rome at sunset',
-    image: 'https://picsum.photos/400/600',
+    image: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/JessicaKidd.png?h=826e7b48&itok=WKAP-LzM',
     url: '/andy-huamani',
   },
   {
     name: 'Juan Pedro',
     ocuppation: 'Travel Specialist',
     alt: 'Safari vehicle with zebras in a wildlife setting',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/Angela_Main_illustration.png?VersionId=4xsXpTlBqt9m6LDr.7511MsPXK6DEVvT&h=826e7b48&itok=jWuwkAkq',
     url: '/juan-pedro',
   },
   {
     name: 'Andy Huamani',
     ocuppation: 'Travel Specialist',
     alt: 'Colosseum in Rome at sunset',
-    image: 'https://picsum.photos/400/600',
+    image: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/michelle_fones.png?VersionId=.zSNN8.6rx.Fm_lPYcU2ItFOf5yjizHf&h=826e7b48&itok=F_PO61Tq',
     url: '/andy-huamani',
   },
   {
     name: 'Juan Pedro',
     ocuppation: 'Travel Specialist',
     alt: 'Safari vehicle with zebras in a wildlife setting',
-    image: 'https://picsum.photos/400/300',
+    image: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/YolandaSmidt.png?h=9b025431&itok=hxHKdEop',
     url: '/juan-pedro',
   },
   {
     name: 'Andy Huamani',
     ocuppation: 'Travel Specialist',
     alt: 'Colosseum in Rome at sunset',
-    image: 'https://picsum.photos/400/600',
+    image: 'https://images.goway.com/production/styles/staff_profile_photo_3xl/s3/author/DavidWong.png?h=826e7b48&itok=fvSY1qPB',
     url: '/andy-huamani',
 
   }
@@ -91,7 +91,7 @@ const teammates = [
       </div>
       <div class="text-center mt-6">
         <nuxt-link class="px-6 py-3 btn-secondary-outline w-full rounded-md">
-          Ver todas los perfiles
+          Ver todos los perfiles
         </nuxt-link>
       </div>
     </div>

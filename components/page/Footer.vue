@@ -5,37 +5,40 @@
   <section class="container my-20 text-left">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="grid grid-cols-2">
-        <img src="https://picsum.photos/400/300" alt="icon" class="w-full h-full rounded-md" />
+        <img
+          src="https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT"
+          alt="icon" class="w-full h-full rounded-md" />
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">New Specials</h3>
           <div class="group">
-            <a href="#" class="">Discover</a>
-            <div
-              class="border border-primary center mt-1 w-16  transition-all duration-700 ease-in-out group-hover:w-0">
-            </div>
+            <a href="/special-offers"
+              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover</a>
           </div>
         </div>
       </div>
       <div class="grid grid-cols-2">
-        <img src="https://picsum.photos/400/300" alt="icon" class="w-full rounded-md" />
+        <img
+          src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ"
+          alt="icon" class="w-full rounded-md" />
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Start Planning</h3>
           <div class="group">
-            <a href="#" class="">Discover All Trips</a>
-            <div class="border border-primary center mt-1 w-32 transition-all duration-700 ease-in-out group-hover:w-0">
-            </div>
+            <a href="/travel-packages"
+              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover
+              All
+              Trips</a>
           </div>
         </div>
       </div>
       <div class="grid grid-cols-2">
-        <img src="https://picsum.photos/400/300" alt="icon" class="w-full rounded-md" />
+        <img
+          src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj"
+          alt="icon" class="w-full rounded-md" />
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Follow Along</h3>
           <div class="group self-center ">
-            <a href="#" class="">@gotoperu</a>
-            <div
-              class="border border-primary center mt-1 w-20  transition-all duration-700 ease-in-out group-hover:w-0">
-            </div>
+            <a href="#"
+              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">@gotoperu</a>
           </div>
         </div>
       </div>
@@ -63,7 +66,7 @@
           </p>
           <ul class="mt-2 space-y-2">
             <li>
-              <nuxt-link to="/peru-travel-packages"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Peru Travel
                 Packages</nuxt-link>
             </li>
@@ -126,17 +129,17 @@
           </p>
           <ul class="mt-2 space-y-2">
             <li>
-              <nuxt-link to="/why-book-with-us"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Why book with
                 us</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/travel-with-confidence"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Travel with
                 confidence</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/booking-terms-and-conditions"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Booking
                 terms</nuxt-link>
             </li>
@@ -146,7 +149,7 @@
                 us</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/frequently-asked-questions"
+              <nuxt-link to="#"
                 class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">FAQ</nuxt-link>
             </li>
           </ul>
@@ -157,8 +160,8 @@
           </p>
           <ul>
             <li>
-              <a href="/frequently-asked-questions"
-                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Terms and
+              <a href="#" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Terms
+                and
                 conditions</a>
             </li>
           </ul>
