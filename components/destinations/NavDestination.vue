@@ -15,7 +15,6 @@ const buttons = ref([
       { name: 'Wildlife Tours', url: 'wildlife-tours' }
     ]
   },
-  { name: 'Places to Go', url: 'places-to-go' },
   {
     name: 'Travel Information',
     items: [

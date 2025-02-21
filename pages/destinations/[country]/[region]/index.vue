@@ -91,7 +91,6 @@ onMounted(async () => {
   </section>
   <SliderPackages :listPackages="listPackages"></SliderPackages>
   <!-- <ImgSlider></ImgSlider> -->
-  <ListExperiences></ListExperiences>
   <section class="container my-20">
     <div class="flex items-center justify-center mt-28 mb-12">
       <div class="grid grid-cols-1 md:grid-cols-2 bg-white w-full gap-6 items-stretch">
