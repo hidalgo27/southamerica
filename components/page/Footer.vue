@@ -5,9 +5,8 @@
   <section class="container my-20 text-left">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="grid grid-cols-2">
-        <img
-          src="https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT"
-          alt="icon" class="w-full h-full rounded-md" />
+        <img src="https://images.goway.com/production/footer_cta/2023-09/lighthouse_4.svg" alt="icon"
+          class="w-full h-full rounded-md" />
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">New Specials</h3>
           <div class="group">
@@ -17,9 +16,8 @@
         </div>
       </div>
       <div class="grid grid-cols-2">
-        <img
-          src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ"
-          alt="icon" class="w-full rounded-md" />
+        <img src="https://images.goway.com/production/footer_cta/2023-09/suitcase_4.svg" alt="icon"
+          class="w-full rounded-md" />
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Start Planning</h3>
           <div class="group">
@@ -31,9 +29,8 @@
         </div>
       </div>
       <div class="grid grid-cols-2">
-        <img
-          src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj"
-          alt="icon" class="w-full rounded-md" />
+        <img src="https://images.goway.com/production/footer_cta/2023-09/camera-passport_4.svg" alt="icon"
+          class="w-full rounded-md" />
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Follow Along</h3>
           <div class="group self-center ">
