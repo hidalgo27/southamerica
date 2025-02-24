@@ -41,10 +41,11 @@ onMounted(async () => {
   <HeaderImgNav></HeaderImgNav>
   <TextDescription v-if="destination" :destination="destination"></TextDescription>
   <CountryMap></CountryMap>
+  <SliderPackages :listPackages="packagesTop"></SliderPackages>
+
   <ListExperiences></ListExperiences>
   <TextDescription v-if="destination" :destination="destination"></TextDescription>
   <PropertyDestination></PropertyDestination>
-  <SliderPackages :listPackages="packagesTop"></SliderPackages>
   <EspecialistLetter></EspecialistLetter>
 
   <TravelStories></TravelStories>
