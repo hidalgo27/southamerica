@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5map from "@amcharts/amcharts5/map";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
@@ -10,18 +9,27 @@ const chartDiv = ref<HTMLElement | null>(null);
 const router = useRouter();
 let root: am5.Root | null = null;
 
-const countries = [
-  "Brazil", "Argentina", "Peru", "Chile", "Colombia", "Ecuador",
-  "Bolivia", "Paraguay", "Uruguay", "Venezuela", "Guyana",
-  "Suriname", "French Guiana", "Falkland Islands"
-];
+const props = defineProps({
+  destinations: {
+    type: Array,
+    required: true,
+  }
+});
 
-onMounted(() => {
-  if (chartDiv.value) {
+const countries = ref([] as string[]);
+watch(() => props.destinations, (newDestinations) => {
+  countries.value = newDestinations.map((destination: any) =>
+    destination.nombre.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, "$1$2").normalize('NFC')
+  );
+
+  // Asegurar que root no tenga una instancia previa
+  if (root) {
+    root.dispose();
+    root = null;
+  }
+
+  if (chartDiv.value && countries.value.length > 0) {
     root = am5.Root.new(chartDiv.value);
-    let myTheme = am5themes_Animated.new(root);
-
-    root.setThemes([myTheme]);
 
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
@@ -38,18 +46,57 @@ onMounted(() => {
     );
 
     polygonSeries.mapPolygons.template.setAll({
-      tooltipHTML: `<div class="font-bold tracking-wide"> {name} </div>`,
+      showTooltipOn: "click",
       cursorOverStyle: "pointer",
-      fill: am5.color(0xdae7f1),
       stroke: am5.color(0xffffff),
       strokeWidth: 1.5,
+      tooltipPosition: "fixed",
+      interactive: (countryname: string) => countries.value.includes(countryname),
+      tooltip: am5.Tooltip.new(root, {
+        keepTargetHover: true,
+      }),
     });
 
-    polygonSeries.mapPolygons.template.events.on("click", (ev) => {
-      const countryName = ev.target.dataItem?.dataContext.name;
-      if (countryName) {
-        router.push(`/destinations/${countryName.toLowerCase()}`);
+    polygonSeries.mapPolygons.template.get("tooltip")?.label.set("interactive", true);
+
+    polygonSeries.mapPolygons.template.adapters.add("tooltipHTML", (html, target) => {
+      const countryName = target.dataItem?.dataContext.name;
+      if (!countryName) return html;
+
+      const destination = props.destinations.find((dest: any) =>
+        dest.nombre.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, "$1$2").normalize('NFC') === countryName
+      );
+
+      if (destination) {
+        return `<div class="w-72 space-y-2 p-2">
+                  <img src="${destination.imagen}" alt="${destination.nombre}" class="rounded-md" />  
+                  <div class="font-bold tracking-wide ">${destination.nombre}</div>
+                  <div class="text-xs overflow-hidden w-full max-h-20"><span class="overflow-hidden">${destination.descripcion || ""}</span></div>
+                </div>
+                <a href="/destinations/${destination.url}" class="w-72 border-t flex justify-between p-2" style="border-color: currentColor">
+                  <span class="text-xs">Discover ${destination.nombre}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </a>`;
       }
+      return html;
+    });
+
+    polygonSeries.mapPolygons.template.adapters.add("fill", (fill, target) => {
+      const countryName = target.dataItem?.dataContext.name;
+
+      // Si el polígono está en estado de hover, forzamos el color de hover
+
+      // Color normal según la lógica
+      return countries.value.includes(countryName) ? am5.color(0xdae7f1) : am5.color(0xd3d3d3);
+    });
+
+
+    // Aplicar interactividad dinámica usando adapter
+    polygonSeries.mapPolygons.template.adapters.add("interactive", (interactive, target) => {
+      const countryName = target.dataItem?.dataContext.name;
+      return countries.value.includes(countryName);
     });
 
     polygonSeries.mapPolygons.template.states.create("hover", {
@@ -68,12 +115,10 @@ onMounted(() => {
           paddingRight: 8,
           paddingBottom: 5,
           paddingLeft: 8,
-
           background: am5.RoundedRectangle.new(root!, {
             fill: am5.color(0xf3f3f3),
             fillOpacity: 0,
           }),
-          visible: window.innerWidth >= 768, // Oculta en móviles
         })
       );
     }
@@ -93,7 +138,6 @@ onMounted(() => {
           width: 130,
           cursorOverStyle: "pointer",
           marginBottom: 5,
-
           background: am5.RoundedRectangle.new(root!, {
             fill: am5.color(0xffffff),
             fillOpacity: 1,
@@ -112,11 +156,11 @@ onMounted(() => {
           }),
         })
       );
+
       button.events.on("pointerover", () => {
         polygonSeries.mapPolygons.each((polygon) => {
           if (polygon.dataItem?.dataContext.name === countryName) {
-            polygon.set("fill", am5.color(0x31456b));
-
+            polygon.states.applyAnimate("hover");
           }
         });
       });
@@ -124,7 +168,7 @@ onMounted(() => {
       button.events.on("pointerout", () => {
         polygonSeries.mapPolygons.each((polygon) => {
           if (polygon.dataItem?.dataContext.name === countryName) {
-            polygon.set("fill", am5.color(0xdae7f1));
+            polygon.states.applyAnimate("default");
           }
         });
       });
@@ -135,7 +179,7 @@ onMounted(() => {
     }
 
     if (window.innerWidth >= 768) {
-      countries.forEach((country, index) => {
+      countries.value.forEach((country, index) => {
         if (index % 2 === 0) {
           createCountryButton(country, leftButtons);
         } else {
@@ -143,9 +187,8 @@ onMounted(() => {
         }
       });
     }
-
   }
-});
+}, { immediate: true });
 
 // Evento para limpiar memoria al desmontar
 onBeforeUnmount(() => {

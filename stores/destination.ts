@@ -31,7 +31,7 @@ export const useDestinationStore = defineStore('destination', () => {
 
 		return new Promise(async (resolve, reject) => {
 			try {
-				const res = await fetch(config.public.apiBase + "/pais/" + pais, {
+				const res = await fetch(config.public.apiBase + "/pais/datalle/" + pais, {
 					method: 'GET',
 					headers: headers,
 				})
@@ -47,13 +47,13 @@ export const useDestinationStore = defineStore('destination', () => {
 		})
 	}
 
-	const getRegion = async (pais: string, region: string) => {
+	const getRegion = async (region: string) => {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
 		return new Promise(async (resolve, reject) => {
 			try {
-				const res = await fetch(config.public.apiBase + "/destinations/" + pais + "/" + region, {
+				const res = await fetch(config.public.apiBase + "/destinations/region/" + region, {
 					method: 'GET',
 					headers: headers,
 				})

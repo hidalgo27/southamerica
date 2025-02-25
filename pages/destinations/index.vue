@@ -28,7 +28,7 @@ onMounted(async () => {
   <HeaderImgNav></HeaderImgNav>
   <DescriptionWithLine :text="text" :line="2"></DescriptionWithLine>
 
-  <SouthAmericaMap></SouthAmericaMap>
+  <SouthAmericaMap v-if="destinations" :destinations="destinations"></SouthAmericaMap>
 
   <CardDestination :destinations="destinations"></CardDestination>
 

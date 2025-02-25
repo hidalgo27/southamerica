@@ -21,8 +21,8 @@ const route = useRoute();
 const destination = ref(null);
 const packagesTop = ref([]);
 const getDestination = async () => {
-  const res: any = await destinationStore.getCountries()
-  destination.value = res.find((dest: any) => dest.url === route.params.country as string);
+  const res: any = await destinationStore.getCountry(route.params.country as string)
+  destination.value = res;
   console.log(destination.value);
 };
 

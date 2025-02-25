@@ -24,9 +24,9 @@ const getPackages = async () => {
 };
 
 const getRegion = async () => {
-  const res: any = await destinationStore.getRegion(route.params.country as string, route.params.region as string);
+  const res: any = await destinationStore.getRegion(route.params.region as string);
   region.value = res;
-  console.log(region.value);
+  console.log("REGION", region.value);
 };
 
 
