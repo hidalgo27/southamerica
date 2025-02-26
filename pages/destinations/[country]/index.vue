@@ -26,7 +26,6 @@ const textDescription2 = ref(null);
 const getDestination = async () => {
   const res: any = await destinationStore.getCountry(route.params.country as string)
   destination.value = res.pais;
-  console.log(destination.value);
 
   if (destination.value) {
     textDescription1.value = {
@@ -59,9 +58,9 @@ onMounted(async () => {
   <TextDescription v-if="textDescription1" :textDescription="textDescription1"></TextDescription>
   <CountryMap v-if="destination" :regiones="destination.destinos" :pais="destination"></CountryMap>
   <SliderPackages v-if="destination" :listPackages="destination.paquetes"></SliderPackages>
-  <ListExperiences></ListExperiences>
+  <ListExperiences v-if="destination" :items="destination.destinos" :pais="destination"></ListExperiences>
   <TextDescription v-if="textDescription2" :textDescription="textDescription2"></TextDescription>
-  <PropertyDestination></PropertyDestination>
+  <PropertyDestination v-if="destination" :properties="destination.propiedades"></PropertyDestination>
   <EspecialistLetter></EspecialistLetter>
 
   <TravelStories></TravelStories>

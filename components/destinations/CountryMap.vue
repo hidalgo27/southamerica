@@ -108,7 +108,7 @@ onMounted(() => {
       fill: am5.color(0x31456b),
     });
 
-    let countryData = am5geodata_data_countries2["PE"];
+    let countryData = am5geodata_data_countries2[props.pais.codigo];
 
     if (countryData && countryData.maps.length) {
       let map = countryData.maps[0];
