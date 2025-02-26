@@ -1,47 +1,46 @@
 <script lang="ts" setup>
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 const { $gsap } = useNuxtApp();
-const animatedDiv = ref<HTMLElement | null>(null);
 
-const props = defineProps({
-  destination: {
+$gsap.registerPlugin(ScrollTrigger);
+
+defineProps({
+  textDescription: {
     type: Object,
     required: true,
   },
 });
 
 onMounted(() => {
-  if (!animatedDiv.value) return;
-  const observer = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          $gsap.from(entry.target, {
-            y: 100,
-            opacity: 0,
-            duration: 2,
-            ease: "power2.out",
-          });
-          observer.unobserve(entry.target);
-        }
-      });
+  $gsap.fromTo('.animatedDiv',
+    {
+      opacity: 0, y: 50,
     },
-    { threshold: 0.2 }
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: '.animatedDiv',
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      },
+    }
   );
-
-  observer.observe(animatedDiv.value);
 });
 </script>
 <template>
   <section class="container mt-28 mb-12">
-    <div class="text-center ">
+    <div class="text-center">
       <p class="mb-6 tracking-widest font-bold">
-        Trips to {{ destination.nombre }}
+        {{ textDescription.minititle }}
       </p>
       <h1 class="font-semibold text-4xl w-3/4 mx-auto mb-6 title font-playfair-display tracking-wide">
-        Explore {{ destination.nombre }} your way on a tailor-made trip with SouthAmerica
+        {{ textDescription.title }}
       </h1>
-      <div ref="animatedDiv" class="w-2/3 mx-auto my-8">
-        <div v-html="destination.descripcion"></div>
+      <div class=" w-2/3 mx-auto my-8">
+        <div class="animatedDiv" v-html="textDescription.description"></div>
       </div>
     </div>
   </section>

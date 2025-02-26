@@ -5,8 +5,9 @@ import MiniReviews from '~/components/home/MiniReviews.vue';
 import TextDescription from '~/components/home/TextDescription.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import ImgSlider from '~/components/travel-packages/ImgSlider.vue';
-
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 const { $gsap } = useNuxtApp();
+
 const curatedTrips = [
   {
     title: 'Perú',

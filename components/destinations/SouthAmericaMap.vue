@@ -30,6 +30,7 @@ watch(() => props.destinations, (newDestinations) => {
 
   if (chartDiv.value && countries.value.length > 0) {
     root = am5.Root.new(chartDiv.value);
+    root.setThemes([am5themes_Animated.new(root)])
 
     const chart = root.container.children.push(
       am5map.MapChart.new(root, {
@@ -51,7 +52,6 @@ watch(() => props.destinations, (newDestinations) => {
       stroke: am5.color(0xffffff),
       strokeWidth: 1.5,
       tooltipPosition: "fixed",
-      interactive: (countryname: string) => countries.value.includes(countryname),
       tooltip: am5.Tooltip.new(root, {
         keepTargetHover: true,
       }),
@@ -86,12 +86,8 @@ watch(() => props.destinations, (newDestinations) => {
     polygonSeries.mapPolygons.template.adapters.add("fill", (fill, target) => {
       const countryName = target.dataItem?.dataContext.name;
 
-      // Si el polígono está en estado de hover, forzamos el color de hover
-
-      // Color normal según la lógica
       return countries.value.includes(countryName) ? am5.color(0xdae7f1) : am5.color(0xd3d3d3);
     });
-
 
     // Aplicar interactividad dinámica usando adapter
     polygonSeries.mapPolygons.template.adapters.add("interactive", (interactive, target) => {
@@ -127,6 +123,9 @@ watch(() => props.destinations, (newDestinations) => {
     const rightButtons = createButtonContainer("right");
 
     function createCountryButton(countryName: string, container: am5.Container) {
+      const destination = props.destinations.find((dest: any) =>
+        dest.nombre.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, "$1$2").normalize('NFC') === countryName
+      );
       const button = container.children.push(
         am5.Button.new(root!, {
           paddingTop: 5,
@@ -174,7 +173,7 @@ watch(() => props.destinations, (newDestinations) => {
       });
 
       button.events.on("click", () => {
-        router.push(`/destinations/${countryName.toLowerCase()}`);
+        router.push(`/destinations/${destination.url}`);
       });
     }
 
