@@ -75,11 +75,12 @@ onMounted(() => {
     <div class="p-6 text-left">
       <div class="h-64">
         <div class="flex flex-wrap gap-2 my-4">
-          <span v-for="(tag, i) in packageData.etiquetas" :key="i"
+          <NuxtLink v-for="(tag, i) in packageData.paquetes_categoria" :key="i"
+            :to="'/experiences/' + tag.categoria.url"
             class="bg-secondary bg-opacity-10 text-gray-700 text-sm font-medium px-3 py-1 rounded-full"
             :class="{ 'bg-white border': i === 0 }">
-            {{ tag }}
-          </span>
+            {{ tag.categoria.nombre }}
+          </NuxtLink>
         </div>
         <NuxtLink :to="'/travel-packages/' + packageData.url"
           class="text-xl font-semibold font-playfair-display tracking-wide mb-3 block">
