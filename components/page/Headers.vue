@@ -238,15 +238,9 @@ onUnmounted(() => {
 
 </script>
 <template>
-<<<<<<< HEAD
-  <div
-    :class="`${position} top-0 left-0 w-full ${zIndex} transition-transform duration-300 ${isHeaderVisible ? '-translate-y-0' : '-translate-y-full'}`">
-    <div :class="`rounded-md ${bgColor} hidden  sm:block m-3`">
-=======
   <div class="top-0 left-0 w-full z-30 transition-transform duration-300"
     :class="`${position}  ${isHeaderVisible ? '-translate-y-0' : '-translate-y-full'}`">
     <div :class="`rounded-md bg-orange-50 hidden sm:block m-3`">
->>>>>>> origin/goto-julio
       <div class="border-b border-secondary border-opacity-20">
         <div class="p-12 flex justify-between py-5 items-center">
           <div class="flex items-center gap-4">
