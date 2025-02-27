@@ -13,6 +13,7 @@ import DescriptionWithLine from '~/components/home/DescriptionWithLine.vue'
 import { Dropdown } from 'floating-vue'
 
 import { usePackageStore } from '~/stores/packages'
+import { useCategoriesStore } from '~/stores/categories'
 
 const packageStore = usePackageStore()
 const listPackages = ref([])
@@ -20,6 +21,15 @@ const getPackage = async () => {
   const res: any = await packageStore.getPackageTop()
   listPackages.value = res
 }
+
+const categoryStore = useCategoriesStore();
+const listCategories = ref([]);
+
+const getCategories = async () => {
+  const res: any = await categoryStore.getCategories();
+  listCategories.value = res;
+  console.log(listCategories.value);
+};
 const loading = ref(true)
 const video = ref()
 const { onLoaded } = useScriptVimeoPlayer()
@@ -88,6 +98,7 @@ const welcome_text = {
 let player: any
 onMounted(async () => {
   await getPackage()
+  await getCategories()
   onLoaded(({ Vimeo }) => {
     player = new Vimeo.Player(video.value, {
       id: 1028540009,
@@ -289,7 +300,7 @@ onMounted(async () => {
 
   <SliderBanner></SliderBanner>
 
-  <TripStyles></TripStyles>
+  <TripStyles v-if="listCategories" :curatedTrips="listCategories"></TripStyles>
 
   <SliderDestinations></SliderDestinations>
 

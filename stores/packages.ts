@@ -69,6 +69,28 @@ export const usePackageStore = defineStore('PackageStore', () => {
 		})
 	}
 
+	const getOffersByCountry = async (pais: string) => {
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+
+		return new Promise(async (resolve, reject) => {
+			try {
+				const res = await fetch(config.public.apiBase + "/packages-offers/" + pais, {
+					method: 'GET',
+					headers: headers,
+				})
+				const data = await res.json()
+				if (data) {
+					resolve(data)
+				} else {
+					reject(data)
+				}
+			} catch (error) {
+				reject(error)
+			}
+		})
+	}
+
 	const getPackage = async (url: string) => {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
@@ -91,11 +113,35 @@ export const usePackageStore = defineStore('PackageStore', () => {
 		})
 	}
 
+	const getPackageByCountry = async (country: string) => {
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+
+		return new Promise(async (resolve, reject) => {
+			try {
+				const res = await fetch(config.public.apiBase + "/pais/packages/" + country, {
+					method: 'GET',
+					headers: headers,
+				})
+				const data = await res.json()
+				if (data) {
+					resolve(data)
+				} else {
+					reject(data)
+				}
+			} catch (error) {
+				reject(error)
+			}
+		})
+	}
+
 	return {
 		getPackageTop,
 		getPackages,
 		getOffers,
 		getPackage,
+		getPackageByCountry,
+		getOffersByCountry
 	}
 
 }, { persist: true, })

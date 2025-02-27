@@ -13,6 +13,7 @@ const props = defineProps({
     required: false,
   }
 });
+console.log(props.packageData);
 
 const countries = computed(() => {
   const countrySet = new Set();
@@ -106,6 +107,15 @@ const selectedCountry = ref("");
 const selectedRegion = ref("");
 const selectedCategory = ref("");
 const sortCriteria = ref({ field: null, order: null });
+const sortLabel = computed(() => {
+  if (!sortCriteria.value.field) return "Sort By";
+  if (sortCriteria.value.field === "price") {
+    return sortCriteria.value.order === "asc" ? "Price: Low to High" : "Price: High to Low";
+  } else if (sortCriteria.value.field === "duration") {
+    return sortCriteria.value.order === "asc" ? "Duration: Low to High" : "Duration: High to Low";
+  }
+  return "Sort By";
+});
 
 // Filtra los paquetes según el checkbox
 const filteredPackages = computed(() => {
@@ -252,9 +262,8 @@ onMounted(() => {
               class="inline-flex items-center justify-center w-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100 focus: rounded-l-md">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                  d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" />
               </svg>
               <span class="ml-2">{{ selectedCountry || "Countries" }}</span>
             </button>
@@ -280,8 +289,9 @@ onMounted(() => {
               class="inline-flex items-center justify-center w-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 <path stroke-linecap="round" stroke-linejoin="round"
-                  d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" />
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
               </svg>
               <span class="ml-2">{{ selectedRegion || "Regions" }}</span>
             </button>
@@ -662,8 +672,14 @@ onMounted(() => {
           <Dropdown class="hidden md:block relative">
             <template #default="{ shown }">
               <button class="bg-white border border-gray-200 rounded-md px-8 py-4 flex items-center space-x-2">
-                <span>Sort By</span>
-                <i :class="['fas', shown ? 'fa-chevron-up' : 'fa-chevron-down']"></i>
+                <span>{{ sortLabel }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                  stroke="currentColor" class="size-3 transition-transform duration-200"
+                  :class="{ '-rotate-180': shown }">
+                  <path fill-rule="evenodd"
+                    d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                    clip-rule="evenodd" />
+                </svg>
               </button>
             </template>
             <template #popper>
@@ -690,7 +706,6 @@ onMounted(() => {
       <div v-else class="text-center text-gray-500 mt-4">
         No packages available.
       </div>
-
       <div v-if="totalPages > 1" class="flex items-center gap-2 justify-center mt-4">
         <button @click="prevPage" :disabled="currentPage === 1" class="p-2 text-gray-500 disabled:text-gray-300">
           ←

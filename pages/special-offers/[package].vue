@@ -12,11 +12,11 @@ const listPackages = ref([]);
 //Paginación
 const itemsPerPage = 9;
 const currentPage = ref(1);
-
+const route = useRoute();
 
 const getPackages = async () => {
-  const res: any = await packageStore.getPackages();
-  listPackages.value = res;
+  const res: any = await packageStore.getOffersByCountry(route.params.package as string);
+  listPackages.value = res.paquetes;
 };
 
 onMounted(async () => {

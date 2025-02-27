@@ -19,10 +19,6 @@ $gsap.registerPlugin(ScrollToPlugin);
 const packageStore = usePackageStore();
 const route = useRoute();
 const listPackages = ref([]);
-const getPackage = async () => {
-  const res: any = await packageStore.getPackageTop();
-  listPackages.value = res;
-};
 
 const packageDetail = ref([]);
 const getPackageDetail = async () => {
@@ -45,14 +41,13 @@ const scrollToSection = (sectionId: string) => {
 
   $gsap.to(window, {
     duration: 1, // Tiempo en segundos (ajústalo según prefieras)
-    scrollTo: { y: element, offsetY: 100 }, // Desplaza al elemento con un pequeño margen
+    scrollTo: { y: element, offsetY: 155 }, // Desplaza al elemento con un pequeño margen
     ease: "power2.inOut" // Efecto de suavizado
   });
 };
 
 
 onMounted(async () => {
-  await getPackage();
   await getPackageDetail();
   window.addEventListener("scroll", handleScroll);
 });
@@ -77,10 +72,20 @@ const destination = computed(() => {
   return packageDetail.value[0]?.paquetes_destinos[0]?.destinos || null;
 });
 
+const getPackagesCountry = async () => {
+  console.log(packageDetail.value)
+  const res: any = await packageStore.getPackageByCountry(destination.value.pais.url);
+  listPackages.value = res.paquetes;
+  console.log(listPackages.value);
+};
 const getDestinationUrl = (itemUrl = '') => {
   if (!destination.value) return '#'; // Prevención de errores
   return `/destinations/${destination.value.pais.url}/${destination.value.url}/${itemUrl}`;
 };
+
+watch(destination, () => {
+  getPackagesCountry();
+});
 </script>
 <template>
   <HeaderImgNav :packageDetail="packageDetail"></HeaderImgNav>
@@ -128,8 +133,15 @@ const getDestinationUrl = (itemUrl = '') => {
         <client-only>
           <template v-if="button.items">
             <Dropdown>
-              <template #default>
+              <template #default="{ shown }">
                 <span class="cursor-pointer">{{ button.name }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                  stroke="currentColor" class="size-3 transition-transform duration-200"
+                  :class="{ '-rotate-180': shown }">
+                  <path fill-rule="evenodd"
+                    d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                    clip-rule="evenodd" />
+                </svg>
               </template>
               <template #popper>
                 <div
@@ -172,7 +184,7 @@ const getDestinationUrl = (itemUrl = '') => {
     <Itinerary :packageDetail="packageDetail[0]" />
     <PackageDetails :packageDetail="packageDetail[0]" id="packageDetail" />
   </div>
-  <div v-else>
+  <div v-else class="flex justify-center items-center ">
     <p>Cargando datos del paquete...</p>
   </div>
   <SliderPackages :listPackages="listPackages"></SliderPackages>

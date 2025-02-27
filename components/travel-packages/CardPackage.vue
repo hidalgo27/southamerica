@@ -111,6 +111,7 @@ onMounted(() => {
             savings US$ {{ packageData.ahorro }}
           </span>
         </div>
+        <div v-else class="flex justify-between items-center"> Please Inquire</div>
         <div v-if="packageData.author" class="flex justify-between items-center">
           <span class="block text-gray-700 mr-2">
             By {{ packageData.author }}

@@ -16,15 +16,11 @@ defineProps({
       </h1>
       <div class="flex flex-col lg:flex-row">
         <div class="lg:w-1/2">
-          <div class="bg-orange-100 p-4 mb-6 rounded">
+          <div v-if="packageDetail.opcional" class="bg-orange-100 p-4 mb-6 rounded">
             <h2 class="font-semibold mb-2">
               Special Offer Details
             </h2>
-            <p>
-              From ancient ruins in Rome, art in Florence and canals in Venice. Discover Italy's classics with Goway's
-              exclusive offer! Travel between Apr 1 to Oct 31, 2025.
-              <br />
-              Departs from Rome daily, except Thursdays &amp; Fridays
+            <p v-html="packageDetail.opcional">
             </p>
           </div>
           <div v-if="packageDetail.descripcion" v-html="packageDetail.descripcion"></div>

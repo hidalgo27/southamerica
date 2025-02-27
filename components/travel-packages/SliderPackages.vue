@@ -83,7 +83,10 @@ const progressWidth = computed(() => {
       <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide">Memories won't make themselves.
       </h1>
     </div>
-    <div v-if="!showCarousel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div v-if="listPackages.length === 0" class="text-center text-gray-500 mt-4">
+      No packages available.
+    </div>
+    <div v-else-if="!showCarousel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <CardPackage v-for="(packages, index) in listPackages" :key="index" :packageData="packages" />
     </div>
     <carousel v-else :breakpoints="breakpoints" class="-m-3" @update:modelValue="updateProgress">
