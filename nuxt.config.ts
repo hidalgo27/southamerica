@@ -36,12 +36,33 @@ export default defineNuxtConfig({
   //   composables: true,
   //   provide: false,
   // },
+  render: {
+    csp: {
+      policies: {
+        'default-src': ["'self'"],
+        'script-src': [
+          "'self'",
+          "'unsafe-inline'", // Solo si es necesario
+          "https://player.vimeo.com",
+          "https://vimeo.com",
+        ],
+        'frame-src': ["'self'", "https://player.vimeo.com"],
+        'connect-src': ["'self'", "https://player.vimeo.com", "https://vimeo.com"],
+        'img-src': ["'self'", "data:", "https://i.vimeocdn.com"],
+        'style-src': ["'self'", "'unsafe-inline'"],
+      },
+    },
+  },
   scripts: {
     registry: {
       googleTagManager: {
         id: 'AW-382248808',
       }
-    }
+    },
+    vimeo: {
+      src: 'https://player.vimeo.com/api/player.js',
+      async: true,
+    },
   },
   googleFonts: {
     families: {
@@ -67,7 +88,7 @@ export default defineNuxtConfig({
     },
   },
   build: {
-    transpile: ['vue3-carousel', '@pinia-plugin-persistedstate']
+    transpile: ['vue3-carousel', '@pinia-plugin-persistedstate','@nuxt/scripts']
   },
   runtimeConfig: {
     apiSecret: '',
