@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Peru Travel Packages',
+      title: 'South America Company',
       // meta: [
       //   { name: 'description', content: 'My amazing site.' }
       // ],

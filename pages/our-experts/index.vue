@@ -5,53 +5,47 @@ import MiniReviews from '~/components/home/MiniReviews.vue';
 import TextDescription from '~/components/home/TextDescription.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import ImgSlider from '~/components/travel-packages/ImgSlider.vue';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+const { $gsap } = useNuxtApp();
 
 const curatedTrips = [
   {
-    title: 'Safari & Wildlife Vacations',
-    alt: 'Safari vehicle with zebras in a wildlife setting',
+    title: 'Perú',
+    alt: 'Vista panorámica de Machu Picchu en Perú',
     image: 'https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Radisson_Blu_Plaza_Hotel_Sydney/img_RadissonBluPlazaHotelSydney_Exterior.jpg',
-    url: '/safari-wildlife',
-    icon: 'fas fa-paw',
+    url: '/peru',
   },
   {
-    title: 'Classic Vacations',
-    alt: 'Colosseum in Rome at sunset',
+    title: 'Chile',
+    alt: 'Torres del Paine en Chile',
     image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ',
-    url: '/classic-vacations',
-    icon: 'fas fa-landmark',
+    url: '/chile',
   },
   {
-    title: 'Solo & Women Travel',
-    alt: 'Two women looking at a map in a city',
+    title: 'Argentina',
+    alt: 'Vista nocturna del Obelisco en Buenos Aires, Argentina',
     image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj',
-    url: '/solo-women-travel',
-    icon: 'fas fa-female',
+    url: '/argentina',
   },
   {
-    title: 'Beach & Island Getaways',
-    alt: 'Aerial view of boats in blue water',
+    title: 'Brasil',
+    alt: 'Cristo Redentor en Río de Janeiro, Brasil',
     image: 'https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg',
-    url: '/beach-island-getaways',
-    icon: 'fas fa-umbrella-beach',
+    url: '/brasil',
   },
   {
-    title: 'Adventure Travel',
-    alt: 'Person hiking in a desert landscape',
+    title: 'Bolivia',
+    alt: 'Salar de Uyuni en Bolivia',
     image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg',
-    url: '/adventure-travel',
-    icon: 'fas fa-hiking',
+    url: '/bolivia',
   },
   {
-    title: 'Luxury Resorts',
-    alt: 'Tropical resort with a pool',
+    title: 'Colombia',
+    alt: 'Ciudad amurallada en Cartagena, Colombia',
     image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ',
-    url: '/luxury-resorts',
-    icon: 'fas fa-spa',
+    url: '/colombia',
   },
-]
-
-const animatedDiv = ref<HTMLElement | null>(null);
+];
 
 const destination = {
   nombre: 'Want to explore the whole world your way? We’re the experts.',
@@ -59,25 +53,22 @@ const destination = {
 }
 
 onMounted(() => {
-  if (!animatedDiv.value) return;
-  const observer = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          $gsap.from(entry.target, {
-            y: 100,
-            opacity: 0,
-            duration: 2,
-            ease: "power2.out",
-          });
-          observer.unobserve(entry.target);
-        }
-      });
+  $gsap.fromTo('.animatedDiv',
+    {
+      opacity: 0, y: 50,
     },
-    { threshold: 0.2 }
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: '.animatedDiv',
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      },
+    }
   );
-
-  observer.observe(animatedDiv.value);
 });
 </script>
 <template>
@@ -85,7 +76,6 @@ onMounted(() => {
   <CardBlue></CardBlue>
   <TextDescription :destination="destination"></TextDescription>
   <section class="container my-20">
-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <nuxt-link v-for="(trip, index) in curatedTrips" :key="index" :to="'/our-experts' + trip.url"
         class="relative block hover:shadow-lg transition duration-500 ease-in-out h-full bg-white content-between overflow-hidden rounded-md border group">
@@ -93,7 +83,8 @@ onMounted(() => {
           <img :alt="trip.alt" :src="trip.image"
             class="w-full h-96 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
         </div>
-        <div class="absolute bottom-0 left-0 right-0 bg-white p-4 flex justify-between items-center rounded-b-md">
+        <div
+          class="absolute bottom-6 left-3 md:left-4 bg-white py-4 px-6 flex justify-between items-center rounded-md w-11/12">
           <span>
             {{ trip.title }}
           </span>
@@ -109,7 +100,7 @@ onMounted(() => {
   <section class="container my-20">
     <div class="text-center ">
       <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide"> Why South America Company?</h1>
-      <div ref="animatedDiv" class="w-1/2 mx-auto my-8">
+      <div ref="" class="animatedDiv w-1/2 mx-auto my-8">
         <p class="tracking-widest font-light">At South America Company, we specialize in tailor-made trips that
           immortalize the best days exploring Peru and South America. Every detail is meticulously designed to offer the
           maximum comfort, exclusivity, and luxury. From private villas and luxury cruises to customized itineraries, we
@@ -120,7 +111,7 @@ onMounted(() => {
       </button>
     </div>
   </section>
-  <ImgSlider></ImgSlider>
+  <!-- <ImgSlider></ImgSlider> -->
   <section class="container my-20">
     <div class="max-w-2xl ml-52 ">
       <p class="text-gray-500 mb-6">

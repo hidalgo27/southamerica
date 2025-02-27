@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import 'floating-vue/dist/style.css';
-import { Dropdown, Menu } from 'floating-vue';
+import { Dropdown } from 'floating-vue';
 import InquireNowForm from '../form/InquireNowForm.vue';
 
 import { useDestinationStore } from '~/stores/destination';
-import { DataItem } from '@amcharts/amcharts5';
 
 const destinationStore = useDestinationStore();
 
@@ -38,6 +37,10 @@ const menus = ref([
     items: [],
   },
   {
+    title: "Inspiration",
+    items: [],
+  },
+  {
     title: "Specials",
     items: [],
   },
@@ -53,10 +56,6 @@ const menus = ref([
     title: "About Us",
     items: [],
   },
-  {
-    title: "Travel Packages",
-    items: [],
-  }
 ])
 
 const updateMenu = () => {
@@ -125,6 +124,12 @@ const updateMenu = () => {
       ],
     },
     {
+      title: "Inspiration",
+      items: [{ name: "History & Culture", link: "/inspiration/history-and-culture" }, { name: "Trending", link: "/inspiration/trending" }, { name: "Wellness", link: "/inspiration/wellness" }],
+      image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
+      url: "/inspiration"
+    },
+    {
       title: "Specials",
       items: [{ name: "Argentina", link: "/special-offers/argentina" }, { name: "Peru", link: "/special-offers/peru" }, { name: "Ecuador", link: "/special-offers/ecuador" }],
       image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
@@ -185,13 +190,18 @@ const updateMenu = () => {
       items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
       image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg"
     },
-    {
-      title: "Travel Packages",
-      items: [{ name: "All Packages", link: "/travel-packages" }, { name: "Special Offers", link: "/special-offers" }]
-    },
   ]
 }
 
+const hoveredItem = ref(null);
+
+const setHoveredItem = (item) => {
+  hoveredItem.value = item.firstTitle ? item : null;
+};
+const handleDropdownOpen = (menu) => {
+  const firstItemWithTitle = menu.items.find(item => item.firstTitle);
+  hoveredItem.value = firstItemWithTitle || null;
+};
 
 const handleScroll = () => {
   const currentScrollPosition = window.scrollY;
@@ -264,83 +274,72 @@ onUnmounted(() => {
       </div>
 
       <div>
-        <nav class="container flex justify-center text-start">
+        <nav class="flex flex-row gap-3 item-center justify-center text-start">
           <div v-for="(menu, index) in menus" :key="index" class="relative">
             <client-only>
               <Dropdown>
-                <button class="menu-list text-sm px-4 py-2 focus:outline-none">
+                <button class="menu-list focus:outline-none" @click="handleDropdownOpen(menu)">
                   {{ menu.title }}
                 </button>
                 <template #popper>
-                  <div class="bg-white text-gray-800 rounded-md p-4 w-72 flex flex-row"
-                    :class="menu.image ? 'flex-row w-[60vh]' : 'flex-col'">
-                    <div class="w-full" :class="menu.image ? 'w-4/6' : ''">
-                      <span class="text-xs ">{{ menu.title }}</span>
-                      <div :class="menu.image ? 'grid grid-cols-3 gap-x-10 ' : ''">
-                        <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800 ">
-                          <template v-if="item.firstTitle">
-                            <Menu placement="right-start" :skidding="-40" :distance="20" :popperTriggers="['hover']">
+                  <div
+                    class="bg-white text-gray-800 rounded-md w-[80vh] lg:w-[100vh] 2xl:[70vh] flex md:flex-col lg:flex-row gap-6 text-sm"
+                    :class="!menu.items[0].firstTitle ? ' h-96 p-6 min-h-96' : ''">
+                    <div class="w-full " :class="!menu.items[0].firstTitle ? '' : 'grid grid-flow-col grid-cols-4 '">
+                      <div class="col-span-1  relative "
+                        :class="!menu.items[0].firstTitle ? '' : 'p-6 border-gray-200 border-r'">
+                        <span class="text-xs">{{ menu.title }}</span>
+                        <div :class="menu.image ? 'grid grid-cols-3 gap-x-10' : ''">
+                          <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800">
+                            <template v-if="item.firstTitle">
                               <button
-                                class="w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-gray-100 group">
+                                class="w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-gray-100 group"
+                                @mouseover="setHoveredItem(item)">
                                 {{ item.name }}
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                   stroke-width="1.5" stroke="currentColor" class="size-4 hidden group-hover:block">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                                 </svg>
                               </button>
-
-                              <template #popper>
-                                <div class="rounded-md bg-white text-gray-800 p-6 flex md:flex-col lg:flex-row">
-                                  <div>
-                                    <div class="h-72">
-                                      <div v-if="item.firstTitle">
-                                        <span class="text-xs">{{ item.firstTitle.name }}</span>
-                                        <div class="grid grid-cols-3 gap-x-10">
-                                          <div v-for="sub in item.firstTitle.items" :key="sub.name"
-                                            class="py-2 text-gray-800 hover:text-orange-500 duration-300">
-                                            <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div v-if="item.secondTitle">
-                                        <span class="text-xs">{{ item.secondTitle.name }}</span>
-                                        <div class="grid grid-cols-3 gap-10 ">
-                                          <div v-for="sub in item.secondTitle.items" :key="sub.name"
-                                            class="py-2 text-gray-800 hover:text-orange-500 duration-300">
-                                            <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations/' + item.link"
-                                      class="text-semibold duration-300 text-md">
-                                      Explore all {{ item.name }}
-                                    </NuxtLink>
-                                  </div>
-                                  <div v-if="item.image"
-                                    class="m-0 md:mt-2 lg:ml-6 w-full h-full lg:w-52 lg:h-80 rounded-md overflow-hidden">
-                                    <NuxtImg :src="item.image" class="w-full h-full "></NuxtImg>
-                                  </div>
-                                </div>
-                              </template>
-                            </Menu>
-
-                          </template>
-                          <template v-else>
-                            <div class="py-2 text-gray-800 hover:text-orange-500 duration-300 text-md">
-                              <NuxtLink :to="item.link">{{ item.name }}</NuxtLink>
-                            </div>
-                          </template>
-
+                            </template>
+                            <template v-else>
+                              <div class="py-2 text-gray-800 hover:text-orange-500 duration-300 text-md">
+                                <NuxtLink :to="item.link">{{ item.name }}</NuxtLink>
+                              </div>
+                            </template>
+                          </div>
                         </div>
                         <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations'"
-                          class=" bg-secondary w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-orange-300 duration-300 group">
+                          class=" bg-orange-500 absolute bottom-6 text-center flex items-center p-2 rounded-md justify-between hover:bg-orange-600 text-white duration-300 w-9/12 2xl:w-10/12">
                           Explore all Destinations
                         </NuxtLink>
                       </div>
+                      <div v-if="hoveredItem" class="col-span-3">
+                        <div
+                          class="rounded-md bg-white text-gray-800 p-6 flex md:flex-col lg:flex-row justify-between h-96 min-h-96">
+                          <div class="flex flex-col relative w-full h-full">
+                            <div v-if="hoveredItem.firstTitle">
+                              <span class="text-xs mb-12">{{ hoveredItem.firstTitle.name }}</span>
+                              <div class="grid grid-cols-3 gap-x-10">
+                                <div v-for="sub in hoveredItem.firstTitle.items" :key="sub.name"
+                                  class="py-2 text-gray-800 hover:text-orange-500 duration-300">
+                                  <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
+                                </div>
+                              </div>
+                            </div>
+                            <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations/' + hoveredItem.link"
+                              class="text-semibold duration-300 text-md absolute bottom-0 inline-block after:block after:w-full after:h-[2px] after:bg-orange-500 after:transition-all after:duration-300 after:origin-left hover:after:w-0">
+                              Explore all {{ hoveredItem.name }}
+                            </NuxtLink>
+                          </div>
+
+                          <div v-if="hoveredItem.image" class="m-0 w-full h-full lg:w-56 rounded-md overflow-hidden">
+                            <NuxtImg :src="hoveredItem.image" class="w-full h-full object-cover"></NuxtImg>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div v-if="menu.image"
-                      class="m-0 md:mt-2 lg:ml-6 w-full h-64 lg:w-52 lg:h-80 rounded-md overflow-hidden">
+                    <div v-if="menu.image" class=" w-full h-full lg:w-52 rounded-md overflow-hidden">
                       <NuxtImg :src="menu.image" class="w-full h-full "></NuxtImg>
                     </div>
                   </div>

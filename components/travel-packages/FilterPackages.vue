@@ -38,8 +38,21 @@ const regions = computed(() => {
   console.log(regionSet);
   return Array.from(regionSet);
 });
-const mixedList1 = ref(["Mountain", "Beach", "City", "Desert", "Jungle", "Island", "Forest"]);
-const mixedList2 = ref(["Luxury", "Adventure", "Budget", "Cultural", "Family", "Diversity", "Funny"]);
+
+const categorias = computed(() => {
+  const categorySet = new Set();
+  console.log(props.packageData);
+  props.packageData.forEach((pkg: any) => {
+    pkg.paquetes_categoria?.forEach((cat: any) => {
+      if (cat.categoria?.nombre) {
+        categorySet.add(cat.categoria.nombre);
+      }
+    });
+  });
+  console.log(categorySet);
+  return Array.from(categorySet);
+})
+// const mixedList2 = ref(["Luxury", "Adventure", "Budget", "Cultural", "Family", "Diversity", "Funny"]);
 
 //RANGO DE PRECIO
 const priceRange = ref({ min: 100, max: 10000 });
@@ -76,8 +89,8 @@ const updateMaxDuration = () => {
 const searchTerms = ref({
   countries: "",
   regions: "",
-  mixedList1: "",
-  mixedList2: "",
+  categorias: "",
+  //mixedList2: "",
 });
 
 const filteredItems = (list: string[], term: string) => {
@@ -91,6 +104,7 @@ const currentPage = ref(1);
 const showSpecialOffers = ref(false);
 const selectedCountry = ref("");
 const selectedRegion = ref("");
+const selectedCategory = ref("");
 const sortCriteria = ref({ field: null, order: null });
 
 // Filtra los paquetes según el checkbox
@@ -103,12 +117,15 @@ const filteredPackages = computed(() => {
     const matchesRegion = selectedRegion.value
       ? pkg.paquetes_destinos?.some((dest) => dest.destinos?.nombre === selectedRegion.value)
       : true;
+    const matchesCategory = selectedCategory.value
+      ? pkg.paquetes_categoria?.some((cat) => cat.categoria?.nombre === selectedCategory.value)
+      : true;
     const matchesPrice = pkg.precio_paquetes?.length > 0 &&
       pkg.precio_paquetes[0].precio_d >= priceRange.value.min &&
       pkg.precio_paquetes[0].precio_d <= priceRange.value.max;
     const matchesDuration = pkg.duracion >= durationRange.value.min && pkg.duracion <= durationRange.value.max;
 
-    return matchesOffers && matchesCountry && matchesRegion && matchesDuration;
+    return matchesOffers && matchesCountry && matchesCategory && matchesRegion && matchesDuration;
   });
 
   // Aplicar ordenación si hay un criterio definido
@@ -133,7 +150,7 @@ const filteredPackages = computed(() => {
 });
 
 // Se reinicia la paginación cuando cambian los datos o el filtro
-watch([() => props.packageData, showSpecialOffers, selectedCountry, selectedRegion, priceRange, durationRange], () => {
+watch([() => props.packageData, showSpecialOffers, selectedCountry, selectedRegion, selectedCategory, priceRange, durationRange], () => {
   currentPage.value = 1;
 }, { immediate: true });
 
@@ -197,6 +214,7 @@ const sortBy = (field: any, order: any) => {
 const clearFilters = () => {
   selectedCountry.value = "";
   selectedRegion.value = "";
+  selectedCategory.value = "";
   priceRange.value = { min: 100, max: 10000 };
   durationRange.value = { min: 1, max: 30 };
   showSpecialOffers.value = false;
@@ -208,6 +226,12 @@ onMounted(() => {
     console.log("entra");
     if (props.filters.country) {
       selectedCountry.value = props.filters.country;
+    }
+    if (props.filters.region) {
+      selectedRegion.value = props.filters.region;
+    }
+    if (props.filters.category) {
+      selectedCategory.value = props.filters.category;
     }
     if (props.filters.budget && props.filters.budget.length === 2) {
       priceRange.value = { min: props.filters.budget[0], max: props.filters.budget[1] };
@@ -251,7 +275,7 @@ onMounted(() => {
           </Dropdown>
         </client-only>
         <client-only>
-          <Dropdown v-if="!route.params.vacationpackages" class="w-full border-r-2">
+          <Dropdown class="w-full border-r-2">
             <button
               class="inline-flex items-center justify-center w-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -278,7 +302,7 @@ onMounted(() => {
           </Dropdown>
         </client-only>
         <client-only>
-          <Dropdown v-if="!route.path.includes('experiences', 0)" class="w-full border-r-2">
+          <Dropdown class="w-full border-r-2">
             <button
               class="inline-flex items-center justify-center w-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -286,26 +310,27 @@ onMounted(() => {
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
               </svg>
-              <span class="ml-2">Experiences</span>
+              <span class="ml-2">{{ selectedCategory || "Experiences" }}</span>
             </button>
             <template #popper class="border">
               <div
-                class=" w-full grid grid-cols-2 rounded-md shadow-lg max-h-64 bg-white text-gray-800 text-sm p-4 border">
+                class=" w-full grid grid-cols-1 rounded-md shadow-lg max-h-64 bg-white text-gray-800 text-sm p-4 border">
                 <div class="space-y-1 pr-2">
                   <div>
                     <span>Trip Types</span>
                   </div>
-                  <input v-model="searchTerms.mixedList1"
+                  <input v-model="searchTerms.categorias"
                     class="block w-full px-4 py-2 text-gray-800 border rounded-md border-gray-300 focus:outline-none"
                     type="text" placeholder="Search items" autocomplete="off" />
                   <div class="overflow-y-auto max-h-36">
-                    <button v-for="item in filteredItems(mixedList1, searchTerms.mixedList1)" :key="item" href="#"
+                    <button v-for="item in filteredItems(categorias, searchTerms.categorias)" :key="item"
+                      @click.prevent="selectedCategory = item"
                       class="flex w-full px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
                       {{ item }}
                     </button>
                   </div>
                 </div>
-                <div class="space-y-1">
+                <!-- <div class="space-y-1">
                   <span>Trip Styles</span>
                   <input v-model="searchTerms.mixedList2"
                     class="block w-full px-4 py-2 text-gray-800 border rounded-md border-gray-300 focus:outline-none"
@@ -316,7 +341,7 @@ onMounted(() => {
                       {{ item }}
                     </button>
                   </div>
-                </div>
+                </div> -->
               </div>
             </template>
           </Dropdown>
@@ -495,10 +520,10 @@ onMounted(() => {
             <div
               class="mt-2 w-full grid grid-cols-2 rounded-md shadow-lg max-h-64 overflow-y-auto bg-white ring-1 ring-black ring-opacity-5 p-1">
               <div class=" pr-2">
-                <input v-model="searchTerms.mixedList1"
+                <input v-model="searchTerms.categorias"
                   class="block w-full px-4 py-2 text-gray-800 border rounded-md border-gray-300 focus:outline-none"
                   type="text" placeholder="Search items" autocomplete="off" />
-                <button v-for="item in filteredItems(mixedList1, searchTerms.mixedList1)" :key="item" href="#"
+                <button v-for="item in filteredItems(categorias, searchTerms.categorias)" :key="item" href="#"
                   class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
                   {{ item }}
                 </button>
@@ -593,6 +618,15 @@ onMounted(() => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
               </svg>
             </button>
+            <button v-if="selectedCategory" class="flex items-center space-x-2 border-2 px-2 py-2 rounded-full"
+              @click="selectedCategory = ''">
+              <span>{{ selectedCategory }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+
             <button v-if="priceRange.min !== 100 || priceRange.max !== 10000"
               class="flex items-center space-x-2 border-2 px-2 py-2 rounded-full"
               @click="priceRange = { min: 100, max: 10000 }">

@@ -1,21 +1,30 @@
 <script lang="ts" setup>
 import { Dropdown } from 'floating-vue';
 import InquireNowForm from '~/components/form/InquireNowForm.vue';
+import { useCategoriesStore } from '~/stores/categories';
 
+const useCategories = useCategoriesStore();
+const categories = ref([]);
+const items = ref([
+  { name: 'All Vacation Packages', url: 'vacation-packages' },
+])
+
+const getCategories = async () => {
+  const res: any = await useCategories.getCategories();
+  categories.value = res;
+  console.log(categories.value);
+
+  for (let i = 0; i < categories.value.length; i++) {
+    items.value.push({ name: categories.value[i].nombre, url: categories.value[i].url });
+  }
+  console.log(items.value);
+};
 const buttons = ref([
   { name: 'Overview', url: '' },
   {
     name: 'Vacation Packages',
-    items: [
-      { name: 'All Vacation Packages', url: 'vacation-packages' },
-      { name: 'Adventure Tours', url: 'adventure-tours' },
-      { name: 'Cultural Tours', url: 'cultural-tours' },
-      { name: 'Family Tours', url: 'family-tours' },
-      { name: 'Luxury Tours', url: 'luxury-tours' },
-      { name: 'Wildlife Tours', url: 'wildlife-tours' }
-    ]
+    items: items.value,
   },
-  { name: 'Places to Go', url: 'places-to-go' },
   {
     name: 'Travel Information',
     items: [
@@ -29,7 +38,7 @@ const buttons = ref([
 ]);
 
 const route = useRoute();
-const isOpen = ref(false);
+const formOpen = ref(false);
 const isFixed = ref(false);
 
 const handleScroll = () => {
@@ -40,7 +49,8 @@ const handleScroll = () => {
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
+  await getCategories();
   window.addEventListener('scroll', handleScroll);
 });
 
@@ -70,9 +80,17 @@ onUnmounted(() => {
     <div class="flex justify-center items-center">
       <div v-for="(button, index) in buttons" :key="index" class="inline-block px-4 ">
         <client-only>
-          <Dropdown v-if="button.items">
+          <Dropdown v-if="button.items" v-model:shown="isOpen">
             <template #default>
-              <span class="cursor-pointer">{{ button.name }}</span>
+              <span class="cursor-pointer flex justify-between items-center gap-1">{{ button.name }}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                  stroke="currentColor" class="size-3 transition-transform duration-200"
+                  :class="{ '-rotate-180': isOpen }">
+                  <path fill-rule="evenodd"
+                    d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                    clip-rule="evenodd" />
+                </svg>
+              </span>
             </template>
             <template #popper>
               <div
@@ -90,11 +108,11 @@ onUnmounted(() => {
         </client-only>
       </div>
     </div>
-    <button v-if="isFixed" @click="isOpen = true"
+    <button v-if="isFixed" @click="formOpen = true"
       class="btn-primary-outline bg-orange-50 px-4 py-2 rounded-md shadow-md">
       Inquire Now
     </button>
-    <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
+    <InquireNowForm :isOpen="formOpen" @close="formOpen = false"></InquireNowForm>
   </nav>
 </template>
 <style></style>

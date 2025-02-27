@@ -278,14 +278,10 @@ onMounted(async () => {
       As featured in
     </p>
     <div class="flex flex-wrap justify-center gap-8 sm:flex-nowrap sm:space-x-8">
-      <img alt="Travel+Leisure logo" class="h-12"
-        src="https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT" />
-      <img alt="AFAR logo" class="h-12"
-        src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ" />
-      <img alt="Forbes logo" class="h-12"
-        src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ" />
-      <img alt="Smithsonian Magazine logo" class="h-12"
-        src="https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg" />
+      <img alt="Travel+Leisure logo" class="h-8" src="https://images.goway.com/dev/featured_in/travel-leisure.svg" />
+      <img alt="AFAR logo" class="h-8" src="https://images.goway.com/dev/featured_in/afar.svg" />
+      <img alt="Forbes logo" class="h-8" src="https://images.goway.com/dev/featured_in/forbes.svg" />
+      <img alt="Smithsonian Magazine logo" class="h-8" src="https://images.goway.com/dev/featured_in/smithsonian.svg" />
     </div>
   </div>
 

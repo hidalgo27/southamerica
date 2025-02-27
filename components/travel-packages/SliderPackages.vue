@@ -40,6 +40,24 @@ const updateItemsToShow = () => {
     itemsToShow.value = 1;
   }
 };
+const showCarousel = computed(() => {
+  const packageCount = props.listPackages.length;
+
+  if (packageCount === 1) {
+    return false; // No mostrar carrusel si hay solo 1 paquete
+  }
+  if (packageCount === 2 && window.innerWidth < 768) {
+    return true; // Mostrar carrusel solo en móviles si hay 2 paquetes
+  }
+  if (packageCount === 3 && window.innerWidth < 1024) {
+    return true; // Mostrar carrusel en móviles y tablets si hay 3 paquetes
+  }
+  if (packageCount > 3) {
+    return true; // Mostrar carrusel siempre si hay más de 3 paquetes
+  }
+  return false; // En otros casos, no mostrar carrusel
+});
+
 
 // Llamar la función al cargar y en el resize
 onMounted(() => {
@@ -65,7 +83,10 @@ const progressWidth = computed(() => {
       <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide">Memories won't make themselves.
       </h1>
     </div>
-    <carousel :breakpoints="breakpoints" class="-m-3" @update:modelValue="updateProgress">
+    <div v-if="!showCarousel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <CardPackage v-for="(packages, index) in listPackages" :key="index" :packageData="packages" />
+    </div>
+    <carousel v-else :breakpoints="breakpoints" class="-m-3" @update:modelValue="updateProgress">
       <slide v-for="(packages, index) in listPackages" :key="index" class="px-3 relative">
         <CardPackage :packageData="packages"></CardPackage>
       </slide>
@@ -92,7 +113,7 @@ const progressWidth = computed(() => {
         </CarouselNavigation>
       </template>
     </carousel>
-    <div class="progress-bar-container">
+    <div class="progress-bar-container" v-if="showCarousel">
       <div class="progress-bar" :style="{ width: progressWidth + '%' }"></div>
     </div>
     <div class="text-center mt-6">

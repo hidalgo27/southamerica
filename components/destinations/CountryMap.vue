@@ -6,11 +6,35 @@ import am5geodata_data_countries2 from "@amcharts/amcharts5-geodata/data/countri
 
 const chartDiv = ref<HTMLElement | null>(null);
 const router = useRouter();
-const regions = [
-  "Amazonas", "Ancash", "Apurimac", "Arequipa", "Ayacucho", "Cajamarca", "El Callao", "Cusco", "Huancavelica", "Huánuco",
-  "Ica", "Junin", "La Libertad", "Lambayeque", "Lima Province", "Lima", "Loreto", "Madre de Dios", "Moquegua", "Pasco", "Piura",
-  "Puno", "San Martin", "Tacna", "Tumbes", "Ucayali", "Lake Titicaca"
-];
+let root: am5.Root | null = null;
+
+const props = defineProps({
+  regiones: {
+    type: Array,
+    required: true,
+  },
+  pais: {
+    type: Object,
+    required: true,
+  }
+});
+
+const regions = ref([] as string[]);
+
+watch(() => props.regiones, (newDestinations) => {
+  if (newDestinations) {
+    regions.value = newDestinations.map((destination: any) =>
+      destination.nombre.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, "$1$2").normalize('NFC')
+    );
+  }
+
+  if (root) {
+    root.dispose();
+    root = null;
+  }
+}, { immediate: true });
+
+
 onMounted(() => {
   if (chartDiv.value) {
     const root = am5.Root.new(chartDiv.value);
@@ -32,20 +56,59 @@ onMounted(() => {
     );
 
     countrySeries.mapPolygons.template.setAll({
-      tooltipText: "{name}",
-      interactive: true,
+      showTooltipOn: "click",
       cursorOverStyle: "pointer",
-      fill: am5.color(0xdae7f1),
       stroke: am5.color(0xffffff),
       strokeWidth: 1.5,
+      tooltipPosition: "fixed",
+      tooltip: am5.Tooltip.new(root, {
+        keepTargetHover: true,
+      }),
     });
 
+    countrySeries.mapPolygons.template.get("tooltip")?.label.set("interactive", true);
+
+    countrySeries.mapPolygons.template.adapters.add("tooltipHTML", (html, target) => {
+      const countryName = target.dataItem?.dataContext.name;
+      if (!countryName) return html;
+
+      const destination = props.regiones.find((dest: any) =>
+        dest.nombre.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, "$1$2").normalize('NFC') === countryName
+      );
+
+      if (destination) {
+        return `<div class="w-72 space-y-2 p-2">
+                  <img src="${destination.imagen}" alt="${destination.nombre}" class="rounded-md" />  
+                  <div class="font-bold tracking-wide ">${destination.nombre}</div>
+                  <div class="text-xs overflow-hidden w-full max-h-20"><span class="overflow-hidden">${destination.descripcion || ""}</span></div>
+                </div>
+                <a href="/destinations/${props.pais.url}/${destination.url}" class="w-72 border-t flex justify-between p-2" style="border-color: currentColor">
+                  <span class="text-xs">Discover ${destination.nombre}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </a>`;
+      }
+      return html;
+    });
+
+    countrySeries.mapPolygons.template.adapters.add("fill", (fill, target) => {
+      const countryName = target.dataItem?.dataContext.name;
+
+      return regions.value.includes(countryName) ? am5.color(0xdae7f1) : am5.color(0xd3d3d3);
+    });
+
+    // Aplicar interactividad dinámica usando adapter
+    countrySeries.mapPolygons.template.adapters.add("interactive", (interactive, target) => {
+      const countryName = target.dataItem?.dataContext.name;
+      return regions.value.includes(countryName);
+    });
 
     countrySeries.mapPolygons.template.states.create("hover", {
       fill: am5.color(0x31456b),
     });
 
-    let countryData = am5geodata_data_countries2["PE"];
+    let countryData = am5geodata_data_countries2[props.pais.codigo];
 
     if (countryData && countryData.maps.length) {
       let map = countryData.maps[0];
@@ -78,7 +141,6 @@ onMounted(() => {
           fill: am5.color(0xf3f3f3),
           fillOpacity: 0,
         }),
-        visible: window.innerWidth >= 768,
       })
     );
 
@@ -98,11 +160,13 @@ onMounted(() => {
           fill: am5.color(0xffffff),
           fillOpacity: 0,
         }),
-        visible: window.innerWidth >= 768,
       })
     );
 
     function createRegionButton(regionName, container) {
+      const destination = props.regiones.find(dest =>
+        dest.nombre.normalize('NFD').replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, "$1$2").normalize('NFC') === regionName
+      );
       const button = container.children.push(
         am5.Button.new(root, {
           paddingTop: 5,
@@ -136,8 +200,7 @@ onMounted(() => {
       button.events.on("pointerover", () => {
         countrySeries.mapPolygons.each((polygon) => {
           if (polygon.dataItem?.dataContext.name === regionName) {
-            polygon.set("fill", am5.color(0x31456b));
-            polygon.set("fillOpacity", 300);
+            polygon.states.applyAnimate("hover");
           }
         });
       });
@@ -145,31 +208,17 @@ onMounted(() => {
       button.events.on("pointerout", () => {
         countrySeries.mapPolygons.each((polygon) => {
           if (polygon.dataItem?.dataContext.name === regionName) {
-            polygon.set("fill", am5.color(0xdae7f1));
+            polygon.states.applyAnimate("default");
           }
         });
       });
 
       button.events.on("click", () => {
-        router.push(`/destinations/peru/${regionName.toLowerCase().replace(/ /g, "-")}`);
+        router.push(`/destinations/${props.pais.url}/${destination.url}`);
       });
     }
-
-    countrySeries.mapPolygons.template.events.on("click", (ev) => {
-      const regionName = ev.target.dataItem?.dataContext.name;
-      if (regionName) {
-        const newRoute = `/destinations/peru/${regionName.toLowerCase().replace(/ /g, "-")}`;
-        if (router.currentRoute.value.path === newRoute) {
-          router.replace({ path: "/redirect" }).then(() => {
-            router.replace(newRoute);
-          });
-        } else {
-          router.push(newRoute);
-        }
-      }
-    });
     // Distribuir los botones en los dos contenedores
-    regions.forEach((region, index) => {
+    regions.value.forEach((region, index) => {
       if (index % 2 === 0) {
         createRegionButton(region, leftButtons);
       } else {
