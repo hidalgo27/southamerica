@@ -63,7 +63,8 @@ const toggle = (index: null) => {
       </div>
     </div>
   </section>
-  <ListExperiences></ListExperiences>
+  <!--   <ListExperiences ></ListExperiences>
+ -->
   <SliderDestinations></SliderDestinations>
   <BannerPosition></BannerPosition>
   <MiniReviews></MiniReviews>

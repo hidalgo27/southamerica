@@ -83,10 +83,10 @@ const destination = {
       </div>
     </div>
   </section>
-  <TextDescription v-if="destination" :destination="destination"></TextDescription>
+  <!-- <TextDescription v-if="destination" :destination="destination"></TextDescription> -->
   <Benefits></Benefits>
   <CardBlue></CardBlue>
-  <TripStyles></TripStyles>
+  <!-- <TripStyles></TripStyles> -->
   <section class="container my-20">
     <div class="text-center">
       <p class="mb-6 tracking-widest font-bold">
