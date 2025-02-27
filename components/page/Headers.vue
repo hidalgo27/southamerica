@@ -4,8 +4,10 @@ import { Dropdown } from 'floating-vue';
 import InquireNowForm from '../form/InquireNowForm.vue';
 
 import { useDestinationStore } from '~/stores/destination';
+import { useCategoriesStore } from '~/stores/categories';
 
 const destinationStore = useDestinationStore();
+const categoryStore = useCategoriesStore();
 
 const countries = ref([]);
 const getCountries = async () => {
@@ -20,6 +22,16 @@ const getCountries = async () => {
       url: dest.url
     })) : []
   }));
+};
+
+const categories = ref([])
+const getCategories = async () => {
+  const res: any = await categoryStore.getCategories();
+  categories.value = res.map((category: any) => ({
+    nombre: category.nombre,
+    url: category.url,
+  }));
+  console.log(res);
 };
 
 const position = ref('fixed');
@@ -71,7 +83,7 @@ const updateMenu = () => {
             link: `/destinations/${country.url}/${dest.url}`
           }))
         },
-        link: country.url,
+        link: `/destinations/${country.url}`,
         image: country.imagen
       }))
     },
@@ -82,25 +94,15 @@ const updateMenu = () => {
           name: "Travel Styles",
           firstTitle: {
             name: "Explore",
-            items: [
-              {
-                name: "Adventure",
-                link: "/experiences/adventure"
-              },
-              {
-                name: "Cruises",
-                link: "/experiences/cruises"
-              },
-              {
-                name: "Family",
-                link: "/experiences/family"
-              }
-            ]
+            items: categories.value.map((category: any) => ({
+              name: category.nombre,
+              link: `/experiences/${category.url}`
+            }))
           },
           link: "/experiences",
           image: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg"
         },
-        {
+        /* {
           name: "Ways to travel",
           firstTitle: {
             name: "Explore",
@@ -120,7 +122,7 @@ const updateMenu = () => {
             ]
           },
           link: "/experiences",
-        },
+        }, */
       ],
     },
     {
@@ -131,13 +133,19 @@ const updateMenu = () => {
     },
     {
       title: "Specials",
-      items: [{ name: "Argentina", link: "/special-offers/argentina" }, { name: "Peru", link: "/special-offers/peru" }, { name: "Ecuador", link: "/special-offers/ecuador" }],
+      items: countries.value.map((country: any) => ({
+        name: country.nombre,
+        link: `/special-offers/${country.url}`,
+      })),
       image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
       url: "/special-offers"
     },
     {
       title: "Our Experts",
-      items: [{ name: "Argentina", link: "/our-experts/argentina" }, { name: "Peru", link: "/our-experts/peru" }, { name: "Ecuador", link: "/our-experts/ecuador" }],
+      items: countries.value.map((country: any) => ({
+        name: country.nombre,
+        link: `/our-experts/${country.url}`,
+      })),
       image: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
       url: "/our-experts"
     },
@@ -188,7 +196,8 @@ const updateMenu = () => {
     {
       title: "About Us",
       items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
-      image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg"
+      image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg",
+      url: "/about-us"
     },
   ]
 }
@@ -218,6 +227,7 @@ const handleScroll = () => {
 // Llama a la función en el montaje inicial
 onMounted(async () => {
   await getCountries();
+  await getCategories();
   updateMenu();
   window.addEventListener('scroll', handleScroll);
 });
@@ -327,15 +337,21 @@ onUnmounted(() => {
                             </NuxtLink>
                           </div>
 
-                          <div v-if="hoveredItem.image" class="m-0 w-full h-full lg:w-56 rounded-md overflow-hidden">
-                            <NuxtImg :src="hoveredItem.image" class="w-full h-full object-cover"></NuxtImg>
-                          </div>
+                          <NuxtLink v-if="hoveredItem.image" :to="hoveredItem.link"
+                            class="m-0 w-full h-full lg:w-56 rounded-md overflow-hidden group relative">
+                            <NuxtImg :src="hoveredItem.image"
+                              class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105">
+                            </NuxtImg>
+                          </NuxtLink>
                         </div>
                       </div>
                     </div>
-                    <div v-if="menu.image" class=" w-full h-full lg:w-52 rounded-md overflow-hidden">
-                      <NuxtImg :src="menu.image" class="w-full h-full "></NuxtImg>
-                    </div>
+                    <NuxtLink v-if="menu.image" :to="menu.url"
+                      class=" w-full h-full lg:w-52 rounded-md overflow-hidden group relative">
+                      <NuxtImg :src="menu.image"
+                        class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105">
+                      </NuxtImg>
+                    </NuxtLink>
                   </div>
                 </template>
               </Dropdown>

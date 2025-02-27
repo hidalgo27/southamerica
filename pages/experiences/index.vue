@@ -7,6 +7,7 @@ import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 
 import { usePackageStore } from '~/stores/packages';
+import { useCategoriesStore } from '~/stores/categories';
 
 const packageStore = usePackageStore();
 const listPackages = ref([]);
@@ -16,16 +17,25 @@ const getPackages = async () => {
   listPackages.value = res;
 };
 
+const categoryStore = useCategoriesStore();
+const listCategories = ref([]);
+
+const getCategories = async () => {
+  const res: any = await categoryStore.getCategories();
+  listCategories.value = res;
+  console.log(listCategories.value);
+};
+
 onMounted(async () => {
   await getPackages();
+  await getCategories();
 });
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
-  <TripStyles></TripStyles>
-
+  <TripStyles v-if="listCategories" :curatedTrips="listCategories"></TripStyles>
   <section>
-    <ListExperiences></ListExperiences>
+    <!--<ListExperiences></ListExperiences>-->
   </section>
   <SliderPackages :listPackages="listPackages"></SliderPackages>
 

@@ -24,7 +24,30 @@ export const useCategoriesStore = defineStore('category', () => {
       }
     })
   }
+
+  const getCategory = async (url: string) => {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await fetch(config.public.apiBase + "/categorias/" + url, {
+          method: 'GET',
+          headers: headers,
+        })
+        const data = await res.json()
+        if (data) {
+          resolve(data)
+        } else {
+          reject(data)
+        }
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
   return {
     getCategories,
+    getCategory
   }
 })

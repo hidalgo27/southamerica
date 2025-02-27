@@ -13,6 +13,7 @@ const props = defineProps({
     required: false,
   }
 });
+console.log(props.packageData);
 
 const countries = computed(() => {
   const countrySet = new Set();
