@@ -331,7 +331,7 @@ onUnmounted(() => {
                                 </div>
                               </div>
                             </div>
-                            <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations/' + hoveredItem.link"
+                            <NuxtLink v-if="menu.title === 'Destinations'" :to="hoveredItem.link"
                               class="text-semibold duration-300 text-md absolute bottom-0 inline-block after:block after:w-full after:h-[2px] after:bg-orange-500 after:transition-all after:duration-300 after:origin-left hover:after:w-0">
                               Explore all {{ hoveredItem.name }}
                             </NuxtLink>
