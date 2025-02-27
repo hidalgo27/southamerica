@@ -7,52 +7,34 @@ import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import ImgSlider from '~/components/travel-packages/ImgSlider.vue';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 const { $gsap } = useNuxtApp();
+$gsap.registerPlugin(ScrollTrigger);
 
-const curatedTrips = [
-  {
-    title: 'Perú',
-    alt: 'Vista panorámica de Machu Picchu en Perú',
-    image: 'https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Radisson_Blu_Plaza_Hotel_Sydney/img_RadissonBluPlazaHotelSydney_Exterior.jpg',
-    url: '/peru',
-  },
-  {
-    title: 'Chile',
-    alt: 'Torres del Paine en Chile',
-    image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ',
-    url: '/chile',
-  },
-  {
-    title: 'Argentina',
-    alt: 'Vista nocturna del Obelisco en Buenos Aires, Argentina',
-    image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj',
-    url: '/argentina',
-  },
-  {
-    title: 'Brasil',
-    alt: 'Cristo Redentor en Río de Janeiro, Brasil',
-    image: 'https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg',
-    url: '/brasil',
-  },
-  {
-    title: 'Bolivia',
-    alt: 'Salar de Uyuni en Bolivia',
-    image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg',
-    url: '/bolivia',
-  },
-  {
-    title: 'Colombia',
-    alt: 'Ciudad amurallada en Cartagena, Colombia',
-    image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ',
-    url: '/colombia',
-  },
-];
+import { useDestinationStore } from '~/stores/destination';
+const useDestination = useDestinationStore();
+const countries = ref([]);
+const curatedTrips = ref([]);
+const getCountries = async () => {
+  const res: any = await useDestination.getCountries();
+  countries.value = res;
+  console.log(countries.value);
+
+  curatedTrips.value = countries.value.map((country: any) => {
+    return {
+      title: country.nombre,
+      image: country.imagen,
+      url: country.url,
+    };
+  });
+};
 
 const destination = {
-  nombre: 'Want to explore the whole world your way? We’re the experts.',
-  descripcion: "Goway's team of born globetrotters have lived, worked, and travelled the world extensively, from our management to our Destination Specialists and support staff. We share your passion for travel, whether you're a culinary explorer seeking new flavours in the bustling markets of Marrakech, an adventurer searching for new summits in the Swiss Alps or dive sites along the Great Barrier Reef, or a family making lifelong memories in the enchanting streets of Kyoto or on the Maldives' white-sand beaches. Come meet our team and make your dream travel plans a reality together.",
+  minititle: "Our Team All Around The Globe",
+  title: 'Want to explore the whole world your way? We’re the experts.',
+  description: "Goway's team of born globetrotters have lived, worked, and travelled the world extensively, from our management to our Destination Specialists and support staff. We share your passion for travel, whether you're a culinary explorer seeking new flavours in the bustling markets of Marrakech, an adventurer searching for new summits in the Swiss Alps or dive sites along the Great Barrier Reef, or a family making lifelong memories in the enchanting streets of Kyoto or on the Maldives' white-sand beaches. Come meet our team and make your dream travel plans a reality together.",
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await getCountries();
   $gsap.fromTo('.animatedDiv',
     {
       opacity: 0, y: 50,
@@ -74,13 +56,13 @@ onMounted(() => {
 <template>
   <HeaderImgNav></HeaderImgNav>
   <CardBlue></CardBlue>
-  <TextDescription :destination="destination"></TextDescription>
+  <TextDescription :textDescription="destination"></TextDescription>
   <section class="container my-20">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <nuxt-link v-for="(trip, index) in curatedTrips" :key="index" :to="'/our-experts' + trip.url"
+      <nuxt-link v-for="(trip, index) in curatedTrips" :key="index" :to="'/our-experts/' + trip.url"
         class="relative block hover:shadow-lg transition duration-500 ease-in-out h-full bg-white content-between overflow-hidden rounded-md border group">
         <div class="relative overflow-hidden rounded-md">
-          <img :alt="trip.alt" :src="trip.image"
+          <img :alt="trip.title" :src="trip.image"
             class="w-full h-96 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
         </div>
         <div

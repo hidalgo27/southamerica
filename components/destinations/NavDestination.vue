@@ -58,9 +58,9 @@ onUnmounted(() => {
 });
 </script>
 <template>
-  <nav class="py-6 border-y-2 flex justify-center space-x-72 text-xs mb-20" :class="{
+  <nav class="py-6 border-y-2 justify-around px-4 hidden sm:flex text-xs mb-20" :class="{
     'fixed top-0 w-full bg-white shadow-md z-20 py-1': isFixed,
-    'relative': !isFixed
+    'relative top-0 w-full bg-white shadow-md z-20 py-1': !isFixed
   }">
     <nuxt-link v-if="isFixed" to="/" class="flex items-center">
       <div class="font-playfair-display text-xl font-medium flex items-end">

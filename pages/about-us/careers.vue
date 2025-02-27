@@ -157,7 +157,7 @@ const text = {
       </div>
     </div>
   </section>
-  <ImgSlider></ImgSlider>
+  <!--<ImgSlider></ImgSlider>-->
   <BannerPosition></BannerPosition>
   <Reviews></Reviews>
 </template>

@@ -172,7 +172,7 @@ const activeTab = ref(0)
     </div>
   </section>
 
-  <ImgSlider></ImgSlider>
+  <!--<ImgSlider></ImgSlider>-->
   <EspecialistLetter></EspecialistLetter>
   <Newsletter></Newsletter>
   <Reviews></Reviews>

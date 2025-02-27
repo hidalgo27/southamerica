@@ -33,8 +33,8 @@ const sections = [
 ]
 
 const destination = {
-  nombre: "South America",
-  descripcion: "South America is a continent of superlatives: the highest, the largest, the longest, the deepest, the remotest. Discover the continent's most iconic destinations, from the Amazon rainforest to the Andes Mountains, from the beaches of Rio de Janeiro to the glaciers of Patagonia. Whether you're looking for adventure, culture, or relaxation, South America has something for everyone.",
+  title: "South America",
+  description: "South America is a continent of superlatives: the highest, the largest, the longest, the deepest, the remotest. Discover the continent's most iconic destinations, from the Amazon rainforest to the Andes Mountains, from the beaches of Rio de Janeiro to the glaciers of Patagonia. Whether you're looking for adventure, culture, or relaxation, South America has something for everyone.",
 }
 const awards = [
   {
@@ -83,7 +83,7 @@ const responsability_text = {
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
-  <TextDescription v-if="destination" :destination="destination"></TextDescription>
+  <TextDescription v-if="destination" :textDescription="destination"></TextDescription>
   <Benefits></Benefits>
   <DescriptionWithLine :text="southamerica"></DescriptionWithLine>
   <section class="container my-20 space-y-6">

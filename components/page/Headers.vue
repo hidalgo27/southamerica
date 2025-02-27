@@ -9,6 +9,8 @@ import { useCategoriesStore } from '~/stores/categories';
 const destinationStore = useDestinationStore();
 const categoryStore = useCategoriesStore();
 
+const route = useRoute();
+
 const countries = ref([]);
 const getCountries = async () => {
   const res: any = await destinationStore.getCountries();
@@ -60,10 +62,10 @@ const menus = ref([
     title: "Our Experts",
     items: [],
   },
-  {
+  /* {
     title: "Groups Only",
     items: [],
-  },
+  }, */
   {
     title: "About Us",
     items: [],
@@ -149,7 +151,7 @@ const updateMenu = () => {
       image: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
       url: "/our-experts"
     },
-    {
+    /* {
       title: "Groups Only",
       items: [
         {
@@ -174,7 +176,7 @@ const updateMenu = () => {
           link: "/groups",
           image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg"
         },
-        {
+       {
           name: "Groups Destination",
           firstTitle: {
             name: "Explore",
@@ -190,9 +192,9 @@ const updateMenu = () => {
             ]
           },
           link: "/groups",
-        },
+        }, 
       ],
-    },
+    }, */
     {
       title: "About Us",
       items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
@@ -201,6 +203,11 @@ const updateMenu = () => {
     },
   ]
 }
+
+const dropdownStates = ref(menus.value.map(() => false));
+const closeDropdowns = () => {
+  dropdownStates.value = dropdownStates.value.map(() => false);
+};
 
 const hoveredItem = ref(null);
 
@@ -230,11 +237,17 @@ onMounted(async () => {
   await getCategories();
   updateMenu();
   window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', closeDropdowns);
+
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('scroll', closeDropdowns);
 });
+
+// Cierra dropdowns cuando cambie la ruta
+watch(() => route.fullPath, closeDropdowns);
 
 </script>
 <template>
@@ -281,7 +294,7 @@ onUnmounted(() => {
         <nav class="flex flex-row gap-3 item-center justify-center text-start">
           <div v-for="(menu, index) in menus" :key="index" class="relative">
             <client-only>
-              <Dropdown>
+              <Dropdown v-model:shown="dropdownStates[index]">
                 <button class="menu-list focus:outline-none" @click="handleDropdownOpen(menu)">
                   {{ menu.title }}
                 </button>
@@ -331,7 +344,7 @@ onUnmounted(() => {
                                 </div>
                               </div>
                             </div>
-                            <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations/' + hoveredItem.link"
+                            <NuxtLink v-if="menu.title === 'Destinations'" :to="hoveredItem.link"
                               class="text-semibold duration-300 text-md absolute bottom-0 inline-block after:block after:w-full after:h-[2px] after:bg-orange-500 after:transition-all after:duration-300 after:origin-left hover:after:w-0">
                               Explore all {{ hoveredItem.name }}
                             </NuxtLink>

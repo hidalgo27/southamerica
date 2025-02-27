@@ -6,7 +6,8 @@ import FilterPackages from '~/components/travel-packages/FilterPackages.vue';
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
-  <FilterPackages></FilterPackages>
+  <!--   <FilterPackages></FilterPackages>
+ -->
 </template>
 
 <style></style>
