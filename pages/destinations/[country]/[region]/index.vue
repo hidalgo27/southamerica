@@ -17,7 +17,6 @@ const region = ref(null)
 const getRegion = async () => {
   const res: any = await destinationStore.getRegion(route.params.region as string);
   region.value = res.destino;
-  console.log("REGION", region.value);
 };
 
 onMounted(async () => {

@@ -68,9 +68,16 @@ const progressWidth = computed(() => {
     </Carousel>
 
     <!-- Si hay 1 o 2 imágenes, centrarlas sin carrusel -->
-    <div v-else class="flex mx-auto  items-center gap-3 w-2/3 h-48 md:h-96 lg:h-[60vh] 2xl:h-[70vh]">
-      <img v-for="(image, index) in images" :key="index" :src="image.src" :alt="image.alt"
-        class="w-full h-full rounded-md object-cover" />
+    <div v-else class="flex items-center gap-3 w-full h-48 md:h-96 lg:h-[60vh] 2xl:h-[70vh]">
+      <template v-if="images.length === 1">
+        <img :src="images[0].src" :alt="images[0].alt" class="w-full h-full rounded-md object-cover mx-auto" />
+      </template>
+      <template v-else-if="images.length === 2">
+        <div class="grid grid-cols-2 gap-3 w-full h-full">
+          <img v-for="(image, index) in images" :key="index" :src="image.src" :alt="image.alt"
+            class="w-full h-full rounded-md object-cover" />
+        </div>
+      </template>
     </div>
 
     <!-- Barra de progreso solo si hay más de 2 imágenes -->

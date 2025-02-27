@@ -6,7 +6,7 @@ const props = defineProps({
     required: true,
   },
 });
-const activeTab = ref('terms');
+const activeTab = ref('departures');
 
 const tabs = [
   { key: 'departures', label: 'Departures' },
@@ -29,25 +29,36 @@ const tabs = [
       </div>
 
       <div class="mt-6">
-        <div v-if="activeTab === 'departures' && packageDetail?.departures"
-          class="grid md:grid-cols-2 items-center justify-center">
-          <div class="w-full lg:w-2/3 h-full p-6 mx-auto">
-            <img v-if="packageDetail.departures.image" :src="packageDetail.departures.image" alt="Image"
-              class="w-full h-full rounded-md" />
-          </div>
+        <div v-if="activeTab === 'departures' && packageDetail?.precio_paquetes?.length"
+          class="flex flex-col items-center justify-center w-full p-6">
 
-          <div class="text-start md:text-left">
-            <h2 v-if="packageDetail.departures.title" class="text-xl font-playfair-display font-semibold mb-4 md:mb-6">
-              {{ packageDetail.departures.title }}
-            </h2>
-            <p v-if="packageDetail.departures.description" class="text-gray-600">
-              {{ packageDetail.departures.description }}
-            </p>
-            <p v-if="packageDetail.departures.days" class="text-gray-500 mt-2">
-              {{ packageDetail.departures.days }}
-            </p>
-          </div>
+          <h2 class="text-xl font-playfair-display font-semibold mb-4">
+            Tarifas de Alojamiento
+          </h2>
+
+          <!-- Tabla de precios por cantidad de estrellas -->
+          <table class="border-collapse w-full md:w-2/3 text-left shadow-md">
+            <thead>
+              <tr class="bg-gray-200">
+                <th class="border p-3 text-center">Estrellas</th>
+                <th class="border p-3">Simple</th>
+                <th class="border p-3">Doble</th>
+                <th class="border p-3">Triple</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="price in packageDetail.precio_paquetes" :key="price.id" class="border-t">
+                <td class="border p-3 text-center">
+                  <span v-for="n in price.estrellas" :key="n">⭐</span>
+                </td>
+                <td class="border p-3">${{ price.precio_s || 'N/A' }}</td>
+                <td class="border p-3">${{ price.precio_d || 'N/A' }}</td>
+                <td class="border p-3">${{ price.precio_t || 'N/A' }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
 
         <div v-if="activeTab === 'inclusions' && (packageDetail?.incluye?.length || packageDetail?.noincluye?.length)"
           class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">

@@ -135,7 +135,7 @@ const toggleWithGSAP = (index: number) => {
                 </button>
 
                 <div :ref="el => setContentRef(el, index)" class="overflow-hidden rounded-b-md"
-                  v-html="itinerary.itinerarios.resumen" :class="{ 'bg-white ': isOpen(index) }">
+                  v-html="itinerary.itinerarios.descripcion" :class="{ 'bg-white ': isOpen(index) }">
                 </div>
               </div>
             </div>
