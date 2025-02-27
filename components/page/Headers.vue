@@ -9,6 +9,8 @@ import { useCategoriesStore } from '~/stores/categories';
 const destinationStore = useDestinationStore();
 const categoryStore = useCategoriesStore();
 
+const route = useRoute();
+
 const countries = ref([]);
 const getCountries = async () => {
   const res: any = await destinationStore.getCountries();
@@ -202,6 +204,11 @@ const updateMenu = () => {
   ]
 }
 
+const dropdownStates = ref(menus.value.map(() => false));
+const closeDropdowns = () => {
+  dropdownStates.value = dropdownStates.value.map(() => false);
+};
+
 const hoveredItem = ref(null);
 
 const setHoveredItem = (item) => {
@@ -230,11 +237,17 @@ onMounted(async () => {
   await getCategories();
   updateMenu();
   window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', closeDropdowns);
+
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('scroll', closeDropdowns);
 });
+
+// Cierra dropdowns cuando cambie la ruta
+watch(() => route.fullPath, closeDropdowns);
 
 </script>
 <template>
@@ -281,8 +294,9 @@ onUnmounted(() => {
         <nav class="flex flex-row gap-3 item-center justify-center text-start">
           <div v-for="(menu, index) in menus" :key="index" class="relative">
             <client-only>
-              <Dropdown>
-                <button class="menu-list focus:outline-none" @click="handleDropdownOpen(menu)">
+              <Dropdown v-model:shown="dropdownStates[index]">
+                <button class="menu-list focus:outline-none"
+                  @click="handleDropdownOpen(menu), openDropdown = openDropdown ? null : menu">
                   {{ menu.title }}
                 </button>
                 <template #popper>
