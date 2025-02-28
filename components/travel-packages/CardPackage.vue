@@ -1,59 +1,51 @@
 <script lang="ts" setup>
 const { $gsap } = useNuxtApp();
 
-const animatedDiv = ref<HTMLElement | null>(null);
-const imageDiv = ref<HTMLElement | null>(null);
-
-defineProps({
+const props = defineProps({
   packageData: { Object, required: true }
 });
 
+const route = useRoute();
+const isTravelPackages = route.path.includes("/inspiration") ? '/inspiration/' : '/travel-packages/';
 onMounted(() => {
-  if (!imageDiv.value) return;
-  $gsap.set(animatedDiv.value, { opacity: 0, y: 100 });
+  const imageDivs = document.querySelectorAll(".image-div");
+  const animatedDivs = document.querySelectorAll(".animated-div");
 
-  // Activar la animación cuando el mouse pasa sobre el div
-  const handleMouseEnter = () => {
-    $gsap.to(
-      animatedDiv.value,
-      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
-    );
-  };
+  imageDivs.forEach((imageDiv, index) => {
+    const animatedDiv = animatedDivs[index];
+    if (!animatedDiv) return;
 
-  const handleMouseLeave = () => {
-    $gsap.to(
-      animatedDiv.value,
-      { opacity: 0, y: 100, duration: 0.5, ease: "power2.out" }
-    );
-  };
+    $gsap.set(animatedDiv, { opacity: 0, y: 100 });
 
-  // Agregar el evento mouseenter
-  if (imageDiv.value) {
-    imageDiv.value.addEventListener('mouseenter', handleMouseEnter);
-  }
+    const handleMouseEnter = () => {
+      $gsap.to(animatedDiv, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+    };
 
-  imageDiv.value.addEventListener('mouseenter', handleMouseEnter);
-  imageDiv.value.addEventListener('mouseleave', handleMouseLeave);
+    const handleMouseLeave = () => {
+      $gsap.to(animatedDiv, { opacity: 0, y: 100, duration: 0.5, ease: "power2.out" });
+    };
 
-  // Limpiar eventos al desmontar
-  onBeforeUnmount(() => {
-    if (imageDiv.value) {
-      imageDiv.value.removeEventListener('mouseenter', handleMouseEnter);
-      imageDiv.value.removeEventListener('mouseleave', handleMouseLeave);
-    }
+    imageDiv.addEventListener("mouseenter", handleMouseEnter);
+    imageDiv.addEventListener("mouseleave", handleMouseLeave);
+
+    onBeforeUnmount(() => {
+      imageDiv.removeEventListener("mouseenter", handleMouseEnter);
+      imageDiv.removeEventListener("mouseleave", handleMouseLeave);
+    });
   });
 });
 </script>
 <template>
-  <div ref="imageDiv"
-    class="bg-white rounded-md border overflow-hidden w-full h-full group flex-grow hover:shadow-xl hover:border-transparent transition duration-500 ease-in-out">
+  <div
+    class="image-div bg-white rounded-md border overflow-hidden w-full h-full group flex-grow hover:shadow-xl hover:border-transparent transition duration-500 ease-in-out">
     <div class="relative overflow-hidden cursor-pointer">
-      <NuxtLink :to="'/travel-packages/' + packageData.url" class="block">
+      <NuxtLink :to="isTravelPackages + packageData.url" class="block">
         <div class="w-full h-96">
           <NuxtImg :src="packageData.imagen" :alt="packageData.titulo"
             class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
         </div>
-        <div class="absolute top-4 left-4 flex flex-wrap gap-2 text-start">
+        <div class="absolute top-4 left-4 flex flex-wrap gap-2 text-start"
+          v-if="packageData.paquetes_destinos || packageData.offers_home">
           <span v-if="packageData.offers_home"
             class="bg-white text-secondary text-xs font-semibold px-2 py-1 rounded-full ">
             Specials
@@ -64,7 +56,7 @@ onMounted(() => {
             {{ region.destinos.nombre }}
           </NuxtLink>
         </div>
-        <div ref="animatedDiv" class="absolute bottom-4 right-4 flex bg-white space-x-2 rounded-full p-2 y-100">
+        <div class="animated-div absolute bottom-4 right-4 flex bg-white space-x-2 rounded-full p-2 y-100">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
             class="size-10">
             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
@@ -74,7 +66,7 @@ onMounted(() => {
     </div>
     <div class="p-6 text-left">
       <div class="h-64">
-        <div class="flex flex-wrap gap-2 my-4">
+        <div class="flex flex-wrap gap-2 my-4" v-if="packageData.paquetes_categoria">
           <NuxtLink v-for="(tag, i) in packageData.paquetes_categoria" :key="i"
             :to="'/experiences/' + tag.categoria.url"
             class="bg-secondary bg-opacity-10 text-gray-700 text-sm font-medium px-3 py-1 rounded-full"
@@ -102,7 +94,7 @@ onMounted(() => {
           {{ packageData.date }}
         </span>
         <div class="block border-l border-gray-200 h-8 mx-6"></div>
-        <div v-if="packageData.precio_paquetes[0].precio_d || packageData.ahorro"
+        <div v-if="packageData.precio_paquetes && (packageData.precio_paquetes[0].precio_d || packageData.ahorro)"
           class="flex justify-between items-center">
           <span v-if="packageData.precio_paquetes[0].precio_d" class="block text-gray-700 mr-2">
             From US$ {{ packageData.precio_paquetes[0].precio_d }}
@@ -111,12 +103,12 @@ onMounted(() => {
             savings US$ {{ packageData.ahorro }}
           </span>
         </div>
-        <div v-else class="flex justify-between items-center"> Please Inquire</div>
-        <div v-if="packageData.author" class="flex justify-between items-center">
+        <div v-else-if="packageData.author" class="flex justify-between items-center">
           <span class="block text-gray-700 mr-2">
             By {{ packageData.author }}
           </span>
         </div>
+        <div v-else class="flex justify-between items-center"> Please Inquire</div>
       </div>
     </div>
   </div>

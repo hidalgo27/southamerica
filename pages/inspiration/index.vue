@@ -5,7 +5,22 @@ import CardPackage from '~/components/travel-packages/CardPackage.vue';
 import Newsletter from '~/components/home/Newsletter.vue';
 import NavInspiration from '~/components/inspiration/NavInspiration.vue';
 
-const articles = [
+import { useBlogStore } from '~/stores/blog';
+
+const blogStore = useBlogStore();
+const blogs = ref([]);
+
+const getBlogs = async () => {
+  const res: any = await blogStore.getBlogs();
+  blogs.value = res.blogs;
+  console.log(blogs.value);
+};
+
+onMounted(async () => {
+  await getBlogs();
+});
+
+const articles = ref([
   {
     name: 'Trending',
     items: [
@@ -64,29 +79,38 @@ const articles = [
       },
     ]
   }
-];
+]);
 
 const journeys = [
   {
     imagen: "https://images.goway.com/production/inline-images/laszlo_selly_ori_raynai.jpg?VersionId=tP_qZt0_3x9GO88obEymH1Fo0LDr2do7",
-    url: "",
-    etiquetas: ['Journeys'],
+    url: "best-of-2025-up-and-coming-group-travel-destinations",
+    paquetes_categoria: [{
+      nombre: 'Journeys',
+      categoria: { url: 'journeys', }
+    },],
     titulo: "Best of 2025: Up and Coming Group Travel Destinations",
     date: "Dec 12, 2024",
     author: "Christian Baines",
   },
   {
     imagen: "https://images.goway.com/production/inline-images/laszlo_selly_ori_raynai.jpg?VersionId=tP_qZt0_3x9GO88obEymH1Fo0LDr2do7",
-    url: "",
-    etiquetas: ['Journeys'],
+    url: "best-of-2025-up-and-coming-group-travel-destinations",
+    paquetes_categoria: [{
+      nombre: 'Journeys',
+      categoria: { url: 'journeys', }
+    },],
     titulo: "Best of 2025: Up and Coming Group Travel Destinations",
     date: "Dec 12, 2024",
     author: "Christian Baines",
   },
   {
     imagen: "https://images.goway.com/production/inline-images/laszlo_selly_ori_raynai.jpg?VersionId=tP_qZt0_3x9GO88obEymH1Fo0LDr2do7",
-    url: "",
-    etiquetas: ['Journeys'],
+    url: "best-of-2025-up-and-coming-group-travel-destinations",
+    paquetes_categoria: [{
+      nombre: 'Journeys',
+      categoria: { url: 'journeys', }
+    },],
     titulo: "Best of 2025: Up and Coming Group Travel Destinations",
     date: "Dec 12, 2024",
     author: "Christian Baines",
@@ -96,46 +120,36 @@ const journeys = [
 
 <template>
   <HeaderImgNav />
-  <NavInspiration></NavInspiration>
-  <section class="container my-20">
+  <!--<NavInspiration></NavInspiration>-->
+  <section v-for="(category, catIndex) in articles" :key="catIndex" class="container my-20">
     <div class="flex justify-between items-center mb-20">
-      <h1 class="text-4xl font-bold font-playfair-display">Trending</h1>
+      <h1 class="text-4xl font-bold font-playfair-display">{{ category.name }}</h1>
       <button class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100">
         See All
       </button>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <TrendingCard v-for="(article, index) in articles[0].items" :key="index" category="Trending"
+      <TrendingCard v-for="(article, index) in category.items" :key="index" :category="category.name"
         :image="article.image" :title="article.title" :date="article.date" :author="article.author" />
-    </div>
-  </section>
-  <section class="container my-32">
-    <div class="block border-b border-gray-200 w-full"></div>
-  </section>
-  <section class="container my-20">
-    <div class="flex justify-between items-center mb-20">
-      <h1 class="text-4xl font-bold font-playfair-display">History & Culture</h1>
-      <button class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100">
-        See All
-      </button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <TrendingCard v-for="(article, index) in articles[1].items" :key="index" category="History & Culture"
-        :image="article.image" :title="article.title" :date="article.date" :author="article.author" />
+    <div v-if="catIndex !== articles.length - 1" class="container my-32">
+      <div class="border-b border-gray-200 w-full"></div>
     </div>
   </section>
-  <section class="bg-secondary bg-opacity-10">
+
+  <section class="bg-secondary bg-opacity-10 my-20 p-20">
     <div class="container">
       <div class="flex justify-between items-center mb-20">
-        <h1 class="text-4xl font-bold font-playfair-display">History & Culture</h1>
+        <h1 class="text-4xl font-bold font-playfair-display">Journeys</h1>
         <button class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100">
           See All
         </button>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <CardPackage v-for="(packages, index) in journeys" :key="index" :packageData="packages"></CardPackage>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" v-if="journeys">
+        <CardPackage v-for="(packages, index) in journeys" :key="index" :packageData="packages">
+        </CardPackage>
       </div>
     </div>
   </section>
