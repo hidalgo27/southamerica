@@ -5,7 +5,22 @@ import Teammates from '~/components/experts/Teammates.vue';
 import MiniReviews from '~/components/home/MiniReviews.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 
+import { useTeamStore } from '~/stores/team';
+import { useRoute } from 'vue-router';
 
+const route = useRoute();
+const useTeam = useTeamStore();
+const team = ref(null);
+
+const getTeam = async () => {
+  const res: any = await useTeam.getTeamByCountry(route.params.country as string);
+  team.value = res.pais;
+  console.log(team.value);
+};
+
+onMounted(async () => {
+  await getTeam();
+});
 </script>
 <template>
   <HeaderImgNav></HeaderImgNav>
@@ -29,7 +44,7 @@ import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
     </div>
   </section>
 
-  <Teammates></Teammates>
+  <Teammates v-if="team && team.teams" :teammates="team"></Teammates>
   <SliderDestinations></SliderDestinations>
   <BannerPosition></BannerPosition>
   <MiniReviews></MiniReviews>

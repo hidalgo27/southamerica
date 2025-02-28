@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia'
 
-export const useCategoriesStore = defineStore('category', () => {
+export const useTeamStore = defineStore('teams', () => {
   const config = useRuntimeConfig();
 
-  const getCategories = async () => {
+  const getTeamByCountry = async (pais: string) => {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await fetch(config.public.apiBase + "/categorias", {
+        const res = await fetch(config.public.apiBase + "/team/country/" + pais, {
           method: 'GET',
           headers: headers,
         })
@@ -25,13 +25,13 @@ export const useCategoriesStore = defineStore('category', () => {
     })
   }
 
-  const getCategory = async (url: string) => {
+  const getTeammate = async (id: number) => {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await fetch(config.public.apiBase + "/categorias/" + url, {
+        const res = await fetch(config.public.apiBase + "/team/" + id, {
           method: 'GET',
           headers: headers,
         })
@@ -46,8 +46,10 @@ export const useCategoriesStore = defineStore('category', () => {
       }
     })
   }
+
+
   return {
-    getCategories,
-    getCategory
+    getTeamByCountry,
+    getTeammate
   }
 }, { persist: true, })

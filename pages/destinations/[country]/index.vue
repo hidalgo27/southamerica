@@ -43,7 +43,7 @@ const getDestination = async () => {
 };
 
 const getPackages = async () => {
-  const res: any = await packageStore.getPackageTop();
+  const res: any = await packageStore.getPackageByCountry(route.params.country as string);
   packagesTop.value = res;
 };
 

@@ -40,7 +40,7 @@ const animateImage = async (index: number) => {
         </h1>
       </div>
 
-      <div class="w-3/4 mx-auto">
+      <div class="w-3/4 mx-auto" v-if="items.length">
         <NuxtLink v-for="(item, index) in items" :key="index"
           class="group flex justify-between p-4 rounded-md border-gray-500 transition-all duration-300 hover:bg-gray-100 hover:scale-[1.02]"
           :to="'/destinations/' + pais.url + '/' + item.url" @mouseenter="selectedItem = index; animateImage(index);"

@@ -33,7 +33,6 @@ const getCategories = async () => {
     nombre: category.nombre,
     url: category.url,
   }));
-  console.log(res);
 };
 
 const position = ref('fixed');
