@@ -72,7 +72,7 @@ onMounted(async () => {
       </div>
     </div>
   </section>
-  <!-- <ListExperiences v-if="team && team.destinos" :items="team.destinos" :pais=""></ListExperiences> -->
+  <ListExperiences v-if="team && team.destinos.length > 0" :items="team.destinos"></ListExperiences>
   <SliderDestinations></SliderDestinations>
   <BannerPosition></BannerPosition>
   <MiniReviews></MiniReviews>

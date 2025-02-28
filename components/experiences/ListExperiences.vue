@@ -1,16 +1,21 @@
 <script lang="ts" setup>
 const { $gsap } = useNuxtApp();
 
-defineProps({
+const props = defineProps({
   items: {
     type: Array,
     required: true,
   },
   pais: {
     type: Object,
-    required: true,
+    required: false,
   },
 });
+
+console.log(props.items);
+const getCountryUrl = (item) => {
+  return props.pais?.url || item.pais?.url || '';
+};
 
 const selectedItem = ref<number | null>(null);
 const animatingItem = ref<number | null>(null);
@@ -43,7 +48,8 @@ const animateImage = async (index: number) => {
       <div class="w-3/4 mx-auto" v-if="items.length">
         <NuxtLink v-for="(item, index) in items" :key="index"
           class="group flex justify-between p-4 rounded-md border-gray-500 transition-all duration-300 hover:bg-gray-100 hover:scale-[1.02]"
-          :to="'/destinations/' + pais.url + '/' + item.url" @mouseenter="selectedItem = index; animateImage(index);"
+          :to="'/destinations/' + getCountryUrl(item) + '/' + item.url"
+          @mouseenter="selectedItem = index; animateImage(index);"
           @mouseleave="selectedItem = null; animatingItem = null;">
           <div class="flex items-center md:w-3/5">
             <span class="text-gray-400 text-md md:text-lg w-8">
