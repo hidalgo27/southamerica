@@ -10,7 +10,7 @@ const activeTab = ref(0);
 const community_commitment = [
   {
     title: 'Growing Together',
-    text: 'At Goway, we are committed to building a workforce that reflects the communities we operate within and to promote a diverse, anti- racist, inclusive, accessible, merit - based, respectful and equitable workplace.',
+    text: 'At SouthAmerica, we are committed to building a workforce that reflects the communities we operate within and to promote a diverse, anti- racist, inclusive, accessible, merit - based, respectful and equitable workplace.',
     image: 'https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT',
   },
   {
@@ -20,7 +20,7 @@ const community_commitment = [
   },
   {
     title: 'Equal Opportunity',
-    text: 'Goway provides equal opportunities for all applicants and is committed to fostering an inclusive, accessible environment, where all employees feel valued, respected and supported throughout the recruitment and employment process. If you require accommodation, we will work with you to meet your needs. For more information on our committment to accessibility, contact us at access@goway.com',
+    text: 'SouthAmerica provides equal opportunities for all applicants and is committed to fostering an inclusive, accessible environment, where all employees feel valued, respected and supported throughout the recruitment and employment process. If you require accommodation, we will work with you to meet your needs. For more information on our committment to accessibility, contact us at access@SouthAmerica.com',
     image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg',
   }
 ]
@@ -38,7 +38,7 @@ const positions = [
 
 const text = {
   title: 'The SouthAmerica Culture',
-  description: 'At Goway, you’ll enjoy industry-leading work/life balance with competitive vacation, paid personal days, and paid volunteer days to make a difference in your community. You’ll also get your birthday off!\nWe’re a community of passionate globetrotters, so you’ll get travel perks, discounted worldwide travel, work abroad opportunities, and the chance to win free trips.  \nWhether you work remotely or in one of our offices, you’ll find a rich, open, and supportive culture that connects all our teams around the globe.We’re growth- minded and entrepreneurial, supporting our teams in achieving their goals and advancing within the organization.We value teamwork, integrity, and accountability – working together to help our clients realize their travel dreams.  \nOur benefits package also includes retirement savings support, a comprehensive health and dental package, and short - and long - term disability, should you ever need it.'
+  description: 'At SouthAmerica, you’ll enjoy industry-leading work/life balance with competitive vacation, paid personal days, and paid volunteer days to make a difference in your community. You’ll also get your birthday off!\nWe’re a community of passionate globetrotters, so you’ll get travel perks, discounted worldwide travel, work abroad opportunities, and the chance to win free trips.  \nWhether you work remotely or in one of our offices, you’ll find a rich, open, and supportive culture that connects all our teams around the globe.We’re growth- minded and entrepreneurial, supporting our teams in achieving their goals and advancing within the organization.We value teamwork, integrity, and accountability – working together to help our clients realize their travel dreams.  \nOur benefits package also includes retirement savings support, a comprehensive health and dental package, and short - and long - term disability, should you ever need it.'
 }
 </script>
 <template>
@@ -51,14 +51,16 @@ const text = {
           <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide">
             <div class="text-gray-500 text-lg mb-4">
             </div>
-            Welcome to Goway
+            Welcome to SouthAmerica
           </h1>
           <p class="text-gray-600 mb-8">We’re an award-winning, global travel company. For over 50 years we’ve been
-            crafting tailor-made travel dreams for clients. Established by Bruce Hodge in 1970, Goway has remained
+            crafting tailor-made travel dreams for clients. Established by Bruce Hodge in 1970, SouthAmerica has
+            remained
             family-owned and operated, growing to a team of 600+ specialists.
 
             In the business of tailor-made travel, we understand that every traveler, and every team member, is unique.
-            Goway is a company built on values, taking care of our people, our clients, and the communities in which we
+            SouthAmerica is a company built on values, taking care of our people, our clients, and the communities in
+            which we
             operate. </p>
           <button class="btn-ternary py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700">Explor all
             positions</button>
@@ -118,7 +120,7 @@ const text = {
 
         <div class="space-y-4 ml-20">
           <h1 class="font-semibold text-4xl mb-4 font-playfair-display tracking-wide">
-            Become a Goway Destination Specialist
+            Become a SouthAmerica Destination Specialist
           </h1>
           <div class="text-gray-700 leading-relaxed text-sm">
             Our Destination Specialists are passionate about expanding their knowledge of specific regions of the world,

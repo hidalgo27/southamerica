@@ -82,7 +82,7 @@ watch(() => route.path, async () => {
             <p class="text-md font-semibold text-gray-800">{{ packageDetail.titulo }}</p>
           </div>
         </div>
-        <h2 class="text-2xl font-semibold mb-4 font-playfair-display">Start planning with Goway</h2>
+        <h2 class="text-2xl font-semibold mb-4 font-playfair-display">Start planning with SouthAmerica</h2>
 
         <form @submit.prevent="submitForm" class="space-y-4 text-sm">
           <!-- Nombres -->
@@ -206,7 +206,7 @@ watch(() => route.path, async () => {
 
           <!-- Comentario opcional -->
           <div>
-            <label class="block text-sm font-medium">What would make an ideal Goway vacation? (Optional)</label>
+            <label class="block text-sm font-medium">What would make an ideal SouthAmerica vacation? (Optional)</label>
             <textarea v-model="formData.comment" class="input-field h-20"></textarea>
           </div>
 

@@ -355,15 +355,33 @@ watch(() => route.fullPath, closeDropdowns);
                             <NuxtImg :src="hoveredItem.image"
                               class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105">
                             </NuxtImg>
+                            <div
+                              class="absolute bottom-0 w-full bg-opacity-50 text-white text-center p-2 flex items-center justify-between ">
+                              <span>{{ hoveredItem.name }}</span>
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                                stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                              </svg>
+                            </div>
                           </NuxtLink>
                         </div>
                       </div>
                     </div>
                     <NuxtLink v-if="menu.image" :to="menu.url"
-                      class=" w-full h-full lg:w-52 rounded-md overflow-hidden group relative">
+                      class="w-full h-full lg:w-52 rounded-md overflow-hidden group relative">
                       <NuxtImg :src="menu.image"
                         class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105">
                       </NuxtImg>
+                      <div
+                        class="absolute bottom-0 w-full bg-opacity-50 text-white text-center p-2 flex items-center justify-between ">
+                        <span>{{ menu.title }}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                          stroke="currentColor" class="size-5">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                      </div>
                     </NuxtLink>
                   </div>
                 </template>

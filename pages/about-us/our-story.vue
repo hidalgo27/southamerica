@@ -9,9 +9,9 @@ const timeline = [
   {
     year: 1970,
     goals: [
-      'Bruce Hodge founded Goway Travel in Toronto.',
+      'Bruce Hodge founded SouthAmerica Travel in Toronto.',
       'Bruce worked evenings in a peanut butter factory to make cash flow and grew the company to promote European Camping Tours for 18 to 30-somethings, Adventures in Australia, and Overland Expeditions across Asia and Africa.',
-      'By the late 70s, Goway had become a pioneer operator of overland camping tours across the Americas',
+      'By the late 70s, SouthAmerica had become a pioneer operator of overland camping tours across the Americas',
 
     ],
     image: 'https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT'
@@ -19,8 +19,8 @@ const timeline = [
   {
     year: 1980,
     goals: [
-      'Goway established itself as a global influence.',
-      'The travel industry endured major challenges, but our strong foundations allowed Goway to forge ahead.',
+      'SouthAmerica established itself as a global influence.',
+      'The travel industry endured major challenges, but our strong foundations allowed SouthAmerica to forge ahead.',
       'We continually innovated, invested in new technology, and challenged the status quo.',
       'Bruce’s wife, son, and daughter have played key roles in our growth.'
     ],
@@ -40,30 +40,30 @@ const timeline = [
   {
     year: 2000,
     goals: [
-      'Goway Travel was founded in Toronto in 1970 by Bruce Hodge, a young Australian economist who moved to Canada to follow his dreams.',
+      'SouthAmerica Travel was founded in Toronto in 1970 by Bruce Hodge, a young Australian economist who moved to Canada to follow his dreams.',
       'He forged a passion for travel during a short stint as a tour guide in England.',
       'Bruce worked evenings in a peanut butter factory to make cash flow and grew the company to promote European Camping Tours for 18 to 30-somethings, Adventures in Australia, and Overland Expeditions across Asia and Africa.',
-      'By the late 70s, Goway had become a pioneer operator of overland camping tours across the Americas',
+      'By the late 70s, SouthAmerica had become a pioneer operator of overland camping tours across the Americas',
     ],
     image: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ'
   },
   {
     year: 2010,
     goals: [
-      'Goway Travel was founded in Toronto in 1970 by Bruce Hodge, a young Australian economist who moved to Canada to follow his dreams.',
+      'SouthAmerica Travel was founded in Toronto in 1970 by Bruce Hodge, a young Australian economist who moved to Canada to follow his dreams.',
       'He forged a passion for travel during a short stint as a tour guide in England.',
       'Bruce worked evenings in a peanut butter factory to make cash flow and grew the company to promote European Camping Tours for 18 to 30-somethings, Adventures in Australia, and Overland Expeditions across Asia and Africa.',
-      'By the late 70s, Goway had become a pioneer operator of overland camping tours across the Americas',
+      'By the late 70s, SouthAmerica had become a pioneer operator of overland camping tours across the Americas',
     ],
     image: 'https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg'
   },
   {
     year: 2020,
     goals: [
-      'Goway Travel was founded in Toronto in 1970 by Bruce Hodge, a young Australian economist who moved to Canada to follow his dreams.',
+      'SouthAmerica Travel was founded in Toronto in 1970 by Bruce Hodge, a young Australian economist who moved to Canada to follow his dreams.',
       'He forged a passion for travel during a short stint as a tour guide in England.',
       'Bruce worked evenings in a peanut butter factory to make cash flow and grew the company to promote European Camping Tours for 18 to 30-somethings, Adventures in Australia, and Overland Expeditions across Asia and Africa.',
-      'By the late 70s, Goway had become a pioneer operator of overland camping tours across the Americas',
+      'By the late 70s, SouthAmerica had become a pioneer operator of overland camping tours across the Americas',
     ],
     image: 'https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext25/image_24703_v1.jpg'
   }
@@ -84,16 +84,19 @@ const activeTab = ref(0)
           </h1>
           <p class="text-gray-600 mb-8">Dear Globetrotter,</p>
 
-          <p class="text-gray-600 mb-8">When I started this journey back in 1970, Goway was a one-man company operating
+          <p class="text-gray-600 mb-8">When I started this journey back in 1970, SouthAmerica was a one-man company
+            operating
             out of a small apartment in
             Toronto. Today, we have over 600 team members working across three continents. We’re also marking an
-            exciting new chapter for Goway with a completely new look, and an incredible new goway.com to serve you
+            exciting new chapter for SouthAmerica with a completely new look, and an incredible new goway.com to serve
+            you
             better.</p>
           <p class="text-gray-600 mb-8">Consider this website your window into the world. As you explore its pages,
             you’ll discover inspirational
             stories, expert advice, and unforgettable trip ideas to over 100 countries worldwide.</p>
 
-          <p class="text-gray-600 mb-8">Remember that every Goway vacation is tailor-made. Join us on this new journey,
+          <p class="text-gray-600 mb-8">Remember that every SouthAmerica vacation is tailor-made. Join us on this new
+            journey,
             and when you’re ready for
             your own adventure, get in touch. We’d love to help turn your travel dreams into reality.</p>
 
@@ -114,20 +117,23 @@ const activeTab = ref(0)
         About Us
       </p>
       <h1 class="text-4xl font-bold mb-12 font-playfair-display">
-        A Timeline of Goway
+        A Timeline of SouthAmerica
       </h1>
-      <p class="text-md mb-6">Goway Travel was founded in Toronto in 1970 by Bruce Hodge, a young Australian economist
+      <p class="text-md mb-6">SouthAmerica Travel was founded in Toronto in 1970 by Bruce Hodge, a young Australian
+        economist
         who moved to Canada to
         follow his dreams. He forged a passion for travel during a short stint as a tour guide in England. </p>
       <p class="text-md mb-6">
         Bruce worked evenings in a peanut butter factory to make cash flow and grew the company to promote European
         Camping Tours for 18 to 30-somethings, Adventures in Australia, and Overland Expeditions across Asia and Africa.
-        By the late 70s, Goway had become a pioneer operator of overland camping tours across the Americas, providing
+        By the late 70s, SouthAmerica had become a pioneer operator of overland camping tours across the Americas,
+        providing
         “Young Adult Adventures.”
       </p>
       <p class="text-md mb-6">
         In the following decades, we have established ourselves as a global influence. While the travel industry endured
-        major challenges, our strong foundations allowed Goway to forge ahead. We continually innovated, invested in new
+        major challenges, our strong foundations allowed SouthAmerica to forge ahead. We continually innovated, invested
+        in new
         technology, and challenged the status quo. Bruce’s wife, son, and daughter have played key roles in our growth.
       </p>
       <p class="text-md mb-6">Our mission has always been to help our clients realize their travel dreams. We’ve

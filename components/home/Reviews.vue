@@ -11,17 +11,17 @@ const prev = () => carouselRef.value.prev();
 const reviews = ref([
   {
     titulo: '“Group Travel Guidance”',
-    descripcion: 'The agent we worked with helped us find the best itinerary for our group of 20, which is no small feat. She was responsive to other needs that unfolded during our booking process, including special meals and seat assignments. We have returned to Goway Travel year after year because of the great service Cathy has provided.',
+    descripcion: 'The agent we worked with helped us find the best itinerary for our group of 20, which is no small feat. She was responsive to other needs that unfolded during our booking process, including special meals and seat assignments. We have returned to SouthAmerica Travel year after year because of the great service Cathy has provided.',
     name: 'Jessica',
   },
   {
     titulo: '“Communication and Expert Knowledge”',
-    descripcion: 'I had an excellent trip because Alice, my Goway Travel agent, was an excellent communicator. Listening to my concerns and then following up in a timely manner made this process enjoyable and productive. It was very helpful that Alice had intimate knowledge of every location and activity that we spoke about. I felt assured that she would be a support throughout my travels and she was.',
+    descripcion: 'I had an excellent trip because Alice, my SouthAmerica Travel agent, was an excellent communicator. Listening to my concerns and then following up in a timely manner made this process enjoyable and productive. It was very helpful that Alice had intimate knowledge of every location and activity that we spoke about. I felt assured that she would be a support throughout my travels and she was.',
     name: 'Greg M.',
   },
   {
     titulo: '“Everything went off without a hitch”',
-    descripcion: 'Everything went off without a hitch. Goway reps reviewed everything with us the week before: where to be, when to be there, etc. and it just worked every single time. We were never left waiting for a representative to meet us in destination, they were always where they said they would be, on time. It made for a very worry free travel experience. Highly recommend.',
+    descripcion: 'Everything went off without a hitch. SouthAmerica reps reviewed everything with us the week before: where to be, when to be there, etc. and it just worked every single time. We were never left waiting for a representative to meet us in destination, they were always where they said they would be, on time. It made for a very worry free travel experience. Highly recommend.',
     name: 'Chris H',
   },
 ])

@@ -15,15 +15,16 @@
         <p class="text-blue-900 mb-4">
           We’re driven by a love of travel, and one of the joys of exploring the world is sharing our passion with
           others.
-          Keep scrolling to see more about what makes Goway’s Destination Specialists unique.
+          Keep scrolling to see more about what makes SouthAmerica’s Destination Specialists unique.
         </p>
         <p class="text-blue-900 mb-6">
           Are you ready to get serious about planning your next trip? You can also explore all of the destinations that
-          Goway travels to.
+          SouthAmerica travels to.
         </p>
-        <button class="bg-white text-blue-900 border border-blue-900 py-4 px-8 rounded hover:shadow-md">
+        <NuxtLink to="/destinations"
+          class="bg-white text-blue-900 border border-blue-900 py-4 px-8 rounded hover:shadow-md">
           Start Planning
-        </button>
+        </NuxtLink>
       </div>
     </div>
   </section>

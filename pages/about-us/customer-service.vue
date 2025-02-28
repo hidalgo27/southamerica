@@ -16,18 +16,20 @@ import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
         Committed to the Best Travel Experiences
       </h1>
       <p class="text-md mb-6">
-        At Goway, our Destination Specialists work in teams that focus on specific regions of the world so they can go
+        At SouthAmerica, our Destination Specialists work in teams that focus on specific regions of the world so they
+        can go
         deeper and become true experts who know more than your typical travel advisor. They also draw on their wealth of
         experiences, not only as travel professionals but as travellers and people with diverse interests. When working
-        with Goway, you don’t get cookie cutter advice and travel planning help. You get expert service from passionate
+        with SouthAmerica, you don’t get cookie cutter advice and travel planning help. You get expert service from
+        passionate
         travellers who have dedicated their lives, personally and professionally, to exploring the world.
       </p>
       <p class="text-md mb-6">
         Regardless of the situation, our team is there to provide emergency support and assistance. The first and best
-        resource is your Goway travel document, which has the contact details for our local representatives and
+        resource is your SouthAmerica travel document, which has the contact details for our local representatives and
         suppliers. When travelling, our local representatives should be your first point of contact as they can often
         resolve issues quickly and give appropriate guidance. If you have trouble contacting our local offices or need
-        urgent assistance, contact Goway directly.
+        urgent assistance, contact SouthAmerica directly.
       </p>
       <p class="text-md mb-6 font-playfair-display font-semibold">
         How to Contact Support While Travelling

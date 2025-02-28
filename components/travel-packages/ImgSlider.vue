@@ -61,7 +61,7 @@ const progressWidth = computed(() => {
 <template>
   <section class="my-20" v-if="images.length > 0">
     <Carousel v-if="images.length > 2" :breakpoints="breakpoints" @update:modelValue="(index) => currentSlide = index"
-      class="h-48 md:h-96 lg:h-[60vh] 2xl:h-[70vh]-mx-3">
+      class="">
       <Slide v-for="(image, index) in images" :key="index" class="px-3 relative w-full h-full">
         <img :src="image.src" :alt="image.alt" class="w-full h-full rounded-md" />
       </Slide>

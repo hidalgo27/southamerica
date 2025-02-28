@@ -37,7 +37,7 @@ const activeTab = ref(0);
 
 const text = {
   title: 'A global team, creating global experiences.',
-  description: 'At Goway, we sell trips to all corners of the world. Thus, it’s only fitting that our team is from all across this world, with 45 nationalities represented at the company. We have over 600 team members working out of five offices across three continents. We’re global. We think internationally. And our team is diverse. \nEvery single team member at Goway brings their own unique experiences, passions, and skills to the table.This is essential to our mission to provide the best tailor- made travel experiences in the world.We’re passionate travellers catering to passionate travellers.\nYou’re only as good as your team, and luckily, we’ve got a great one.'
+  description: 'At SouthAmerica, we sell trips to all corners of the world. Thus, it’s only fitting that our team is from all across this world, with 45 nationalities represented at the company. We have over 600 team members working out of five offices across three continents. We’re global. We think internationally. And our team is diverse. \nEvery single team member at SouthAmerica brings their own unique experiences, passions, and skills to the table.This is essential to our mission to provide the best tailor- made travel experiences in the world.We’re passionate travellers catering to passionate travellers.\nYou’re only as good as your team, and luckily, we’ve got a great one.'
 }
 </script>
 

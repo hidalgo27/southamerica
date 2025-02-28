@@ -5,19 +5,34 @@ import Newsletter from '~/components/home/Newsletter.vue';
 import TravelStories from '~/components/home/TravelStories.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import FilterPackages from '~/components/travel-packages/FilterPackages.vue';
-
-import { useCategoriesStore } from '~/stores/categories';
-import { useRoute } from 'vue-router';
 import DescriptionWithLine from '~/components/home/DescriptionWithLine.vue';
 
+import { useCategoriesStore } from '~/stores/categories';
+import { usePackageStore } from '~/stores/packages';
+import { useRoute } from 'vue-router';
+import { list } from 'postcss';
+
 const categoryStore = useCategoriesStore();
+const packageStore = usePackageStore();
+
 const category = ref(null);
+const listPackages = ref([]);
 const route = useRoute();
+const isLoading = ref(true);
+const selectedCategory = ref(null);
 
 const getCategory = async () => {
   const res: any = await categoryStore.getCategory(route.params.experience as string);
   category.value = res;
   console.log(category.value);
+  selectedCategory.value = category.value.nombre;
+  console.log(selectedCategory.value)
+  isLoading.value = false;
+};
+
+const getPackage = async () => {
+  const res: any = await packageStore.getPackages();
+  listPackages.value = res;
 };
 
 const text = computed(() => {
@@ -29,8 +44,13 @@ const text = computed(() => {
     : null;
 });
 
+const filters = computed(() => ({
+  category: selectedCategory.value,
+}))
+
 onMounted(async () => {
   await getCategory();
+  await getPackage();
 });
 </script>
 <template>
@@ -54,7 +74,8 @@ onMounted(async () => {
     </div>
   </section>
   <DescriptionWithLine v-if="text" :text="text" :line="0"></DescriptionWithLine>
-  <!-- <FilterPackages v-if="category" :package-data="category.paquetes"></FilterPackages> -->
+  <FilterPackages v-if="!isLoading && listPackages" :packageData="listPackages" :filters="filters">
+  </FilterPackages>
   <EspecialistLetter></EspecialistLetter>
   <TravelStories></TravelStories>
   <Newsletter></Newsletter>

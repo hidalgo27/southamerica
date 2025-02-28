@@ -13,7 +13,7 @@ const tabs = [
   { key: 'benefits', label: 'Benefits of Group Travel' },
   { key: 'only-groups', label: 'We Only Work with Groups' },
   { key: 'promotional-back', label: `We've Got Your(Promotional) Back` },
-  { key: 'bookings', label: 'Goway GroupsOnly Air Bookings' }
+  { key: 'bookings', label: 'SouthAmerica GroupsOnly Air Bookings' }
 ];
 
 const content = {
@@ -36,14 +36,14 @@ const content = {
   },
   works: {
     title: 'We Only Work with Groups',
-    description: 'Working with Goway GroupsOnly means working with our Groups Specialists, enjoying all of our Goway destination expertise with that special Groups boost. We all know organizing a group is more complicated than taking off by yourself, with the family, or with a few friends or colleagues. That’s why Goway GroupsOnly only works with groups of 10 or more. On top of your specialist’s full attention, you’re getting over 50 years of dedicated groups expertise. Our team is so familiar with the challenges and requirements particular to group travel, we’ve go many of them solved before you even think of them. That’s the Goway GroupsOnly difference'
+    description: 'Working with SouthAmerica GroupsOnly means working with our Groups Specialists, enjoying all of our SouthAmerica destination expertise with that special Groups boost. We all know organizing a group is more complicated than taking off by yourself, with the family, or with a few friends or colleagues. That’s why SouthAmerica GroupsOnly only works with groups of 10 or more. On top of your specialist’s full attention, you’re getting over 50 years of dedicated groups expertise. Our team is so familiar with the challenges and requirements particular to group travel, we’ve go many of them solved before you even think of them. That’s the SouthAmerica GroupsOnly difference'
   },
   promotional: {
     title: 'We’ve Got Your (Promotional) Back',
-    description: 'Feeling inspired to lead a group of friends or like-minded acquaintances who’d be interested in a group trip? If they just need that extra push to commit, Goway GroupsOnly can help. If you’re not afraid to add a few new friends to the mix, a little marketing or PR boost can make all the difference in filling up those last few group slots. Talk to us about custom solutions that speak to your group, whether it’s e-fliers, blog articles, or help selling your group trip on social media. We can even put together a presentation to get your group excited about the trip.'
+    description: 'Feeling inspired to lead a group of friends or like-minded acquaintances who’d be interested in a group trip? If they just need that extra push to commit, SouthAmerica GroupsOnly can help. If you’re not afraid to add a few new friends to the mix, a little marketing or PR boost can make all the difference in filling up those last few group slots. Talk to us about custom solutions that speak to your group, whether it’s e-fliers, blog articles, or help selling your group trip on social media. We can even put together a presentation to get your group excited about the trip.'
   },
   bookings: {
-    title: 'Goway GroupsOnly Air Bookings',
+    title: 'SouthAmerica GroupsOnly Air Bookings',
     description: 'Not in love with the idea of keeping 10+ people organized at the airport (or worse, through connections!)? You’re not alone. We take the stress out of booking air itineraries for every group, partnering with major airlines around the world. With the most competitive rates, our group base fares are guaranteed until departure.',
     advantages: [
       'Confirmed group space approximately 11 months prior to departure',
@@ -71,7 +71,7 @@ const destination = {
           <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide">
             <div class="text-gray-500 text-lg mb-4">
             </div>
-            Your Goway Group Trip, crafted your way.
+            Your SouthAmerica Group Trip, crafted your way.
           </h1>
           <p class="text-gray-600 mb-8">Our GroupsOnly Team of Experts will put together a trip that matches your needs
             and interests, while keeping in mind those special touches needed for smooth group travel.</p>
@@ -95,7 +95,7 @@ const destination = {
       <h1 class="font-semibold text-5xl w-3/4 mx-auto mb-6 title font-playfair-display tracking-wide"> Explore Africa
         your way
         on a
-        tailor-made trip with Goway
+        tailor-made trip with SouthAmerica
       </h1>
     </div>
 
@@ -139,7 +139,7 @@ const destination = {
           <p class="text-gray-600 mt-2 text-center md:text-left">{{ content.promotional.description }}</p>
         </div>
 
-        <!-- Goway GroupsOnly Air Bookings -->
+        <!-- SouthAmerica GroupsOnly Air Bookings -->
         <div v-if="activeTab === 'bookings'" class="text-start">
           <h2 class="text-xl font-playfair-display font-semibold my-6 md:my-12 text-center md:text-left">{{
             content.bookings.title }}</h2>

@@ -51,7 +51,8 @@ const isOpen = ref(false);
             The experts in tailor-made travel.
           </h1>
           <p class="mb-8 text-sm md:text-md">
-            When working with Goway, you dream it, we plan it. Rely on the passion and expertise of our Destination
+            When working with SouthAmerica, you dream it, we plan it. Rely on the passion and expertise of our
+            Destination
             Specialists to craft the trip that’s right for you.
           </p>
           <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 text-sm md:text-md">
