@@ -50,19 +50,44 @@ const handleScroll = () => {
 
 onMounted(async () => {
   await getCategories();
-  window.addEventListener('scroll', handleScroll);
+  updateIsMobile();
+  window.addEventListener("scroll", handleScroll);
+  window.addEventListener('resize', updateIsMobile);
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('resize', updateIsMobile);
 });
+
+const isMobile = ref(false);
+
+const updateIsMobile = () => {
+  if (typeof window !== 'undefined') {
+    isMobile.value = window.innerWidth < 640;
+  }
+};
+let count = 0;
+const onShow = () => {
+  if (count === 0) {
+    document.body.classList.add('no-scroll');
+  }
+  count++;
+};
+
+const onHide = () => {
+  count--;
+  if (count === 0) {
+    document.body.classList.remove('no-scroll');
+  }
+};
 </script>
 <template>
-  <nav class="py-6 border-y-2 justify-around px-4 hidden sm:flex text-xs mb-20" :class="{
+  <nav class="py-4 sm:py-6 border-y-2 justify-around sm:px-4 flex text-xs mb-12" :class="{
     'fixed top-0 w-full bg-white shadow-md z-20 py-1': isFixed,
     'relative top-0 w-full bg-white shadow-md z-20 py-1': !isFixed
   }">
-    <nuxt-link v-if="isFixed" to="/" class="flex items-center">
+    <nuxt-link v-if="isFixed" to="/" class="items-center hidden sm:flex">
       <div class="font-playfair-display text-xl font-medium flex items-end">
         South
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -76,14 +101,15 @@ onUnmounted(() => {
         </div>
       </div>
     </nuxt-link>
-    <div class="flex justify-center items-center">
-      <div v-for="(button, index) in buttons" :key="index" class="inline-block px-4 ">
+    <div class="flex justify-around items-center">
+      <div v-for="(button, index) in buttons" :key="index" class="flex w-auto px-1 sm:px-4 ">
         <client-only>
-          <Dropdown v-if="button.items" v-model:shown="dropdownStates[index]">
+          <Dropdown v-if="button.items" v-model:shown="dropdownStates[index]" :positioning-disabled="isMobile"
+            @apply-show="isMobile && onShow()" @apply-hide="isMobile && onHide()">
             <template #default>
-              <span class="cursor-pointer flex justify-between items-center gap-1">{{ button.name }}
+              <span class="cursor-pointer flex justify-around items-center sm:gap-1">{{ button.name }}
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
-                  stroke="currentColor" class="size-3 transition-transform duration-200"
+                  stroke="currentColor" class="size-3 transition-transform duration-200 hidden md:flex"
                   :class="{ '-rotate-180': dropdownStates[index] }">
                   <path fill-rule="evenodd"
                     d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
@@ -91,13 +117,19 @@ onUnmounted(() => {
                 </svg>
               </span>
             </template>
-            <template #popper>
+            <template #popper="{ hide }">
               <div
-                class="v-popper p-2 bg-white text-gray-800 rounded-md grid grid-cols max-h-48 overflow-y-auto shadow-md border">
+                class="v-popper p-2 bg-white text-gray-800 md:rounded-md grid grid-cols max-h-48 overflow-y-auto shadow-md border">
                 <NuxtLink v-for="(item, i) in button.items" :key="i" class="py-2 px-4 hover:bg-gray-100"
                   :to="`/destinations/${route.params.country}/${route.params.region}/${item.url}`">
                   <span>{{ item.name }}</span>
                 </NuxtLink>
+                <button @click="hide()" class="absolute top-2 right-2 p-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-5 h-5 text-gray-500 hover:text-gray-800 transition">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
             </template>
           </Dropdown>
@@ -108,10 +140,41 @@ onUnmounted(() => {
       </div>
     </div>
     <button v-if="isFixed" @click="formOpen = true"
-      class="btn-primary-outline bg-orange-50 px-4 py-2 rounded-md shadow-md">
+      class="py-3 px-5 text-primary border-2 border-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out bg-orange-50 rounded-md shadow-md hidden sm:flex">
       Inquire Now
     </button>
     <InquireNowForm :isOpen="formOpen" @close="formOpen = false"></InquireNowForm>
   </nav>
 </template>
-<style></style>
+<style>
+body.no-scroll {
+  overflow: hidden;
+}
+
+.v-popper__popper--no-positioning {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.v-popper__popper--no-positioning .v-popper__backdrop {
+  display: block;
+  background: rgba(0 0 0 / 90%);
+}
+
+.v-popper__popper--no-positioning .v-popper__wrapper {
+  width: 100%;
+  pointer-events: auto;
+  transition: transform .15s ease-out;
+}
+
+.v-popper__popper--no-positioning.v-popper__popper--hidden .v-popper__wrapper {
+  transform: translateY(100%);
+
+}
+</style>

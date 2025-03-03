@@ -235,19 +235,57 @@ onMounted(async () => {
   await getCountries();
   await getCategories();
   updateMenu();
+  updateIsMobile();
   window.addEventListener('scroll', handleScroll);
   window.addEventListener('scroll', closeDropdowns);
-
+  window.addEventListener('resize', updateIsMobile);
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
   window.removeEventListener('scroll', closeDropdowns);
+  window.removeEventListener('resize', updateIsMobile);
 });
 
-// Cierra dropdowns cuando cambie la ruta
-watch(() => route.fullPath, closeDropdowns);
+const closeMenu = () => {
+  isMobileMenuOpen.value = false;
+};
 
+// Cierra dropdowns cuando cambie la ruta
+watch(() => route.fullPath, () => {
+  closeDropdowns();
+  closeMenu();
+});
+
+const isMobile = ref(false);
+
+const updateIsMobile = () => {
+  if (typeof window !== 'undefined') {
+    isMobile.value = window.innerWidth < 640;
+  }
+};
+let count = 0;
+const onShow = () => {
+  if (count === 0) {
+    document.body.classList.add('no-scroll');
+  }
+  count++;
+};
+
+const onHide = () => {
+  count--;
+  if (count === 0) {
+    document.body.classList.remove('no-scroll');
+  }
+};
+
+const isMobileMenuOpen = ref(false);
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
+const toggleDropdown = (index) => {
+  dropdownStates.value = dropdownStates.value.map((state, i) => i === index ? !state : false);
+};
 </script>
 <template>
   <div class="top-0 left-0 w-full z-30 transition-transform duration-300"
@@ -293,16 +331,17 @@ watch(() => route.fullPath, closeDropdowns);
         <nav class="flex flex-row gap-3 item-center justify-center text-start">
           <div v-for="(menu, index) in menus" :key="index" class="relative">
             <client-only>
-              <Dropdown v-model:shown="dropdownStates[index]">
+              <Dropdown v-model:shown="dropdownStates[index]" :positioning-disabled="isMobile"
+                @apply-show="isMobile && onShow()" @apply-hide="isMobile && onHide()">
                 <button class="menu-list focus:outline-none" @click="handleDropdownOpen(menu)">
                   {{ menu.title }}
                 </button>
-                <template #popper>
+                <template #popper="{ hide }">
                   <div
-                    class="bg-white text-gray-800 rounded-md w-[80vh] lg:w-[100vh] 2xl:[70vh] flex md:flex-col lg:flex-row gap-6 text-sm"
+                    class="v-popper bg-white text-gray-800 rounded-t-md md:rounded-md  md:w-[80vh] lg:w-[100vh] 2xl:[70vh] flex md:flex-col lg:flex-row gap-6 text-sm"
                     :class="!menu.items[0].firstTitle ? ' h-96 p-6 min-h-96' : ''">
                     <div class="w-full " :class="!menu.items[0].firstTitle ? '' : 'grid grid-flow-col grid-cols-4 '">
-                      <div class="col-span-1  relative "
+                      <div class="col-span-1 relative "
                         :class="!menu.items[0].firstTitle ? '' : 'p-6 border-gray-200 border-r'">
                         <span class="text-xs">{{ menu.title }}</span>
                         <div :class="menu.image ? 'grid grid-cols-3 gap-x-10' : ''">
@@ -327,7 +366,7 @@ watch(() => route.fullPath, closeDropdowns);
                         </div>
                         <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations'"
                           class=" bg-orange-500 absolute bottom-6 text-center flex items-center p-2 rounded-md justify-between hover:bg-orange-600 text-white duration-300 w-9/12 2xl:w-10/12">
-                          Explore all Destinations
+                          Destinations
                         </NuxtLink>
                       </div>
                       <div v-if="hoveredItem" class="col-span-3">
@@ -348,9 +387,8 @@ watch(() => route.fullPath, closeDropdowns);
                               Explore all {{ hoveredItem.name }}
                             </NuxtLink>
                           </div>
-
                           <NuxtLink v-if="hoveredItem.image" :to="hoveredItem.link"
-                            class="m-0 w-full h-full lg:w-56 rounded-md overflow-hidden group relative">
+                            class="m-0 w-full h-full lg:w-56 rounded-md overflow-hidden group relative hidden md:block">
                             <NuxtImg :src="hoveredItem.image"
                               class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105">
                             </NuxtImg>
@@ -368,7 +406,7 @@ watch(() => route.fullPath, closeDropdowns);
                       </div>
                     </div>
                     <NuxtLink v-if="menu.image" :to="menu.url"
-                      class="w-full h-full lg:w-52 rounded-md overflow-hidden group relative">
+                      class="hidden md:block w-full h-full lg:w-52 rounded-md overflow-hidden group relative">
                       <NuxtImg :src="menu.image"
                         class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105">
                       </NuxtImg>
@@ -390,6 +428,66 @@ watch(() => route.fullPath, closeDropdowns);
         </nav>
       </div>
     </div>
+    <div>
+      <button @click="toggleMobileMenu"
+        class="flex md:hidden py-3 p-2 focus:outline-none bg-secondary rounded-bl-md ml-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+          class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+
+      <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 h-screen flex justify-end">
+        <div class="bg-white w-3/4 h-full shadow-md p-5 relative transform transition-transform duration-300"
+          :class="{ 'translate-x-0': isMobileMenuOpen, 'translate-x-full': !isMobileMenuOpen }">
+          <button @click="toggleMobileMenu" class="absolute top-4 right-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <nav class="flex flex-col gap-4">
+            <div v-for="(menu, index) in menus" :key="index">
+              <button @click="toggleDropdown(index), handleDropdownOpen(menu)"
+                class="w-full text-left p-2 rounded-md hover:bg-gray-200">
+                {{ menu.title }}
+              </button>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-<style></style>
+<style>
+body.no-scroll {
+  overflow: hidden;
+}
+
+.v-popper__popper--no-positioning {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.v-popper__popper--no-positioning .v-popper__backdrop {
+  display: block;
+  background: rgba(0 0 0 / 90%);
+}
+
+.v-popper__popper--no-positioning .v-popper__wrapper {
+  width: 100%;
+  pointer-events: auto;
+  transition: transform .15s ease-out;
+}
+
+.v-popper__popper--no-positioning.v-popper__popper--hidden .v-popper__wrapper {
+  transform: translateY(100%);
+
+}
+</style>

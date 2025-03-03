@@ -10,8 +10,9 @@
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">New Specials</h3>
           <div class="group">
-            <a href="/special-offers"
-              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover</a>
+            <NuxtLink to="/special-offers"
+              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">
+              Discover</NuxtLink>
           </div>
         </div>
       </div>
@@ -21,10 +22,10 @@
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Start Planning</h3>
           <div class="group">
-            <a href="/travel-packages"
-              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Discover
-              All
-              Trips</a>
+            <NuxtLink to="/travel-packages"
+              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">
+              Discover All Trips
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -34,8 +35,10 @@
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Follow Along</h3>
           <div class="group self-center ">
-            <a href="#"
-              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">@gotoperu</a>
+            <NuxtLink to="#"
+              class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">
+              @southamerica
+            </NuxtLink>
           </div>
         </div>
       </div>
