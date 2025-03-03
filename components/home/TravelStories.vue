@@ -34,16 +34,21 @@ const toggleLike = (post: any, event: MouseEvent) => {
   post.liked = !post.liked;
 
   const heart = event.currentTarget as HTMLElement;
+  const plusOne = heart.querySelector('.plus-one') as HTMLElement;
 
   if (post.liked) {
     $gsap.to(heart, { scale: 1.2, duration: 0.2, yoyo: true, repeat: 1 });
-    $gsap.to('.plus-one', { y: -20, opacity: 1, duration: 0.5, ease: "power2.out" });
-    $gsap.to('.plus-one', { opacity: 0, duration: 0.5, delay: 0.5 });
-    $gsap.to('.plus-one', { y: 0, duration: 0 });
+
+    if (plusOne) {
+      $gsap.to(plusOne, { y: -20, opacity: 1, duration: 0.5, ease: "power2.out" });
+      $gsap.to(plusOne, { opacity: 0, duration: 0.5, delay: 0.5 });
+      $gsap.to(plusOne, { y: 0, duration: 0 });
+    }
   } else {
     $gsap.to(heart, { scale: 1, duration: 0.2 });
   }
 };
+
 onMounted(() => {
   $gsap.fromTo('.story',
     { opacity: 0, y: 50 },
@@ -79,13 +84,16 @@ onMounted(() => {
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <div v-for="(post, index) in posts" :key="index"
-        class="content-between overflow-hidden rounded-md group cursor-pointer transition duration-500 ease-in-out h-full ">
+        class="content-between overflow-hidden rounded-md group transition duration-500 ease-in-out h-full ">
         <div class="story">
-          <div class="overflow-hidden relative rounded-md ">
-            <img :alt="post.imageAlt"
-              class="w-full h-80 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105"
-              :src="post.imageUrl" />
-            <span class="absolute top-2 left-2 bg-white text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">
+          <NuxtLink class="overflow-hidden relative rounded-md size-96"
+            :to="'/inspiration/' + post.title.toLowerCase().replace(/ /g, '-')">
+            <div class="w-full h-96 overflow-hidden rounded-md">
+              <NuxtImg :alt="post.imageAlt"
+                class="w-full h-full rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105"
+                :src="post.imageUrl" />
+            </div>
+            <span class=" absolute top-2 left-2 bg-white text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">
               {{ post.category }}
             </span>
             <div class="absolute top-2 right-2 cursor-pointer" @click="toggleLike(post, $event)">
@@ -99,14 +107,18 @@ onMounted(() => {
                 +1
               </span>
             </div>
-          </div>
-          <div class="pt-4">
-            <h3 class="text-lg font-semibold mb-2">{{ post.title }}</h3>
+          </NuxtLink>
+          <div class="flex flex-col gap-3">
+            <NuxtLink class="text-lg font-semibold mb-"
+              :to="'/inspiration/' + post.title.toLowerCase().replace(/ /g, '-')">{{ post.title }}</NuxtLink>
             <p class="mb-4">{{ post.excerpt }}</p>
-            <a class=" relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0 "
-              href="#">
-              Read More
-            </a>
+            <div>
+              <NuxtLink
+                class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0 "
+                :to="'/inspiration/' + post.title.toLowerCase().replace(/ /g, '-')">
+                Read More
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
