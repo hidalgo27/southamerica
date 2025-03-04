@@ -11,6 +11,7 @@ const packageStore = usePackageStore();
 
 const listPackages = ref([]);
 
+// Obtaining packages
 const getPackage = async () => {
   const res: any = await packageStore.getPackages();
   listPackages.value = res;
@@ -20,6 +21,7 @@ onMounted(async () => {
   await getPackage();
 });
 
+// Filters obtained from the URL to be passed to the FilterPackages component
 const selectedCountry = ref(route.query.country || null);
 const selectedBudget = ref(route.query.budget
   ? route.query.budget.split('-').map(Number)
@@ -28,7 +30,7 @@ const selectedDuration = ref(route.query.duration
   ? route.query.duration.split('-').map(Number)
   : null);
 
-// Objeto con los filtros
+// Filters object
 const filters = computed(() => ({
   country: selectedCountry.value,
   budget: selectedBudget.value,
