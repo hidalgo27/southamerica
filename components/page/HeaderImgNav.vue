@@ -15,11 +15,15 @@ const breadcrumbs = route.path
     };
   });
 
-defineProps({
+const props = defineProps({
   packageDetail: {
     type: Array,
     required: false,
   },
+  header: {
+    type: Object,
+    required: false,
+  }
 });
 
 const loading = ref(true)
@@ -44,7 +48,7 @@ onMounted(async () => {
 
 const liked = ref(false)
 
-const toggleLike = (event) => {
+const toggleLike = (event: { currentTarget: any; }) => {
   liked.value = !liked.value;
 
   const heart = event.currentTarget;
@@ -58,19 +62,30 @@ const toggleLike = (event) => {
     $gsap.to(heart, { scale: 1, duration: 0.2 });
   }
 };
+
+const defaultHeader = {
+  miniTitle: "",
+  title: "Design Your SouthAmerica Discovery.",
+  subTitle: "Explore the world in just the way you want.",
+  url: "", // Puede ser una imagen o un video
+};
+
+const computedHeader = computed(() => props.header || defaultHeader);
 </script>
 
 <template>
   <section>
-    <div class="relative w-full h-screen ">
+    <div class="relative w-full h-[85vh] md:h-screen">
       <div class="overflow-hidden h-full relative ">
-        <div class="mask gradient-cicle-gray items-center flex justify-center">
+        <div class="mask gradient-cicle-gray items-center flex justify-center -z-20">
           <div v-if="loading" class="mt-40 text-center">
             Cargando ..
           </div>
         </div>
-        <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>
-        <div class="relative z-10 flex items-center  w-full h-full text-center">
+        <NuxtImg v-if="computedHeader.url" :src="computedHeader.url" alt="Header Image"
+          class="absolute inset-0 w-full h-full object-cover " />
+        <div v-else v-show="!loading" ref="video" class="vimeo-wrapper"></div>
+        <div class="relative z-10 flex items-center w-full h-full text-center">
           <nav class="absolute top-0 md:top-40 left-0 text-gray-50 text-md p-4 backdrop-blur-md rounded-md">
             <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
             <span v-if="breadcrumbs.length"> / </span>
@@ -83,11 +98,15 @@ const toggleLike = (event) => {
             </span>
           </nav>
           <div v-if="!packageDetail" class="container">
+            <p class="text-white text-md 2xl:text-xl mb-8">
+              {{ computedHeader.miniTitle }}
+            </p>
             <h1
-              class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight text-5xl 2xl:text-7xl tracking-wide font-semibold font-playfair-display">
-              Design Your Peru Discovery.</h1>
-            <p class="text-white text-xl 2xl:text-lg tracking-widest font-light mt-5 ">Uncover the secrets of Machu
-              Picchu and the wonders of Peru on a journey tailored just for you.</p>
+              class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight text-5xl lg:text-7xl 2xl:text-8xl tracking-wide font-semibold font-playfair-display">
+              {{ computedHeader.title }}</h1>
+            <p class="text-white text-xl 2xl:text-3xl font-playfair-display font-bold tracking-wide mt-5 ">
+              {{ computedHeader.subTitle }}
+            </p>
           </div>
           <div v-else
             class="container absolute bottom-10 left-4 md:left-10 w-11/12 md:w-2/3 lg:w-1/3 2xl:w-1/4 bg-blue-800/60 text-white p-4 rounded-md shadow-lg"
@@ -171,11 +190,9 @@ const toggleLike = (event) => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </section>
 </template>
-
 <style></style>

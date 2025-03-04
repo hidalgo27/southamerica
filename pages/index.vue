@@ -113,7 +113,6 @@ onMounted(async () => {
   })
 });
 </script>
-
 <template>
   <section class="hidden md:block w-full h-40 mb-2"></section>
   <section>
@@ -280,9 +279,7 @@ onMounted(async () => {
     </div>
   </section>
   <DescriptionWithLine :text="welcome_text" :line="1"></DescriptionWithLine>
-
   <Benefits></Benefits>
-
   <div class="flex flex-col items-center justify-center my-20 bg-white" id="app">
     <div class="border-title mb-2 mx-auto"></div>
     <p class="mb-6 tracking-widest font-bold">
@@ -295,21 +292,12 @@ onMounted(async () => {
       <img alt="Smithsonian Magazine logo" class="h-8" src="https://images.goway.com/dev/featured_in/smithsonian.svg" />
     </div>
   </div>
-
   <SliderPackages :listPackages="listPackages"></SliderPackages>
-
   <SliderBanner></SliderBanner>
-
   <TripStyles v-if="listCategories" :curatedTrips="listCategories"></TripStyles>
-
   <SliderDestinations></SliderDestinations>
-
   <EspecialistLetter></EspecialistLetter>
-
   <TravelStories></TravelStories>
-
   <Newsletter></Newsletter>
-
   <Reviews></Reviews>
-
 </template>

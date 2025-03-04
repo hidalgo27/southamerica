@@ -11,22 +11,24 @@ import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
 import ListExperiences from '~/components/experiences/ListExperiences.vue';
 
 import { useDestinationStore } from '~/stores/destination';
-import { usePackageStore } from '~/stores/packages';
 
 const destinationStore = useDestinationStore();
-const packageStore = usePackageStore();
 
 const route = useRoute();
 
 const destination = ref(null);
-const packagesTop = ref([]);
 const textDescription1 = ref(null);
 const textDescription2 = ref(null);
+const header = ref({
+  miniTitle: '',
+  title: '',
+  subTitle: '',
+  url: '',
+})
 
 const getDestination = async () => {
   const res: any = await destinationStore.getCountry(route.params.country as string)
   destination.value = res.pais;
-
   if (destination.value) {
     textDescription1.value = {
       minititle: `Trips to ${destination.value.nombre}`,
@@ -39,22 +41,19 @@ const getDestination = async () => {
       title: destination.value.titulo,
       description: destination.value.descripcion,
     }
+    header.value.miniTitle = destination.value.title;
+    header.value.title = destination.value.nombre;
+    header.value.subTitle = 'Tours and Vacation Packages';
+    header.value.url = destination.value.imagen;
   }
-};
-
-const getPackages = async () => {
-  const res: any = await packageStore.getPackageByCountry(route.params.country as string);
-  packagesTop.value = res;
 };
 
 onMounted(async () => {
   await getDestination();
-  await getPackages();
 });
-
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <TextDescription v-if="textDescription1" :textDescription="textDescription1"></TextDescription>
   <CountryMap v-if="destination" :regiones="destination.destinos" :pais="destination"></CountryMap>
   <SliderPackages v-if="destination" :listPackages="destination.paquetes"></SliderPackages>
@@ -62,7 +61,6 @@ onMounted(async () => {
   <TextDescription v-if="textDescription2" :textDescription="textDescription2"></TextDescription>
   <PropertyDestination v-if="destination" :properties="destination.propiedades"></PropertyDestination>
   <EspecialistLetter></EspecialistLetter>
-
   <TravelStories></TravelStories>
   <Newsletter></Newsletter>
   <MiniReviews></MiniReviews>

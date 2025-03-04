@@ -13,10 +13,23 @@ const destinationStore = useDestinationStore();
 
 const route = useRoute();
 const region = ref(null)
+const header = ref({
+  miniTitle: '',
+  title: '',
+  subTitle: '',
+  url: '',
+})
 
 const getRegion = async () => {
   const res: any = await destinationStore.getRegion(route.params.region as string);
   region.value = res.destino;
+  console.log(region.value);
+  if (region.value) {
+    header.value.miniTitle = region.value.title;
+    header.value.title = region.value.nombre;
+    header.value.subTitle = 'Vacation Packages';
+    header.value.url = region.value.imagen;
+  }
 };
 
 onMounted(async () => {
@@ -30,7 +43,7 @@ const toggleReadMore = () => {
 };
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <NavDestination></NavDestination>
   <section v-if="region" class="container my-20 px-6 py-12 flex flex-col justify-center md:flex-row gap-6 md:gap-20">
     <div class="w-full md:w-2/5">

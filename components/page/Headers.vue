@@ -340,6 +340,12 @@ const toggleDropdown = (index) => {
                   <div
                     class="v-popper bg-white text-gray-800 rounded-t-md md:rounded-md  md:w-[80vh] lg:w-[100vh] 2xl:[70vh] flex md:flex-col lg:flex-row gap-6 text-sm"
                     :class="!menu.items[0].firstTitle ? ' h-96 p-6 min-h-96' : ''">
+                    <button v-if="isMobile" @click="hide()" class="absolute top-2 right-2 p-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-5 h-5 text-gray-500 hover:text-gray-800 transition">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
                     <div class="w-full " :class="!menu.items[0].firstTitle ? '' : 'grid grid-flow-col grid-cols-4 '">
                       <div class="col-span-1 relative "
                         :class="!menu.items[0].firstTitle ? '' : 'p-6 border-gray-200 border-r'">
@@ -448,8 +454,7 @@ const toggleDropdown = (index) => {
           </button>
           <nav class="flex flex-col gap-4">
             <div v-for="(menu, index) in menus" :key="index">
-              <button @click="toggleDropdown(index), handleDropdownOpen(menu)"
-                class="w-full text-left p-2 rounded-md hover:bg-gray-200">
+              <button @click="toggleDropdown(index), handleDropdownOpen(menu)" class="w-full text-left p-2 rounded-md ">
                 {{ menu.title }}
               </button>
             </div>
