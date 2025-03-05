@@ -5,74 +5,80 @@ import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
 
-import { usePackageStore } from '~/stores/packages';
 import { useDestinationStore } from '~/stores/destination';
+import { useBlogStore } from '~/stores/blog';
 
 const route = useRoute();
 const destinationStore = useDestinationStore();
-const packageStore = usePackageStore();
-const listPackages = ref([]);
+const blogStore = useBlogStore();
+
 const region = ref(null);
+const post = ref(null);
+
 const header = ref({
   miniTitle: 'Travel Information',
   title: '',
   subTitle: '',
   url: '',
 })
+
+const categoryMap: Record<string, string> = {
+  'things-to-know': 'Things to Know',
+  'food-and-drink': 'Food and Drink',
+  'culture-and-traditions': 'Culture and Traditions',
+  'best-time-to-visit': 'Best Time to Visit',
+};
+
+const categoryStateMap: Record<string, number> = {
+  'things-to-know': 1,
+  'food-and-drink': 2,
+  'culture-and-traditions': 3,
+  'best-time-to-visit': 4,
+};
+
 const getRegion = async () => {
   const res: any = await destinationStore.getRegion(route.params.region as string);
   region.value = res.destino;
+  console.log(route.params.detail as string);
   console.log(region.value);
   if (region.value) {
     header.value.title = region.value.nombre;
+    if (categoryMap[route.params.detail]) {
+      header.value.subTitle = categoryMap[route.params.detail];
+
+      // Filtrar posts que tengan un estado válido y coincidan con la categoría
+      post.value = region.value.posts.filter(
+        (post: any) =>
+          post.estado === categoryStateMap[route.params.detail]
+      )[0];
+    }
+    getBlog(post.value.url);
   }
 };
 
-const getPackages = async () => {
-  const res: any = await packageStore.getPackageTop();
-  listPackages.value = res;
-};
+const getBlog = async (url: string) => {
+  const res: any = await blogStore.getBlog(url);
+  post.value = res[0];
+  console.log(post.value);
+  header.value.url = post.value.imagenes[0].nombre;
+}
 
 onMounted(async () => {
   await getRegion();
-  await getPackages();
 });
 </script>
 <template>
   <HeaderImgNav :header="header"></HeaderImgNav>
   <NavDestination></NavDestination>
-  <section class="container my-20 justify-center flex">
+  <section class="container my-20 justify-center flex" v-if="post">
     <div class="w-2/3">
       <h1 class="text-5xl font-bold font-playfair-display mb-20">
-        Discover vibrant cities, historic forts, wildlife-rich landscapes and more places to visit in Ghana.
+        {{ post.titulo }}
       </h1>
-      <h2 class="text-lg font-semibold my-6">How long can you vacation in Ghana?</h2>
-      <p class="text-sm mb-6">In addition to a valid passport, most foreigners require a visa to enter Ghana.
-        Single-entry visas are valid for three months and must be utilized within three months of the date of issue.
-        Multiple-entry visas are valid for more than three months; their exact duration is at the discretion of the
-        consular officers issuing them. While in Ghana, stays may be extended by filling out a visa extension form and
-        taking it in person to the Ghana Immigration Service (GIS) in Accra.</p>
-      <h2 class="text-lg font-semibold my-6">How long can you vacation in Ghana?</h2>
-      <p class="text-sm mb-6">In addition to a valid passport, most foreigners require a visa to enter Ghana.
-        Single-entry visas are valid for three months and must be utilized within three months of the date of issue.
-        Multiple-entry visas are valid for more than three months; their exact duration is at the discretion of the
-        consular officers issuing them. While in Ghana, stays may be extended by filling out a visa extension form and
-        taking it in person to the Ghana Immigration Service (GIS) in Accra.</p>
-      <h2 class="text-lg font-semibold my-6">How long can you vacation in Ghana?</h2>
-      <p class="text-sm mb-6">In addition to a valid passport, most foreigners require a visa to enter Ghana.
-        Single-entry visas are valid for three months and must be utilized within three months of the date of issue.
-        Multiple-entry visas are valid for more than three months; their exact duration is at the discretion of the
-        consular officers issuing them. While in Ghana, stays may be extended by filling out a visa extension form and
-        taking it in person to the Ghana Immigration Service (GIS) in Accra.</p>
-      <h2 class="text-lg font-semibold my-6">How long can you vacation in Ghana?</h2>
-      <p class="text-sm mb-6">In addition to a valid passport, most foreigners require a visa to enter Ghana.
-        Single-entry visas are valid for three months and must be utilized within three months of the date of issue.
-        Multiple-entry visas are valid for more than three months; their exact duration is at the discretion of the
-        consular officers issuing them. While in Ghana, stays may be extended by filling out a visa extension form and
-        taking it in person to the Ghana Immigration Service (GIS) in Accra.</p>
+      <div class="font-medium " v-html="post.detalle"></div>
     </div>
   </section>
-  <SliderPackages :listPackages="listPackages"></SliderPackages>
+  <SliderPackages v-if="region" :listPackages="region.paquetes"></SliderPackages>
   <EspecialistLetter></EspecialistLetter>
   <MiniReviews></MiniReviews>
 </template>

@@ -28,7 +28,7 @@ const buttons = ref([
     items: [
       { name: 'Things to Know', url: 'travel-information/things-to-know' },
       { name: 'Food and Drink', url: 'travel-information/food-and-drink' },
-      { name: 'Culture and Traditions', url: 'travel-information/culture-and-tradtions' },
+      { name: 'Culture and Traditions', url: 'travel-information/culture-and-traditions' },
       { name: 'Best Time to Visit', url: 'travel-information/best-time-to-visit' }
     ]
   },
