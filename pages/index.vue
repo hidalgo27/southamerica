@@ -95,10 +95,12 @@ const welcome_text = {
   title: 'Why South America Company?',
   description: 'At South America Company, we specialize in tailor-made trips that immortalize the best days exploring Peru and South America. Every detail is meticulously designed to offer the maximum comfort, exclusivity, and luxury. From private villas and luxury cruises to customized itineraries, we make sure you only worry about enjoying your luxury vacation.',
 }
+
 let player: any
 onMounted(async () => {
   await getPackage()
   await getCategories()
+  updateIsMobile();
   onLoaded(({ Vimeo }) => {
     player = new Vimeo.Player(video.value, {
       id: 1028540009,
@@ -111,7 +113,34 @@ onMounted(async () => {
       loading.value = false
     })
   })
+  window.addEventListener('resize', updateIsMobile);
 });
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateIsMobile);
+});
+
+const isMobile = ref(false);
+
+const updateIsMobile = () => {
+  if (typeof window !== 'undefined') {
+    isMobile.value = window.innerWidth < 640;
+  }
+};
+let count = 0;
+const onShow = () => {
+  if (count === 0) {
+    document.body.classList.add('no-scroll');
+  }
+  count++;
+};
+
+const onHide = () => {
+  count--;
+  if (count === 0) {
+    document.body.classList.remove('no-scroll');
+  }
+};
 </script>
 <template>
   <section class="hidden md:block w-full h-40 mb-2"></section>
@@ -134,11 +163,12 @@ onMounted(async () => {
             <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center">
               <div class="grid grid-cols-3 w-full">
                 <client-only>
-                  <Dropdown class="w-full border-r border-gray-300">
+                  <Dropdown class="w-full border-r border-gray-300" :positioning-disabled="isMobile"
+                    @apply-show="isMobile && onShow()" @apply-hide="isMobile && onHide()">
                     <button
-                      class="inline-flex items-center justify-center w-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100 focus: rounded-l-md">
+                      class="inline-flex items-center justify-center w-full h-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100 focus: rounded-l-md">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
+                        stroke="currentColor" class="size-6 hidden md:block">
                         <path stroke-linecap="round" stroke-linejoin="round"
                           d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -157,9 +187,9 @@ onMounted(async () => {
                         </button>
                       </div>
                     </button>
-                    <template #popper>
+                    <template #popper="{ hide }">
                       <div
-                        class="md:w-48 lg:w-64 rounded-md shadow-lg max-h-64 overflow-y-auto bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
+                        class="md:w-48 lg:w-64 rounded-t-md md:rounded-md shadow-lg max-h-64 overflow-y-auto bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
                         <input v-model="searchTerms.countries"
                           class="block w-full px-4 py-2 text-gray-800 border rounded-md border-gray-300 focus:outline-none"
                           type="text" placeholder="Search Country" autocomplete="off" />
@@ -175,11 +205,12 @@ onMounted(async () => {
                   </Dropdown>
                 </client-only>
                 <client-only>
-                  <Dropdown class="w-full border-r border-gray-300">
+                  <Dropdown class="w-full border-r border-gray-300" :positioning-disabled="isMobile"
+                    @apply-show="isMobile && onShow()" @apply-hide="isMobile && onHide()">
                     <button
-                      class="inline-flex items-center justify-center w-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100 focus: rounded-l-md">
+                      class="inline-flex items-center justify-center w-full h-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100 focus: rounded-l-md">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
+                        stroke="currentColor" class="size-6 hidden md:block">
                         <path stroke-linecap="round" stroke-linejoin="round"
                           d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
@@ -188,7 +219,7 @@ onMounted(async () => {
                         <div class="text-start ml-2">
                           <span class=" font-semibold">Budget</span>
                           <p class="text-xs lg:text-md">
-                            {{ selectedBudget || "Select price per person" }}
+                            {{ selectedBudget || "Select price per double" }}
                           </p>
                         </div>
                         <button v-if="selectedBudget" @click.stop="selectedBudget = null"
@@ -197,27 +228,33 @@ onMounted(async () => {
                         </button>
                       </div>
                     </button>
-                    <template #popper>
+                    <template #popper="{ hide }">
                       <div
                         class="md:w-48 lg:w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
                         <div class="text-start p-4 text-gray-400 border-b-2">
                           <span class="font-semibold text-xs">Price (USD) per person</span>
                         </div>
-                        <button v-for="item in budget" :key="item.label" href="#"
-                          @click.prevent="selectBudget(item.label)"
+                        <button v-for="item in budget" :key="item.label" @click.prevent="selectBudget(item.label)"
                           class="flex w-full px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
                           {{ item.label }}
+                        </button>
+                        <button v-if="isMobile" @click="hide()" class="absolute top-4 right-3 p-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5 text-gray-500 hover:text-gray-800 transition">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
                         </button>
                       </div>
                     </template>
                   </Dropdown>
                 </client-only>
                 <client-only>
-                  <Dropdown class="w-full">
+                  <Dropdown class="w-full border-r border-gray-300" :positioning-disabled="isMobile"
+                    @apply-show="isMobile && onShow()" @apply-hide="isMobile && onHide()">
                     <button
-                      class="inline-flex items-center justify-center w-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100 focus: rounded-l-md">
+                      class="inline-flex items-center justify-center w-full h-full p-4 text-sm font-medium text-gray-700 focus:bg-gray-100 focus: rounded-l-md">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
+                        stroke="currentColor" class="size-6 hidden md:block">
                         <path stroke-linecap="round" stroke-linejoin="round"
                           d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                       </svg>
@@ -234,7 +271,7 @@ onMounted(async () => {
                         </button>
                       </div>
                     </button>
-                    <template #popper>
+                    <template #popper="{ hide }">
                       <div
                         class="md:w-48 lg:w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
                         <div class="text-start p-4 text-gray-400 border-b-2">
@@ -244,18 +281,23 @@ onMounted(async () => {
                           class="flex w-full px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
                           {{ item.label }}
                         </button>
+                        <button v-if="isMobile" @click="hide()" class="absolute top-4 right-3 p-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-5 h-5 text-gray-500 hover:text-gray-800 transition">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
                       </div>
                     </template>
                   </Dropdown>
                 </client-only>
               </div>
-              <div class="px-6">
+              <div class="px-2 md:px-6">
                 <NuxtLink :to="{
                   path: '/travel-packages',
                   query: filteredQuery
                 }"
                   class="group bg-orange-500 hover:bg-orange-600 text-white rounded-full flex items-center transition-all duration-300 ease-in-out w-12 hover:w-24 px-3 py-3 overflow-hidden">
-
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                     stroke="currentColor" class="w-5 h-5 flex-shrink-0">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
