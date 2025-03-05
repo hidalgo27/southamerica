@@ -40,9 +40,50 @@ const text = {
   title: 'The SouthAmerica Culture',
   description: 'At SouthAmerica, you’ll enjoy industry-leading work/life balance with competitive vacation, paid personal days, and paid volunteer days to make a difference in your community. You’ll also get your birthday off!\nWe’re a community of passionate globetrotters, so you’ll get travel perks, discounted worldwide travel, work abroad opportunities, and the chance to win free trips.  \nWhether you work remotely or in one of our offices, you’ll find a rich, open, and supportive culture that connects all our teams around the globe.We’re growth- minded and entrepreneurial, supporting our teams in achieving their goals and advancing within the organization.We value teamwork, integrity, and accountability – working together to help our clients realize their travel dreams.  \nOur benefits package also includes retirement savings support, a comprehensive health and dental package, and short - and long - term disability, should you ever need it.'
 }
+
+const header = ref({
+  miniTitle: 'Let’s Grow Together',
+  title: 'Careers at SouthAmerica',
+  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/AdobeStock_208715920.jpeg?VersionId=sFnTO72WhH2Yd9FvvH48W32BjAK.sT1e&h=439f1a1a&itok=m04aWEyb'
+})
+
+const imagen_paquetes = [
+  {
+    "id": 121,
+    "nombre": "https://images.goway.com/production/styles/visual_media_content_3xl/s3/media/Dubai_SkyDiving_202203_Leyan-1.png?h=00da3206&itok=bdXDSPHL",
+    "alt": null,
+    "idpaquetes": 168,
+    "created_at": null,
+    "updated_at": null
+  },
+  {
+    "id": 123,
+    "nombre": "https://images.goway.com/production/styles/visual_media_content_3xl/s3/media/Juan-Michael-Hanging-Bridges-Arenal.png?h=3a980eaf&itok=ZRpKFWQ1",
+    "alt": null,
+    "idpaquetes": 168,
+    "created_at": null,
+    "updated_at": null
+  },
+  {
+    "id": 124,
+    "nombre": "https://images.goway.com/production/styles/visual_media_content_3xl/s3/media/Bryan-Torres-del-Paine.jpg?h=86eb6ee5&itok=5KWP8uI5",
+    "alt": null,
+    "idpaquetes": 168,
+    "created_at": null,
+    "updated_at": null
+  },
+  {
+    "id": 125,
+    "nombre": "https://images.goway.com/production/styles/visual_media_content_3xl/s3/media/IMG_0951.jpg?h=0642ef60&itok=U5lPDbxohttps://images.goway.com/production/styles/visual_media_content_3xl/s3/media/Archive%20-%20Baby%20Kangaroo%20%282000s%29.png?h=3149e7c3&itok=EPp8hKJ2",
+    "alt": null,
+    "idpaquetes": 168,
+    "created_at": null,
+    "updated_at": null
+  }
+]
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="container my-20">
     <div class="flex items-center justify-center mt-28 mb-12">
       <div class="grid grid-cols-1 md:grid-cols-2 bg-white w-full gap-6 items-stretch">
@@ -159,7 +200,7 @@ const text = {
       </div>
     </div>
   </section>
-  <!--<ImgSlider></ImgSlider>-->
+  <ImgSlider :imagen_paquetes="imagen_paquetes"></ImgSlider>
   <BannerPosition></BannerPosition>
   <Reviews></Reviews>
 </template>

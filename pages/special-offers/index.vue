@@ -8,6 +8,12 @@ import { usePackageStore } from '~/stores/packages';
 
 const packageStore = usePackageStore();
 const listPackages = ref([]);
+const header = ref({
+  miniTitle: '',
+  title: 'Specials Offers',
+  subTitle: '',
+  url: 'https://images.goway.com/production/hero/tanzania_serengeti_hot_air_balloon_iStock-472048307.jpg?VersionId=ZyJVpBhi.7W4lcaqefJxFJwlkpwHaHhT',
+})
 
 const getPackage = async () => {
   const res: any = await packageStore.getOffers();
@@ -19,7 +25,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <FilterPackages :package-data="listPackages"></FilterPackages>
   <Newsletter></Newsletter>
   <Reviews></Reviews>

@@ -13,6 +13,12 @@ import { useDestinationStore } from '~/stores/destination';
 const useDestination = useDestinationStore();
 const countries = ref([]);
 const curatedTrips = ref([]);
+const header = ref({
+  miniTitle: 'Who We Are',
+  title: 'SouthAmerica Expertise',
+  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/iStock-689453486.jpg?VersionId=WAnr4B3xR8PsVdqcg8eqLlgRhmfUMR2l&h=f33b7eb6&itok=kqB88MbG',
+})
+
 const getCountries = async () => {
   const res: any = await useDestination.getCountries();
   countries.value = res;
@@ -89,7 +95,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <CardBlue></CardBlue>
   <TextDescription :textDescription="destination"></TextDescription>
   <section class="container my-20">

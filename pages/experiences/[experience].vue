@@ -20,12 +20,19 @@ const listPackages = ref([]);
 const route = useRoute();
 const isLoading = ref(true);
 const selectedCategory = ref(null);
+const header = ref({
+  miniTitle: 'Travel Styles',
+  title: '',
+  url: '',
+})
 
 const getCategory = async () => {
   const res: any = await categoryStore.getCategory(route.params.experience as string);
   category.value = res;
   console.log(category.value);
   selectedCategory.value = category.value.nombre;
+  header.value.title = category.value.nombre;
+  header.value.url = category.value.imagen_banner;
   console.log(selectedCategory.value)
   isLoading.value = false;
 };
@@ -54,7 +61,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="container my-20">
     <div class="flex items-center justify-center mt-28 mb-12">
       <div class="grid grid-cols-1 md:grid-cols-2 bg-white w-full gap-6 items-stretch">

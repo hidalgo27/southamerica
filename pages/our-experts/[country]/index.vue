@@ -11,11 +11,18 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const useTeam = useTeamStore();
 const team = ref(null);
+const header = ref({
+  miniTitle: 'Meet The Team',
+  title: '',
+  subTitle: 'Destinations Specialists',
+  url: '',
+});
 
 const getTeam = async () => {
   const res: any = await useTeam.getTeamByCountry(route.params.country as string);
   team.value = res.pais;
   console.log(team.value);
+  header.value.title = team.value.nombre;
 };
 
 onMounted(async () => {
@@ -23,7 +30,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="container my-20">
     <div class="max-w-2xl md:ml-52 ">
       <p class="text-gray-500 mb-6">
@@ -43,7 +50,6 @@ onMounted(async () => {
       </p>
     </div>
   </section>
-
   <Teammates v-if="team && team.teams" :teammates="team"></Teammates>
   <SliderDestinations></SliderDestinations>
   <BannerPosition></BannerPosition>

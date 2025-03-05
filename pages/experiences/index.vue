@@ -26,13 +26,19 @@ const getCategories = async () => {
   console.log(listCategories.value);
 };
 
+const header = {
+  miniTitle: 'Tailor-Made Travel',
+  title: 'SouthAmerica Experiences',
+  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/tanzania_safari_tent_sunset_iStock-1212708184.jpg?VersionId=gttrpLF4n9YkeNsnSdPtL__8IzdPxUDC&h=460aa7b3&itok=63o7k8E1',
+}
+
 onMounted(async () => {
   await getPackages();
   await getCategories();
 });
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <TripStyles v-if="listCategories" :curatedTrips="listCategories"></TripStyles>
   <section>
     <!--<ListExperiences></ListExperiences>-->

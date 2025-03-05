@@ -78,13 +78,14 @@ const computedHeader = computed(() => props.header || defaultHeader);
     <div class="relative w-full h-[85vh] md:h-screen">
       <div class="overflow-hidden h-full relative ">
         <div class="mask gradient-cicle-gray items-center flex justify-center -z-20">
-          <div v-if="loading" class="mt-40 text-center">
-            Cargando ..
+          <NuxtImg v-if="computedHeader.url" :src="computedHeader.url" alt="Header Image"
+            class="absolute inset-0 w-full h-full object-cover" />
+          <div v-else ref="video" class="vimeo-wrapper relative">
+            <div v-if="loading" class="mt-40 text-center">
+              Cargando ...
+            </div>
           </div>
         </div>
-        <NuxtImg v-if="computedHeader.url" :src="computedHeader.url" alt="Header Image"
-          class="absolute inset-0 w-full h-full object-cover " />
-        <div v-else v-show="!loading" ref="video" class="vimeo-wrapper"></div>
         <div class="relative z-10 flex items-center w-full h-full text-center">
           <nav class="absolute top-0 md:top-40 left-0 text-gray-50 text-md p-4 backdrop-blur-md rounded-md">
             <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
@@ -145,7 +146,8 @@ const computedHeader = computed(() => props.header || defaultHeader);
                 </svg>
                 <span class="ml-2"> Book by {{ paquete.reserva }}</span>
               </p>
-              <h2 class="text-start text-white text-2xl font-bold mb-4 font-playfair-display py-12">{{ paquete.titulo }}
+              <h2 class="text-start text-white text-2xl font-bold mb-4 font-playfair-display py-12">{{ paquete.titulo
+              }}
               </h2>
               <div class="flex text-start items-center border-t pt-4 text-sm">
                 <div v-if="paquete.duracion" class="flex items-center gap-2">
@@ -165,7 +167,8 @@ const computedHeader = computed(() => props.header || defaultHeader);
                   <span>{{ paquete.timeRead }} min read</span>
                 </div>
                 <div class="block border-l border-gray-200 h-12 mx-4 md:mx-6"></div>
-                <div v-if="paquete.precio_paquetes?.[0]" class="text-start flex justify-between items-center gap-2">
+                <div v-if="paquete.precio_paquetes?.[0]?.precio_d"
+                  class="text-start flex justify-between items-center gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6 md:size-5">
                     <path stroke-linecap="round" stroke-linejoin="round"

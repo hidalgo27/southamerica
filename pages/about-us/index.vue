@@ -3,6 +3,12 @@ import Newsletter from '~/components/home/Newsletter.vue';
 import Reviews from '~/components/home/Reviews.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 
+const header = ref({
+  miniTitle: 'The SouthAmerica Way',
+  title: 'About Us',
+  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/iStock-892407318_1.jpg?VersionId=6MqcaLqSEubKmLGfclwxia7APNn2A5AH&h=6c3b1055&itok=GtdZmeWC'
+})
+
 const sections = [
   {
     title: "Our Story",
@@ -31,7 +37,7 @@ const sections = [
 ]
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="container my-20 space-y-6">
     <div v-for="(section, index) in sections" :key="index"
       class="grid grid-cols-2 md:grid-rows-1 items-center justify-center bg-white h-[50vh] gap-6">

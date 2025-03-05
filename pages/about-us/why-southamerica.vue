@@ -5,6 +5,12 @@ import Reviews from '~/components/home/Reviews.vue';
 import TextDescription from '~/components/home/TextDescription.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import Benefits from '~/components/page/slider/Benefits.vue';
+
+const header = ref({
+  miniTitle: 'The SouthAmerica Way',
+  title: 'Why SouthAmerica',
+  url: 'https://images.goway.com/production/hero/iStock-1297807578.jpg'
+})
 const sections = [
   {
     title: "Our Story",
@@ -82,7 +88,7 @@ const responsability_text = {
 }
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <TextDescription v-if="destination" :textDescription="destination"></TextDescription>
   <Benefits></Benefits>
   <DescriptionWithLine :text="southamerica"></DescriptionWithLine>

@@ -5,6 +5,11 @@ import Reviews from '~/components/home/Reviews.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import ImgSlider from '~/components/travel-packages/ImgSlider.vue';
 
+const header = ref({
+  miniTitle: 'The SouthAmerica Way',
+  title: 'Our Story',
+  url: 'https://www.andbeyond.com/wp-content/uploads/sites/5/Lama-and-Machu-Picchu-in-Peru-in-South-America.jpg'
+})
 const timeline = [
   {
     year: 1970,
@@ -69,9 +74,44 @@ const timeline = [
   }
 ]
 const activeTab = ref(0)
+
+const imagen_paquetes = [
+  {
+    "id": 121,
+    "nombre": "https://images.goway.com/production/styles/visual_media_content_3xl/s3/media/Archive%20-%20Alaska%20B%26W.png?h=b353f8d2&itok=FWZONCPI",
+    "alt": null,
+    "idpaquetes": 168,
+    "created_at": null,
+    "updated_at": null
+  },
+  {
+    "id": 123,
+    "nombre": "https://images.goway.com/production/styles/visual_media_content_3xl/s3/media/Archive%20-%20Trade%20Show.png?h=fdee6af2&itok=Zr2-khQR",
+    "alt": null,
+    "idpaquetes": 168,
+    "created_at": null,
+    "updated_at": null
+  },
+  {
+    "id": 124,
+    "nombre": "https://images.goway.com/production/styles/visual_media_content_3xl/s3/media/Archive%20-%20Event.png?h=4d6740f7&itok=1Iq9mMAS",
+    "alt": null,
+    "idpaquetes": 168,
+    "created_at": null,
+    "updated_at": null
+  },
+  {
+    "id": 125,
+    "nombre": "https://images.goway.com/production/styles/visual_media_content_3xl/s3/media/Archive%20-%20Baby%20Kangaroo%20%282000s%29.png?h=3149e7c3&itok=EPp8hKJ2",
+    "alt": null,
+    "idpaquetes": 168,
+    "created_at": null,
+    "updated_at": null
+  }
+]
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="container my-20">
     <div class="flex items-center justify-center mt-28 mb-12">
       <div class="grid grid-cols-1 md:grid-cols-2 bg-white w-full gap-6 items-stretch">
@@ -177,8 +217,7 @@ const activeTab = ref(0)
       </div>
     </div>
   </section>
-
-  <!--<ImgSlider></ImgSlider>-->
+  <ImgSlider :imagen_paquetes="imagen_paquetes"></ImgSlider>
   <EspecialistLetter></EspecialistLetter>
   <Newsletter></Newsletter>
   <Reviews></Reviews>

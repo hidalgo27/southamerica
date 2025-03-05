@@ -9,6 +9,11 @@ import { useBlogStore } from '~/stores/blog';
 
 const blogStore = useBlogStore();
 const blogs = ref([]);
+const header = ref({
+  title: 'Inspiration',
+  subtitle: 'Travel Stories, Tips, and Guides',
+  url: 'https://www.goway.com/static/author-hero-bc1c42d3868a64f674a983f54bb90d51.jpeg'
+})
 
 const getBlogs = async () => {
   const res: any = await blogStore.getBlogs();
@@ -119,7 +124,7 @@ const journeys = [
 </script>
 
 <template>
-  <HeaderImgNav />
+  <HeaderImgNav :header="header" />
   <!--<NavInspiration></NavInspiration>-->
   <section v-for="(category, catIndex) in articles" :key="catIndex" class="container my-20">
     <div class="flex justify-between items-center mb-20">

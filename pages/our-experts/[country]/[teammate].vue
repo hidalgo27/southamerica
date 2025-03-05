@@ -10,12 +10,19 @@ const useTeam = useTeamStore();
 const team = ref(null);
 const route = useRoute();
 const items = ref([])
-
+const header = ref({
+  miniTitle: '',
+  title: '',
+  subTitle: '',
+  url: '',
+})
 const getTeam = async () => {
   const res: any = await useTeam.getTeammate(route.params.teammate as number);
   team.value = res.team;
   console.log(team.value);
-
+  header.value.title = team.value.nombre;
+  header.value.subTitle = team.value.cargo;
+  header.value.url = team.value.imagen_portada;
   items.value = [
     { title: "Fun Facts", content: team.value?.fun_facts },
     { title: "Favourite Quote", content: team.value?.favorite_quote },
@@ -33,7 +40,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="container mx-auto py-20">
     <div class="flex flex-col lg:flex-row items-center lg:items-start" v-if="team">
       <div class="relative w-full lg:w-1/3 bottom-1/2 flex justify-center lg:justify-start mb-8 lg:mb-0">
@@ -61,7 +68,7 @@ onMounted(async () => {
               <span class="text-lg pl-6">{{ item.title }}</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6 transition-transform duration-300 mr-8"
-                :class="{ 'rotate-180': activeIndex === index }">
+                :class="{ '-rotate-180': activeIndex === index }">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
               </svg>
             </div>

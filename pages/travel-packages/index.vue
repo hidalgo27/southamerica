@@ -10,6 +10,12 @@ const route = useRoute();
 const packageStore = usePackageStore();
 
 const listPackages = ref([]);
+const header = ref({
+  miniTitle: '',
+  title: 'Travel Packages',
+  subTitle: '',
+  url: 'https://www.goway.com/images/hero-default/trip-search-hero.jpeg',
+});
 
 // Obtaining packages
 const getPackage = async () => {
@@ -39,7 +45,7 @@ const filters = computed(() => ({
 
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <FilterPackages v-if="listPackages" :filters="filters" :package-data="listPackages"></FilterPackages>
   <Newsletter></Newsletter>
   <MiniReviews></MiniReviews>

@@ -19,11 +19,19 @@ $gsap.registerPlugin(ScrollToPlugin);
 const packageStore = usePackageStore();
 const route = useRoute();
 const listPackages = ref([]);
+const header = ref({
+  miniTitle: '',
+  title: '',
+  subTitle: '',
+  url: '',
+});
 
 const packageDetail = ref([]);
 const getPackageDetail = async () => {
   const res: any = await packageStore.getPackage(route.params.package as string);
   packageDetail.value = res
+  console.log(packageDetail.value);
+  header.value.url = packageDetail.value[0].imagen;
 };
 
 const isOpen = ref(false);
@@ -45,7 +53,6 @@ const scrollToSection = (sectionId: string) => {
     ease: "power2.inOut" // Efecto de suavizado
   });
 };
-
 
 onMounted(async () => {
   await getPackageDetail();
@@ -81,6 +88,7 @@ const getPackagesCountry = async () => {
   listPackages.value = res.paquetes;
   console.log(listPackages.value);
 };
+
 const getDestinationUrl = (itemUrl = '') => {
   if (!destination.value) return '#'; // Prevención de errores
   return `/destinations/${destination.value.pais.url}/${destination.value.url}/${itemUrl}`;
@@ -113,7 +121,7 @@ const onHide = () => {
 };
 </script>
 <template>
-  <HeaderImgNav :packageDetail="packageDetail"></HeaderImgNav>
+  <HeaderImgNav :header="header" :packageDetail="packageDetail"></HeaderImgNav>
   <div
     class="fixed bottom-0 md:bottom-12 space-x-2 w-full z-40 md:w-2/3 lg:w-1/2 md:translate-x-1/4 lg:translate-x-1/2 md:rounded-md bg-blue-900 text-white flex justify-between items-center p-4 shadow-md transition-all duration-500 ease-in-out"
     :class="{

@@ -1,10 +1,14 @@
 <script lang="ts" setup>
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 
+const header = ref({
+  title: 'Contact Us',
+  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/travel_backpacker_smiling_AdobeStock_693133044_0.jpeg?VersionId=9ylmr6w2NUcVyoeS0CxtaVriD6IYtfkY&h=302da8bd&itok=m4zLOee1'
+})
 
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="container my-20">
     <div class="max-w-2xl ml-52 ">
       <h1 class="text-4xl font-bold mb-12 font-playfair-display">

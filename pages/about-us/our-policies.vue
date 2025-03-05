@@ -2,6 +2,11 @@
 import Newsletter from '~/components/home/Newsletter.vue';
 import Reviews from '~/components/home/Reviews.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
+
+const header = ref({
+  title: 'Our Policies',
+  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/italy_florence_duomo_aerial_iStock-912355896_0.jpg?VersionId=ugzrgq_j7rydks8_5PFpVn7tZIKOCYce&h=f183ff8f&itok=gIPibuJA'
+})
 const sections = [
   {
     title: "Consumer Protection Plans",
@@ -38,7 +43,7 @@ const sections = [
 ]
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="container my-20 space-y-6">
     <div v-for="(section, index) in sections" :key="index"
       class="grid grid-cols-2 md:grid-rows-1 items-center justify-center bg-white h-[50vh] gap-6">

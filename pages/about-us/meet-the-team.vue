@@ -39,12 +39,17 @@ const text = {
   title: 'A global team, creating global experiences.',
   description: 'At SouthAmerica, we sell trips to all corners of the world. Thus, it’s only fitting that our team is from all across this world, with 45 nationalities represented at the company. We have over 600 team members working out of five offices across three continents. We’re global. We think internationally. And our team is diverse. \nEvery single team member at SouthAmerica brings their own unique experiences, passions, and skills to the table.This is essential to our mission to provide the best tailor- made travel experiences in the world.We’re passionate travellers catering to passionate travellers.\nYou’re only as good as your team, and luckily, we’ve got a great one.'
 }
+
+const header = ref({
+  miniTitle: 'People Behind the Magic',
+  title: 'Meet the Team',
+  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/travel_backpacker_smiling_AdobeStock_693133044_0.jpeg?VersionId=9ylmr6w2NUcVyoeS0CxtaVriD6IYtfkY&h=302da8bd&itok=m4zLOee1'
+})
 </script>
 
 <template>
-  <HeaderImgNav />
+  <HeaderImgNav :header="header" />
   <DescriptionWithLine :text="text" />
-
   <section class="container my-20 px-4">
     <div class="flex justify-center space-x-4 border-b-2 mb-6">
       <button v-for="(item, index) in team" :key="index" @click="activeTab = index"

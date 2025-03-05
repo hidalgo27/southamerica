@@ -9,7 +9,13 @@ import { usePackageStore } from '~/stores/packages';
 const packageStore = usePackageStore();
 const listPackages = ref([]);
 
-//Paginación
+const header = ref({
+  miniTitle: 'Discover our Best Deals',
+  title: '',
+  subTitle: 'Specials',
+  url: '',
+})
+
 const itemsPerPage = 9;
 const currentPage = ref(1);
 const route = useRoute();
@@ -17,6 +23,8 @@ const route = useRoute();
 const getPackages = async () => {
   const res: any = await packageStore.getOffersByCountry(route.params.package as string);
   listPackages.value = res.paquetes;
+
+  header.value.title = res.pais.nombre;
 };
 
 onMounted(async () => {
@@ -77,7 +85,7 @@ const prevPage = () => {
 };
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="my-20">
     <div class="container">
       <div>

@@ -3,10 +3,14 @@ import Newsletter from '~/components/home/Newsletter.vue';
 import Reviews from '~/components/home/Reviews.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 
-
+const header = ref({
+  miniTitle: 'Available 24/7',
+  title: 'Our Commitment to Customer Service',
+  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/travel_hikers_help_AdobeStock_596302702.jpeg?VersionId=ofIR5uHqfvZBS_V7ky.zB_LY0gs55Ydr&h=01c9a1c9&itok=76wyX5ZW'
+})
 </script>
 <template>
-  <HeaderImgNav></HeaderImgNav>
+  <HeaderImgNav :header="header"></HeaderImgNav>
   <section class="container my-20">
     <div class="max-w-2xl ml-52 ">
       <p class="text-gray-500 mb-6">
