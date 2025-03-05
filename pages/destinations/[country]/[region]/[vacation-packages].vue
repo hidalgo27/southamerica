@@ -42,6 +42,7 @@ const getRegion = async () => {
   if (region.value) {
     selectedRegion.value = region.value.nombre;
     header.value.title = selectedRegion.value;
+    header.value.url = region.value.imagenes[0].nombre;
   }
 };
 

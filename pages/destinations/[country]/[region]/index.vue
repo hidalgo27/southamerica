@@ -28,7 +28,7 @@ const getRegion = async () => {
     header.value.miniTitle = region.value.title;
     header.value.title = region.value.nombre;
     header.value.subTitle = 'Vacation Packages';
-    header.value.url = region.value.imagen;
+    header.value.url = region.value.imagenes[0].nombre;
   }
 };
 
@@ -84,7 +84,7 @@ const toggleReadMore = () => {
     </div>
   </section>
   <SliderPackages v-if="region" :listPackages="region.paquetes"></SliderPackages>
-  <ImgSlider v-if="region" :imagen_paquetes="region.imagenes"></ImgSlider>
+  <ImgSlider v-if="region" :imagen_paquetes="region.imagenes.slice(1)"></ImgSlider>
   <section class="container my-20">
     <div class="flex items-center justify-center p-4">
       <div class="grid grid-cols-1 md:grid-cols-2 bg-white w-full gap-6 items-stretch min-h-[50vh]">

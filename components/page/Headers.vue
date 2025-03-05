@@ -18,7 +18,7 @@ const getCountries = async () => {
   countries.value = res.map((country: any) => ({
     nombre: country.nombre,
     url: country.url,
-    imagen: country.imagen,
+    imagen: country.imagen_s,
     destinos: country.destino ? country.destino.map((dest: any) => ({
       nombre: dest.nombre,
       url: dest.url

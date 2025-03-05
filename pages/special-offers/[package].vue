@@ -25,6 +25,7 @@ const getPackages = async () => {
   listPackages.value = res.paquetes;
 
   header.value.title = res.pais.nombre;
+  header.value.url = res.pais.imagen;
 };
 
 onMounted(async () => {

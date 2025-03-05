@@ -12,7 +12,7 @@ const getDestinations = async () => {
     country.destino ? country.destino.map((dest: any) => ({
       title: dest.nombre,
       image: dest.imagen,
-      url: dest.url,
+      url: country.url + "/" + dest.url,
     })) : []
   );
 };

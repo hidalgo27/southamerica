@@ -80,10 +80,11 @@ const computedHeader = computed(() => props.header || defaultHeader);
         <div class="mask gradient-cicle-gray items-center flex justify-center -z-20">
           <NuxtImg v-if="computedHeader.url" :src="computedHeader.url" alt="Header Image"
             class="absolute inset-0 w-full h-full object-cover" />
-          <div v-else ref="video" class="vimeo-wrapper relative">
-            <div v-if="loading" class="mt-40 text-center">
+          <div v-else>
+            <div if="loading" class="mt-40 text-center">
               Cargando ...
             </div>
+            <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>
           </div>
         </div>
         <div class="relative z-10 flex items-center w-full h-full text-center">

@@ -31,7 +31,7 @@ const getPackageDetail = async () => {
   const res: any = await packageStore.getPackage(route.params.package as string);
   packageDetail.value = res
   console.log(packageDetail.value);
-  header.value.url = packageDetail.value[0].imagen;
+  header.value.url = packageDetail.value[0].imagen_paquetes[0].nombre;
 };
 
 const isOpen = ref(false);
@@ -225,7 +225,7 @@ const onHide = () => {
   </nav>
   <div v-if="packageDetail && packageDetail.length > 0">
     <OverviewPackage :packageDetail="packageDetail[0]" id="overview" />
-    <ImgSlider v-if="packageDetail[0].imagen_paquetes" :imagen_paquetes="packageDetail[0].imagen_paquetes" />
+    <ImgSlider v-if="packageDetail[0].imagen_paquetes" :imagen_paquetes="packageDetail[0].imagen_paquetes.slice(1)" />
     <Itinerary :packageDetail="packageDetail[0]" />
     <PackageDetails :packageDetail="packageDetail[0]" id="packageDetail" />
   </div>

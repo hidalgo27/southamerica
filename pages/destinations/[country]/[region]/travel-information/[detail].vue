@@ -75,7 +75,7 @@ onMounted(async () => {
       <h1 class="text-5xl font-bold font-playfair-display mb-20">
         {{ post.titulo }}
       </h1>
-      <div class="font-medium " v-html="post.detalle"></div>
+      <div class="font-medium" v-html="post.detalle"></div>
     </div>
   </section>
   <SliderPackages v-if="region" :listPackages="region.paquetes"></SliderPackages>

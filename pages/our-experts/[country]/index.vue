@@ -23,6 +23,7 @@ const getTeam = async () => {
   team.value = res.pais;
   console.log(team.value);
   header.value.title = team.value.nombre;
+  header.value.url = team.value.imagen;
 };
 
 onMounted(async () => {
