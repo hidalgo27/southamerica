@@ -12,18 +12,26 @@ import { useDestinationStore } from '~/stores/destination';
 const route = useRoute();
 const destinationStore = useDestinationStore();
 const region = ref(null);
+const travel_guides = ref([]);
+const isLoading = ref(false);
 const header = ref({
   miniTitle: 'Inspiration',
   title: '',
   subTitle: 'Travel Guides',
   url: '',
 })
+
 const getRegion = async () => {
   const res: any = await destinationStore.getRegion(route.params.region as string);
   region.value = res.destino;
-  console.log(region.value);
   if (region.value) {
     header.value.title = region.value.nombre;
+    header.value.url = region.value.imagenes[0].nombre;
+    travel_guides.value = region.value.posts.filter(
+      (post: any) =>
+        post.estado === 5
+    );
+    isLoading.value = true;
   }
 };
 
@@ -35,7 +43,7 @@ onMounted(async () => {
   <HeaderImgNav :header="header"></HeaderImgNav>
   <NavDestination></NavDestination>
   <CardBlue></CardBlue>
-  <TravelGuides></TravelGuides>
+  <TravelGuides v-if="isLoading" :travelGuides="travel_guides"></TravelGuides>
   <EspecialistLetter> </EspecialistLetter>
   <Newsletter></Newsletter>
   <MiniReviews></MiniReviews>

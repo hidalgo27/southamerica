@@ -119,12 +119,16 @@ const computedHeader = computed(() => props.header || defaultHeader);
                   class="bg-white text-secondary text-xs font-semibold px-2 py-1 rounded-full ">
                   Specials
                 </span>
-                <NuxtLink v-for="(region, i) in paquete.paquetes_destinos"
+                <NuxtLink v-if="paquete.paquetes_destinos" v-for="(region, i) in paquete.paquetes_destinos"
                   :to="/destinations/ + region.destinos.pais.url + '/' + region.destinos.url"
                   class="bg-blue-800 text-white text-xs font-semibold px-2 py-1 rounded-full whitespace-nowrap"
                   :key="i">
                   {{ region.destinos.nombre }}
                 </NuxtLink>
+                <div v-if="paquete.travelGuide"
+                  class="bg-white text-gray-700 text-xs px-2 py-1 rounded-full whitespace-nowrap">
+                  Travel Guide
+                </div>
               </div>
               <div class="top-2 right-2 cursor-pointer" @click="toggleLike($event)">
                 <svg xmlns="http://www.w3.org/2000/svg" :fill="liked ? 'white' : 'none'" viewBox="0 0 24 24"
@@ -150,7 +154,7 @@ const computedHeader = computed(() => props.header || defaultHeader);
               <h2 class="text-start text-white text-2xl font-bold mb-4 font-playfair-display py-12">{{ paquete.titulo
               }}
               </h2>
-              <div class="flex text-start items-center border-t pt-4 text-sm">
+              <div v-if="!paquete.travelGuide" class="flex text-start items-center border-t pt-4 text-sm">
                 <div v-if="paquete.duracion" class="flex items-center gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6 md:size-5">
