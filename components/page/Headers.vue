@@ -283,7 +283,7 @@ const isMobileMenuOpen = ref(false);
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
-const toggleDropdown = (index) => {
+const toggleDropdown = (index: number) => {
   dropdownStates.value = dropdownStates.value.map((state, i) => i === index ? !state : false);
 };
 </script>
@@ -434,18 +434,46 @@ const toggleDropdown = (index) => {
         </nav>
       </div>
     </div>
-    <div>
-      <button @click="toggleMobileMenu"
-        class="flex md:hidden py-3 p-2 focus:outline-none bg-secondary rounded-bl-md ml-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-          class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-        </svg>
-      </button>
+    <div class="md:hidden rounded-md bg-orange-50 m-3">
+      <div class="border-b border-secondary  border-opacity-20 flex justify-between items-center">
+        <div class="flex justify-between items-center w-full ">
+          <div class="py-3 px-4 flex items-center">
+            <nuxt-link to="/">
+              <div class="font-playfair-display text-sm md:text-3xl font-medium flex items-end">
+                South
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-4">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" />
+                </svg>
+                America
+                <div class="px-1">
+                  <span class="text-xs italic">company</span>
+                </div>
+              </div>
+            </nuxt-link>
+          </div>
+          <div class="flex items-center py-3 px-2">
+            <button @click="isOpen = true"
+              class="inline-block py-2 px-4 text-primary border-2 border-primary rounded-md hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out text-xs bg-orange-50"
+              href="#form-dream-adventure">Inquire
+              Now</button>
+            <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
+          </div>
+        </div>
+        <button @click="toggleMobileMenu"
+          class=" py-3 px-2 focus:outline-none border-l border-primary border-opacity-25">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
 
-      <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 h-screen flex justify-end">
-        <div class="bg-white w-3/4 h-full shadow-md p-5 relative transform transition-transform duration-300"
-          :class="{ 'translate-x-0': isMobileMenuOpen, 'translate-x-full': !isMobileMenuOpen }">
+      <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 h-screen flex justify-center">
+        <div
+          class="bg-white w-10/12 max-w-md h-[70vh] shadow-md p-5 relative transform transition-transform duration-300"
+          :class="{ 'translate-y-96': isMobileMenuOpen, 'translate-y-0': !isMobileMenuOpen }">
           <button @click="toggleMobileMenu" class="absolute top-4 right-4">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
               stroke="currentColor" class="size-6">

@@ -143,9 +143,9 @@ const onHide = () => {
 };
 </script>
 <template>
-  <section class="hidden md:block w-full h-40 mb-2"></section>
+  <section class=" w-full h-20  md:h-40 mb-2"></section>
   <section>
-    <div class="relative w-full h-screen 2xl:h-[70vh] px-3">
+    <div class="relative w-full h-[80vh] md:h-screen 2xl:h-[70vh] px-3">
       <div class="overflow-hidden h-full relative rounded-md">
         <div class="mask gradient-cicle-gray items-center flex justify-center">
           <div v-if="loading" class="mt-40 text-center">
@@ -156,9 +156,10 @@ const onHide = () => {
         <div class="relative z-10 flex items-center  w-full h-full text-center">
           <div class=" container ">
             <h1
-              class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight text-5xl 2xl:text-7xl tracking-wide font-semibold font-playfair-display">
+              class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight md:text-5xl 2xl:text-7xl tracking-wide font-semibold font-playfair-display">
               Design Your SouthAmerica Discovery.</h1>
-            <p class="text-white text-xl 2xl:text-lg tracking-widest font-light mt-5 ">Uncover the secrets of Machu
+            <p class="text-white text-sm md:text-xl 2xl:text-lg tracking-widest font-light mt-5 ">Uncover the secrets of
+              Machu
               Picchu and the wonders of Peru on a journey tailored just for you.</p>
             <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center">
               <div class="grid grid-cols-3 w-full">

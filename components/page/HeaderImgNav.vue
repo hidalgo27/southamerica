@@ -88,7 +88,8 @@ const computedHeader = computed(() => props.header || defaultHeader);
           </div>
         </div>
         <div class="relative z-10 flex items-center w-full h-full text-center">
-          <nav class="absolute top-0 md:top-40 left-0 text-gray-50 text-md p-4 backdrop-blur-md rounded-md">
+          <nav
+            class="absolute top-20 md:top-40 left-0 text-start text-gray-50 text-md mx-3 py-1 px-2 backdrop-blur-md rounded-md">
             <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
             <span v-if="breadcrumbs.length"> / </span>
             <span v-for="(crumb, index) in breadcrumbs" :key="index">
