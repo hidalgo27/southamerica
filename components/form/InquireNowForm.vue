@@ -1,45 +1,200 @@
 <script setup lang="ts">
 import { usePackageStore } from "~/stores/packages";
-const props = defineProps({
-  isOpen: Boolean,
-});
+import { useFormStore } from "~/stores/form";
+import { useIpStore } from "~/stores/ip";
+import { notify } from "notiwind";
+import moment from "moment-timezone";
 
-const emit = defineEmits(["close"]);
+import { useDestinationStore } from "~/stores/destination";
+// Vuelidate
+import { email, required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
-const closeForm = () => {
-  emit("close");
-};
+const { dataLayer } = useScriptGoogleTagManager();
+const { $device } = useNuxtApp();
+
+const formStore = useFormStore();
+const ipStore = useIpStore();
 const packageStore = usePackageStore();
 
+const props = defineProps({ isOpen: Boolean });
+const destinationStore = useDestinationStore();
+const countries = ref([]);
+
+const getCountries = async () => {
+  const res: any = await destinationStore.getCountries();
+  countries.value = res;
+  console.log(countries.value);
+}
+
+// Refs para los inputs de intlTelInput
+const phoneInputRef = ref<HTMLElement | null>(null);
+const countryInputRef = ref<HTMLElement | null>(null);
+const companyCountryInputRef = ref<HTMLElement | null>(null);
+
+const today = moment().format("YYYY-MM-DD");
+const emit = defineEmits(["close"]);
+const closeForm = () => emit("close");
+
+// Datos del formulario
 const formData = ref({
+  travelStyle: [],
+  destinations: [],
+  passengers: 1,
+  startDate: null,
+  endDate: "",
   firstName: "",
   lastName: "",
-  userType: "Consumer",
-  agencyName: "",
   email: "",
   phone: "",
-  streetAddress: "",
-  unitNumber: "",
-  adults: 2,
-  children: 0,
-  startDate: "",
-  endDate: "",
-  country: "",
-  travelStyle: [],
-  budget: "",
+  phone_code: "",
   comment: "",
+  country: "",
+  country_code: "",
+  // streetAddress: "",
+  // unitNumber: "",
+  // children: 0,
+  // budget: "",
+  userType: "Consumer",
+  agencyName: "",
+  agencyCountry: "",
 });
 
-const submitForm = () => {
-  console.log("Formulario enviado:", formData.value);
-  closeForm();
+// Variables adicionales
+const showLoader = ref(false);
+const geoIp = ref();
+
+// Validaciones con Vuelidate
+const rules = {
+  firstName: { required },
+  lastName: { required },
+  email: { required, email },
+  phone: { required },
+  startDate: { required },
 };
 
-watchEffect(() => {
-  if (typeof document !== "undefined") {
-    document.body.style.overflow = props.isOpen ? "hidden" : "auto";
+const $v = useVuelidate(rules, formData);
+
+// Función para obtener el navegador
+function getBrowserName() {
+  const browserMap = {
+    Chrome: $device.isChrome,
+    Safari: $device.isSafari,
+    Firefox: $device.isFirefox,
+    Edge: $device.isEdge,
+    "Samsung Browser": $device.isSamsung,
+  };
+
+  return Object.keys(browserMap).find((browser) => browserMap[browser]) || "Unknown";
+}
+
+// Función para obtener la IP y el país
+const getIp = async () => {
+  const res = await ipStore.getIp();
+  geoIp.value = res;
+};
+
+// Función para enviar el formulario
+const handleSubmit = async () => {
+  $v.value.$validate();
+
+  if ($v.value.$invalid) {
+    console.log("Formulario no válido");
+    return;
   }
-});
+
+  showLoader.value = true;
+
+  const obj = {
+    package: '',
+    category_d: '',
+    destino_d: '',
+    pasajeros_d: formData.value.passengers,
+    duracion_d: moment(formData.value.endDate).diff(moment(formData.value.startDate), 'days') || "Undefined",
+    el_nombre: formData.value.firstName + " " + formData.value.lastName,
+    el_email: formData.value.email,
+    el_telefono: formData.value.phone,
+    el_fecha: formData.value.startDate
+      ? moment(formData.value.startDate).format("YYYY-MM-DD")
+      : null,
+    el_textarea: formData.value.comment,
+    country: formData.value.country,
+    codigo_pais: formData.value.country_code,
+    producto: "southamerica.company",
+    device: $device.isMobile ? "Mobile" : $device.isTablet ? "Tablet" : "Desktop",
+    browser: getBrowserName(),
+    origen: "Web",
+    inquire_date: moment().tz("America/Lima").format("YYYY-MM-DD HH:mm:ss"),
+    company: formData.value.agencyName,
+    company_country: formData.value.agencyCountry,
+  };
+
+  /* dataLayer.push({
+    user_properties: {
+      user_id: { value: crypto.randomUUID() },
+      email: { value: formData.value.email },
+      full_name: { value: formData.value.firstName + " " + formData.value.lastName },
+      tentative_date: { value: formData.value.startDate },
+    },
+    event: "generate_lead",
+  }); */
+  console.log(obj);
+  /* await formStore
+    .getInquire(obj)
+    .then((res) => {
+      if (res) {
+        formStore.saveInquire(obj);
+        showLoader.value = false;
+
+        // Resetear formulario
+        formData.value = {
+          firstName: "",
+          lastName: "",
+          userType: "Consumer",
+          agencyName: "",
+          email: "",
+          phone: "",
+          streetAddress: "",
+          unitNumber: "",
+          adults: 2,
+          children: 0,
+          startDate: "",
+          endDate: "",
+          country: "",
+          travelStyle: [],
+          budget: "",
+          comment: "",
+        };
+
+        $v.value.$reset();
+        closeForm();
+
+        notify({
+          group: "foo",
+          title: "Success",
+          type: "success",
+          text: "Your inquiry has been successfully sent 🙂",
+        }, 4000);
+      } else {
+        showLoader.value = false;
+        notify({
+          group: "foo",
+          title: "Error",
+          type: "error",
+          text: "An error occurred while sending your inquiry :(",
+        }, 4000);
+      }
+    })
+    .catch(() => {
+      showLoader.value = false;
+      notify({
+        group: "foo",
+        title: "Error",
+        type: "error",
+        text: "An error occurred while sending your inquiry :(",
+      }, 4000);
+    }); */
+};
 
 const route = useRoute();
 const packageDetail = ref(null);
@@ -48,8 +203,54 @@ const getPackageDetail = async () => {
   packageDetail.value = res.find((item: any) => item.url === route.params.package);
 };
 
+// @ts-ignore
+const module = await import("intl-tel-input/build/js/intlTelInput.min.js");
+const intlTelInput = module.default;
+
+const setupIntlTelInput = async (inputElement: HTMLInputElement, type: "phone" | "country" | "companyCountry") => {
+  if (!process.client) return;
+  await nextTick();
+  const iti = intlTelInput(inputElement, {
+    initialCountry: "auto",
+    // @ts-ignore
+    geoIpLookup: (callback) => {
+      fetch("https://ipapi.co/json?key=NgKiSgq0Re9Agc6U6mnuP9601tOdj5a5iMh6tjKcRUwzJQEE4H")
+        .then((res) => res.json())
+        .then((data) => callback(data.country_code))
+        .catch(() => callback("us"));
+    },
+  });
+
+  inputElement.addEventListener("countrychange", async () => {
+    const countryData = iti.getSelectedCountryData();
+
+    if (type === "phone") {
+      formData.value.phone = "";
+      formData.value.phone_code = `+${countryData.dialCode}`;
+    } else if (type === "country") {
+      formData.value.country = countryData.name;
+      formData.value.country_code = countryData.iso2.toUpperCase() + " +" + countryData.dialCode;
+    } else if (type === "companyCountry") {
+      formData.value.agencyCountry = countryData.name;
+    }
+  });
+
+  if (type === "companyCountry") {
+    const testEvent = new Event("countrychange");
+    inputElement.dispatchEvent(testEvent);
+  }
+};
+
 onMounted(async () => {
   if (route.params.package) await getPackageDetail();
+  await getIp();
+  await getCountries();
+});
+
+watchEffect(() => {
+  if (typeof document !== "undefined") {
+    document.body.style.overflow = props.isOpen ? "hidden" : "auto";
+  }
 });
 
 watch(() => route.path, async () => {
@@ -58,12 +259,39 @@ watch(() => route.path, async () => {
   else
     packageDetail.value = null;
 });
+
+watch(() => props.isOpen, async (newVal) => {
+  if (newVal) {
+    await nextTick();
+    if (process.client) {
+      if (phoneInputRef.value) await setupIntlTelInput(phoneInputRef.value as HTMLInputElement, "phone");
+      if (countryInputRef.value) await setupIntlTelInput(countryInputRef.value as HTMLInputElement, "country");
+    }
+  }
+})
+
+watch(() => formData.value.userType, async (newType) => {
+  if (newType === "Agent") {
+    await nextTick();
+    if (process.client) {
+      if (companyCountryInputRef.value) await setupIntlTelInput(companyCountryInputRef.value as HTMLInputElement, "companyCountry");
+    }
+  } else if (newType === "Consumer") {
+    formData.value.agencyName = "";
+    formData.value.agencyCountry = "";
+  }
+});
+
+watch(() => formData.value.startDate, () => {
+  if (moment(formData.value.endDate).isBefore(formData.value.startDate)) {
+    formData.value.endDate = "";
+  }
+});
 </script>
 <template>
   <Teleport to="body">
     <!-- Overlay -->
     <div v-if="isOpen" class="fixed inset-0 bg-black bg-opacity-50 z-50" @click="closeForm"></div>
-
     <!-- Formulario Deslizable -->
     <transition name="slide">
       <div v-if="isOpen"
@@ -84,7 +312,7 @@ watch(() => route.path, async () => {
         </div>
         <h2 class="text-2xl font-semibold mb-4 font-playfair-display">Start planning with SouthAmerica</h2>
 
-        <form @submit.prevent="submitForm" class="space-y-4 text-sm">
+        <form @submit.prevent="handleSubmit" class="space-y-4 text-sm">
           <!-- Nombres -->
           <div class="grid grid-cols-2 gap-4">
             <div>
@@ -114,6 +342,11 @@ watch(() => route.path, async () => {
               <label class="block text-sm font-medium">Agency Name *</label>
               <input v-model="formData.agencyName" type="text" class="input-field" placeholder="Agency Name" required />
             </div>
+            <div class="relative z-50">
+              <label class="block text-sm font-medium">Agency Country *</label>
+              <input type="text" class="input-goto peer" placeholder="" autocomplete="off"
+                v-model="formData.agencyCountry" ref="companyCountryInputRef" id="agencyName" @keydown.prevent />
+            </div>
           </template>
 
           <!-- Email y Teléfono -->
@@ -122,14 +355,15 @@ watch(() => route.path, async () => {
               <label class="block text-sm font-medium">Email *</label>
               <input v-model="formData.email" type="email" class="input-field" placeholder="Email address" required />
             </div>
-            <div>
+            <div class="relative">
               <label class="block text-sm font-medium">Phone Number *</label>
-              <input v-model="formData.phone" type="tel" class="input-field" placeholder="1234567890" required />
+              <input type="text" class="input-goto peer" placeholder=" " autocomplete="off" v-model="formData.phone"
+                ref="phoneInputRef" id="phoneNumber" />
             </div>
           </div>
 
           <!-- Dirección -->
-          <div>
+          <!--<div>
             <label class="block text-sm font-medium">Street Address *</label>
             <input v-model="formData.streetAddress" type="text" class="input-field" placeholder="Street Address"
               required />
@@ -137,21 +371,20 @@ watch(() => route.path, async () => {
           <div>
             <label class="block text-sm font-medium">Unit Number (optional)</label>
             <input v-model="formData.unitNumber" type="text" class="input-field" placeholder="Unit Number" />
-          </div>
+          </div>-->
 
-          <!-- Cantidad de adultos y niños -->
+          <!-- Cantidad de pasajeros y país proveniente -->
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium">How many adults? *</label>
-              <select v-model="formData.adults" class="input-field">
+              <label class="block text-sm font-medium">How many travelers? *</label>
+              <select v-model="formData.passengers" class="input-field">
                 <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
               </select>
             </div>
-            <div>
-              <label class="block text-sm font-medium">How many children? *</label>
-              <select v-model="formData.children" class="input-field">
-                <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
-              </select>
+            <div class="relative">
+              <label class="block text-sm font-medium">Where are you from? *</label>
+              <input type="text" class="input-goto peer" placeholder="" autocomplete="off" v-model="formData.country"
+                ref="countryInputRef" id="country_name" @keydown.prevent />
             </div>
           </div>
 
@@ -159,24 +392,50 @@ watch(() => route.path, async () => {
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium">Select Start Date *</label>
-              <input v-model="formData.startDate" type="date" class="input-field" required />
+              <client-only>
+                <VDatePicker v-model="formData.startDate" mode="date" :min-date="today">
+                  <template #default="{ togglePopover }">
+                    <button class="input-field peer text-left" @click="togglePopover">
+                      <span v-if="formData.startDate">{{ moment(formData.startDate).format('YYYY-MM-DD') }}</span>
+                      <span class="text-gray-500" v-else>Tentative travel startdate</span>
+                      <span
+                        class="absolute cursor-text text-gray-500 -top-3 left-2 backdrop-blur-sm rounded-2xl px-1 transition-all duration-200 ease-in-out text-xs">Inquire
+                        Date</span>
+                    </button>
+                  </template>
+                </VDatePicker>
+              </client-only>
             </div>
             <div>
-              <label class="block text-sm font-medium">Select End Date *</label>
-              <input v-model="formData.endDate" type="date" class="input-field" required />
+              <label class="block text-sm font-medium">Select End Date (Optional)</label>
+              <client-only>
+                <VDatePicker v-model="formData.endDate" mode="date" :min-date="formData.startDate">
+                  <template #default="{ togglePopover }">
+                    <button class="input-field peer text-left" @click="togglePopover" :disabled="!formData.startDate">
+                      <span v-if="formData.endDate">{{ moment(formData.endDate).format('YYYY-MM-DD') }}</span>
+                      <span class="text-gray-500" v-else>Tentative travel end date</span>
+                      <span
+                        class="absolute cursor-text text-gray-500 -top-3 left-2 backdrop-blur-sm rounded-2xl px-1 transition-all duration-200 ease-in-out text-xs">Inquire
+                        Date</span>
+                    </button>
+                  </template>
+                </VDatePicker>
+              </client-only>
             </div>
           </div>
 
           <!-- País de interés -->
           <div v-if="!packageDetail">
-            <label class="block text-sm font-medium">Country of Interest *</label>
-            <select v-model="formData.country" class="input-field">
-              <option value="">Select</option>
-              <option>USA</option>
-              <option>Canada</option>
-              <option>Mexico</option>
-              <option>France</option>
-              <option>Japan</option>
+            <label class="block text-sm font-medium">Destination of Interest *</label>
+            <select v-model="formData.destinations" class="input-field overflow-y-auto h-48 max-h-48" multiple>
+              <option value="" disabled>Select destinations</option>
+              <template v-for="country in countries" :key="country.codigo">
+                <optgroup :label="country.nombre">
+                  <option v-for="destination in country.destino" :key="destination.id" :value="destination.nombre">
+                    {{ destination.nombre }}
+                  </option>
+                </optgroup>
+              </template>
             </select>
           </div>
 
@@ -194,7 +453,7 @@ watch(() => route.path, async () => {
           </div>
 
           <!-- Presupuesto -->
-          <div v-if="!packageDetail">
+          <!-- <div v-if="!packageDetail">
             <label class="block text-sm font-medium">Estimated Per Person Budget *</label>
             <select v-model="formData.budget" class="input-field">
               <option>Select your budget</option>
@@ -202,7 +461,7 @@ watch(() => route.path, async () => {
               <option>$1000 - $5000</option>
               <option>$5000+</option>
             </select>
-          </div>
+          </div> -->
 
           <!-- Comentario opcional -->
           <div>
@@ -227,7 +486,9 @@ watch(() => route.path, async () => {
     </transition>
   </Teleport>
 </template>
-<style scoped>
+<style>
+@import 'intl-tel-input/build/css/intlTelInput.css';
+
 .input-field {
   @apply w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400;
 }

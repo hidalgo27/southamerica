@@ -1,4 +1,4 @@
-import {defineStore} from "pinia";
+import { defineStore } from "pinia";
 
 export const useFormStore = defineStore('FormStore', () => {
 	const config = useRuntimeConfig()
@@ -12,7 +12,7 @@ export const useFormStore = defineStore('FormStore', () => {
 		travelDate.value = ''
 	}
 
-	const getInquire = async (obj:any) => {
+	const getInquire = async (obj: any) => {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
@@ -26,7 +26,7 @@ export const useFormStore = defineStore('FormStore', () => {
 				const data = await res.json()
 				if (data) {
 					resolve(data)
-				}else {
+				} else {
 					reject(data)
 				}
 			} catch (error) {
@@ -35,7 +35,7 @@ export const useFormStore = defineStore('FormStore', () => {
 		})
 	}
 
-	const saveInquire = async (obj:any) => {
+	const saveInquire = async (obj: any) => {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
@@ -49,7 +49,7 @@ export const useFormStore = defineStore('FormStore', () => {
 				const data = await res.json()
 				if (data) {
 					resolve(data)
-				}else {
+				} else {
 					reject(data)
 				}
 			} catch (error) {
@@ -58,20 +58,20 @@ export const useFormStore = defineStore('FormStore', () => {
 		})
 	}
 
-	const getCountry = async (url:any) => {
+	const getCountry = async (url: any) => {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
 		return new Promise(async (resolve, reject) => {
 			try {
-				const res = await fetch(config.public.apiBase + "/destinations/"+url, {
+				const res = await fetch(config.public.apiBase + "/destinations/" + url, {
 					method: 'GET',
 					headers: headers,
 				})
 				const data = await res.json()
 				if (data) {
 					resolve(data)
-				}else {
+				} else {
 					reject(data)
 				}
 			} catch (error) {
@@ -90,6 +90,5 @@ export const useFormStore = defineStore('FormStore', () => {
 		getCountry,
 		saveInquire,
 		$reset
-
 	}
-},{persist: true})
+}, { persist: true })
