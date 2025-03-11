@@ -52,7 +52,7 @@ const getCategories = async () => {
   const res: any = await categoriesStore.getCategories();
   categories.value = res;
 
-  const paramCategory = route.params.vacationpackages;
+  const paramCategory = route.params.vacationPackages;
   if (paramCategory && paramCategory !== "vacation-packages") {
     let matchedCategory = categories.value.find(
       (category) => category.url === paramCategory

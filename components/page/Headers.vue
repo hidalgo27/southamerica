@@ -348,7 +348,7 @@ const toggleDropdown = (index: number) => {
                     </button>
                     <div class="w-full " :class="!menu.items[0].firstTitle ? '' : 'grid grid-flow-col grid-cols-4 '">
                       <div class="col-span-1 relative "
-                        :class="!menu.items[0].firstTitle ? '' : 'p-6 border-gray-200 border-r'">
+                        :class="!menu.items[0].firstTitle ? '' : 'py-6 px-2 md:p-6 border-gray-200 border-r'">
                         <span class="text-xs">{{ menu.title }}</span>
                         <div :class="menu.image ? 'grid grid-cols-3 gap-x-10' : ''">
                           <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800">
@@ -371,13 +371,13 @@ const toggleDropdown = (index: number) => {
                           </div>
                         </div>
                         <NuxtLink v-if="menu.title === 'Destinations'" :to="'/destinations'"
-                          class=" bg-orange-500 absolute bottom-6 text-center flex items-center p-2 rounded-md justify-between hover:bg-orange-600 text-white duration-300 w-9/12 2xl:w-10/12">
+                          class=" bg-orange-500 absolute bottom-6 text-center flex items-center py-2 px-1 md:p-2 rounded-md justify-between hover:bg-orange-600 text-white duration-300 w-10/12 md:w-9/12 2xl:w-10/12">
                           Destinations
                         </NuxtLink>
                       </div>
                       <div v-if="hoveredItem" class="col-span-3">
                         <div
-                          class="rounded-md bg-white text-gray-800 p-6 flex md:flex-col lg:flex-row justify-between h-96 min-h-96">
+                          class="rounded-md bg-white text-gray-800 p-6 gap-2 flex md:flex-col lg:flex-row justify-between h-96 min-h-96">
                           <div class="flex flex-col relative w-full h-full">
                             <div v-if="hoveredItem.firstTitle">
                               <span class="text-xs mb-12">{{ hoveredItem.firstTitle.name }}</span>
@@ -435,9 +435,9 @@ const toggleDropdown = (index: number) => {
       </div>
     </div>
     <div class="md:hidden rounded-md bg-orange-50 m-3">
-      <div class="border-b border-secondary  border-opacity-20 flex justify-between items-center">
+      <div class=" flex justify-between items-center">
         <div class="flex justify-between items-center w-full ">
-          <div class="py-3 px-4 flex items-center">
+          <div class="py-3 px-2 flex items-center">
             <nuxt-link to="/">
               <div class="font-playfair-display text-sm md:text-3xl font-medium flex items-end">
                 South
@@ -455,8 +455,7 @@ const toggleDropdown = (index: number) => {
           </div>
           <div class="flex items-center py-3 px-2">
             <button @click="isOpen = true"
-              class="inline-block py-2 px-4 text-primary border-2 border-primary rounded-md hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out text-xs bg-orange-50"
-              href="#form-dream-adventure">Inquire
+              class="inline-block px-2 py-1 sm:py-2 sm:px-4 text-primary border-2 border-primary rounded-md hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out text-xs bg-orange-50">Inquire
               Now</button>
             <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
           </div>
@@ -472,7 +471,7 @@ const toggleDropdown = (index: number) => {
 
       <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 h-screen flex justify-center">
         <div
-          class="bg-white w-10/12 max-w-md h-[70vh] shadow-md p-5 relative transform transition-transform duration-300"
+          class="rounded-t bg-white w-10/12 max-w-md h-[70vh] shadow-md p-5 relative transform transition-transform duration-300"
           :class="{ 'translate-y-96': isMobileMenuOpen, 'translate-y-0': !isMobileMenuOpen }">
           <button @click="toggleMobileMenu" class="absolute top-4 right-4">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
