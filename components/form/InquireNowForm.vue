@@ -2,10 +2,11 @@
 import { usePackageStore } from "~/stores/packages";
 import { useFormStore } from "~/stores/form";
 import { useIpStore } from "~/stores/ip";
-import { notify } from "notiwind";
+import { Notification, NotificationGroup, notify } from "notiwind";
 import moment from "moment-timezone";
 
 import { useDestinationStore } from "~/stores/destination";
+import { useCategoriesStore } from "~/stores/categories";
 // Vuelidate
 import { email, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
@@ -16,15 +17,24 @@ const { $device } = useNuxtApp();
 const formStore = useFormStore();
 const ipStore = useIpStore();
 const packageStore = usePackageStore();
+const categoriesStore = useCategoriesStore();
 
 const props = defineProps({ isOpen: Boolean });
 const destinationStore = useDestinationStore();
 const countries = ref([]);
+const categories = ref([]);
 
 const getCountries = async () => {
   const res: any = await destinationStore.getCountries();
   countries.value = res;
   console.log(countries.value);
+}
+
+const getCategories = async () => {
+  const res: any = await categoriesStore.getCategories();
+  console.log(res);
+  categories.value = res;
+  console.log(categories.value);
 }
 
 // Refs para los inputs de intlTelInput
@@ -38,6 +48,7 @@ const closeForm = () => emit("close");
 
 // Datos del formulario
 const formData = ref({
+  package: "",
   travelStyle: [],
   destinations: [],
   passengers: 1,
@@ -65,13 +76,17 @@ const showLoader = ref(false);
 const geoIp = ref();
 
 // Validaciones con Vuelidate
-const rules = {
+const rules = computed(() => ({
   firstName: { required },
   lastName: { required },
   email: { required, email },
   phone: { required },
+  country: { required },
   startDate: { required },
-};
+  destinations: { required },
+  agencyName: formData.value.userType === "Agent" ? { required } : {},
+  agencyCountry: formData.value.userType === "Agent" ? { required } : {},
+}))
 
 const $v = useVuelidate(rules, formData);
 
@@ -96,6 +111,11 @@ const getIp = async () => {
 
 // Función para enviar el formulario
 const handleSubmit = async () => {
+  if (packageDetail) {
+    formData.value.destinations = packageDetail.value.paquetes_destinos.map((item: any) => item.destinos.nombre);
+    formData.value.travelStyle = packageDetail.value.paquetes_categoria.map((item: any) => item.categoria.nombre);
+    formData.value.package = packageDetail.value.titulo;
+  }
   $v.value.$validate();
 
   if ($v.value.$invalid) {
@@ -106,11 +126,13 @@ const handleSubmit = async () => {
   showLoader.value = true;
 
   const obj = {
-    package: '',
-    category_d: '',
-    destino_d: '',
+    package: formData.value.package || "",
+    category_d: formData.value.travelStyle.map(String),
+    destino_d: formData.value.destinations,
     pasajeros_d: formData.value.passengers,
-    duracion_d: moment(formData.value.endDate).diff(moment(formData.value.startDate), 'days') || "Undefined",
+    duracion_d: moment(formData.value.endDate).diff(moment(formData.value.startDate), 'days') >= 0
+      ? [String(moment(formData.value.endDate).diff(moment(formData.value.startDate), 'days'))]
+      : ["Undecided"],
     el_nombre: formData.value.firstName + " " + formData.value.lastName,
     el_email: formData.value.email,
     el_telefono: formData.value.phone,
@@ -139,61 +161,49 @@ const handleSubmit = async () => {
     event: "generate_lead",
   }); */
   console.log(obj);
-  /* await formStore
-    .getInquire(obj)
-    .then((res) => {
-      if (res) {
-        formStore.saveInquire(obj);
-        showLoader.value = false;
 
-        // Resetear formulario
-        formData.value = {
-          firstName: "",
-          lastName: "",
-          userType: "Consumer",
-          agencyName: "",
-          email: "",
-          phone: "",
-          streetAddress: "",
-          unitNumber: "",
-          adults: 2,
-          children: 0,
-          startDate: "",
-          endDate: "",
-          country: "",
-          travelStyle: [],
-          budget: "",
-          comment: "",
-        };
+  try {
+    await formStore.saveInquire(obj);
+    showLoader.value = false;
+    // Resetear formulario
+    formData.value = {
+      package: '',
+      travelStyle: [],
+      destinations: [],
+      passengers: 1,
+      startDate: null,
+      endDate: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      phone_code: "",
+      comment: "",
+      country: "",
+      country_code: "",
+      userType: "Consumer",
+      agencyName: "",
+      agencyCountry: "",
+    };
 
-        $v.value.$reset();
-        closeForm();
+    $v.value.$reset();
+    closeForm();
 
-        notify({
-          group: "foo",
-          title: "Success",
-          type: "success",
-          text: "Your inquiry has been successfully sent 🙂",
-        }, 4000);
-      } else {
-        showLoader.value = false;
-        notify({
-          group: "foo",
-          title: "Error",
-          type: "error",
-          text: "An error occurred while sending your inquiry :(",
-        }, 4000);
-      }
-    })
-    .catch(() => {
-      showLoader.value = false;
-      notify({
-        group: "foo",
-        title: "Error",
-        type: "error",
-        text: "An error occurred while sending your inquiry :(",
-      }, 4000);
-    }); */
+    notify({
+      group: "foo",
+      title: "Success",
+      type: "success",
+      text: "Your inquiry has been successfully sent 🙂",
+    }, 4000);
+  } catch {
+    showLoader.value = false;
+    notify({
+      group: "foo",
+      title: "Error",
+      type: "error",
+      text: "An error occurred while sending your inquiry :(",
+    }, 4000);
+  }
 };
 
 const route = useRoute();
@@ -245,6 +255,7 @@ onMounted(async () => {
   if (route.params.package) await getPackageDetail();
   await getIp();
   await getCountries();
+  await getCategories();
 });
 
 watchEffect(() => {
@@ -317,11 +328,13 @@ watch(() => formData.value.startDate, () => {
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium">First Name *</label>
-              <input v-model="formData.firstName" type="text" class="input-field" placeholder="John" required />
+              <input v-model="formData.firstName" type="text" class="input-field" placeholder="John" />
+              <div v-if="$v.firstName.$error" class="text-xs text-red-500">First Name required</div>
             </div>
             <div>
               <label class="block text-sm font-medium">Last Name *</label>
-              <input v-model="formData.lastName" type="text" class="input-field" placeholder="Smith" required />
+              <input v-model="formData.lastName" type="text" class="input-field" placeholder="Smith" />
+              <div v-if="$v.lastName.$error" class="text-xs text-red-500">Last Name required</div>
             </div>
           </div>
 
@@ -340,12 +353,14 @@ watch(() => formData.value.startDate, () => {
           <template v-if="formData.userType === 'Agent'">
             <div>
               <label class="block text-sm font-medium">Agency Name *</label>
-              <input v-model="formData.agencyName" type="text" class="input-field" placeholder="Agency Name" required />
+              <input v-model="formData.agencyName" type="text" class="input-field" placeholder="Agency Name" />
+              <div v-if="$v.agencyName.$error" class="text-xs text-red-500">Agency Name required</div>
             </div>
             <div class="relative z-50">
               <label class="block text-sm font-medium">Agency Country *</label>
               <input type="text" class="input-goto peer" placeholder="" autocomplete="off"
                 v-model="formData.agencyCountry" ref="companyCountryInputRef" id="agencyName" @keydown.prevent />
+              <div v-if="$v.agencyCountry.$error" class="text-xs text-red-500">Agency Country required</div>
             </div>
           </template>
 
@@ -353,12 +368,16 @@ watch(() => formData.value.startDate, () => {
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium">Email *</label>
-              <input v-model="formData.email" type="email" class="input-field" placeholder="Email address" required />
+              <input v-model="formData.email" type="email" class="input-field" placeholder="Email address" />
+              <div v-if="$v.email.$error" class="text-xs text-red-500">
+                <span v-if="$v.email.email.$message">{{ $v.email.email.$message }}</span>
+              </div>
             </div>
             <div class="relative">
               <label class="block text-sm font-medium">Phone Number *</label>
               <input type="text" class="input-goto peer" placeholder=" " autocomplete="off" v-model="formData.phone"
                 ref="phoneInputRef" id="phoneNumber" />
+              <div v-if="$v.phone.$error" class="text-xs text-red-500">Phone Number required</div>
             </div>
           </div>
 
@@ -385,6 +404,7 @@ watch(() => formData.value.startDate, () => {
               <label class="block text-sm font-medium">Where are you from? *</label>
               <input type="text" class="input-goto peer" placeholder="" autocomplete="off" v-model="formData.country"
                 ref="countryInputRef" id="country_name" @keydown.prevent />
+              <div v-if="$v.country.$error" class="text-xs text-red-500">Country required</div>
             </div>
           </div>
 
@@ -395,7 +415,7 @@ watch(() => formData.value.startDate, () => {
               <client-only>
                 <VDatePicker v-model="formData.startDate" mode="date" :min-date="today">
                   <template #default="{ togglePopover }">
-                    <button class="input-field peer text-left" @click="togglePopover">
+                    <button type="button" class="input-field peer text-left" @click="togglePopover">
                       <span v-if="formData.startDate">{{ moment(formData.startDate).format('YYYY-MM-DD') }}</span>
                       <span class="text-gray-500" v-else>Tentative travel startdate</span>
                       <span
@@ -405,13 +425,15 @@ watch(() => formData.value.startDate, () => {
                   </template>
                 </VDatePicker>
               </client-only>
+              <div v-if="$v.startDate.$error" class="text-xs text-red-500">Start Date required</div>
             </div>
             <div>
               <label class="block text-sm font-medium">Select End Date (Optional)</label>
               <client-only>
                 <VDatePicker v-model="formData.endDate" mode="date" :min-date="formData.startDate">
                   <template #default="{ togglePopover }">
-                    <button class="input-field peer text-left" @click="togglePopover" :disabled="!formData.startDate">
+                    <button type="button" class="input-field peer text-left" @click="togglePopover"
+                      :disabled="!formData.startDate">
                       <span v-if="formData.endDate">{{ moment(formData.endDate).format('YYYY-MM-DD') }}</span>
                       <span class="text-gray-500" v-else>Tentative travel end date</span>
                       <span
@@ -427,29 +449,36 @@ watch(() => formData.value.startDate, () => {
           <!-- País de interés -->
           <div v-if="!packageDetail">
             <label class="block text-sm font-medium">Destination of Interest *</label>
-            <select v-model="formData.destinations" class="input-field overflow-y-auto h-48 max-h-48" multiple>
-              <option value="" disabled>Select destinations</option>
+            <div class="overflow-y-auto h-48 max-h-48 border rounded p-2">
               <template v-for="country in countries" :key="country.codigo">
-                <optgroup :label="country.nombre">
-                  <option v-for="destination in country.destino" :key="destination.id" :value="destination.nombre">
-                    {{ destination.nombre }}
-                  </option>
-                </optgroup>
+                <div class="font-semibold mt-2">{{ country.nombre }}</div>
+                <div v-for="destination in country.destino" :key="destination.id" class="flex items-center">
+                  <input type="checkbox" :id="'destination-' + destination.id" :value="destination.nombre"
+                    v-model="formData.destinations"
+                    class="w-4 h-4 bg-gray-100 border-gray-100 rounded-md focus:ring-2  mr-2" />
+                  <label :for="'destination-' + destination.id">{{ destination.nombre }}</label>
+                </div>
               </template>
-            </select>
+            </div>
+            <div v-if="$v.destinations.$error" class="text-xs text-red-500">Destination required</div>
           </div>
 
           <!-- Estilos de viaje -->
-          <div v-if="!packageDetail">
-            <label class="block text-sm font-medium">Which travel style(s) are you most interested in? (Max 3)
-              *</label>
-            <select v-model="formData.travelStyle" multiple class="input-field">
-              <option>Adventure</option>
-              <option>Luxury</option>
-              <option>Family</option>
-              <option>Beach</option>
-              <option>Cultural</option>
-            </select>
+          <div v-if="!packageDetail && categories && categories.length > 0">
+            <label class="block text-sm font-medium text-gray-700">Which travel style(s) are you most interested in?
+              (Max 3, Optional)</label>
+            <div class="overflow-y-auto h-48 max-h-48 border border-gray-300 rounded-lg p-3 bg-white shadow-sm">
+              <template v-for="category in categories" :key="category.id">
+                <div class="flex items-center hover:bg-gray-100 rounded-lg">
+                  <input type="checkbox" :id="'category-' + category.id" :value="category.id"
+                    v-model="formData.travelStyle"
+                    :disabled="formData.travelStyle.length >= 3 && !formData.travelStyle.includes(category.id)"
+                    class="w-4 h-4 bg-gray-100 border-gray-100 rounded-md focus:ring-2  mr-2" />
+                  <label :for="'category-' + category.id" class="text-gray-700 cursor-pointer">{{ category.nombre
+                  }}</label>
+                </div>
+              </template>
+            </div>
           </div>
 
           <!-- Presupuesto -->
@@ -484,6 +513,52 @@ watch(() => formData.value.startDate, () => {
         </form>
       </div>
     </transition>
+    <NotificationGroup group="foo">
+      <div class="fixed inset-0 flex items-start justify-end p-6 px-4 py-6 pointer-events-none" style="z-index: 9999">
+        <div class="w-full max-w-sm">
+          <Notification v-slot="{ notifications }" enter="transform ease-out duration-300 transition"
+            enter-from="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-4"
+            enter-to="translate-y-0 opacity-100 sm:translate-x-0" leave="transition ease-in duration-500"
+            leave-from="opacity-100" leave-to="opacity-0" move="transition duration-500" move-delay="delay-300">
+            <div v-for="notification in notifications" :key="notification.id">
+              <div v-if="notification.type === 'success'"
+                class="flex w-full max-w-sm mx-auto mt-4 overflow-hidden bg-white rounded-md shadow-md">
+                <div class="flex items-center justify-center w-12 bg-green-500">
+                  <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z" />
+                  </svg>
+                </div>
+
+                <div class="px-4 py-2 -mx-3">
+                  <div class="mx-3">
+                    <span class="font-semibold text-green-500">{{ notification.title }}</span>
+                    <p class="text-sm text-gray-600">{{ notification.text }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex w-full max-w-sm mx-auto mt-4 overflow-hidden bg-white rounded-lg shadow-md"
+                v-if="notification.type === 'error'">
+                <div class="flex items-center justify-center w-12 bg-red-500">
+                  <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z" />
+                  </svg>
+                </div>
+
+                <div class="px-4 py-2 -mx-3">
+                  <div class="mx-3">
+                    <span class="font-semibold text-red-500">{{ notification.title }}</span>
+                    <p class="text-sm text-gray-600">{{ notification.text }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Notification>
+        </div>
+      </div>
+    </NotificationGroup>
   </Teleport>
 </template>
 <style>
