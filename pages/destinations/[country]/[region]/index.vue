@@ -102,7 +102,7 @@ const toggleReadMore = () => {
       </div>
     </div>
   </section>
-  <TravelStories></TravelStories>
+  <!-- <TravelStories></TravelStories> -->
   <EspecialistLetter></EspecialistLetter>
   <MiniReviews></MiniReviews>
 </template>

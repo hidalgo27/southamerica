@@ -61,7 +61,7 @@ onMounted(async () => {
   <TextDescription v-if="textDescription2" :textDescription="textDescription2"></TextDescription>
   <PropertyDestination v-if="destination" :properties="destination.propiedades"></PropertyDestination>
   <EspecialistLetter></EspecialistLetter>
-  <TravelStories></TravelStories>
+  <!-- <TravelStories></TravelStories> -->
   <Newsletter></Newsletter>
   <MiniReviews></MiniReviews>
 </template>

@@ -3,32 +3,26 @@ const { $gsap } = useNuxtApp();
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 $gsap.registerPlugin(ScrollTrigger);
-const posts = ref([
-  {
-    imageUrl: 'https://images.goway.com/production/styles/run_of_site_ad_3xl/s3/trip_level_ad/portugal_porto_tourist_AdobeStock_178862016.jpeg?VersionId=qnpeclJigVYnXDYm1k_1teCzeyut0dfk&itok=ovtj3gJT',
-    imageAlt: 'A delicious dish with a wooden background',
-    category: 'Food & Drink',
-    title: "Prague's Culinary Renaissance",
-    excerpt: "People gravitate to Prague for its enchanting cobblestone streets flanked by stunning Baroque and Gothic buildings and for its palate-pleasing...",
-    liked: ref(false),
-  },
-  {
-    imageUrl: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/Sydney%20Opera%20House_AdobeStock_224286843%20%283%29.jpeg?VersionId=YHodoYpc62zmfJzKE.jfp8S2TwCeaB0c&h=a5654313&itok=ZAZ56cvJ',
-    imageAlt: 'An elderly woman looking thoughtful',
-    category: 'Wellness',
-    title: 'The Blue Zone Blueprint',
-    excerpt: 'American longevity researcher Dan Buettner uses the term “Blue Zone” to define five regions worldwide where people live the longest,...',
-    liked: ref(false),
-  },
-  {
-    imageUrl: 'https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj',
-    imageAlt: 'A group of people on bicycles with a scenic background',
-    category: 'Journeys',
-    title: 'Best of 2025: Up and Coming Group Travel Destinations',
-    excerpt: 'Welcome to 2025—a new year brimming with exciting possibilities and new travel potential! This is the perfect time to set...',
-    liked: ref(false),
+
+const props = defineProps({
+  topBlogs: {
+    type: Array,
+    required: true,
   }
-])
+});
+
+watch(() => props.topBlogs, () => {
+  console.log('Top blogs changed', props.topBlogs);
+});
+const posts = ref(props.topBlogs.map(blog => ({
+  imageUrl: blog.imagen_miniatura,
+  imageAlt: blog.titulo,
+  title: blog.titulo,
+  excerpt: blog.detalle,
+  url: blog.url,
+  liked: ref(false),
+})));
+
 
 const toggleLike = (post: any, event: MouseEvent) => {
   post.liked = !post.liked;
@@ -83,17 +77,17 @@ onMounted(() => {
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div v-for="(post, index) in posts" :key="index"
-        class="content-between overflow-hidden rounded-md group transition duration-500 ease-in-out h-full ">
+      <div v-if="posts" v-for="(post, index) in posts" :key="index"
+        class="content-between overflow-hidden  group transition duration-500 ease-in-out h-full ">
         <div class="story">
-          <NuxtLink class="overflow-hidden relative rounded-md size-96"
-            :to="'/inspiration/' + post.title.toLowerCase().replace(/ /g, '-')">
+          <NuxtLink class="overflow-hidden relative rounded-md size-96" :to="'/inspiration/' + post.url">
             <div class="w-full h-96 overflow-hidden rounded-md">
               <NuxtImg :alt="post.imageAlt"
                 class="w-full h-full rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105"
                 :src="post.imageUrl" />
             </div>
-            <span class=" absolute top-2 left-2 bg-white text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">
+            <span v-if="post.category"
+              class=" absolute top-2 left-2 bg-white text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">
               {{ post.category }}
             </span>
             <div class="absolute top-2 right-2 cursor-pointer" @click="toggleLike(post, $event)">
@@ -108,14 +102,13 @@ onMounted(() => {
               </span>
             </div>
           </NuxtLink>
-          <div class="flex flex-col gap-3">
-            <NuxtLink class="text-lg font-semibold mb-"
-              :to="'/inspiration/' + post.title.toLowerCase().replace(/ /g, '-')">{{ post.title }}</NuxtLink>
-            <p class="mb-4">{{ post.excerpt }}</p>
+          <div class="flex flex-col gap-3 mt-6">
+            <NuxtLink class="text-lg font-semibold " :to="'/inspiration/' + post.url">{{ post.title }}</NuxtLink>
+            <p class="mb-4 h-24 overflow-hidden text-sm" v-html="post.excerpt"></p>
             <div>
               <NuxtLink
                 class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0 "
-                :to="'/inspiration/' + post.title.toLowerCase().replace(/ /g, '-')">
+                :to="'/inspiration/' + post.url">
                 Read More
               </NuxtLink>
             </div>

@@ -84,7 +84,7 @@ onMounted(async () => {
   <FilterPackages v-if="!isLoading && listPackages" :packageData="listPackages" :filters="filters">
   </FilterPackages>
   <EspecialistLetter></EspecialistLetter>
-  <TravelStories></TravelStories>
+  <!-- <TravelStories></TravelStories> -->
   <Newsletter></Newsletter>
   <MiniReviews></MiniReviews>
 </template>

@@ -101,13 +101,14 @@ const computedHeader = computed(() => props.header || defaultHeader);
             </span>
           </nav>
           <div v-if="!packageDetail" class="container">
-            <p class="text-white text-md 2xl:text-xl mb-8">
+            <p v-if="computedHeader.miniTitle" class="text-white text-md 2xl:text-xl mb-8">
               {{ computedHeader.miniTitle }}
             </p>
-            <h1
+            <h1 v-if="computedHeader.title"
               class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight text-5xl lg:text-7xl 2xl:text-8xl tracking-wide font-semibold font-playfair-display">
               {{ computedHeader.title }}</h1>
-            <p class="text-white text-xl 2xl:text-3xl font-playfair-display font-bold tracking-wide mt-5 ">
+            <p v-if="computedHeader.subTitle"
+              class="text-white text-xl 2xl:text-3xl font-playfair-display font-bold tracking-wide mt-5 ">
               {{ computedHeader.subTitle }}
             </p>
           </div>
@@ -125,6 +126,11 @@ const computedHeader = computed(() => props.header || defaultHeader);
                   class="bg-blue-800 text-white text-xs font-semibold px-2 py-1 rounded-full whitespace-nowrap"
                   :key="i">
                   {{ region.destinos.nombre }}
+                </NuxtLink>
+                <NuxtLink v-if="paquete.categoria"
+                  :to="/inspiration/ + paquete.categoria.nombre.toLowerCase().replace(/ /g, '-')"
+                  class="bg-white text-gray-500 text-xs px-2 py-1 rounded-full whitespace-nowrap">
+                  {{ paquete.categoria.nombre }}
                 </NuxtLink>
                 <div v-if="paquete.travelGuide"
                   class="bg-white text-gray-700 text-xs px-2 py-1 rounded-full whitespace-nowrap">

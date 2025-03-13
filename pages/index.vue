@@ -14,6 +14,7 @@ import { Dropdown } from 'floating-vue'
 
 import { usePackageStore } from '~/stores/packages'
 import { useCategoriesStore } from '~/stores/categories'
+import { useBlogStore } from '~/stores/blog'
 
 const packageStore = usePackageStore()
 const listPackages = ref([])
@@ -30,6 +31,16 @@ const getCategories = async () => {
   listCategories.value = res;
   console.log(listCategories.value);
 };
+
+const blogStore = useBlogStore();
+const topBlogs = ref([]);
+
+const getBlogs = async () => {
+  const res: any = await blogStore.getBlogs();
+  topBlogs.value = res.blogs.filter((blog: any) => blog.estado == null || blog.estado === 0).slice(0, 3);
+  console.log(topBlogs.value);
+};
+
 const loading = ref(true)
 const video = ref()
 const { onLoaded } = useScriptVimeoPlayer()
@@ -100,6 +111,7 @@ let player: any
 onMounted(async () => {
   await getPackage()
   await getCategories()
+  await getBlogs()
   updateIsMobile();
   onLoaded(({ Vimeo }) => {
     player = new Vimeo.Player(video.value, {
@@ -340,7 +352,7 @@ const onHide = () => {
   <TripStyles v-if="listCategories" :curatedTrips="listCategories"></TripStyles>
   <SliderDestinations></SliderDestinations>
   <EspecialistLetter></EspecialistLetter>
-  <TravelStories></TravelStories>
+  <TravelStories v-if="topBlogs.length > 0" :topBlogs="topBlogs"></TravelStories>
   <Newsletter></Newsletter>
   <Reviews></Reviews>
 </template>
