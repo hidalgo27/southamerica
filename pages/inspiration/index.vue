@@ -9,84 +9,49 @@ import { useBlogStore } from '~/stores/blog';
 
 const blogStore = useBlogStore();
 const blogs = ref([]);
+const categories = ref({
+  25: 'Curiosidades',
+  26: 'Cusco',
+  27: 'Travel Information',
+});
 const header = ref({
   title: 'Inspiration',
-  subtitle: 'Travel Stories, Tips, and Guides',
+  subTitle: 'Travel Stories, Tips, and Guides',
   url: 'https://www.goway.com/static/author-hero-bc1c42d3868a64f674a983f54bb90d51.jpeg'
 })
 
+const articles = ref({});
+
 const getBlogs = async () => {
   const res: any = await blogStore.getBlogs();
-  blogs.value = res.blogs;
+  blogs.value = res.blogs.filter((blog: any) => blog.estado === null || blog.estado === 0);
   console.log(blogs.value);
+  articles.value = blogs.value.reduce((acc: any, blog: any) => {
+    const category = categories.value[blog.categoria_id];
+    if (!acc[category]) {
+      acc[category] = {
+        name: category,
+        items: [],
+      };
+    }
+    acc[category].items.push({
+      image: blog.imagen_miniatura,
+      title: blog.titulo,
+      date: blog.created_at,
+      url: blog.url,
+      author: blog.user_id.toString(),
+    });
+    return acc;
+  }, {});
+
+  console.log(articles.value);
 };
 
 onMounted(async () => {
   await getBlogs();
 });
 
-const articles = ref([
-  {
-    name: 'Trending',
-    items: [
-      {
-        image: 'https://images.goway.com/production/inline-images/poland_warsaw_jewish_cemetary_ori_raynai.jpg?VersionId=qlgjfn59cpxK4CkLgb07aN4cZ7OXud3l',
-        title: 'Luxury Travel Meets Local Wonder in Thailand',
-        date: 'Dec 12, 2024',
-        author: 'Christian Baines',
-      },
-      {
-        image: 'https://images.goway.com/production/inline-images/poland_zbylitowska_gora_ori_raynai.jpg?VersionId=bOJDUmUtAhGPgT2QmokbhVoZZT39HA7B',
-        title: '10 Reasons to Make South Africa Your First Stop on an African Vacation',
-        date: 'Dec 12, 2024',
-        author: 'Christian Baines',
-      },
-      {
-        image: 'https://images.goway.com/production/inline-images/poland_majdanek_concentration_camp_ori_raynai.jpg?VersionId=9Vb0y9TW9ff8ceahw7utgGBJLDwimO6f',
-        title: "It's Time to Fall in Love with Nicaragua",
-        date: 'Dec 06, 2024',
-        author: 'Christian Baines',
-      },
-      {
-        image: 'https://images.goway.com/production/inline-images/laszlo_selly_ori_raynai.jpg?VersionId=tP_qZt0_3x9GO88obEymH1Fo0LDr2do7',
-        title: 'Discover Fiji & the South Pacific with Award-Winning Fiji Airways',
-        date: 'Nov 14, 2024',
-        author: 'Sael Forster',
-      },
-    ]
-  },
-  {
-    name: 'History & Culture',
-    items: [
-      {
-        image: 'https://images.goway.com/production/inline-images/poland_warsaw_jewish_cemetary_ori_raynai.jpg?VersionId=qlgjfn59cpxK4CkLgb07aN4cZ7OXud3l',
-        title: 'Luxury Travel Meets Local Wonder in Thailand',
-        date: 'Dec 12, 2024',
-        author: 'Christian Baines',
-      },
-      {
-        image: 'https://images.goway.com/production/inline-images/poland_zbylitowska_gora_ori_raynai.jpg?VersionId=bOJDUmUtAhGPgT2QmokbhVoZZT39HA7B',
-        title: '10 Reasons to Make South Africa Your First Stop on an African Vacation',
-        date: 'Dec 12, 2024',
-        author: 'Christian Baines',
-      },
-      {
-        image: 'https://images.goway.com/production/inline-images/poland_majdanek_concentration_camp_ori_raynai.jpg?VersionId=9Vb0y9TW9ff8ceahw7utgGBJLDwimO6f',
-        title: "It's Time to Fall in Love with Nicaragua",
-        date: 'Dec 06, 2024',
-        author: 'Christian Baines',
-      },
-      {
-        image: 'https://images.goway.com/production/inline-images/laszlo_selly_ori_raynai.jpg?VersionId=tP_qZt0_3x9GO88obEymH1Fo0LDr2do7',
-        title: 'Discover Fiji & the South Pacific with Award-Winning Fiji Airways',
-        date: 'Nov 14, 2024',
-        author: 'Sael Forster',
-      },
-    ]
-  }
-]);
-
-const journeys = [
+/* const journeys = [
   {
     imagen: "https://images.goway.com/production/inline-images/laszlo_selly_ori_raynai.jpg?VersionId=tP_qZt0_3x9GO88obEymH1Fo0LDr2do7",
     url: "best-of-2025-up-and-coming-group-travel-destinations",
@@ -120,7 +85,7 @@ const journeys = [
     date: "Dec 12, 2024",
     author: "Christian Baines",
   },
-]
+] */
 </script>
 
 <template>
@@ -129,14 +94,15 @@ const journeys = [
   <section v-for="(category, catIndex) in articles" :key="catIndex" class="container my-20">
     <div class="flex justify-between items-center mb-20">
       <h1 class="text-4xl font-bold font-playfair-display">{{ category.name }}</h1>
-      <button class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100">
+      <!-- <button class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100">
         See All
-      </button>
+      </button> -->
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <TrendingCard v-for="(article, index) in category.items" :key="index" :category="category.name"
-        :image="article.image" :title="article.title" :date="article.date" :author="article.author" />
+        :image="article.image" :title="article.title" :date="article.date" :author="article.author"
+        :url="article.url" />
     </div>
 
     <div v-if="catIndex !== articles.length - 1" class="container my-32">
@@ -144,7 +110,7 @@ const journeys = [
     </div>
   </section>
 
-  <section class="bg-secondary bg-opacity-10 my-20 p-20">
+  <!-- <section class="bg-secondary bg-opacity-10 my-20 p-20">
     <div class="container">
       <div class="flex justify-between items-center mb-20">
         <h1 class="text-4xl font-bold font-playfair-display">Journeys</h1>
@@ -157,6 +123,6 @@ const journeys = [
         </CardPackage>
       </div>
     </div>
-  </section>
+  </section> -->
   <Newsletter></Newsletter>
 </template>

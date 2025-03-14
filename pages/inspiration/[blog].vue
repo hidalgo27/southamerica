@@ -18,7 +18,6 @@ const travelGuideHeader = ref([
   {
     titulo: '',
     timeRead: 6,
-    published: '2021-09-01',
     categoria: '',
   }
 ]);
@@ -31,6 +30,8 @@ const getBlog = async () => {
   travelGuideHeader.value[0].titulo = inspirationDetail.value.titulo;
   console.log(travelGuideHeader.value[0].titulo);
   travelGuideHeader.value[0].categoria = inspirationDetail.value.categoria;
+  const date = new Date(inspirationDetail.value.created_at);
+  travelGuideHeader.value[0].published = date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 };
 
 onMounted(async () => {

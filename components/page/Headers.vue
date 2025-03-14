@@ -128,7 +128,7 @@ const updateMenu = () => {
     },
     {
       title: "Inspiration",
-      items: [{ name: "History & Culture", link: "/inspiration/history-and-culture" }, { name: "Trending", link: "/inspiration/trending" }, { name: "Wellness", link: "/inspiration/wellness" }],
+      items: [{ name: "All Inspirations", link: "/inspiration/" }],
       image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
       url: "/inspiration"
     },
