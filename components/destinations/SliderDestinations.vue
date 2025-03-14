@@ -61,13 +61,13 @@ const breakpoints = {
       <Slide v-for="(destinations, index) in destinations" :key="index"
         class="justify-center items-center overflow-hidden p-6 w-full">
         <NuxtLink :to="'/destinations/' + destinations.url"
-          class="p-2 grid grid-cols-2 items-center overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out w-fit">
-          <div class="overflow-hidden relative rounded-md">
+          class="p-2 gap-3 grid grid-cols-2 items-center overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out text-center">
+          <div class="overflow-hidden relative rounded-md w-full h-full">
             <nuxt-img :src="destinations.image" :alt="destinations.title"
-              class="w-full h-40 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
+              class="w-full h-full rounded-md transition duration-500 ease-in-out transform group-hover:scale-105" />
           </div>
-          <div class="w-full relative ">
-            <h2 class="text-xl font-semibold text-gray-800 w-full font-playfair-display">
+          <div class="w-full mx-auto items-center justify-center flex">
+            <h2 class="text-center text-xl flex flex-wrap font-semibold text-gray-800 font-playfair-display">
               {{ destinations.title }}
             </h2>
           </div>
