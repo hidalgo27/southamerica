@@ -18,9 +18,10 @@ const formStore = useFormStore();
 const ipStore = useIpStore();
 const packageStore = usePackageStore();
 const categoriesStore = useCategoriesStore();
+const destinationStore = useDestinationStore();
+
 
 const props = defineProps({ isOpen: Boolean });
-const destinationStore = useDestinationStore();
 const countries = ref([]);
 const categories = ref([]);
 
@@ -153,7 +154,7 @@ const handleSubmit = async () => {
     company_country: formData.value.agencyCountry,
   };
 
-  /* dataLayer.push({
+  dataLayer.push({
     user_properties: {
       user_id: { value: crypto.randomUUID() },
       email: { value: formData.value.email },
@@ -161,7 +162,7 @@ const handleSubmit = async () => {
       tentative_date: { value: formData.value.startDate },
     },
     event: "generate_lead",
-  }); */
+  });
   console.log(obj);
 
 
@@ -203,7 +204,7 @@ const handleSubmit = async () => {
         group: "foo",
         title: "Error",
         type: "error",
-        text: "An error occurred while sending your inquiry :(",
+        text: "An error occurred while sending your inquiry 😔",
       }, 4000);
     }
   }).catch((err) => {
@@ -212,7 +213,7 @@ const handleSubmit = async () => {
       group: "foo",
       title: "Error",
       type: "error",
-      text: "An error occurred while sending your inquiry :(",
+      text: "An error occurred while sending your inquiry 😔",
     }, 4000);
   });
 };
@@ -595,22 +596,4 @@ watch(() => formData.value.startDate, () => {
 </template>
 <style>
 @import 'intl-tel-input/build/css/intlTelInput.css';
-
-.input-field {
-  @apply w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400;
-}
-
-.toggle-btn {
-  @apply px-4 py-2 border rounded-lg cursor-pointer transition-colors;
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.3s ease-in-out;
-}
-
-.slide-enter-from,
-.slide-leave-to {
-  transform: translateX(100%);
-}
 </style>
