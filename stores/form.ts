@@ -18,7 +18,7 @@ export const useFormStore = defineStore('FormStore', () => {
 
 		return new Promise(async (resolve, reject) => {
 			try {
-				const res = await fetch(config.public.apiBase + "/formulario-diseno/", {
+				const res = await fetch("https://api.gotolatam.travel/api" + "/formulario-diseno/", {
 					method: 'POST',
 					headers: headers,
 					body: JSON.stringify(obj)

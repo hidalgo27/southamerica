@@ -27,14 +27,11 @@ const categories = ref([]);
 const getCountries = async () => {
   const res: any = await destinationStore.getCountries();
   countries.value = res;
-  console.log(countries.value);
 }
 
 const getCategories = async () => {
   const res: any = await categoriesStore.getCategories();
-  console.log(res);
   categories.value = res;
-  console.log(categories.value);
 }
 
 // Refs para los inputs de intlTelInput
@@ -109,11 +106,16 @@ const getIp = async () => {
   geoIp.value = res;
 };
 
+const saveInquire = async (obj: any) => {
+  await formStore.saveInquire(obj)
+}
+
 // Función para enviar el formulario
 const handleSubmit = async () => {
-  if (packageDetail) {
+  console.log(packageDetail.value)
+  if (packageDetail.value) {
     formData.value.destinations = packageDetail.value.paquetes_destinos.map((item: any) => item.destinos.nombre);
-    formData.value.travelStyle = packageDetail.value.paquetes_categoria.map((item: any) => item.categoria.nombre);
+    formData.value.travelStyle = packageDetail.value.paquetes_categoria.map((item: any) => item.categoria.id);
     formData.value.package = packageDetail.value.titulo;
   }
   $v.value.$validate();
@@ -162,40 +164,49 @@ const handleSubmit = async () => {
   }); */
   console.log(obj);
 
-  try {
-    await formStore.saveInquire(obj);
-    showLoader.value = false;
-    // Resetear formulario
-    formData.value = {
-      package: '',
-      travelStyle: [],
-      destinations: [],
-      passengers: 1,
-      startDate: null,
-      endDate: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      phone_code: "",
-      comment: "",
-      country: "",
-      country_code: "",
-      userType: "Consumer",
-      agencyName: "",
-      agencyCountry: "",
-    };
 
-    $v.value.$reset();
-    closeForm();
-
-    notify({
-      group: "foo",
-      title: "Success",
-      type: "success",
-      text: "Your inquiry has been successfully sent 🙂",
-    }, 4000);
-  } catch {
+  await formStore.getInquire(obj).then((res) => {
+    if (res) {
+      saveInquire(obj);
+      showLoader.value = false;
+      // Resetear formulario
+      formData.value = {
+        package: '',
+        travelStyle: [],
+        destinations: [],
+        passengers: 1,
+        startDate: null,
+        endDate: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        phone_code: "",
+        comment: "",
+        country: "",
+        country_code: "",
+        userType: "Consumer",
+        agencyName: "",
+        agencyCountry: "",
+      };
+      $v.value.$reset();
+      closeForm();
+      notify({
+        group: "foo",
+        title: "Success",
+        type: "success",
+        text: "Your inquiry has been successfully sent 🙂",
+      }, 4000);
+    } else {
+      showLoader.value = false;
+      notify({
+        group: "foo",
+        title: "Error",
+        type: "error",
+        text: "An error occurred while sending your inquiry :(",
+      }, 4000);
+    }
+  }).catch((err) => {
     showLoader.value = false;
     notify({
       group: "foo",
@@ -203,7 +214,7 @@ const handleSubmit = async () => {
       type: "error",
       text: "An error occurred while sending your inquiry :(",
     }, 4000);
-  }
+  });
 };
 
 const route = useRoute();
@@ -214,8 +225,7 @@ const getPackageDetail = async () => {
 };
 
 // @ts-ignore
-const module = await import("intl-tel-input/build/js/intlTelInput.min.js");
-const intlTelInput = module.default;
+let intlTelInput;
 
 const setupIntlTelInput = async (inputElement: HTMLInputElement, type: "phone" | "country" | "companyCountry") => {
   if (!process.client) return;
@@ -249,6 +259,10 @@ const setupIntlTelInput = async (inputElement: HTMLInputElement, type: "phone" |
     const testEvent = new Event("countrychange");
     inputElement.dispatchEvent(testEvent);
   }
+  if (type === "country") {
+    const testEvent = new Event("countrychange");
+    inputElement.dispatchEvent(testEvent);
+  }
 };
 
 onMounted(async () => {
@@ -256,6 +270,10 @@ onMounted(async () => {
   await getIp();
   await getCountries();
   await getCategories();
+  // @ts-ignore
+  if (process.client) import("intl-tel-input/build/js/intlTelInput.min.js").then((module) => {
+    intlTelInput = module.default;
+  });
 });
 
 watchEffect(() => {
@@ -430,7 +448,8 @@ watch(() => formData.value.startDate, () => {
             <div>
               <label class="block text-sm font-medium">Select End Date (Optional)</label>
               <client-only>
-                <VDatePicker v-model="formData.endDate" mode="date" :min-date="formData.startDate">
+                <VDatePicker v-model="formData.endDate" mode="date"
+                  :min-date="moment(formData.startDate).add(1, 'days').toDate()">
                   <template #default="{ togglePopover }">
                     <button type="button" class="input-field peer text-left" @click="togglePopover"
                       :disabled="!formData.startDate">
@@ -498,18 +517,31 @@ watch(() => formData.value.startDate, () => {
             <textarea v-model="formData.comment" class="input-field h-20"></textarea>
           </div>
 
-          <fieldset class="mb-6">
+          <!--<fieldset class="mb-6">
             <div class="flex flex-col gap-2">
               <label class="flex items-center gap-2">
                 <input type="checkbox" value="" class="h-5 w-5 text-red-500">
                 Subscribe to our newsletter and offers
               </label>
             </div>
-          </fieldset>
+          </fieldset>-->
 
           <!-- Botón de envío -->
-          <button type="submit"
-            class="btn-ternary py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700 w-full">Submit</button>
+          <div class="flex justify-center mt-12 relative ">
+            <button type="submit"
+              class="btn-ternary py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700 w-full"
+              v-show="showLoader == false">Send Inquiry</button>
+            <button type="button" class="btn-disabled w-full justify-center flex" disabled v-show="showLoader == true">
+              <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>
+              </svg>
+              Processing...
+            </button>
+          </div>
         </form>
       </div>
     </transition>
