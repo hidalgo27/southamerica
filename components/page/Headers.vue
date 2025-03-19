@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import 'floating-vue/dist/style.css';
 import { Dropdown } from 'floating-vue';
+import 'floating-vue/dist/style.css';
 import InquireNowForm from '../form/InquireNowForm.vue';
 
-import { useDestinationStore } from '~/stores/destination';
 import { useCategoriesStore } from '~/stores/categories';
+import { useDestinationStore } from '~/stores/destination';
+import { useFormStore } from '~/stores/form';
+
+const formStore = useFormStore();
 
 const destinationStore = useDestinationStore();
 const categoryStore = useCategoriesStore();
@@ -320,9 +323,10 @@ const toggleDropdown = (index: number) => {
               <span class="font-semibold block">+1 (202) 4911478</span>
               <span class="text-sm">Or contact your travel advisor</span>
             </div>
-            <button @click="isOpen = true" class="btn-primary-outline bg-orange-50 "
+            <button @click="formStore.openInquireNowForm()" class="btn-primary-outline bg-orange-50 "
               href="#form-dream-adventure">Inquire Now</button>
-            <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
+            <InquireNowForm :isOpen="formStore.InquireNowFormOpen" @close="formStore.closeInquireNowForm()">
+            </InquireNowForm>
           </div>
         </div>
       </div>
@@ -454,10 +458,9 @@ const toggleDropdown = (index: number) => {
             </nuxt-link>
           </div>
           <div class="flex items-center py-3 px-2">
-            <button @click="isOpen = true"
+            <button @click="formStore.openInquireNowForm()"
               class="inline-block px-2 py-1 sm:py-2 sm:px-4 text-primary border-2 border-primary rounded-md hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out text-xs bg-orange-50">Inquire
               Now</button>
-            <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
           </div>
         </div>
         <button @click="toggleMobileMenu"

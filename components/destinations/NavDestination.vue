@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { Dropdown } from 'floating-vue';
-import InquireNowForm from '~/components/form/InquireNowForm.vue';
 import { useCategoriesStore } from '~/stores/categories';
+import { useFormStore } from '~/stores/form';
+
+const inquireFormStore = useFormStore();
 
 const useCategories = useCategoriesStore();
 const categories = ref([]);
@@ -139,11 +141,10 @@ const onHide = () => {
         </client-only>
       </div>
     </div>
-    <button v-if="isFixed" @click="formOpen = true"
+    <button v-if="isFixed" @click="inquireFormStore.openInquireNowForm()"
       class="py-3 px-5 text-primary border-2 border-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out bg-orange-50 rounded-md shadow-md hidden sm:flex">
       Inquire Now
     </button>
-    <InquireNowForm :isOpen="formOpen" @close="formOpen = false"></InquireNowForm>
   </nav>
 </template>
 <style>

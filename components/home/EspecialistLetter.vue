@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import InquireNowForm from "~/components/form/InquireNowForm.vue";
-import { Carousel, Slide } from "vue3-carousel";
 import 'vue3-carousel/dist/carousel.css';
+import { useFormStore } from '~/stores/form';
+
+const inquireFormStore = useFormStore();
 
 const items = ref([
   { id: 1, name: "Susanna Beccati", region: "Central America, South America, Arctic & Antarctica", description: "I was born in Toronto and raised in The West Indies, I have been blessed with the opportunity to grow up around many different cultures & to travel to many different places.", img: "https://master-7rqtwti-io4vvdzre4r5u.ca-1.platformsh.site/s3/files/styles/staff_profile_photo_small/s3/author/JuliaBates.png?itok=T3PyTVgG" },
@@ -56,10 +57,10 @@ const isOpen = ref(false);
             Specialists to craft the trip that’s right for you.
           </p>
           <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 text-sm md:text-md">
-            <button class="px-4 py-2 border btn-primary-outline text-start rounded-md" @click="isOpen = true">
+            <button class="px-4 py-2 border btn-primary-outline text-start rounded-md"
+              @click="inquireFormStore.openInquireNowForm()">
               Request a Quote
             </button>
-            <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
             <NuxtLink to="/about-us/meet-the-team" class="px-4 py-2 border btn-secondary-outline rounded-md">
               Meet the Team
             </NuxtLink>
