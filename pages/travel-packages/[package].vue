@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import InquireNowForm from '~/components/form/InquireNowForm.vue';
+import { Dropdown } from 'floating-vue';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
 import MiniReviews from '~/components/home/MiniReviews.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
@@ -8,11 +9,12 @@ import Itinerary from '~/components/travel-packages/Itinerary.vue';
 import OverviewPackage from '~/components/travel-packages/OverviewPackage.vue';
 import PackageDetails from '~/components/travel-packages/PackageDetails.vue';
 import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
-import { Dropdown } from 'floating-vue';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
+import WeTravelCheckoutButton from '~/components/page/WeTravelCheckoutButton.vue';
 import { usePackageStore } from '~/stores/packages';
+import { useFormStore } from '~/stores/form';
 
+const inquireFormStore = useFormStore();
 const { $gsap } = useNuxtApp();
 $gsap.registerPlugin(ScrollToPlugin);
 
@@ -134,17 +136,20 @@ const onHide = () => {
       </p>
       <p class="text-sm">
         {{ packageDetail[0].duracion }} days - From
-        <span class="font-semibold">US$ {{ packageDetail[0].precio_tours }}</span>
+        <span class="font-semibold">US$ {{ packageDetail[0].precio_paquetes?.[0]?.precio_d }}</span>
         <span v-if="packageDetail[0].descuento" class="opacity-70">
           savings US$ {{ packageDetail[0].descuento }}
         </span>
       </p>
     </div>
-    <button class="bg-white text-blue-900 font-semibold px-4 py-2 rounded-md hover:bg-gray-200 transition"
-      @click="isOpen = true">
-      Request a Quote
-    </button>
-    <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
+    <div class="flex gap-2">
+      <WeTravelCheckoutButton :trip-uuid="`${55842886}`"></WeTravelCheckoutButton>
+      <button
+        class="bg-white text-blue-900 font-semibold px-4 py-2 rounded-md hover:bg-gray-200 transition text-sm md:text-base"
+        @click="inquireFormStore.openInquireNowForm()">
+        Request a Quote
+      </button>
+    </div>
   </div>
   <nav class="py-4 sm:py-6 border-y-2 justify-around sm:px-4 flex text-xs mb-12" :class="{
     'fixed top-0 w-full bg-white shadow-md z-20 py-1': isFixed,
@@ -217,11 +222,10 @@ const onHide = () => {
         </client-only>
       </div>
     </div>
-    <button v-if="isFixed" @click="isOpen = true"
+    <button v-if="isFixed" @click="inquireFormStore.openInquireNowForm()"
       class="py-3 px-5 text-primary border-2 border-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out bg-orange-50 rounded-md shadow-md hidden sm:flex">
       Inquire Now
     </button>
-    <InquireNowForm :isOpen="isOpen" @close="isOpen = false"></InquireNowForm>
   </nav>
   <div v-if="packageDetail && packageDetail.length > 0">
     <OverviewPackage :packageDetail="packageDetail[0]" id="overview" />

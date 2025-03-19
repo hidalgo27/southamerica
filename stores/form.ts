@@ -8,6 +8,14 @@ export const useFormStore = defineStore('FormStore', () => {
 	const showModalItinerary = ref(false)
 	const titlePackages = ref()
 
+	const InquireNowFormOpen = ref(false)
+	const openInquireNowForm = () => {
+		InquireNowFormOpen.value = true
+	}
+	const closeInquireNowForm = () => {
+		InquireNowFormOpen.value = false
+	}
+
 	const $reset = () => {
 		travelDate.value = ''
 	}
@@ -86,6 +94,9 @@ export const useFormStore = defineStore('FormStore', () => {
 		showModalInquireGlobal,
 		showModalItinerary,
 		titlePackages,
+		InquireNowFormOpen,
+		openInquireNowForm,
+		closeInquireNowForm,
 		getInquire,
 		getCountry,
 		saveInquire,
