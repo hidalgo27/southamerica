@@ -155,7 +155,7 @@ const responsability_text = {
       <div v-if="social_responsability[activeTab]"
         class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 justify-between w-full">
         <div class="relative p-6 w-full rounded-md h-[50vh]">
-          <NuxtImg :src="social_responsability[activeTab].image" class="rounded-md  w-full h-full object-cover">
+          <NuxtImg :src="social_responsability[activeTab].image" class="rounded-md  w-full h-full object-cover" />
         </div>
 
         <div class="space-y-4">

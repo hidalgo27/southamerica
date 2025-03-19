@@ -136,7 +136,7 @@ const imagen_paquetes = [
       <div v-if="community_commitment[activeTab]"
         class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-between w-full">
         <div class="relative p-6 w-full rounded-md h-[50vh]">
-          <NuxtImg :src="community_commitment[activeTab].image" class="rounded-md  w-full h-full object-cover">
+          <NuxtImg :src="community_commitment[activeTab].image" class="rounded-md  w-full h-full object-cover" />
         </div>
 
         <div class="space-y-4">
@@ -156,7 +156,7 @@ const imagen_paquetes = [
         <div class="relative p-6 w-full rounded-md h-[50vh]">
           <NuxtImg
             src="https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg"
-            class="rounded-md  w-full h-full object-cover">
+            class="rounded-md  w-full h-full object-cover" />
         </div>
 
         <div class="space-y-4 ml-20">

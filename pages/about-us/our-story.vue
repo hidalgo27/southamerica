@@ -201,7 +201,7 @@ const imagen_paquetes = [
         class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 justify-between w-full items-center">
         <div class="relative p-6 w-full rounded-md h-[50vh]">
           <NuxtImg :src="timeline[activeTab].image" alt="Image for {{ timeline[activeTab].year }}"
-            class="rounded-md  w-full h-full object-cover">
+            class="rounded-md  w-full h-full object-cover" />
         </div>
 
 
