@@ -38,19 +38,19 @@ onMounted(() => {
 <template>
   <div
     class="image-div bg-white rounded-md border overflow-hidden w-full h-full group flex-grow hover:shadow-xl hover:border-transparent transition duration-500 ease-in-out">
-    <div class="relative overflow-hidden cursor-pointer">
+    <div class="relative overflow-hidden cursor-pointer" v-if="packageData">
       <NuxtLink :to="isTravelPackages + packageData.url" class="block">
         <div class="w-full h-96">
           <NuxtImg :src="packageData.imagen" :alt="packageData.titulo"
             class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
         </div>
-        <div class="absolute top-4 left-4 flex flex-wrap gap-2 text-start"
-          v-if="packageData.paquetes_destinos || packageData.offers_home">
+        <div class="absolute top-4 left-4 flex flex-wrap gap-2 text-start">
           <span v-if="packageData.offers_home"
             class="bg-white text-secondary text-xs font-semibold px-2 py-1 rounded-full ">
             Specials
           </span>
-          <NuxtLink v-for="(region, i) in packageData.paquetes_destinos"
+          <NuxtLink v-if="packageData.paquetes_destinos && packageData.paquetes_destinos.length > 0"
+            v-for="(region, i) in packageData.paquetes_destinos"
             :to="/destinations/ + region.destinos.pais.url + '/' + region.destinos.url"
             class="bg-blue-800 text-white text-xs font-semibold px-2 py-1 rounded-full whitespace-nowrap" :key="i">
             {{ region.destinos.nombre }}

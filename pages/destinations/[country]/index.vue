@@ -57,9 +57,11 @@ onMounted(async () => {
   <TextDescription v-if="textDescription1" :textDescription="textDescription1"></TextDescription>
   <CountryMap v-if="destination" :regiones="destination.destinos" :pais="destination"></CountryMap>
   <SliderPackages v-if="destination" :listPackages="destination.paquetes"></SliderPackages>
-  <ListExperiences v-if="destination" :items="destination.destinos" :pais="destination"></ListExperiences>
+  <ListExperiences v-if="destination && destination.destinos.length > 0" :items="destination.destinos"
+    :pais="destination"></ListExperiences>
   <TextDescription v-if="textDescription2" :textDescription="textDescription2"></TextDescription>
-  <PropertyDestination v-if="destination" :properties="destination.propiedades"></PropertyDestination>
+  <PropertyDestination v-if="destination && destination.propiedades.length > 0" :properties="destination.propiedades">
+  </PropertyDestination>
   <EspecialistLetter></EspecialistLetter>
   <!-- <TravelStories></TravelStories> -->
   <Newsletter></Newsletter>

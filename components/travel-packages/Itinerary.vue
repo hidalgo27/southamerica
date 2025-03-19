@@ -40,8 +40,8 @@ const expandAll = () => {
       if (ref) {
         const fullHeight = ref.scrollHeight + 40;
         $gsap.fromTo(ref, { height: 0, opacity: 0 }, {
-          height: fullHeight, opacity: 1, duration: 0.5, ease: 'power2.inOut', onComplete() {
-            ref.style.padding = '20px 6px';
+          height: fullHeight, opacity: 1, duration: 0.5, paddingBottom: '1.5rem', paddingTop: '1.5rem', ease: 'power2.inOut', onComplete() {
+            ref.style.padding = '1.5rem 2rem';
             ref.style.height = 'auto';
           }
         });
@@ -55,7 +55,7 @@ const collapseAll = () => {
   contentRefs.value.forEach((ref, index) => {
     if (ref) {
       const fullHeight = ref.scrollHeight;
-      $gsap.fromTo(ref, { height: fullHeight }, { height: 0, opacity: 0, duration: 0.5, ease: 'power2.inOut' });
+      $gsap.fromTo(ref, { height: fullHeight }, { height: 0, paddingBottom: 0, paddingTop: 0, opacity: 0, duration: 0.5, ease: 'power2.inOut' });
     }
   });
   openIndexes.value = []; // Cerramos todos los días
@@ -72,16 +72,21 @@ const toggleWithGSAP = (index: number) => {
 
   if (isOpen(index)) {
     const fullHeight = contentRef.scrollHeight; // Captura la altura completa actual
-    $gsap.fromTo(contentRef, { height: fullHeight }, { height: 0, padding: 0, opacity: 0, duration: 0.5, ease: 'power2.inOut' });
+    $gsap.fromTo(contentRef, { height: fullHeight }, { height: 0, paddingBottom: 0, paddingTop: 0, opacity: 0, duration: 0.5, ease: 'power2.inOut' });
     openIndexes.value = openIndexes.value.filter(i => i !== index);
   } else {
     const fullHeight = contentRef.scrollHeight;
-    $gsap.fromTo(contentRef, { height: 0, opacity: 0 }, {
-      height: fullHeight, opacity: 1, duration: 0.5, ease: 'power2.inOut', onComplete() {
-        contentRef.style.padding = '1.5rem 0.5rem'; // Añade relleno después de la animación
-        contentRef.style.height = 'auto'; // Establece la altura a 'auto' después de la animación
+    $gsap.set(contentRef, { padding: '0rem 2rem' }); // Establece un padding lateral desde el inicio
+    $gsap.fromTo(contentRef,
+      { height: 0, opacity: 0, paddingTop: 0, paddingBottom: 0 },
+      {
+        height: fullHeight, opacity: 1, paddingTop: '1.5rem', paddingBottom: '1.5rem',
+        duration: 0.5, ease: 'power2.inOut',
+        onComplete() {
+          contentRef.style.height = 'auto'; // Mantiene la altura fluida después de la animación
+        }
       }
-    });
+    );
     openIndexes.value.push(index);
   }
 };
@@ -111,7 +116,7 @@ const toggleWithGSAP = (index: number) => {
 
         <div class="w-full mx-auto relative">
           <div v-for="(itinerary, index) in packageDetail.paquete_itinerario" :key="index" class="flex item">
-            <div class="relative w-20 text-center gap-12">
+            <div class="relative w-20 text-center gap-12 ">
               <div class="absolute -z-10 left-1/2 top-0 bottom-0 border-l-2 border-dashed border-slate-300"></div>
               <div class="py-2 font-bold text-xs" :class="[currentItem == index ? 'text-secondary' : 'text-slate-500']">
                 <span class="hidden md:inline">DAY</span> <span class="rounded-full px-2 py-1 text-white"
@@ -134,7 +139,7 @@ const toggleWithGSAP = (index: number) => {
                   </span>
                 </button>
 
-                <div :ref="el => setContentRef(el, index)" class="overflow-hidden rounded-b-md"
+                <div :ref="el => setContentRef(el, index)" class="overflow-hidden rounded-b-md text-start px-8"
                   v-html="itinerary.itinerarios.descripcion" :class="{ 'bg-white ': isOpen(index) }">
                 </div>
               </div>

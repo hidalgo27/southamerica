@@ -64,7 +64,8 @@ onMounted(() => {
 
 <template>
   <section class="bg-secondary bg-opacity-30 py-20">
-    <svg class="animatedSvg2 absolute right-0 w-1/3 overflow-visible translate-y-40" viewBox="0 0 800 300">
+    <svg class="animatedSvg2 absolute right-0 hidden md:flex md:w-1/3 lg:w-1/4 overflow-visible translate-y-40"
+      viewBox="0 0 800 300">
       <path
         d="M785.428 1.301C756.23 37.4045 731.395 80.1763 693.122 106.756C640.695 143.166 585.853 141.377 532.484 135.109C494.542 130.653 455.604 129.089 417.179 126.451C367.602 123.048 318.162 119.825 266.295 135.462C214.189 151.172 165.575 184.569 120.382 219.264C94.4555 239.168 66.3735 265.321 45.5039 291.126"
         fill="none" stroke="#F05B2A" stroke-width="2" stroke-dasharray="0.1 10" stroke-linecap="round"></path>

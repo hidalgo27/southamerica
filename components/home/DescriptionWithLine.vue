@@ -107,7 +107,8 @@ onMounted(async () => {
 
 <template>
   <section class="container my-20">
-    <svg v-if="line === 1" class="absolute right-0 w-1/4 overflow-visible" viewBox="0 0 400 200">
+    <svg v-if="line === 1" class="absolute right-0 hidden md:flex md:w-1/3 lg:w-1/4 overflow-visible"
+      viewBox="0 0 400 200">
       <path d="M400,0 C200,0 150,150 30,160" stroke="#333" stroke-width="0.5" fill="none" stroke-dasharray="1,5"
         stroke-linecap="round" class="animatedSvg" />
       <g class="g-svg">
@@ -127,7 +128,7 @@ onMounted(async () => {
         <p class="tracking-widest font-light">{{ text.description }}</p>
       </div>
     </div>
-    <svg v-if="line === 2" class=" mx-auto w-1/4 my-16" viewBox="0 0 400 200">
+    <svg v-if="line === 2" class="mx-auto hidden md:flex md:w-1/3 lg:w-1/4 my-16" viewBox="0 0 400 200">
       <line x1="200" y1="143" x2="200" y2="1" stroke="#F05B2A" stroke-width="2" stroke-linecap="round"
         stroke-dasharray="0.1 10" class="animatedSvgDown"></line>
       <g class="g-svg-down">

@@ -39,7 +39,7 @@ const animateImage = async (index: number) => {
     <div class="container py-32 text-center">
       <div class="text-center mb-8 justify-center">
         <div class="border mb-2 "></div>
-        <p class="mb-6 tracking-widest font-bold">Curated Trip Styles</p>
+        <p class="mb-6 tracking-widest font-bold"></p>
         <h1 class="font-semibold text-4xl md:text-7xl mb-6 title font-playfair-display tracking-wide">
           Explore the world your way.
         </h1>
@@ -60,7 +60,7 @@ const animateImage = async (index: number) => {
             </span>
           </div>
           <div v-if="animatingItem === index && item.imagen"
-            class="absolute left-2/3 md:left-1/2 top-1/2 transform lg:translate-x-24 -translate-y-1/2 w-24 h-28 md:w-48 md:h-52 z-10">
+            class="absolute left-2/3 md:left-1/2 top-1/2 transform lg:translate-x-24 -translate-y-1/2 hidden md:flex md:w-60 md:h-72 z-10">
             <NuxtImg :class="'image-' + index" :alt="item.nombre" class="w-full h-full rounded-md" :src="item.imagen" />
           </div>
 
