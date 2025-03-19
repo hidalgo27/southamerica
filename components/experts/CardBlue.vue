@@ -4,7 +4,7 @@
   <section class="container my-20 lg:my-40 relative">
     <div class="px-4 py-8 flex flex-col lg:flex-row items-center relative w-full">
       <div class="w-full lg:w-9/12 mt-8 relative lg:left-1/4 z-0">
-        <img alt="Group of travelers taking a selfie" class="rounded-lg w-full h-auto object-cover"
+        <NuxtImg alt="Group of travelers taking a selfie" class="rounded-lg w-full h-auto object-cover"
           src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
       </div>
       <div

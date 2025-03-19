@@ -3,7 +3,7 @@
 <template>
   <section class="my-20">
     <div class="relative h-[60vh]">
-      <img alt="A person with a hat walking on a suspension bridge in a forest"
+      <NuxtImg alt="A person with a hat walking on a suspension bridge in a forest"
         class="absolute  w-full h-full  object-cover"
         src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
       <div class="absolute inset-0 bg-black opacity-50">

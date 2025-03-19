@@ -5,8 +5,10 @@
 <template>
   <div>
     <!--    <nuxt-link to="/"><img src="https://gotoperu-com.s3-us-west-1.amazonaws.com/logos/logo-gotoperu-black.png" class="w-[150px] md:w-[240px]"></nuxt-link>-->
-    <nuxt-link to="/"><nuxt-img src="https://gotoperu-com.s3-us-west-1.amazonaws.com/logos/logo-gotoperu-black.png"
-        class="w-[150px] md:w-[240px]"></nuxt-img></nuxt-link>
+    <nuxt-link to="/">
+      <NuxtImg src="https://gotoperu-com.s3-us-west-1.amazonaws.com/logos/logo-gotoperu-black.png"
+        class="w-[150px] md:w-[240px]"></NuxtImg>
+    </nuxt-link>
   </div>
   <!--  <div class="">-->
   <!--    <nav class="gap-6 hidden md:flex justify-end">-->

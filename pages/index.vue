@@ -341,10 +341,12 @@ const onHide = () => {
       As featured in
     </p>
     <div class="flex flex-wrap justify-center gap-8 sm:flex-nowrap sm:space-x-8">
-      <img alt="Travel+Leisure logo" class="h-8" src="https://images.goway.com/dev/featured_in/travel-leisure.svg" />
-      <img alt="AFAR logo" class="h-8" src="https://images.goway.com/dev/featured_in/afar.svg" />
-      <img alt="Forbes logo" class="h-8" src="https://images.goway.com/dev/featured_in/forbes.svg" />
-      <img alt="Smithsonian Magazine logo" class="h-8" src="https://images.goway.com/dev/featured_in/smithsonian.svg" />
+      <NuxtImg alt="Travel+Leisure logo" class="h-8"
+        src="https://images.goway.com/dev/featured_in/travel-leisure.svg" />
+      <NuxtImg alt="AFAR logo" class="h-8" src="https://images.goway.com/dev/featured_in/afar.svg" />
+      <NuxtImg alt="Forbes logo" class="h-8" src="https://images.goway.com/dev/featured_in/forbes.svg" />
+      <NuxtImg alt="Smithsonian Magazine logo" class="h-8"
+        src="https://images.goway.com/dev/featured_in/smithsonian.svg" />
     </div>
   </div>
   <SliderPackages :listPackages="listPackages"></SliderPackages>

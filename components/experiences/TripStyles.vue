@@ -94,8 +94,11 @@ onMounted(() => {
         <nuxt-link v-for="(trip, index) in paginatedTrips" :key="index" :to="'/experiences/' + trip.url"
           class="relative block hover:shadow-lg transition duration-500 ease-in-out h-full bg-white content-between overflow-hidden rounded-md border group">
           <div class="relative overflow-hidden rounded-md h-[40vh] lg:h-96">
-            <img :alt="trip.nombre" :src="trip.imagen"
+            <NuxtImg v-if="trip.imagen" :alt="trip.nombre" :src="trip.imagen"
               class="w-full h-full rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
+            <div v-else class="mask gradient-cicle-gray flex items-center justify-center">
+              <span class="text-white">Imagen no disponible</span>
+            </div>
           </div>
           <div
             class="absolute bottom-6 left-3 md:left-4 bg-white p-4 flex justify-between items-center rounded-md w-11/12">

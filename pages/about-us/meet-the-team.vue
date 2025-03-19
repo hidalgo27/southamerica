@@ -63,7 +63,7 @@ const header = ref({
       <div v-for="member in team[activeTab].members" :key="member.name"
         class="bg-white p-4 grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-self-center w-1/2 h-1/2 text-center">
         <div class="relative p-6 w-full rounded-md h-full">
-          <img :src="member.imgSrc" class="rounded-md  w-full h-full object-cover">
+          <NuxtImg :src="member.imgSrc" class="rounded-md  w-full h-full object-cover" />
         </div>
 
         <div class="space-y-4">

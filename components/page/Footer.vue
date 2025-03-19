@@ -5,7 +5,7 @@
   <section class="container my-20 text-left">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="grid grid-cols-2">
-        <img src="https://images.goway.com/production/footer_cta/2023-09/lighthouse_4.svg" alt="icon"
+        <NuxtImg src="https: //images.goway.com/production/footer_cta/2023-09/lighthouse_4.svg" alt="icon"
           class="w-full h-full rounded-md" />
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">New Specials</h3>
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="grid grid-cols-2">
-        <img src="https://images.goway.com/production/footer_cta/2023-09/suitcase_4.svg" alt="icon"
+        <NuxtImg src="https://images.goway.com/production/footer_cta/2023-09/suitcase_4.svg" alt="icon"
           class="w-full rounded-md" />
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Start Planning</h3>
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="grid grid-cols-2">
-        <img src="https://images.goway.com/production/footer_cta/2023-09/camera-passport_4.svg" alt="icon"
+        <NuxtImg src="https://images.goway.com/production/footer_cta/2023-09/camera-passport_4.svg" alt="icon"
           class="w-full rounded-md" />
         <div class="self-center pl-6">
           <h3 class="text-lg font-semibold">Follow Along</h3>
@@ -48,13 +48,13 @@
     <div class="container pt-12">
       <div class="mb-10 flex items-center justify-center">
         <div>
-          <nuxt-img src="/images/logos/logo-mapi.svg" class="h-[14px] md:h-[25px] invert mx-auto"></nuxt-img>
+          <NuxtImg src="/images/logos/logo-mapi.svg" class="h-[14px] md:h-[25px] invert mx-auto"></NuxtImg>
         </div>
         <div>
           <span class="text-white px-4 text-xs md:text-lg">part of</span>
         </div>
         <div>
-          <nuxt-img src="/images/logos/logo-gotoperu.svg" class="h-[14px] md:h-[25px] mx-auto"></nuxt-img>
+          <NuxtImg src="/images/logos/logo-gotoperu.svg" class="h-[14px] md:h-[25px] mx-auto"></NuxtImg>
         </div>
       </div>
 
@@ -177,7 +177,7 @@
         </div>
         <div>
           <div class="h-72 overflow-hidden">
-            <nuxt-img src="/images/home/angi.png" class="w-[180px] mx-auto"></nuxt-img>
+            <NuxtImg src="/images/home/angi.png" class="w-[180px] mx-auto"></NuxtImg>
           </div>
           <nuxt-link to="#form-dream-adventure" class="btn-secondary block text-center w-full">Contact Us</nuxt-link>
         </div>

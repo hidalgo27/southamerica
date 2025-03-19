@@ -63,18 +63,18 @@ const progressWidth = computed(() => {
     <Carousel v-if="images.length > 2" :breakpoints="breakpoints" @update:modelValue="(index) => currentSlide = index"
       class="">
       <Slide v-for="(image, index) in images" :key="index" class="px-3 relative w-full h-full">
-        <img :src="image.src" :alt="image.alt" class="w-full h-full rounded-md" />
+        <NuxtImg :src="image.src" :alt="image.alt" class="w-full h-full rounded-md" />
       </Slide>
     </Carousel>
 
     <!-- Si hay 1 o 2 imágenes, centrarlas sin carrusel -->
     <div v-else class="flex items-center gap-3 w-full h-48 md:h-96 lg:h-[60vh] 2xl:h-[70vh]">
       <template v-if="images.length === 1">
-        <img :src="images[0].src" :alt="images[0].alt" class="w-full h-full rounded-md object-cover mx-auto" />
+        <NuxtImg :src="images[0].src" :alt="images[0].alt" class="w-full h-full rounded-md object-cover mx-auto" />
       </template>
       <template v-else-if="images.length === 2">
         <div class="grid grid-cols-2 gap-3 w-full h-full">
-          <img v-for="(image, index) in images" :key="index" :src="image.src" :alt="image.alt"
+          <NuxtImg v-for="(image, index) in images" :key="index" :src="image.src" :alt="image.alt"
             class="w-full h-full rounded-md object-cover" />
         </div>
       </template>

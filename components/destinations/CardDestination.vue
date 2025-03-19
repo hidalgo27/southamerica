@@ -24,7 +24,7 @@ const props = defineProps({
               destination.nombre }}</NuxtLink>
         </div>
         <div class="relative w-full rounded-md h-full">
-          <img :alt="'Explore ' + destination.nombre" class="w-full h-full object-cover rounded-md"
+          <NuxtImg :alt="'Explore ' + destination.nombre" class="w-full h-full object-cover rounded-md"
             :src="destination.imagen" />
         </div>
       </div>

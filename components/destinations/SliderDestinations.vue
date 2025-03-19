@@ -63,7 +63,7 @@ const breakpoints = {
         <NuxtLink :to="'/destinations/' + destinations.url"
           class="p-2 gap-3 grid grid-cols-2 items-center overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out text-center">
           <div class="overflow-hidden relative rounded-md w-full h-full">
-            <nuxt-img :src="destinations.image" :alt="destinations.title"
+            <NuxtImg :src="destinations.image" :alt="destinations.title"
               class="w-full h-full rounded-md transition duration-500 ease-in-out transform group-hover:scale-105" />
           </div>
           <div class="w-full mx-auto items-center justify-center flex">

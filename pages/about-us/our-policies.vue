@@ -56,7 +56,7 @@ const sections = [
         </NuxtLink>
       </div>
       <div class="w-full h-full items-center  justify-center" :class="index % 2 === 0 ? 'order-2' : 'order-1'">
-        <img :alt="section.alt" class="w-full h-full object-cover rounded-md shadow-lg" :src="section.imgSrc" />
+        <NuxtImg :alt="section.alt" class="w-full h-full object-cover rounded-md shadow-lg" :src="section.imgSrc" />
       </div>
     </div>
   </section>

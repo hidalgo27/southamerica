@@ -26,7 +26,7 @@ console.log(props.teammates)
           :to="'/our-experts/' + teammates.url + '/' + teammate.id"
           class="relative block hover:shadow-lg transition duration-500 ease-in-out h-full bg-white content-between overflow-hidden rounded-md border group">
           <div class="relative overflow-hidden rounded-md w-full h-96">
-            <img :alt="teammate.nombre" :src="teammate.imagen_perfil"
+            <NuxtImg :alt="teammate.nombre" :src="teammate.imagen_perfil"
               class="w-full h-full rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
           </div>
           <div

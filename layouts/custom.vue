@@ -11,7 +11,7 @@
       <div class="md:absolute md:inset-0 mt-0 2xl:mt-96">
         <FormFooterInquireDetail></FormFooterInquireDetail>
       </div>
-      <nuxt-img src="/images/banners/footer-colores3.jpg" class="-mt-80 md:-mt-0 w-full h-full"></nuxt-img>
+      <NuxtImg src="/images/banners/footer-colores3.jpg" class="-mt-80 md:-mt-0 w-full h-full"></NuxtImg>
     </section>
 
     <Footer></Footer>

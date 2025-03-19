@@ -3,15 +3,20 @@
     <div class="grid md:grid-cols-7">
       <div class="col-span-2">
         <h2 class="text-3xl font-bold">OUR <br>TEAM</h2>
-        <p class="my-6">Meet our team of specialists, <br> who are in charge of customizing <br> your LATAM travel package to make <br> it an unforgettable experience.</p>
+        <p class="my-6">Meet our team of specialists, <br> who are in charge of customizing <br> your LATAM travel
+          package to make <br> it an unforgettable experience.</p>
         <div class="flex gap-6 hidden md:block">
-          <button class="rounded-full border-2 p-2  border-gray-500 focus:bg-gray-800 focus:text-white" @click="prevSlide">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mx-auto">
+          <button class="rounded-full border-2 p-2  border-gray-500 focus:bg-gray-800 focus:text-white"
+            @click="prevSlide">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="w-6 h-6 mx-auto">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
             </svg>
           </button>
-          <button class="rounded-full border-2 p-2  border-gray-500 focus:bg-gray-800 focus:text-white" @click="nextSlide">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <button class="rounded-full border-2 p-2  border-gray-500 focus:bg-gray-800 focus:text-white"
+            @click="nextSlide">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
           </button>
@@ -20,15 +25,15 @@
 
       <div class="col-span-5">
 
-        <Carousel  ref="carouselRef" :wrap-around="true" :breakpoints="breakpoints">
+        <Carousel ref="carouselRef" :wrap-around="true" :breakpoints="breakpoints">
           <slide v-for="team in listTeam" :key="team.id">
             <!-- Aquí puedes poner el contenido de cada slide, por ejemplo: -->
 
             <div class="mx-3 p-3 bg-white w-full rounded-xl my-2 shadow-md cursor-pointer">
               <div class="relative">
-                <img :src="team.imagen_perfil" alt="" class="rounded-xl">
-                <div class="bg-primary py-3 rounded-xl absolute inset-x-0 bottom-0 text-white">
-                  Hola, Soy {{ team.nombre }}</div>
+                <NuxtImg :src="team.imagen_perfil" alt="" class="rounded-xl">
+                  <div class="bg-primary py-3 rounded-xl absolute inset-x-0 bottom-0 text-white">
+                    Hola, Soy {{ team.nombre }}</div>
               </div>
               <div class="">
                 <h3 class="text-lg text-primary my-3">{{ team.nombre }}</h3>
@@ -44,8 +49,8 @@
 
 <script setup lang="ts" name="CarouselTeam">
 import "vue3-carousel/dist/carousel.css"
-import {Carousel, Slide} from "vue3-carousel"
-import {usePackageStore} from "~/stores/packages"
+import { Carousel, Slide } from "vue3-carousel"
+import { usePackageStore } from "~/stores/packages"
 
 const packageStore = usePackageStore()
 
@@ -80,7 +85,7 @@ const nextSlide = () => {
 }
 
 const getTeam = async () => {
-  const res:any = await packageStore.getTeam()
+  const res: any = await packageStore.getTeam()
 
 
   listTeam.value = res
@@ -95,8 +100,8 @@ interface Item {
   name: string;
 }
 
-const getUniqueDestinos = (arr:any) => {
-  const unique:any = {};
+const getUniqueDestinos = (arr: any) => {
+  const unique: any = {};
   const uniqueDestinos = [];
   for (const paqueteDestino of arr) {
     const { destinos } = paqueteDestino;
@@ -108,7 +113,7 @@ const getUniqueDestinos = (arr:any) => {
   return uniqueDestinos;
 };
 
-const getThreeStarPrice = (arr:any) => {
+const getThreeStarPrice = (arr: any) => {
   const price = arr.find((priceInfo: { estrellas: number; }) => priceInfo.estrellas === 3);
   return price ? price.precio_d : 'No disponible';
 }

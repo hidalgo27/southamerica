@@ -107,7 +107,7 @@ const imagen_paquetes = [
             positions</button>
         </div>
         <div class="relative w-full rounded-md h-full">
-          <img class="w-full h-full object-cover rounded-md"
+          <NuxtImg class="w-full h-full object-cover rounded-md"
             src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj" />
         </div>
       </div>
@@ -136,7 +136,7 @@ const imagen_paquetes = [
       <div v-if="community_commitment[activeTab]"
         class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-between w-full">
         <div class="relative p-6 w-full rounded-md h-[50vh]">
-          <img :src="community_commitment[activeTab].image" class="rounded-md  w-full h-full object-cover">
+          <NuxtImg :src="community_commitment[activeTab].image" class="rounded-md  w-full h-full object-cover">
         </div>
 
         <div class="space-y-4">
@@ -154,7 +154,7 @@ const imagen_paquetes = [
     <div class="container">
       <div class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-between w-full">
         <div class="relative p-6 w-full rounded-md h-[50vh]">
-          <img
+          <NuxtImg
             src="https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg"
             class="rounded-md  w-full h-full object-cover">
         </div>

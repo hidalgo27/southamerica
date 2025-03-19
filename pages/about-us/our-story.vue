@@ -145,7 +145,7 @@ const imagen_paquetes = [
           <p class="text-gray-600 ">Founder & President</p>
         </div>
         <div class="relative w-full rounded-md h-full">
-          <img class="w-full h-full object-cover rounded-md"
+          <NuxtImg class="w-full h-full object-cover rounded-md"
             src="https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj" />
         </div>
       </div>
@@ -200,7 +200,7 @@ const imagen_paquetes = [
       <div v-if="timeline[activeTab]"
         class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 justify-between w-full items-center">
         <div class="relative p-6 w-full rounded-md h-[50vh]">
-          <img :src="timeline[activeTab].image" alt="Image for {{ timeline[activeTab].year }}"
+          <NuxtImg :src="timeline[activeTab].image" alt="Image for {{ timeline[activeTab].year }}"
             class="rounded-md  w-full h-full object-cover">
         </div>
 

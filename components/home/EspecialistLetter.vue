@@ -68,7 +68,8 @@ const isOpen = ref(false);
         </div>
         <div class="relative w-full h-[65vh] md:h-full rounded-md">
           <div class="w-full h-full">
-            <img alt="A beautiful sunset with a giraffe in the foreground" class="w-full h-full object-cover rounded-md"
+            <NuxtImg alt="A beautiful sunset with a giraffe in the foreground"
+              class="w-full h-full object-cover rounded-md"
               src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
           </div>
           <div

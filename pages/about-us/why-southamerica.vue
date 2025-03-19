@@ -104,7 +104,7 @@ const responsability_text = {
         </NuxtLink>
       </div>
       <div class="w-full h-full items-center  justify-center" :class="index % 2 === 0 ? 'order-2' : 'order-1'">
-        <img :alt="section.alt" class="w-full h-full object-cover rounded-md shadow-lg" :src="section.imgSrc" />
+        <NuxtImg :alt="section.alt" class="w-full h-full object-cover rounded-md shadow-lg" :src="section.imgSrc" />
       </div>
     </div>
   </section>
@@ -155,7 +155,7 @@ const responsability_text = {
       <div v-if="social_responsability[activeTab]"
         class="bg-white p-8 rounded-md grid grid-cols-1 md:grid-cols-2 gap-6 justify-between w-full">
         <div class="relative p-6 w-full rounded-md h-[50vh]">
-          <img :src="social_responsability[activeTab].image" class="rounded-md  w-full h-full object-cover">
+          <NuxtImg :src="social_responsability[activeTab].image" class="rounded-md  w-full h-full object-cover">
         </div>
 
         <div class="space-y-4">

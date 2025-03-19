@@ -103,7 +103,7 @@ onMounted(async () => {
       <nuxt-link v-for="(trip, index) in curatedTrips" :key="index" :to="'/our-experts/' + trip.url"
         class="relative block hover:shadow-lg transition duration-500 ease-in-out h-full bg-white content-between overflow-hidden rounded-md border group">
         <div class="relative overflow-hidden rounded-md">
-          <img :alt="trip.title" :src="trip.image"
+          <NuxtImg :alt="trip.title" :src="trip.image"
             class="w-full h-96 rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
         </div>
         <div
