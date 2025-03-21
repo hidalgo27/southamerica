@@ -4,15 +4,14 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
 import MiniReviews from '~/components/home/MiniReviews.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
+import WeTravelCheckoutButton from '~/components/page/WeTravelCheckoutButton.vue';
 import ImgSlider from '~/components/travel-packages/ImgSlider.vue';
 import Itinerary from '~/components/travel-packages/Itinerary.vue';
 import OverviewPackage from '~/components/travel-packages/OverviewPackage.vue';
 import PackageDetails from '~/components/travel-packages/PackageDetails.vue';
 import SliderPackages from '~/components/travel-packages/SliderPackages.vue';
-
-import WeTravelCheckoutButton from '~/components/page/WeTravelCheckoutButton.vue';
-import { usePackageStore } from '~/stores/packages';
 import { useFormStore } from '~/stores/form';
+import { usePackageStore } from '~/stores/packages';
 
 const inquireFormStore = useFormStore();
 const { $gsap } = useNuxtApp();
@@ -36,13 +35,20 @@ const getPackageDetail = async () => {
   header.value.url = packageDetail.value[0].imagen_paquetes[0].nombre;
 };
 
-const isOpen = ref(false);
-const isVisible = ref(false);
 const isFixed = ref(false);
 
 const handleScroll = () => {
-  isVisible.value = window.scrollY > 50;
-  isFixed.value = window.scrollY > window.screen.height - 100;
+  const shouldBeFixed = window.scrollY > window.screen.height - 100;
+  isFixed.value = shouldBeFixed;
+
+  const shouldBeVisible = window.scrollY > 50;
+  // Animación con GSAP para mostrar u ocultar el elemento
+  $gsap.to('.floating-banner', {
+    opacity: shouldBeVisible ? 1 : 0,
+    y: shouldBeVisible ? 0 : 10, // Se desplaza ligeramente hacia abajo al ocultarse
+    duration: 0.5,
+    ease: 'power3.out'
+  });
 };
 
 const scrollToSection = (sectionId: string) => {
@@ -52,13 +58,16 @@ const scrollToSection = (sectionId: string) => {
   $gsap.to(window, {
     duration: 1, // Tiempo en segundos (ajústalo según prefieras)
     scrollTo: { y: element, offsetY: 155 }, // Desplaza al elemento con un pequeño margen
-    ease: "power2.inOut" // Efecto de suavizado
+    ease: "power3.inOut" // Efecto de suavizado
   });
 };
 
 onMounted(async () => {
   await getPackageDetail();
   updateIsMobile();
+  if (window.scrollY < 50) {
+    $gsap.set('.floating-banner', { opacity: 0, y: 10 });
+  };
   window.addEventListener("scroll", handleScroll);
   window.addEventListener('resize', updateIsMobile);
 });
@@ -92,7 +101,7 @@ const getPackagesCountry = async () => {
 };
 
 const getDestinationUrl = (itemUrl = '') => {
-  if (!destination.value) return '#'; // Prevención de errores
+  if (!destination.value) return '#';
   return `/destinations/${destination.value.pais.url}/${destination.value.url}/${itemUrl}`;
 };
 
@@ -125,16 +134,14 @@ const onHide = () => {
 <template>
   <HeaderImgNav :header="header" :packageDetail="packageDetail"></HeaderImgNav>
   <div
-    class="fixed bottom-0 md:bottom-12 space-x-2 w-full z-40 md:w-2/3 lg:w-1/2 md:translate-x-1/4 lg:translate-x-1/2 md:rounded-md bg-blue-900 text-white flex justify-between items-center p-4 shadow-md transition-all duration-500 ease-in-out"
-    :class="{
-      'opacity-0 translate-y-10 pointer-events-none': !isVisible,
-      'opacity-100 translate-y-0': isVisible
-    }" v-if="packageDetail.length > 0">
-    <div class="space-y-2">
-      <p class="font-bold">
+    class="floating-banner fixed bottom-0 md:bottom-12 space-x-2 w-full z-40 md:w-2/3 lg:w-1/2 md:translate-x-1/4 lg:translate-x-1/2 md:rounded-md bg-blue-900 text-white flex justify-between items-center p-4 shadow-md "
+    v-show="packageDetail.length > 0">
+    <div class="space-y-2" v-if="packageDetail[0]">
+      <p v-if="packageDetail[0].titulo" class="font-bold">
         {{ packageDetail[0].titulo }}
       </p>
-      <p class="text-sm">
+      <p class="text-sm"
+        v-if="packageDetail[0].duracion || packageDetail[0].precio_paquetes || packageDetail[0].descuento">
         {{ packageDetail[0].duracion }} days - From
         <span class="font-semibold">US$ {{ packageDetail[0].precio_paquetes?.[0]?.precio_d }}</span>
         <span v-if="packageDetail[0].descuento" class="opacity-70">
@@ -143,7 +150,8 @@ const onHide = () => {
       </p>
     </div>
     <div class="flex gap-2">
-      <WeTravelCheckoutButton :trip-uuid="`${55842886}`"></WeTravelCheckoutButton>
+      <WeTravelCheckoutButton v-show="packageDetail?.[0]?.codigo_f" :tripUuid="packageDetail?.[0]?.codigo_f || ''">
+      </WeTravelCheckoutButton>
       <button
         class="bg-white text-blue-900 font-semibold px-4 py-2 rounded-md hover:bg-gray-200 transition text-sm md:text-base"
         @click="inquireFormStore.openInquireNowForm()">

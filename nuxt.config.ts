@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       // meta: [
       //   { name: 'description', content: 'My amazing site.' }
       // ],
-      script: [{ src: 'https://cdn.wetravel.com/widgets/embed_checkout.js' }],
+      script: [{ src: 'https://cdn.wetravel.com/widgets/embed_checkout.js', async: true, defer: true }],
       link: [
         { rel: 'apple-touch-icon', sizes: '48x48', href: '/favicon/favicon.png' },
         { rel: 'apple-touch-icon', sizes: '192x192', href: '/favicon/android-chrome-192x192.png' },
