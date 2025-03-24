@@ -39,9 +39,9 @@ onMounted(() => {
   <div
     class="image-div bg-white rounded-md border overflow-hidden w-full h-full group flex-grow hover:shadow-xl hover:border-transparent transition duration-500 ease-in-out">
     <div class="relative overflow-hidden cursor-pointer" v-if="packageData">
-      <NuxtLink :to="isTravelPackages + packageData.url" class="block">
+      <a :href="isTravelPackages + packageData.url" class="block">
         <div class="w-full h-96">
-          <NuxtImg :src="packageData.imagen" :alt="packageData.titulo"
+          <NuxtImg :src="packageData.imagen" :alt="packageData.titulo" format="webp" quality="75"
             class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
         </div>
         <div class="absolute top-4 left-4 flex flex-wrap gap-2 text-start">
@@ -62,7 +62,7 @@ onMounted(() => {
             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
           </svg>
         </div>
-      </NuxtLink>
+      </a>
     </div>
     <div class="p-6 text-left">
       <div class="h-64">
@@ -74,10 +74,10 @@ onMounted(() => {
             {{ tag.categoria.nombre }}
           </NuxtLink>
         </div>
-        <NuxtLink :to="'/travel-packages/' + packageData.url"
+        <a :href="'/travel-packages/' + packageData.url"
           class="text-xl font-semibold font-playfair-display tracking-wide mb-3 block">
           {{ packageData.titulo }}
-        </NuxtLink>
+        </a>
         <p v-if="packageData.reserva" class="text-gray-500 my-6 flex">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6 text-secondary">
