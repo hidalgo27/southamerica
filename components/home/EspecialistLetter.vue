@@ -1,22 +1,40 @@
 <script lang="ts" setup>
 import 'vue3-carousel/dist/carousel.css';
 import { useFormStore } from '~/stores/form';
+import { useTeamStore } from '~/stores/team';
+
+const teamStore = useTeamStore();
+const team = ref([])
+const items = ref([])
+
+const getAllTeam = async () => {
+  const res: any = await teamStore.getAllTeam();
+  team.value = res.teams;
+
+  items.value = team.value.map(member => ({
+    id: member.id,
+    name: member.nombre,
+    region: member.destinos?.map(d => d.nombre).join(', ') || 'N/A',
+    description: member.descripcion || 'Sin descripción',
+    img: member.imagen_perfil || 'URL_DEFAULT'
+  }));
+  console.log(team.value)
+}
 
 const inquireFormStore = useFormStore();
 
-const items = ref([
+/* const items = ref([
   { id: 1, name: "Susanna Beccati", region: "Central America, South America, Arctic & Antarctica", description: "I was born in Toronto and raised in The West Indies, I have been blessed with the opportunity to grow up around many different cultures & to travel to many different places.", img: "https://master-7rqtwti-io4vvdzre4r5u.ca-1.platformsh.site/s3/files/styles/staff_profile_photo_small/s3/author/JuliaBates.png?itok=T3PyTVgG" },
   { id: 2, name: "John Doe", region: "Europe, Asia", description: "After I realized that I wanted to be in the travel industry, I studied Travel & Tourism and obtained a diploma. I have been in the travel Industry since 2009. I have worked and", img: "https://master-7rqtwti-io4vvdzre4r5u.ca-1.platformsh.site/s3/files/styles/staff_profile_photo_small/s3/author/MarielleMantele.png?itok=jBQsJ6f9" },
   { id: 3, name: "Maria Lopez", region: "North America, Africa", description: "Growing up in a small town in southern India, my thirst for exploring new places, learning about different cultures, and unraveling the mysteries of history has been insatiable. Over the years, I have journeyed across Europe,.", img: "https://master-7rqtwti-io4vvdzre4r5u.ca-1.platformsh.site/s3/files/styles/staff_profile_photo_small/s3/author/Ivor_Dsouza_illustration.png?itok=rgwnL6Yd" },
-]);
+]); */
 
 const currentSlide = ref(0);
 
 const displayedItems = computed(() => [...items.value]);
 
 const nextSlide = () => {
-  const firstItem = items.value.shift();
-  items.value.push(firstItem);
+  items.value.push(items.value.shift()!);
   currentSlide.value = (currentSlide.value + 1) % items.value.length;
 };
 
@@ -25,20 +43,16 @@ const progressWidth = computed(() => {
   return totalSlides > 1 ? ((currentSlide.value / (totalSlides - 1)) * 100) : 100;
 });
 
-const getCardClass = (index) => {
-  switch (index) {
-    case 0:
-      return "z-30 scale-100";
-    case 1:
-      return "z-20 scale-95 translate-x-4 translate-y-4";
-    case 2:
-      return "z-10 scale-90 translate-x-8 translate-y-8";
-    default:
-      return "hidden";
-  }
+const getCardClass = (index: number) => {
+  if (index === 0) return "z-30 scale-100";
+  if (index === 1) return "z-20 scale-95 translate-x-4 translate-y-4";
+  return "z-10 scale-90 translate-x-8 translate-y-8";
 };
 
-const isOpen = ref(false);
+
+onMounted(async () => {
+  await getAllTeam()
+})
 </script>
 <template>
   <section class="container my-20">
