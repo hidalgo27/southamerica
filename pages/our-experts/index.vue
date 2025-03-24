@@ -155,9 +155,9 @@ onMounted(async () => {
       <p class="text-md mb-6">
         Where are you headed to next?
       </p>
-      <button class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700">
+      <NuxtLink to="/destinations" class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700">
         Explore Destinations
-      </button>
+      </NuxtLink>
     </div>
   </section>
   <BannerPosition></BannerPosition>

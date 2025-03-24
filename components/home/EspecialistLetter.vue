@@ -89,7 +89,7 @@ onMounted(async () => {
           <div
             class="absolute top-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-3 lg:left-1/2 transform lg:-translate-x-1/2  translate-y-16 xl:translate-y-12">
             <div class="relative w-[30vh] md:w-[36vh] h-[380px] mx-auto">
-              <transition-group name="carousel" tag="div">
+              <transition-group name="carousel" tag="div" v-if="displayedItems.length > 0">
                 <div v-for="(item, index) in displayedItems" :key="item.id"
                   class="absolute w-full h-full p-6 rounded-xl shadow-xl bg-white transition-all duration-500 flex flex-col justify-between"
                   :class="getCardClass(index)">
@@ -103,14 +103,12 @@ onMounted(async () => {
                       </p>
                     </div>
                     <div class="ml-4 w-16 h-16 rounded-full overflow-hidden">
-                      <NuxtImg alt="Illustration of a person with long hair wearing a white shirt" height="64"
-                        :src="item.img" width="64" />
+                      <NuxtImg alt="Illustration of a person with long hair wearing a white shirt" :src="item.img" />
                     </div>
                   </div>
                   <hr class="my-4" />
-                  <p class="text-gray-700 mb-4 text-sm overflow-hidden">
-                    {{ item.description }}...
-                  </p>
+                  <div class="text-gray-700 mb-4 text-sm overflow-hidden text-ellipsis" v-html="item.description">
+                  </div>
                   <div class="group">
                     <NuxtLink
                       class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0"

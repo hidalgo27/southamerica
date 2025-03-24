@@ -60,10 +60,10 @@ const tabs = [
         </div>
 
 
-        <div v-if="activeTab === 'inclusions' && (packageDetail?.incluye?.length || packageDetail?.noincluye?.length)"
-          class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
-          <div v-if="packageDetail.incluye?.length"
-            class="border-b-2 md:border-b-0 md:border-r-2 border-gray-200 pb-6 md:pb-0 md:pr-6 md:ml-12">
+        <div v-if="activeTab === 'inclusions'" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg"
+          :class="{ 'md:grid-cols-1': !packageDetail.noincluye && !packageDetail.incluye }">
+          <div v-if="packageDetail.incluye" class=" pb-6 md:pb-0 md:pr-6 md:ml-12"
+            :class="{ 'border-b-2 md:border-b-0 md:border-r-2 border-gray-200': packageDetail?.incluye && packageDetail?.noincluye }">
             <h3
               class="text-lg font-playfair-display font-semibold text-green-600 my-6 md:my-12 text-center md:text-left">
               Included
@@ -73,13 +73,17 @@ const tabs = [
             </ul>
           </div>
 
-          <div v-if="packageDetail.noincluye?.length" class="md:ml-12">
+          <div v-if="packageDetail.noincluye" class="md:ml-12">
             <h3 class="text-lg font-playfair-display font-semibold text-red-600 my-6 md:my-12 text-center md:text-left">
               Not Included
             </h3>
-            <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6">
+            <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6 text-center">
               <div v-html="packageDetail.noincluye"></div>
             </ul>
+          </div>
+
+          <div v-if="!packageDetail.incluye?.length && !packageDetail.noincluye?.length" class="text-center">
+            <p class="text-gray-600 mt-2">No information available.</p>
           </div>
         </div>
 

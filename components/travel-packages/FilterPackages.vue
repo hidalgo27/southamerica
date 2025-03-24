@@ -133,7 +133,7 @@ const filteredPackages = computed(() => {
       pkg.precio_paquetes[0].precio_d <= priceRange.value.max;
     const matchesDuration = pkg.duracion >= durationRange.value.min && pkg.duracion <= durationRange.value.max;
 
-    return matchesOffers && matchesCountry && matchesCategory && matchesRegion && matchesDuration;
+    return matchesOffers && matchesCountry && matchesCategory && matchesRegion && matchesDuration && matchesPrice;
   });
 
   // Aplicar ordenación si hay un criterio definido
@@ -154,6 +154,7 @@ const filteredPackages = computed(() => {
       return sortCriteria.value.order === 'asc' ? valueA - valueB : valueB - valueA;
     });
   }
+
   return packages;
 });
 

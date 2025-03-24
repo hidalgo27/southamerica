@@ -23,7 +23,7 @@ const slides = [
             {{ slide.title }}
           </h1>
           <NuxtLink to="/destinations"
-            class="translate-y-20 lg:translate-y-44 px-6 py-3 bg-white text-gray-800 text-lg font-semibold rounded shadow hover:bg-gray-100">
+            class="translate-y-32  px-6 py-3 bg-white text-gray-800 text-lg font-semibold rounded shadow hover:bg-gray-100">
             {{ slide.buttonText }}
           </NuxtLink>
         </div>
