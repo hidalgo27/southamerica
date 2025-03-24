@@ -164,7 +164,7 @@ const onHide = () => {
             Cargando ..
           </div>
         </div>
-        <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper brightness-75"></div>
+        <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>
         <div class="relative z-10 flex items-center  w-full h-full text-center">
           <div class=" container ">
             <h1
