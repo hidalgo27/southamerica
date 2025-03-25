@@ -83,14 +83,15 @@ onMounted(async () => {
           <div class="w-full h-full">
             <NuxtImg alt="A beautiful sunset with a giraffe in the foreground"
               class="w-full h-full object-cover rounded-md"
-              src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
+              src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf"
+              loading="lazy" />
           </div>
           <div
             class="absolute top-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-3 lg:left-1/2 transform lg:-translate-x-1/2  translate-y-16 xl:translate-y-12">
             <div class="relative w-[30vh] md:w-[36vh] h-[380px] mx-auto">
               <transition-group name="carousel" tag="div" v-if="displayedItems.length > 0">
                 <div v-for="(item, index) in displayedItems" :key="item.id"
-                  class="absolute w-full h-full p-6 rounded-xl shadow-xl bg-white transition-all duration-500 flex flex-col justify-between"
+                  class="absolute w-full h-full p-6 rounded-xl border bg-white transition-all duration-700 flex flex-col justify-between"
                   :class="getCardClass(index)">
                   <div class="flex items-center justify-between mb-4">
                     <div class="">
@@ -102,7 +103,8 @@ onMounted(async () => {
                       </p>
                     </div>
                     <div class="ml-4 w-16 h-16 rounded-full overflow-hidden">
-                      <NuxtImg alt="Illustration of a person with long hair wearing a white shirt" :src="item.img" />
+                      <NuxtImg alt="Illustration of a person with long hair wearing a white shirt" :src="item.img"
+                        loading="lazy" />
                     </div>
                   </div>
                   <hr class="my-4" />

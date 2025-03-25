@@ -81,7 +81,7 @@ onMounted(() => {
             <div class="w-full h-96 overflow-hidden rounded-md">
               <NuxtImg :alt="post.imageAlt"
                 class="w-full h-full rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105"
-                :src="post.imageUrl" />
+                :src="post.imageUrl" loading="lazy" />
             </div>
             <span v-if="post.category"
               class=" absolute top-2 left-2 bg-white text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">

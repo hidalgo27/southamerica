@@ -400,7 +400,8 @@ const toggleDropdown = (index: number) => {
                           <NuxtLink v-if="hoveredItem.image" :to="hoveredItem.link"
                             class="m-0 w-full h-full lg:w-56 rounded-md overflow-hidden group relative hidden md:block">
                             <NuxtImg :src="hoveredItem.image"
-                              class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105">
+                              class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105"
+                              loading="lazy">
                             </NuxtImg>
                             <div
                               class="absolute bottom-0 w-full bg-opacity-50 text-white text-center p-2 flex items-center justify-between ">
@@ -418,7 +419,8 @@ const toggleDropdown = (index: number) => {
                     <NuxtLink v-if="menu.image" :to="menu.url"
                       class="hidden md:block w-full h-full lg:w-52 rounded-md overflow-hidden group relative">
                       <NuxtImg :src="menu.image"
-                        class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105">
+                        class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105"
+                        loading="lazy">
                       </NuxtImg>
                       <div
                         class="absolute bottom-0 w-full bg-opacity-50 text-white text-center p-2 flex items-center justify-between ">
@@ -471,30 +473,31 @@ const toggleDropdown = (index: number) => {
           </svg>
         </button>
       </div>
-
-      <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 h-screen flex justify-center">
-        <div
-          class="rounded-t bg-white w-10/12 max-w-md h-[70vh] shadow-md p-5 relative transform transition-transform duration-300"
-          :class="{ 'translate-y-96': isMobileMenuOpen, 'translate-y-0': !isMobileMenuOpen }">
-          <button @click="toggleMobileMenu" class="absolute top-4 right-4">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-              stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          <nav class="flex flex-col gap-4">
-            <div v-for="(menu, index) in menus" :key="index">
-              <button @click="toggleDropdown(index), handleDropdownOpen(menu)" class="w-full text-left p-2 rounded-md ">
-                {{ menu.title }}
-              </button>
-            </div>
-          </nav>
-        </div>
-      </div>
     </div>
   </div>
+  <Teleport to="body">
+    <div v-if="isMobileMenuOpen" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50"></div>
+    <transition name="slide">
+      <div v-if="isMobileMenuOpen"
+        class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-80 bg-white p-6 z-50 rounded-t-md">
+        <button @click="toggleMobileMenu" class="absolute top-4 right-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <nav class="flex flex-col gap-4">
+          <div v-for="(menu, index) in menus" :key="index">
+            <button @click="toggleDropdown(index), handleDropdownOpen(menu)" class="w-full text-left p-2 rounded-md ">
+              {{ menu.title }}
+            </button>
+          </div>
+        </nav>
+      </div>
+    </transition>
+  </Teleport>
 </template>
-<style>
+<style scoped>
 body.no-scroll {
   overflow: hidden;
 }
@@ -523,6 +526,20 @@ body.no-scroll {
 
 .v-popper__popper--no-positioning.v-popper__popper--hidden .v-popper__wrapper {
   transform: translateY(100%);
+}
 
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease-in-out, opacity 0.3s;
+}
+
+.slide-enter-from {
+  transform: translate(-50%, 100%);
+  opacity: 0;
+}
+
+.slide-leave-to {
+  transform: translate(-50%, 100%);
+  opacity: 0;
 }
 </style>

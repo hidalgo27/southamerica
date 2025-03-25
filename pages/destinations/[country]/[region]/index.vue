@@ -84,7 +84,7 @@ const toggleReadMore = () => {
   </section>
   <SliderPackages v-if="region" :listPackages="region.paquetes"></SliderPackages>
   <ImgSlider v-if="region" :imagen_paquetes="region.imagenes.slice(1)"></ImgSlider>
-  <section class="container my-20">
+  <section class="container my-20" v-if="region && (region.wtitle && region.wimage)">
     <div class="flex items-center justify-center p-4">
       <div class="grid grid-cols-1 md:grid-cols-2 bg-white w-full gap-6 items-stretch min-h-[50vh]">
         <div class="bg-tertiary bg-opacity-10 p-6 rounded-md flex flex-col justify-between h-full">

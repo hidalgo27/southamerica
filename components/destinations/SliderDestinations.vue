@@ -64,7 +64,8 @@ const breakpoints = {
           class="p-2 gap-3 grid grid-cols-2 items-center overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out text-center">
           <div class="overflow-hidden relative rounded-md w-full h-full">
             <NuxtImg :src="destinations.image" :alt="destinations.title"
-              class="w-full h-full rounded-md transition duration-500 ease-in-out transform group-hover:scale-105" />
+              class="w-full h-full rounded-md transition duration-500 ease-in-out transform group-hover:scale-105"
+              loading="lazy" />
           </div>
           <div class="w-full mx-auto items-center justify-center flex">
             <h2 class="text-center text-xl flex flex-wrap font-semibold text-gray-800 font-playfair-display">
