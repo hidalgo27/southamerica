@@ -25,10 +25,8 @@ const travelGuideHeader = ref([
 const getBlog = async () => {
   const res: any = await blogStore.getBlog(route.params.blog as string);
   inspirationDetail.value = res[0];
-  console.log(inspirationDetail.value);
   header.value.url = inspirationDetail.value?.imagenes.length > 0 ? inspirationDetail.value?.imagenes[0].nombre : '';
   travelGuideHeader.value[0].titulo = inspirationDetail.value.titulo;
-  console.log(travelGuideHeader.value[0].titulo);
   travelGuideHeader.value[0].categoria = inspirationDetail.value.categoria;
   const date = new Date(inspirationDetail.value.created_at);
   travelGuideHeader.value[0].published = date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });

@@ -6,8 +6,6 @@ const props = defineProps({
     required: true,
   },
 });
-console.log(props.teammates)
-
 </script>
 <template>
   <section class="bg-secondary bg-opacity-30 py-12 ">

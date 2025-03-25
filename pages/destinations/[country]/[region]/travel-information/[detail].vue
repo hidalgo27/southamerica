@@ -39,8 +39,6 @@ const categoryStateMap: Record<string, number> = {
 const getRegion = async () => {
   const res: any = await destinationStore.getRegion(route.params.region as string);
   region.value = res.destino;
-  console.log(route.params.detail as string);
-  console.log(region.value);
   if (region.value) {
     header.value.title = region.value.nombre;
     if (categoryMap[route.params.detail]) {
@@ -59,7 +57,6 @@ const getRegion = async () => {
 const getBlog = async (url: string) => {
   const res: any = await blogStore.getBlog(url);
   post.value = res[0];
-  console.log(post.value);
   header.value.url = post.value.imagenes[0].nombre;
 }
 

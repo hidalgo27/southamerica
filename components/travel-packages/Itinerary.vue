@@ -34,7 +34,6 @@ const expandAll = () => {
   if (!props.packageDetail || !props.packageDetail.paquete_itinerario) return;
   openIndexes.value = props.packageDetail.paquete_itinerario.map((_: any, i: any) => i);
 
-  console.log(openIndexes.value)
   nextTick(() => {
     contentRefs.value.forEach((ref, index) => {
       if (ref) {

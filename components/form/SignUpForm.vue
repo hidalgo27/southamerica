@@ -131,7 +131,6 @@ const handleSubmit = async () => {
     },
     event: "generate_lead",
   });
-  console.log(obj);
 
   await formStore.getInquire(obj).then((res) => {
     if (res) {

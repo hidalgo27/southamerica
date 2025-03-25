@@ -13,7 +13,6 @@ const props = defineProps({
     required: false,
   }
 });
-console.log(props.packageData);
 
 const countries = computed(() => {
   const countrySet = new Set();
@@ -36,13 +35,11 @@ const regions = computed(() => {
       }
     });
   });
-  console.log(regionSet);
   return Array.from(regionSet);
 });
 
 const categorias = computed(() => {
   const categorySet = new Set();
-  console.log(props.packageData);
   props.packageData.forEach((pkg: any) => {
     pkg.paquetes_categoria?.forEach((cat: any) => {
       if (cat.categoria?.nombre) {
@@ -50,7 +47,6 @@ const categorias = computed(() => {
       }
     });
   });
-  console.log(categorySet);
   return Array.from(categorySet);
 })
 // const mixedList2 = ref(["Luxury", "Adventure", "Budget", "Cultural", "Family", "Diversity", "Funny"]);
@@ -230,11 +226,9 @@ const clearFilters = () => {
 };
 
 onMounted(() => {
-  console.log(props.filters);
   updateIsMobile();
   window.addEventListener('resize', updateIsMobile);
   if (props.filters) {
-    console.log("entra");
     if (props.filters.country) {
       selectedCountry.value = props.filters.country;
     }

@@ -22,7 +22,6 @@ const header = ref({
 const getCountries = async () => {
   const res: any = await useDestination.getCountries();
   countries.value = res;
-  console.log(countries.value);
 
   curatedTrips.value = countries.value.map((country: any) => {
     return {

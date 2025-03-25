@@ -113,7 +113,6 @@ const saveInquire = async (obj: any) => {
 
 // Función para enviar el formulario
 const handleSubmit = async () => {
-  console.log(packageDetail.value)
   if (packageDetail.value) {
     formData.value.destinations = packageDetail.value.paquetes_destinos.map((item: any) => item.destinos.nombre);
     formData.value.travelStyle = packageDetail.value.paquetes_categoria.map((item: any) => item.categoria.id);
@@ -163,8 +162,6 @@ const handleSubmit = async () => {
     },
     event: "generate_lead",
   });
-  console.log(obj);
-
 
   await formStore.getInquire(obj).then((res) => {
     if (res) {

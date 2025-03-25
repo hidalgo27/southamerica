@@ -31,7 +31,6 @@ const packageDetail = ref([]);
 const getPackageDetail = async () => {
   const res: any = await packageStore.getPackage(route.params.package as string);
   packageDetail.value = res
-  console.log(packageDetail.value);
   header.value.url = packageDetail.value[0].imagen_paquetes[0].nombre;
 };
 
@@ -94,10 +93,8 @@ const destination = computed(() => {
 });
 
 const getPackagesCountry = async () => {
-  console.log(packageDetail.value)
   const res: any = await packageStore.getPackageByCountry(destination.value.pais.url);
   listPackages.value = res.paquetes;
-  console.log(listPackages.value);
 };
 
 const getDestinationUrl = (itemUrl = '') => {

@@ -23,7 +23,6 @@ const header = ref({
 const getRegion = async () => {
   const res: any = await destinationStore.getRegion(route.params.region as string);
   region.value = res.destino;
-  console.log(region.value);
   if (region.value) {
     header.value.miniTitle = region.value.title;
     header.value.title = region.value.nombre;

@@ -11,9 +11,6 @@ const props = defineProps({
   }
 });
 
-watch(() => props.topBlogs, () => {
-  console.log('Top blogs changed', props.topBlogs);
-});
 const posts = ref(props.topBlogs.map(blog => ({
   imageUrl: blog.imagen_miniatura,
   imageAlt: blog.titulo,

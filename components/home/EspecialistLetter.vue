@@ -18,7 +18,6 @@ const getAllTeam = async () => {
     description: member.descripcion || 'Sin descripción',
     img: member.imagen_perfil || 'URL_DEFAULT'
   }));
-  console.log(team.value)
 }
 
 const inquireFormStore = useFormStore();

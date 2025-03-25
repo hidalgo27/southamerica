@@ -19,7 +19,6 @@ const header = ref({
 const getTeam = async () => {
   const res: any = await useTeam.getTeammate(route.params.teammate as number);
   team.value = res.team;
-  console.log(team.value);
   header.value.title = team.value.nombre;
   header.value.subTitle = team.value.cargo;
   header.value.url = team.value.imagen_portada;

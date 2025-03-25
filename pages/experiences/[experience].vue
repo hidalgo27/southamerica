@@ -29,11 +29,9 @@ const header = ref({
 const getCategory = async () => {
   const res: any = await categoryStore.getCategory(route.params.experience as string);
   category.value = res;
-  console.log(category.value);
   selectedCategory.value = category.value.nombre;
   header.value.title = category.value.nombre;
   header.value.url = category.value.imagen_banner;
-  console.log(selectedCategory.value)
   isLoading.value = false;
 };
 

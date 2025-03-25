@@ -12,7 +12,6 @@ const props = defineProps({
   },
 });
 
-console.log(props.items);
 const getCountryUrl = (item) => {
   return props.pais?.url || item.pais?.url || '';
 };

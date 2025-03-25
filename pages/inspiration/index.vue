@@ -25,7 +25,6 @@ const articles = ref({});
 const getBlogs = async () => {
   const res: any = await blogStore.getBlogs();
   blogs.value = res.blogs.filter((blog: any) => blog.estado === null || blog.estado === 0);
-  console.log(blogs.value);
   articles.value = blogs.value.reduce((acc: any, blog: any) => {
     const category = categories.value[blog.categoria_id];
     if (!acc[category]) {
@@ -44,7 +43,6 @@ const getBlogs = async () => {
     return acc;
   }, {});
 
-  console.log(articles.value);
 };
 
 onMounted(async () => {

@@ -21,7 +21,6 @@ const header = ref({
 const getTeam = async () => {
   const res: any = await useTeam.getTeamByCountry(route.params.country as string);
   team.value = res.pais;
-  console.log(team.value);
   header.value.title = team.value.nombre;
   header.value.url = team.value.imagen;
 };

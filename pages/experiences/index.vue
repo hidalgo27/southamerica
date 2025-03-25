@@ -23,7 +23,6 @@ const listCategories = ref([]);
 const getCategories = async () => {
   const res: any = await categoryStore.getCategories();
   listCategories.value = res;
-  console.log(listCategories.value);
 };
 
 const header = {

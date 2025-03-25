@@ -29,7 +29,6 @@ const listCategories = ref([]);
 const getCategories = async () => {
   const res: any = await categoryStore.getCategories();
   listCategories.value = res;
-  console.log(listCategories.value);
 };
 
 const blogStore = useBlogStore();
@@ -38,7 +37,6 @@ const topBlogs = ref([]);
 const getBlogs = async () => {
   const res: any = await blogStore.getBlogs();
   topBlogs.value = res.blogs.filter((blog: any) => blog.estado == null || blog.estado === 0).slice(0, 3);
-  console.log(topBlogs.value);
 };
 
 const loading = ref(true)
@@ -341,8 +339,8 @@ const onHide = () => {
       As featured in
     </p>
     <div class="flex flex-wrap justify-center gap-8 sm:flex-nowrap sm:space-x-8">
-      <NuxtImg alt="Travel+Leisure logo" class="h-8"
-        src="https://images.goway.com/dev/featured_in/travel-leisure.svg" />
+      <NuxtImg alt="Travel+Leisure logo" class="h-8" src="https://images.goway.com/dev/featured_in/travel-leisure.svg"
+        loading="lazy" />
       <NuxtImg alt="AFAR logo" class="h-8" src="https://images.goway.com/dev/featured_in/afar.svg" />
       <NuxtImg alt="Forbes logo" class="h-8" src="https://images.goway.com/dev/featured_in/forbes.svg" />
       <NuxtImg alt="Smithsonian Magazine logo" class="h-8"
