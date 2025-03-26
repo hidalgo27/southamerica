@@ -272,7 +272,8 @@ onMounted(async () => {
 <template>
   <div v-if="isOpen" class="fixed inset-0 flex items-center z-50 justify-center bg-gray-800 bg-opacity-50 scroll"
     @click.self="closeModal">
-    <div class="bg-white rounded-lg shadow-lg w-5/6 h-screen md:h-auto relative overflow-y-auto sm:overflow-y-auto">
+    <div
+      class="bg-white md:rounded-lg shadow-lg md:w-5/6 h-screen md:h-auto relative overflow-y-auto sm:overflow-y-auto">
       <button @click="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
         ✕
       </button>

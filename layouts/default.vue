@@ -4,15 +4,14 @@
     <slot />
 
     <Footer></Footer>
-
+    <ButtonToTop></ButtonToTop>
     <!-- <Float></Float> -->
-
   </div>
 </template>
 
 <script setup lang="ts">
-
 import Headers from "~/components/page/Headers.vue";
 import Footer from "~/components/page/Footer.vue";
 import Float from "~/components/page/Float.vue";
+import ButtonToTop from "~/components/page/ButtonToTop.vue";
 </script>
