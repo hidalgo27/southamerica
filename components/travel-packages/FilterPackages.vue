@@ -2,6 +2,12 @@
 import { Dropdown } from 'floating-vue';
 import CardPackage from './CardPackage.vue';
 
+import { useDestinationStore } from '~/stores/destination';
+import { useCategoriesStore } from '~/stores/categories';
+
+const destinationStore = useDestinationStore();
+const categoriesStore = useCategoriesStore();
+
 const route = useRoute();
 const props = defineProps({
   packageData: {
@@ -13,42 +19,27 @@ const props = defineProps({
     required: false,
   }
 });
-
-const countries = computed(() => {
-  const countrySet = new Set();
-  props.packageData.forEach((pkg: any) => {
-    pkg.paquetes_destinos?.forEach((dest: any) => {
-      if (dest.destinos?.pais?.nombre) {
-        countrySet.add(dest.destinos.pais.nombre);
-      }
-    });
+const countries = ref([]);
+const regions = ref([])
+const getCountries = async () => {
+  const res: any = await destinationStore.getCountries();
+  countries.value = res.map((country: any) => {
+    return country.nombre;
   });
-  return Array.from(countrySet);
-});
-
-const regions = computed(() => {
-  const regionSet = new Set();
-  props.packageData.forEach((pkg: any) => {
-    pkg.paquetes_destinos?.forEach((dest: any) => {
-      if (dest.destinos?.nombre) {
-        regionSet.add(dest.destinos.nombre);
-      }
-    });
+  regions.value = res.flatMap((country: any) => {
+    return country.destino.map((region: any) => region.nombre)
   });
-  return Array.from(regionSet);
-});
+}
 
-const categorias = computed(() => {
-  const categorySet = new Set();
-  props.packageData.forEach((pkg: any) => {
-    pkg.paquetes_categoria?.forEach((cat: any) => {
-      if (cat.categoria?.nombre) {
-        categorySet.add(cat.categoria.nombre);
-      }
-    });
+const categorias = ref([]);
+const getCategories = async () => {
+  const res: any = await categoriesStore.getCategories();
+  console.log(res)
+  categorias.value = res.map((category: any) => {
+    return category.nombre;
   });
-  return Array.from(categorySet);
-})
+}
+
 // const mixedList2 = ref(["Luxury", "Adventure", "Budget", "Cultural", "Family", "Diversity", "Funny"]);
 
 //RANGO DE PRECIO
@@ -225,7 +216,9 @@ const clearFilters = () => {
   showSpecialOffers.value = false;
 };
 
-onMounted(() => {
+onMounted(async () => {
+  await getCountries();
+  await getCategories();
   updateIsMobile();
   window.addEventListener('resize', updateIsMobile);
   if (props.filters) {

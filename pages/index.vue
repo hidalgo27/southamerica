@@ -15,12 +15,22 @@ import { Dropdown } from 'floating-vue'
 import { usePackageStore } from '~/stores/packages'
 import { useCategoriesStore } from '~/stores/categories'
 import { useBlogStore } from '~/stores/blog'
+import { useDestinationStore } from '~/stores/destination'
 
 const packageStore = usePackageStore()
+const destinationStore = useDestinationStore()
 const listPackages = ref([])
 const getPackage = async () => {
   const res: any = await packageStore.getPackageTop()
   listPackages.value = res
+}
+
+const getCountries = async () => {
+  const res: any = await destinationStore.getCountries()
+  countries.value = res.map((country: any) => {
+    return country.nombre
+  })
+  console.log(countries.value)
 }
 
 const categoryStore = useCategoriesStore();
@@ -110,6 +120,7 @@ onMounted(async () => {
   await getPackage()
   await getCategories()
   await getBlogs()
+  await getCountries()
   updateIsMobile();
   onLoaded(({ Vimeo }) => {
     player = new Vimeo.Player(video.value, {
