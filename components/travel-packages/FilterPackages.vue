@@ -34,7 +34,6 @@ const getCountries = async () => {
 const categorias = ref([]);
 const getCategories = async () => {
   const res: any = await categoriesStore.getCategories();
-  console.log(res)
   categorias.value = res.map((category: any) => {
     return category.nombre;
   });
@@ -115,11 +114,13 @@ const filteredPackages = computed(() => {
     const matchesCategory = selectedCategory.value
       ? pkg.paquetes_categoria?.some((cat) => cat.categoria?.nombre === selectedCategory.value)
       : true;
-    const matchesPrice = pkg.precio_paquetes?.length > 0 &&
-      pkg.precio_paquetes[0].precio_d >= priceRange.value.min &&
-      pkg.precio_paquetes[0].precio_d <= priceRange.value.max;
     const matchesDuration = pkg.duracion >= durationRange.value.min && pkg.duracion <= durationRange.value.max;
-
+    const isDefaultPriceRange = priceRange.value.min === 100 && priceRange.value.max === 10000;
+    const matchesPrice = isDefaultPriceRange || (
+      pkg.precio_paquetes?.length &&
+      pkg.precio_paquetes[0].precio_d >= priceRange.value.min &&
+      pkg.precio_paquetes[0].precio_d <= priceRange.value.max
+    );
     return matchesOffers && matchesCountry && matchesCategory && matchesRegion && matchesDuration && matchesPrice;
   });
 
