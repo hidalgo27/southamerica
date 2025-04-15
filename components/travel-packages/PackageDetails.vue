@@ -74,10 +74,10 @@ const tabs = [
           </div>
 
           <div v-if="packageDetail.noincluye" class="md:ml-12">
-            <h3 class="text-lg font-playfair-display font-semibold text-red-600 my-6 md:my-12 text-center md:text-left">
+            <h3 class="text-lg font-playfair-display font-semibold text-red-600 my-6 md:my-12 text-left">
               Not Included
             </h3>
-            <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6 text-center">
+            <ul class="list-disc text-sm pl-5 text-gray-600 space-y-4 md:space-y-6 text-left">
               <div v-html="packageDetail.noincluye"></div>
             </ul>
           </div>

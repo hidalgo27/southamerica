@@ -84,9 +84,11 @@ onMounted(() => {
     </svg>
     <div class="p-8 container z-10">
       <div class="text-center mb-8">
-        <p class="mb-6 tracking-widest font-bold">Curated Trip Styles</p>
-        <h1 class="font-semibold text-4xl md:text-8xl my-20 title font-playfair-display tracking-wide">
-          Explore the world your way.
+        <p class="mb-6 tracking-widest font-bold">
+          Curated Experiences
+        </p>
+        <h1 class="font-semibold text-4xl md:text-7xl my-20 title font-playfair-display tracking-wide gap-2">
+          Explore the soul of <br> South America
         </h1>
       </div>
 

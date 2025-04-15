@@ -56,18 +56,17 @@ onMounted(async () => {
 <template>
   <section class="container my-20">
     <div class="flex items-center justify-center ">
-      <div class="grid grid-cols-1 md:grid-cols-2 bg-white overflow-hidden w-full gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 bg-white overflow-hidden w-full gap-6 xl:max-h-[60vh]">
         <div class="bg-secondary bg-opacity-10 py-8 px-6 md:py-20 lg:py-32 lg:px-16 rounded-md">
           <p class="mb-8 tracking-widest font-bold">
-            Destination Specialists
+            Crafted by Destination Insiders
           </p>
           <h1 class="font-semibold text-2xl md:text-4xl mb-8 title font-playfair-display tracking-wide  ">
-            The experts in tailor-made travel.
+            The People Behind the Perfect Journey
           </h1>
           <p class="mb-8 text-sm md:text-md">
-            When working with SouthAmerica, you dream it, we plan it. Rely on the passion and expertise of our
-            Destination
-            Specialists to craft the trip that’s right for you.
+            At SouthAmerica, your dreams shape the journey. Our Destination Specialists bring it to life with unmatched
+            expertise and a true passion for Latin America.
           </p>
           <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 text-sm md:text-md">
             <button class="px-4 py-2 border btn-primary-outline text-start rounded-md"
@@ -79,13 +78,9 @@ onMounted(async () => {
             </NuxtLink>
           </div>
         </div>
-        <div class="relative w-full h-[65vh] md:h-full rounded-md">
-          <div class="w-full h-full">
-            <NuxtImg alt="A beautiful sunset with a giraffe in the foreground"
-              class="w-full h-full object-cover rounded-md"
-              src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf"
-              loading="lazy" />
-          </div>
+        <div class="relative w-full rounded-md overflow-hidden xl:max-h-[60vh]">
+          <NuxtImg alt="A beautiful sunset with a giraffe in the foreground"
+            class="w-full h-full object-cover rounded-md" src="images\forest.webp" loading="lazy" />
           <div
             class="absolute top-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-3 lg:left-1/2 transform lg:-translate-x-1/2  translate-y-16 xl:translate-y-12">
             <div class="relative w-[30vh] md:w-[36vh] h-[380px] mx-auto">

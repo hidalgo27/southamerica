@@ -45,10 +45,10 @@ const breakpoints = {
     <div class="container text-center mb-8">
       <div class="border-title mb-2 mx-auto"></div>
       <p class="mb-6 tracking-widest font-bold">
-        Top Places To Travel
+        Icons of Latin America
       </p>
       <h1 class="font-semibold text-4xl md:text-8xl mb-6 title font-playfair-display tracking-wide">
-        Where are you headed to next?
+        Next stop awaits you!
       </h1>
     </div>
     <div class="text-center my-6">
