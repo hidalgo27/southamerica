@@ -80,7 +80,8 @@ const progressWidth = computed(() => {
     <div class="container text-center tracking-widest font-bold pb-6">
       <div class="border-title mb-2 mx-auto"></div>
       <p class="mb-6 tracking-widest font-bold">Top Trip Experiences</p>
-      <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide">Memories won't make themselves.
+      <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide">
+        Your next chapter starts here
       </h1>
     </div>
     <div v-if="listPackages.length === 0" class="text-center text-gray-500 mt-4">

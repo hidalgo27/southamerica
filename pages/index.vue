@@ -112,7 +112,7 @@ const selectDuration = (duration: any) => {
 
 const welcome_text = {
   title: 'Why South America Company?',
-  description: 'At South America Company, we specialize in tailor-made trips that immortalize the best days exploring Peru and South America. Every detail is meticulously designed to offer the maximum comfort, exclusivity, and luxury. From private villas and luxury cruises to customized itineraries, we make sure you only worry about enjoying your luxury vacation.',
+  description: 'At South America Company, we specialize in turning dreams into reality through personalized travel to South America. Every detail of our trips is carefully crafted to ensure maximum comfort, exclusivity, and luxury. From private villas/lodges and luxury cruises to customized itineraries, we prioritize allowing our clients to focus solely on enjoying their premium vacation experiences. Embark with us on a journey that deepens your connection with the land and local communities while making a positive impact along the way. Travel with an open heart and embrace the gifts South America has to offer.',
 }
 
 let player: any
@@ -178,10 +178,10 @@ const onHide = () => {
           <div class=" container ">
             <h1
               class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight md:text-5xl 2xl:text-7xl tracking-wide font-semibold font-playfair-display">
-              Design Your SouthAmerica Discovery.</h1>
-            <p class="text-white text-sm md:text-xl 2xl:text-lg tracking-widest font-light mt-5 ">Uncover the secrets of
-              Machu
-              Picchu and the wonders of Peru on a journey tailored just for you.</p>
+              Discover South America at your own terms.</h1>
+            <p class="text-white text-sm md:text-xl 2xl:text-lg tracking-widest font-light mt-5 ">
+              Curated Latin American Journeys: Where Luxury Meets Discovery
+            </p>
             <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center">
               <div class="grid grid-cols-3 w-full">
                 <client-only>

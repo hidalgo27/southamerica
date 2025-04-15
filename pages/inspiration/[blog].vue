@@ -64,15 +64,15 @@ onMounted(async () => {
       </button>
     </div>
   </section>
-  <section class="bg-secondary bg-opacity-20 rounded-md p-6 flex items-center container w-2/3">
-    <!-- Imagen del autor -->
+  <!-- <section class="bg-secondary bg-opacity-20 rounded-md p-6 flex items-center container w-2/3">
+    Imagen del autor
     <div class="w-full p-6 flex justify-center">
       <NuxtImg
         src="https://images.goway.com/production/styles/author_photo_3xl/s3/author/ChristianBaines.png?h=d0e75635&itok=GSLQupow/author.png"
         alt="Christian Baines" class="w-2/3" />
     </div>
 
-    <!-- Información del autor -->
+    Información del autor
     <div class="ml-6 gap-6 flex flex-col p-6">
       <h2 class="text-2xl font-bold font-playfair-display">Christian Baines</h2>
       <p class="text-sm text-gray-600">SouthAmerica - Contributing Writer</p>
@@ -84,14 +84,14 @@ onMounted(async () => {
         with a love of off-beat, artsy cities, he’ll seize any opportunity to return to Paris, New York, or Berlin.
       </p>
 
-      <!-- <div class="mt-4 flex items-center">
+      <div class="mt-4 flex items-center">
         <a href="#"
           class="text-sm relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">
           Read More
         </a>
-      </div> -->
+      </div>
     </div>
-  </section>
+  </section> -->
   <Newsletter></Newsletter>
   <MiniReviews></MiniReviews>
 </template>

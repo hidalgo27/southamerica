@@ -63,10 +63,10 @@ onMounted(() => {
   <section class="container my-20">
     <div class="text-center mb-8 md:text-start">
       <h2 class="mb-6 tracking-widest font-bold">
-        Get Inspired
+        Suitcase Stories
       </h2>
       <h1 class="font-semibold text-3xl md:text-5xl mb-6 title font-playfair-display tracking-wide">
-        Travel stories to inspire you.
+        Postcards & Pathways to inspire you
       </h1>
       <button class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700">
         Travel Inspiration
