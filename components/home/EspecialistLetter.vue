@@ -80,7 +80,8 @@ onMounted(async () => {
         </div>
         <div class="relative w-full rounded-md overflow-hidden xl:max-h-[60vh]">
           <NuxtImg alt="A beautiful sunset with a giraffe in the foreground"
-            class="w-full h-full object-cover rounded-md" src="images\forest.webp" loading="lazy" />
+            class="w-full h-full object-cover rounded-md" src="\images\home\especilist-letter-background.webp"
+            loading="lazy" />
           <div
             class="absolute top-0 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-3 lg:left-1/2 transform lg:-translate-x-1/2  translate-y-16 xl:translate-y-12">
             <div class="relative w-[30vh] md:w-[36vh] h-[380px] mx-auto">
