@@ -42,9 +42,9 @@ const getCategories = async () => {
 // const mixedList2 = ref(["Luxury", "Adventure", "Budget", "Cultural", "Family", "Diversity", "Funny"]);
 
 //RANGO DE PRECIO
-const priceRange = ref({ min: 100, max: 10000 });
+const priceRange = ref({ min: 100, max: 20000 });
 const min = ref(100);
-const max = ref(10000);
+const max = ref(20000);
 
 const minThumb = computed(() => ((priceRange.value.min - min.value) / (max.value - min.value)) * 100);
 const maxThumb = computed(() => 100 - ((priceRange.value.max - min.value) / (max.value - min.value)) * 100);
@@ -58,9 +58,9 @@ const updateMax = () => {
 };
 
 //RANGO DE DURACIÓN
-const durationRange = ref({ min: 1, max: 30 });
+const durationRange = ref({ min: 1, max: 40 });
 const minDuration = ref(1);
-const maxDuration = ref(30);
+const maxDuration = ref(40);
 
 const minThumbDuration = computed(() => ((durationRange.value.min - minDuration.value) / (maxDuration.value - minDuration.value)) * 100);
 const maxThumbDuration = computed(() => 100 - ((durationRange.value.max - minDuration.value) / (maxDuration.value - minDuration.value)) * 100);
@@ -115,7 +115,7 @@ const filteredPackages = computed(() => {
       ? pkg.paquetes_categoria?.some((cat) => cat.categoria?.nombre === selectedCategory.value)
       : true;
     const matchesDuration = pkg.duracion >= durationRange.value.min && pkg.duracion <= durationRange.value.max;
-    const isDefaultPriceRange = priceRange.value.min === 100 && priceRange.value.max === 10000;
+    const isDefaultPriceRange = priceRange.value.min === 100 && priceRange.value.max === 20000;
     const matchesPrice = isDefaultPriceRange || (
       pkg.precio_paquetes?.length &&
       pkg.precio_paquetes[0].precio_d >= priceRange.value.min &&
@@ -212,8 +212,8 @@ const clearFilters = () => {
   selectedCountry.value = "";
   selectedRegion.value = "";
   selectedCategory.value = "";
-  priceRange.value = { min: 100, max: 10000 };
-  durationRange.value = { min: 1, max: 30 };
+  priceRange.value = { min: 100, max: 20000 };
+  durationRange.value = { min: 1, max: 40 };
   showSpecialOffers.value = false;
 };
 
@@ -388,7 +388,7 @@ const onHide = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
               </svg>
               <span class="ml-2">
-                {{ priceRange.min === 100 && priceRange.max === 10000 ? "Budget (price per double)" :
+                {{ priceRange.min === 100 && priceRange.max === 20000 ? "Budget (price per double)" :
                   `$ ${priceRange.min} - $ ${priceRange.max}` }}
               </span>
             </button>
@@ -441,7 +441,7 @@ const onHide = () => {
                   d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
               </svg>
               <span class="ml-2">
-                {{ durationRange.min === 1 && durationRange.max === 30 ? "Duration (days)" :
+                {{ durationRange.min === 1 && durationRange.max === 40 ? "Duration (days)" :
                   `${durationRange.min} - ${durationRange.max} days` }}
               </span>
             </button>
@@ -519,18 +519,18 @@ const onHide = () => {
               </svg>
             </button>
 
-            <button v-if="priceRange.min !== 100 || priceRange.max !== 10000"
+            <button v-if="priceRange.min !== 100 || priceRange.max !== 20000"
               class="flex items-center space-x-2 border-2 px-2 py-2 rounded-full"
-              @click="priceRange = { min: 100, max: 10000 }">
+              @click="priceRange = { min: 100, max: 20000 }">
               <span>${{ priceRange.min }} - ${{ priceRange.max }}</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
               </svg>
             </button>
-            <button v-if="durationRange.min !== 1 || durationRange.max !== 30"
+            <button v-if="durationRange.min !== 1 || durationRange.max !== 40"
               class="flex items-center space-x-2 border-2 px-2 py-2 rounded-full"
-              @click="durationRange = { min: 1, max: 30 }">
+              @click="durationRange = { min: 1, max: 40 }">
               <span>{{ durationRange.min }} - {{ durationRange.max }} days</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-3">
@@ -538,7 +538,7 @@ const onHide = () => {
               </svg>
             </button>
             <button
-              v-if="selectedCountry || selectedRegion || (priceRange.min !== 100 || priceRange.max !== 10000) || durationRange.min !== 1 || (durationRange.max !== 30)"
+              v-if="selectedCountry || selectedRegion || (priceRange.min !== 100 || priceRange.max !== 20000) || durationRange.min !== 1 || (durationRange.max !== 40)"
               class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0"
               @click="clearFilters">
               Remove all
@@ -592,7 +592,7 @@ const onHide = () => {
     </div>
 
     <div>
-      <div v-if="paginatedData.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 results">
+      <div v-if="paginatedData.length > 0" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 results">
         <CardPackage v-for="pkg in paginatedData" :key="pkg.id" :packageData="pkg" />
       </div>
       <div v-else class="text-center text-gray-500 mt-4">

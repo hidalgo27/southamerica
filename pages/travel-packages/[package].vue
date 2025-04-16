@@ -139,8 +139,10 @@ const onHide = () => {
       </p>
       <p class="text-sm"
         v-if="packageDetail[0].duracion || packageDetail[0].precio_paquetes || packageDetail[0].descuento">
-        {{ packageDetail[0].duracion }} days - From
-        <span class="font-semibold">US$ {{ packageDetail[0].precio_paquetes?.[0]?.precio_d }}</span>
+        {{ packageDetail[0].duracion }} days -
+        <span v-if="packageDetail[0].precio_paquetes?.[0]?.precio_d" class="font-semibold">From US$ {{
+          packageDetail[0].precio_paquetes?.[0]?.precio_d }}</span>
+        <span v-else>Inquire Now</span>
         <span v-if="packageDetail[0].descuento" class="opacity-70">
           savings US$ {{ packageDetail[0].descuento }}
         </span>
