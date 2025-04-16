@@ -7,6 +7,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+console.log(props.packageDetail)
 const openIndexes = ref<number[]>([]); // Abre solo el primer día al cargar
 const contentRefs = ref<HTMLElement[]>([]); // Almacena referencias de contenido
 const currentItem = ref(null)
@@ -139,15 +141,16 @@ const toggleWithGSAP = (index: number) => {
 
                 <div :ref="el => setContentRef(el, index)"
                   class="grid lg:grid-cols-6 overflow-hidden rounded-b-md text-start px-8 lg:flex-row items-center gap-6"
-                  :class="{ 'bg-white ': isOpen(index) }">
-                  <div
+                  :class="{ 'bg-white': isOpen(index) }">
+                  <div v-if="itinerary.itinerarios.itinerario_imagen[0]"
                     class="lg:col-span-2 md:w-1/2 lg:w-full rounded-lg overflow-hidden order-1 lg:order-2 aspect-[4/3] mx-auto">
-                    <NuxtImg
-                      src="https://s3.us-west-1.amazonaws.com/southamerica-company/itinerary/1744736362891imagen_2025-04-15_115922789_1744736430.png"
-                      class="w-full h-full object-cover">
-                    </NuxtImg>
+                    <NuxtImg :src="itinerary.itinerarios.itinerario_imagen[0].nombre"
+                      class="w-full h-full object-cover" />
                   </div>
-                  <div class="lg:col-span-4 order-2 lg:order-1 " v-html="itinerary.itinerarios.descripcion"></div>
+                  <div :class="[
+                    'order-2 lg:order-1',
+                    itinerary.itinerarios.itinerario_imagen[0] ? 'lg:col-span-4' : 'lg:col-span-6'
+                  ]" v-html="itinerary.itinerarios.descripcion"></div>
                 </div>
               </div>
             </div>

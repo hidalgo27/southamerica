@@ -66,8 +66,8 @@
           </p>
           <ul class="mt-2 space-y-2">
             <li>
-              <nuxt-link to="#"
-                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Peru Travel
+              <nuxt-link to="/travel-packages"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Latam Travel
                 Packages</nuxt-link>
             </li>
             <!--            <li>-->
@@ -82,18 +82,16 @@
           </p>
           <ul class="mt-2 space-y-2">
             <li>
-              <nuxt-link to="/destinations/cusco"
-                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Cusco</nuxt-link>
+              <nuxt-link to="/destinations/peru"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Peru</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/destinations/machupicchu"
-                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Machu
-                Picchu</nuxt-link>
+              <nuxt-link to="/destinations/brazil"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Brazil</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/destinations/sacred-valley"
-                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Sacred
-                Valley</nuxt-link>
+              <nuxt-link to="/destinations/argentina"
+                class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Argentina</nuxt-link>
             </li>
             <!--            <li>-->
             <!--              <nuxt-link to="/destinations/galapagos" class="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400">Galapagos</nuxt-link>-->
