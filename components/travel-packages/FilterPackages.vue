@@ -592,7 +592,7 @@ const onHide = () => {
     </div>
 
     <div>
-      <div v-if="paginatedData.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 results">
+      <div v-if="paginatedData.length > 0" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 results">
         <CardPackage v-for="pkg in paginatedData" :key="pkg.id" :packageData="pkg" />
       </div>
       <div v-else class="text-center text-gray-500 mt-4">

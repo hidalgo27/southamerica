@@ -11,12 +11,12 @@ const props = defineProps({
 });
 
 const breakpoints = {
-  600: {
+  768: {
     itemsToShow: 2,
     snapAlign: 'start',
   },
   // 1024 and up
-  1024: {
+  1440: {
     itemsToShow: 3,
     snapAlign: 'start',
   },
@@ -32,9 +32,9 @@ const updateProgress = (index: number) => {
 
 // Detectar cuántos slides se muestran
 const updateItemsToShow = () => {
-  if (window.innerWidth >= 1024) {
+  if (window.innerWidth >= 1440) {
     itemsToShow.value = 3;
-  } else if (window.innerWidth >= 600) {
+  } else if (window.innerWidth >= 768) {
     itemsToShow.value = 2;
   } else {
     itemsToShow.value = 1;
@@ -49,7 +49,7 @@ const showCarousel = computed(() => {
   if (packageCount === 2 && window.innerWidth < 768) {
     return true; // Mostrar carrusel solo en móviles si hay 2 paquetes
   }
-  if (packageCount === 3 && window.innerWidth < 1024) {
+  if (packageCount === 3 && window.innerWidth < 1440) {
     return true; // Mostrar carrusel en móviles y tablets si hay 3 paquetes
   }
   if (packageCount > 3) {
