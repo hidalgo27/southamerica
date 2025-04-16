@@ -37,11 +37,11 @@ onMounted(() => {
 </script>
 <template>
   <a :href="isTravelPackages + packageData.url"
-    class="image-div bg-white rounded-md border overflow-hidden w-full group  hover:shadow-xl hover:border-transparent transition duration-500 ease-in-out flex flex-col h-[60vh]"
+    class="image-div bg-white rounded-md border overflow-hidden w-full group  hover:shadow-xl hover:border-transparent transition duration-500 ease-in-out flex flex-col"
     v-if="packageData">
     <div class="relative overflow-hidden h-full">
       <NuxtImg :src="packageData.imagen" :alt="packageData.titulo" format="webp" quality="75"
-        class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
+        class="w-full h-96 object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
       <div class="absolute top-4 left-4 flex flex-wrap gap-2 text-start">
         <span v-if="packageData.offers_home"
           class="bg-white text-secondary text-xs font-semibold px-2 py-1 rounded-full ">
@@ -61,7 +61,7 @@ onMounted(() => {
         </svg>
       </div>
     </div>
-    <div class="p-6 text-left flex flex-col relative h-5/6">
+    <div class="p-6 text-left flex flex-col relative">
       <div class="flex flex-col justify-between">
         <div class="flex flex-wrap gap-2 my-4" v-if="packageData.paquetes_categoria">
           <NuxtLink v-for="(tag, i) in packageData.paquetes_categoria" :key="i"
@@ -82,7 +82,7 @@ onMounted(() => {
           <span class="ml-2"> Book by {{ packageData.reserva }}</span>
         </p>
       </div>
-      <div class="flex justify-between items-center text-sm font-bold h-14 mt-auto">
+      <div class="flex justify-between items-center text-sm font-bold h-14 mt-2">
         <div v-if="packageData.precio_paquetes" class=" flex flex-col xl:w-3/5">
           <span v-if="packageData.duracion" class="text-gray-700 text-sm md:text-lg tracking-wide">
             {{ packageData.duracion }} days
@@ -92,15 +92,10 @@ onMounted(() => {
           </span>
           <span v-if="packageData.precio_paquetes && packageData.precio_paquetes[0].precio_d"
             class="block text-gray-700">
-            <div class="flex flex-col text-xs xl:text-md 2xl:text-base">
-              <div class="">
-                From <span class="text-orange-600 text-base 2xl:text-lg">US$ {{ packageData.precio_paquetes[0].precio_d
-                }}</span> /
-                per person
-              </div>
-              <div class=" text-right self-end">
-                based on 4 stars hotels
-              </div>
+            <div class="flex items-center gap-2">
+
+                From <span class="text-orange-600">US${{ packageData.precio_paquetes[0].precio_d }}</span><span class="text-xs leading-none">per person <span class="text-[10px] block text-right">based on 4 stars hotels</span></span>
+
             </div>
           </span>
           <div v-else class="flex justify-between items-center">Please Inquire</div>
@@ -111,9 +106,9 @@ onMounted(() => {
           </span>
         </div>
         <div
-          class="text-orange-600 flex items-center md:text-xs lg:text-base lg:opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-500 ease-in-out">
+          class="text-orange-600 flex items-center gap-1 md:text-sm lg:opacity-0 translate-y-2 group-hover:opacity-100 transition duration-500 ease-in-out">
           <span>Request a Quote</span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="size-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
           </svg>
