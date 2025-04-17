@@ -6,10 +6,10 @@ const props = defineProps({
     required: true,
   },
 });
-const activeTab = ref('departures');
+const activeTab = ref('prices');
 
 const tabs = [
-  { key: 'departures', label: 'Departures' },
+  { key: 'prices', label: 'Prices' },
   { key: 'inclusions', label: 'Trip Inclusions and Exclusions' },
   { key: 'terms', label: 'Terms and Conditions' }
 ];
@@ -29,7 +29,7 @@ const tabs = [
       </div>
 
       <div class="mt-6">
-        <div v-if="activeTab === 'departures' && packageDetail?.precio_paquetes?.length"
+        <div v-if="activeTab === 'prices' && packageDetail?.precio_paquetes?.length"
           class="flex flex-col items-center justify-center w-full p-6">
 
           <h2 class="text-xl font-playfair-display font-semibold mb-4">
@@ -41,19 +41,21 @@ const tabs = [
             <thead>
               <tr class="bg-gray-200">
                 <th class="border p-3 text-center">Estrellas</th>
-                <th class="border p-3">Simple</th>
                 <th class="border p-3">Doble</th>
-                <th class="border p-3">Triple</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="price in packageDetail.precio_paquetes" :key="price.id" class="border-t">
+              <tr class="border-t">
                 <td class="border p-3 text-center">
-                  <span v-for="n in price.estrellas" :key="n">⭐</span>
+                  <span v-for="n in 4" :key="n">⭐</span>
                 </td>
-                <td class="border p-3">${{ price.precio_s || 'N/A' }}</td>
-                <td class="border p-3">${{ price.precio_d || 'N/A' }}</td>
-                <td class="border p-3">${{ price.precio_t || 'N/A' }}</td>
+                <td class="border p-3">
+                  {{
+                    packageDetail.precio_paquetes.find(p => p.estrellas === 2)?.precio_d
+                      ? 'US $' + packageDetail.precio_paquetes.find(p => p.estrellas === 2).precio_d
+                      : 'Please Inquire'
+                  }}
+                </td>
               </tr>
             </tbody>
           </table>
