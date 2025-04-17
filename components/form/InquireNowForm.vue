@@ -481,22 +481,22 @@ watch(() => formData.value.startDate, () => {
           </div>
 
           <!-- Estilos de viaje -->
-          <div v-if="!packageDetail && categories && categories.length > 0">
-            <label class="block text-sm font-medium text-gray-700">Which travel style(s) are you most interested in?
-              (Max 3, Optional)</label>
-            <div class="overflow-y-auto h-48 max-h-48 border border-gray-300 rounded-lg p-3 bg-white shadow-sm">
-              <template v-for="category in categories" :key="category.id">
-                <div class="flex items-center hover:bg-gray-100 rounded-lg">
-                  <input type="checkbox" :id="'category-' + category.id" :value="category.id"
-                    v-model="formData.travelStyle"
-                    :disabled="formData.travelStyle.length >= 3 && !formData.travelStyle.includes(category.id)"
-                    class="w-4 h-4 bg-gray-100 border-gray-100 rounded-md focus:ring-2  mr-2" />
-                  <label :for="'category-' + category.id" class="text-gray-700 cursor-pointer">{{ category.nombre
-                  }}</label>
-                </div>
-              </template>
-            </div>
-          </div>
+<!--          <div v-if="!packageDetail && categories && categories.length > 0">-->
+<!--            <label class="block text-sm font-medium text-gray-700">Which travel style(s) are you most interested in?-->
+<!--              (Max 3, Optional)</label>-->
+<!--            <div class="overflow-y-auto h-48 max-h-48 border border-gray-300 rounded-lg p-3 bg-white shadow-sm">-->
+<!--              <template v-for="category in categories" :key="category.id">-->
+<!--                <div class="flex items-center hover:bg-gray-100 rounded-lg">-->
+<!--                  <input type="checkbox" :id="'category-' + category.id" :value="category.id"-->
+<!--                    v-model="formData.travelStyle"-->
+<!--                    :disabled="formData.travelStyle.length >= 3 && !formData.travelStyle.includes(category.id)"-->
+<!--                    class="w-4 h-4 bg-gray-100 border-gray-100 rounded-md focus:ring-2  mr-2" />-->
+<!--                  <label :for="'category-' + category.id" class="text-gray-700 cursor-pointer">{{ category.nombre-->
+<!--                  }}</label>-->
+<!--                </div>-->
+<!--              </template>-->
+<!--            </div>-->
+<!--          </div>-->
 
           <!-- Presupuesto -->
           <!-- <div v-if="!packageDetail">

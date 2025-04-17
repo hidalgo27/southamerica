@@ -10,7 +10,7 @@ import { useBlogStore } from '~/stores/blog';
 const blogStore = useBlogStore();
 const blogs = ref([]);
 const categories = ref({
-  25: 'Curiosidades',
+  25: 'Inspiration & Guides',
   26: 'Cusco',
   27: 'Travel Information',
 });

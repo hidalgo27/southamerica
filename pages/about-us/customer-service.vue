@@ -42,6 +42,7 @@ const header = ref({
         When you encounter an emergency, our Client Experience team can assist you 24/7/365. We will work with our teams
         on the ground to resolve your situation promptly.
       </p>
+      <p class="font-semibold ">WhatsApp: +1 (202) 491-1478 </p>
     </div>
   </section>
   <Newsletter></Newsletter>

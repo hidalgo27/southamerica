@@ -48,9 +48,10 @@ const toggleReadMore = () => {
     <div class="w-full md:w-2/5">
       <p class="my-6">Overview</p>
       <h2 class="text-4xl font-bold text-gray-900 font-playfair-display">
-        {{ region.titulo }}
+        {{ region.nombre }}
       </h2>
       <div class="relative overflow-hidden transition-all duration-500 " :class="expanded ? 'max-h-auto' : 'max-h-96'">
+
         <p class="text-gray-700 mt-8" v-html="region.descripcion"></p>
       </div>
       <button @click="toggleReadMore"
