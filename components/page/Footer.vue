@@ -1,7 +1,7 @@
 <template>
-  <section class="container ">
-    <div class="block border-b border-gray-200 w-full mb-8"></div>
-  </section>
+<!--  <section class="container ">-->
+<!--    <div class="block border-b border-gray-200 w-full mb-8"></div>-->
+<!--  </section>-->
   <section class="container my-20 hidden text-left">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="grid grid-cols-2">

@@ -3,6 +3,8 @@ import { defineStore } from 'pinia'
 export const usePackageStore = defineStore('PackageStore', () => {
 	const config = useRuntimeConfig()
 	const showModalInquireGlobal = ref(false)
+	const titlePackages = ref("")
+	const imgPackages = ref("")
 	const getPackageTop = async () => {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
@@ -213,7 +215,9 @@ export const usePackageStore = defineStore('PackageStore', () => {
 		saveInquire,
 		getInquire,
 		showModalInquireGlobal,
-		getPais
+		getPais,
+		titlePackages,
+		imgPackages
 	}
 
 }, { persist: true, })

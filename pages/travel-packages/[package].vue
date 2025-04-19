@@ -32,6 +32,10 @@ const getPackageDetail = async () => {
   const res: any = await packageStore.getPackage(route.params.package as string);
   packageDetail.value = res
   header.value.url = packageDetail.value[0].imagen_paquetes[0].nombre;
+
+  packageStore.titlePackages = res[0].titulo
+  packageStore.imgPackages = res[0].imagen_paquetes[0].nombre
+
 };
 
 const isFixed = ref(false);

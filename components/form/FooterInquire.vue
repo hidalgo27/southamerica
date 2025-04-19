@@ -4,17 +4,122 @@
   <div class="w-full">
     <div class="grid grid-cols-1">
 
-      <section class="pb-8 text-center">
+      <section class=" text-center">
 <!--        <img src="/images/logos/logo-gotolatam.svg" alt="" class="mx-auto w-64">-->
-        <h3 class="my-3 font-semibold text-gray-700 text-2xl">Free Quote</h3>
+        <h3 class="my-4 font-semibold text-gray-700 text-5xl font-playfair-display tracking-wide">Free Quote</h3>
         <p class="text-gray-500">We're flexible! Postpone your tour with zero cost up to 10 days prior to departure.</p>
+<!--        {{ packageStore.titlePackages }}-->
+
+        <client-only>
+        <div v-if="isTravelPackagePage" class="w-11/12 bg-blue-50 h-24  rounded-md flex justify-center items-center p-2 shadow-md mx-auto mt-6">
+          <NuxtImg :src="packageStore.imgPackages" alt="Trip Image" class="w-16 h-16 rounded-md object-cover" />
+          <div class="ml-4 text-left">
+            <p class="text-xs text-gray-500">Selected Trip Itinerary</p>
+            <p class="text-md font-semibold font-playfair-display text-xl text-gray-800">{{ packageStore.titlePackages }}</p>
+          </div>
+        </div>
+        </client-only>
       </section>
-      <div class="divider-dashed"></div>
-      <div class="text-left mt-6">
-        <h2 class="text-lg text-gray-800 font-semibold omnes-semibold mb-5">What countries do you want to visit?</h2>
-        <div class="grid grid-cols-12 gap-6">
-          <div class="col-span-12 hidden md:col-span-2 border md:flex justify-center items-center rounded-l-xl bg-gray-50">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <div class="border-dashed border-b-2 my-6"></div>
+
+      <h3 class="text-lg text-gray-800 font-semibold ">Hotel Category</h3>
+      <div class="grid grid-cols-12 gap-6  mt-4 overflow-x-scroll focus:touch-pan-x">
+
+        <div class="col-span-12 hidden md:col-span-2 md:flex justify-center items-center rounded-l-md bg-secondary py-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+          </svg>
+        </div>
+        <div class="col-span-12 md:col-span-10 grid grid-cols-3 gap-3 overflow-x-scroll focus:touch-pan-x">
+
+          <div class="flex">
+            <input type="checkbox" id="hotel_5" class="peer hidden" value="5" v-model="hotel" />
+            <label for="hotel_5" class="select-none w-full cursor-pointer px-5 py-2 border border-gray-400 text-center text-gray-500 rounded-md divide-y divide-gray-200 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary  ">
+              <div class="pb-1 flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mt-1">
+                  <path fill-rule="evenodd" d="M3 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5H15v-18a.75.75 0 0 0 0-1.5H3ZM6.75 19.5v-2.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-3a.75.75 0 0 1-.75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 0 1.5h-.75A.75.75 0 0 1 6 6.75ZM6.75 9a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM6 12.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 6a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75A.75.75 0 0 1 10.5 9h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75ZM10.5 12a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75ZM16.5 6.75v15h5.25a.75.75 0 0 0 0-1.5H21v-12a.75.75 0 0 0 0-1.5h-4.5Zm1.5 4.5a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Zm.75 2.25a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75v-.008a.75.75 0 0 0-.75-.75h-.008ZM18 17.25a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75h-.008a.75.75 0 0 1-.75-.75v-.008Z" clip-rule="evenodd" />
+                </svg>
+                <h4 class=" pt-1">Luxury</h4>
+              </div>
+              <div class="flex pt-2 gap-1 justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+
+              </div>
+            </label>
+          </div>
+
+          <div class="flex">
+            <input type="checkbox" id="hotel_4" class="peer hidden" value="4" v-model="hotel" />
+            <label for="hotel_4" class="select-none w-full cursor-pointer px-5 py-2 text-center border border-gray-400 text-gray-500 rounded-md divide-y divide-gray-200 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary  ">
+              <div class="pb-1 flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mt-1">
+                  <path fill-rule="evenodd" d="M4.5 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5h-.75V3.75a.75.75 0 0 0 0-1.5h-15ZM9 6a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H9Zm-.75 3.75A.75.75 0 0 1 9 9h1.5a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM9 12a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H9Zm3.75-5.25A.75.75 0 0 1 13.5 6H15a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75ZM13.5 9a.75.75 0 0 0 0 1.5H15A.75.75 0 0 0 15 9h-1.5Zm-.75 3.75a.75.75 0 0 1 .75-.75H15a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75ZM9 19.5v-2.25a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 9 19.5Z" clip-rule="evenodd" />
+                </svg>
+                <h4 class=" pt-1">Superior</h4>
+              </div>
+              <div class="flex pt-2 gap-1 justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            </label>
+          </div>
+
+          <div class="flex">
+            <input type="checkbox" id="hotel_3" class="peer hidden" value="3" v-model="hotel" />
+            <label for="hotel_3" class="select-none w-full cursor-pointer px-5 py-2 text-center border border-gray-400 text-gray-500 rounded-md divide-y divide-gray-200 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary  ">
+              <div class="pb-1 flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 mt-1">
+                  <path fill-rule="evenodd" d="M4.5 2.25a.75.75 0 0 0 0 1.5v16.5h-.75a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5h-.75V3.75a.75.75 0 0 0 0-1.5h-15ZM9 6a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H9Zm-.75 3.75A.75.75 0 0 1 9 9h1.5a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75ZM9 12a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5H9Zm3.75-5.25A.75.75 0 0 1 13.5 6H15a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75ZM13.5 9a.75.75 0 0 0 0 1.5H15A.75.75 0 0 0 15 9h-1.5Zm-.75 3.75a.75.75 0 0 1 .75-.75H15a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75ZM9 19.5v-2.25a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 9 19.5Z" clip-rule="evenodd" />
+                </svg>
+                <h4 class=" pt-1">Best Value</h4>
+              </div>
+              <div class="flex pt-2 gap-1 justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            </label>
+          </div>
+
+        </div>
+      </div>
+      <h3 class="text-[12px] text-gray-400 font-semibold  mt-3">(OPTIONAL. You may choose more than one)</h3>
+
+      <div class="text-left" >
+        <h2 class="text-lg text-gray-800 font-semibold mt-6 mb-5" v-if="!isTravelPackagePage">What countries do you want to visit?</h2>
+        <div class="grid grid-cols-12 gap-6" v-if="!isTravelPackagePage">
+          <div class="col-span-12 hidden md:col-span-2 md:flex justify-center items-center rounded-l-md bg-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-white">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
             </svg>
@@ -23,7 +128,7 @@
           <div class="col-span-12 md:col-span-10 grid grid-cols-2 md:grid-cols-4 gap-3 overflow-x-scroll focus:touch-pan-x">
             <div class="flex" v-for="destino in listDestination">
               <input type="checkbox" :id="destino.id" class="peer hidden" :value="destino.url" v-model="destination" />
-              <label :for="destino.id" class="w-full flex items-center gap-2 select-none cursor-pointer bg-gray-100 text-gray-800 rounded-full px-5 py-2 transition-colors duration-200 ease-in-out grayscale peer-checked:grayscale-0 peer-checked:bg-[#D6DD85] peer-checked:text-primary">
+              <label :for="destino.id" class="w-full flex items-center gap-2 select-none cursor-pointer bg-gray-100 text-gray-800 border border-gray-400 text-sm rounded-md px-2 py-2 transition-colors duration-200 ease-in-out grayscale peer-checked:grayscale-0 peer-checked:bg-secondary/80 peer-checked:text-white peer-checked:border-secondary">
 
                 <img :src="destino.imagen" alt="" class=" w-8 h-8 rounded-full shadow-lg float-left">
                 <span>{{ destino.nombre }}</span>
@@ -49,36 +154,37 @@
 
           </div>
         </div>
-        <h3 class="text-xs text-gray-800 font-semibold omnes-semibold mt-3">You can choose one or more countries</h3>
-        <h3 class="text-lg text-gray-800 font-semibold omnes-semibold my-5">Number of travelers</h3>
+        <h3 class="text-[12px] text-gray-400 font-semibold  mt-3" v-if="!isTravelPackagePage">You can choose one or more countries</h3>
+        <h3 class="text-lg text-gray-800 font-semibold  my-5">Number of travelers</h3>
         <div class="grid grid-cols-12 gap-6 my-6 overflow-x-scroll focus:touch-pan-x">
 
-          <div class="col-span-12 hidden md:col-span-2 border md:flex justify-center items-center rounded-l-xl bg-gray-50">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <div class="col-span-12 hidden md:col-span-2 md:flex justify-center items-center rounded-l-md bg-secondary py-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-white">
               <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
             </svg>
           </div>
 
           <div class="col-span-12 md:col-span-10 grid grid-cols-7 gap-3">
-            <div class="flex" v-for="n in 6" :key="n">
+            <div class="flex items-center" v-for="n in 6" :key="n">
               <input type="radio" :id="'radio_'+n" class="peer hidden" :value="n" v-model="traveller" />
-              <label :for="'radio_'+n" class="w-full select-none cursor-pointer bg-gray-100 text-gray-800 rounded-lg text-center py-2 transition-colors duration-200 ease-in-out peer-checked:bg-primary peer-checked:text-white"> {{ n }} </label>
+              <label :for="'radio_'+n" class="w-full select-none cursor-pointer bg-gray-100 text-gray-800 rounded-md text-center py-5 transition-colors duration-200 ease-in-out peer-checked:bg-primary peer-checked:font-semibold peer-checked:text-white"> {{ n }} </label>
             </div>
 
-            <div class="flex">
+            <div class="flex items-center">
               <input type="radio" :id="'radio_7'" class="peer hidden" value="7+" v-model="traveller" />
-              <label :for="'radio_7'" class="w-full select-none cursor-pointer bg-gray-100 text-gray-800 rounded-lg text-center py-2 transition-colors duration-200 ease-in-out peer-checked:bg-primary peer-checked:text-white"> 7+ </label>
+              <label :for="'radio_7'" class="w-full select-none cursor-pointer bg-gray-100 text-gray-800 rounded-md text-center py-5 transition-colors duration-200 ease-in-out peer-checked:bg-primary peer-checked:font-semibold peer-checked:text-white"> 7+ </label>
             </div>
           </div>
 
         </div>
 
 
-        <h3 class="text-lg text-gray-800 font-semibold omnes-semibold my-5">Trip length</h3>
-        <div class="grid grid-cols-12 gap-6 my-6 overflow-x-scroll focus:touch-pan-x">
 
-          <div class="col-span-12 hidden md:col-span-2 border md:flex justify-center items-center rounded-l-xl bg-gray-50">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <h3 class="text-lg text-gray-800 font-semibold  my-5" v-if="!isTravelPackagePage">Trip length</h3>
+        <div class="grid grid-cols-12 gap-6 my-6 overflow-x-scroll focus:touch-pan-x" v-if="!isTravelPackagePage">
+
+          <div class="col-span-12 hidden md:col-span-2 md:flex justify-center items-center rounded-l-md bg-secondary py-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-white">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
             </svg>
 
@@ -91,122 +197,65 @@
 <!--          </div>-->
 
           <div class="col-span-12 md:col-span-10 grid grid-cols-4 md:grid-cols-6 gap-3 overflow-x-scroll focus:touch-pan-x">
-          <div class="flex">
+          <div class="flex items-center">
             <input type="checkbox" :id="'radio_t_1'" class="peer hidden" value="3-7" v-model="trip_length" />
-            <label :for="'radio_t_1'" class="select-none leading-3 cursor-pointer w-full border border-gray-300 text-center text-gray-400 rounded-lg px-5 py-2 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary">
-              <span class="text-sm">3-7</span>
-              <hr>
-              <span class="text-xs">days</span>
+            <label :for="'radio_t_1'" class="divide-y divide-gray-200 px-2 select-none leading-3 cursor-pointer w-full border border-gray-400 text-center  bg-gray-50 rounded-md  py-4 peer-checked:font-semibold transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary">
+              <div class="text-sm">3-7</div>
+<!--&lt;!&ndash;              <span class="border border-gray-200 group-checked:border-secondary w-8 block mx-auto"></span>&ndash;&gt;-->
+              <div class="text-xs">days</div>
             </label>
           </div>
 
-          <div class="flex">
+
+
+          <div class="flex items-center">
             <input type="checkbox" :id="'radio_t_2'" class="peer hidden" value="8-11" v-model="trip_length" />
-            <label :for="'radio_t_2'" class="select-none cursor-pointer w-full border border-gray-300 text-center leading-3 text-gray-400 rounded-lg px-5 py-2 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary">
-              <span class="text-sm">8-11</span>
-              <hr>
-              <span class="text-xs">days</span>
+            <label :for="'radio_t_2'" class="divide-y divide-gray-200 px-2 cursor-pointer w-full border border-gray-400 text-center leading-3  bg-gray-50 rounded-md  py-4 peer-checked:font-semibold transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary">
+              <div class="text-sm">8-11</div>
+<!--              <span class="border border-gray-200 group-checked:border-secondary w-8 block mx-auto"></span>-->
+              <div class="text-xs">days</div>
             </label>
           </div>
 
-          <div class="flex">
+          <div class="flex items-center">
             <input type="checkbox" :id="'radio_t_3'" class="peer hidden" value="12-16" v-model="trip_length" />
-            <label :for="'radio_t_3'" class="select-none cursor-pointer w-full border border-gray-300 text-center leading-3 text-gray-400 rounded-lg px-5 py-2 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary">
-              <span class="text-sm">12-16</span>
-              <hr>
-              <span class="text-xs">days</span>
+            <label :for="'radio_t_3'" class="divide-y divide-gray-200 px-2 cursor-pointer w-full border border-gray-400 text-center leading-3  bg-gray-50 rounded-md  py-4 peer-checked:font-semibold transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary">
+              <div class="text-sm">12-16</div>
+<!--              <span class="border border-gray-200 group-checked:border-secondary w-8 block mx-auto"></span>-->
+              <div class="text-xs">days</div>
             </label>
           </div>
 
-          <div class="flex">
+          <div class="flex items-center">
             <input type="checkbox" :id="'radio_t_4'" class="peer hidden" value="17-21" v-model="trip_length" />
-            <label :for="'radio_t_4'" class="select-none cursor-pointer w-full border border-gray-300 text-center leading-3 text-gray-400 rounded-lg px-5 py-2 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary">
-              <span class="text-sm">17-21</span>
-              <hr>
-              <span class="text-xs">days</span>
+            <label :for="'radio_t_4'" class="divide-y divide-gray-200 px-2 cursor-pointer w-full border border-gray-400 text-center leading-3  bg-gray-50 rounded-md  py-4 peer-checked:font-semibold transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary">
+              <div class="text-sm">17-21</div>
+<!--              <span class="border border-gray-200 group-checked:border-secondary w-8 block mx-auto"></span>-->
+              <div class="text-xs">days</div>
             </label>
           </div>
 
-          <div class="flex">
+          <div class="flex items-center">
             <input type="checkbox" :id="'radio_t_5'" class="peer hidden" value="22+" v-model="trip_length" />
-            <label :for="'radio_t_5'" class="select-none cursor-pointer w-full border border-gray-300 text-center leading-3 text-gray-400 rounded-lg px-5 py-2 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary">
-              <span class="text-sm">22+</span>
-              <hr>
-              <span class="text-xs">days</span>
+            <label :for="'radio_t_5'" class="divide-y divide-gray-200 px-2 cursor-pointer w-full border border-gray-400 text-center leading-3  bg-gray-50 rounded-md  py-4 peer-checked:font-semibold transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary">
+              <div class="text-sm">22+</div>
+<!--              <span class="border border-gray-200 group-checked:border-secondary w-8 block mx-auto"></span>-->
+              <div class="text-xs">days</div>
             </label>
           </div>
 
-          <div class="flex">
+          <div class="flex items-center">
             <input type="checkbox" :id="'radio_t_6'" class="peer hidden" value="Undecided" v-model="trip_length" />
-            <label :for="'radio_t_6'" class="select-none cursor-pointer w-full border border-gray-300 text-center leading-3 text-gray-400 rounded-lg px-5 py-2 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary text-[10px]">
+            <label :for="'radio_t_6'" class="divide-y divide-gray-200 px-2 cursor-pointer w-full border border-gray-400 text-center leading-3  bg-gray-50 rounded-md  py-7 peer-checked:font-semibold transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary text-[10px]">
               Undecided
             </label>
           </div>
           </div>
         </div>
 
-        <h3 class="text-lg text-gray-800 font-semibold omnes-semibold my-5">Hotel Category</h3>
-        <div class="grid grid-cols-12 gap-6 my-6 overflow-x-scroll focus:touch-pan-x">
 
-          <div class="col-span-12 hidden md:col-span-2 border md:flex justify-center items-center rounded-l-xl bg-gray-50">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-            </svg>
-          </div>
-        <div class="col-span-12 md:col-span-10 flex justify-start gap-3 overflow-x-scroll focus:touch-pan-x">
 
-          <div class="flex">
-            <input type="checkbox" id="hotel_5" class="peer hidden" value="5" v-model="hotel" />
-            <label for="hotel_5" class="select-none cursor-pointer px-5 py-2 border border-gray-300 text-center text-gray-400 rounded-lg divide-y divide-gray-400 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary  ">
-              <div class="pb-1">
-                <img src="/icons/hotel.svg" alt="">
-                <h4 class=" pt-1">Luxury</h4>
-              </div>
-              <div class="flex pt-2 gap-1">
-                <img src="/icons/star.svg" alt="" class="w-2">
-                <img src="/icons/star.svg" alt="" class="w-2">
-                <img src="/icons/star.svg" alt="" class="w-2">
-                <img src="/icons/star.svg" alt="" class="w-2">
-                <img src="/icons/star.svg" alt="" class="w-2">
-              </div>
-            </label>
-          </div>
-
-          <div class="flex">
-            <input type="checkbox" id="hotel_4" class="peer hidden" value="4" v-model="hotel" />
-            <label for="hotel_4" class="select-none cursor-pointer px-5 py-2 border border-gray-300 text-gray-400 rounded-lg divide-y divide-gray-400 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary  ">
-              <div class="pb-1">
-                <img src="/icons/hotel.svg" alt="">
-                <h4 class=" pt-1">Superior</h4>
-              </div>
-              <div class="flex pt-2 gap-1">
-                <img src="/icons/star.svg" alt="" class="w-2">
-                <img src="/icons/star.svg" alt="" class="w-2">
-                <img src="/icons/star.svg" alt="" class="w-2">
-                <img src="/icons/star.svg" alt="" class="w-2">
-              </div>
-            </label>
-          </div>
-
-          <div class="flex">
-            <input type="checkbox" id="hotel_3" class="peer hidden" value="3" v-model="hotel" />
-            <label for="hotel_3" class="select-none cursor-pointer px-5 py-2 border border-gray-300 text-gray-400 rounded-lg divide-y divide-gray-400 transition-colors duration-200 ease-in-out peer-checked:border-2 peer-checked:border-primary peer-checked:text-primary peer-checked:divide-primary  ">
-              <div class="pb-1">
-                <img src="/icons/hotel.svg" alt="">
-                <h4 class=" pt-1">Best Value</h4>
-              </div>
-              <div class="flex pt-2 gap-1">
-                <img src="/icons/star.svg" alt="" class="w-2">
-                <img src="/icons/star.svg" alt="" class="w-2">
-                <img src="/icons/star.svg" alt="" class="w-2">
-              </div>
-            </label>
-          </div>
-
-        </div>
-        </div>
-
-        <h3 class="text-lg text-gray-800 font-semibold omnes-semibold my-5">Contact information</h3>
+        <h3 class="text-lg text-gray-800 font-semibold  my-5">Contact information</h3>
 
         <form @submit.prevent="handleSubmit">
           <div class="grid grid-cols-1 gap-3">
@@ -444,14 +493,20 @@ const comment = ref('')
 const listDestination = ref([])
 
 const geoIp = ref()
-
+const tripLength = ref([]);
 const phoneInputRef = ref(null);
 
 const showModalProcess = ref(false)
 
+const route = useRoute()
+
 const formatter = ref({
   date: 'YYYY/MM/DD',
   month: 'MMM'
+})
+
+const isTravelPackagePage = computed(() => {
+  return route.path.startsWith('/travel-packages/') && !!route.params.package
 })
 
 const disablePastDates = (date:any) => {
@@ -501,6 +556,8 @@ const handleSubmit = async () => {
     showLoader.value = true
 
     let obj = {
+      el_package: packageStore.titlePackages,
+      package: packageStore.titlePackages,
       category_d: hotel.value,
       destino_d: destination.value,
       pasajeros_d: traveller.value,
@@ -525,10 +582,19 @@ const handleSubmit = async () => {
     await packageStore.getInquire(obj).then((res) => {
       try {
         if (res){
-
+          console.log("ress.dfmsdkfsdkfsdkfhsdkfhsdkfjhsdkfjhsdfkj")
           saveInquire(obj)
 
+          notify({
+            group: "foo",
+            title: 'Well done',
+            type: "success",
+            text: "Your trip has been successfully created 🙂",
+          }, 4000) // 4s
+
           showLoader.value = false
+
+          packageStore.titlePackages = ''
 
           travelDate.value = ''
           traveller.value = ""
@@ -546,12 +612,8 @@ const handleSubmit = async () => {
 
           $v.value.$reset()
 
-          notify({
-            group: "foo",
-            title: 'Well done',
-            type: "success",
-            text: "Your trip has been successfully created 🙂",
-          }, 4000) // 4s
+
+
         }else{
           packageStore.$reset()
         }
@@ -608,13 +670,35 @@ const getIp = async () => {
   // }
 }
 
+watchEffect(() => {
+  if (route.params.package) {
+    console.log('Slug detectado:', route.params.package)
+  } else {
+    packageStore.titlePackages = ''
+  }
+})
+
 
 onMounted(async () => {
+  // if (route.params.package){
+  //   console.log(route.params.package)
+  //
+  // }else {
+  //   packageStore.titlePackages = ''
+  // }
+
   await getIp()
 
   await getPais()
 
+
+
+
+
   if (process.client) {
+    // if (!isTravelPackagePage.value){
+    //   packageStore.titlePackages = ''
+    // }
     // @ts-ignore
     import('intl-tel-input/build/js/intlTelInput.min.js').then((module) => {
       const intlTelInput = module.default;
