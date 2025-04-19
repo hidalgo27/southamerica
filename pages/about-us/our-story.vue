@@ -173,7 +173,7 @@ const imagen_paquetes = [
       </p>
     </div>
   </section>
-  <section class="container my-20">
+  <section class="container my-20 hidden">
     <!-- Botones de Navegación -->
     <div class="flex justify-center md:space-x-6 border-b text-sm md:text-lg">
       <button v-for="(item, index) in timeline" :key="item.year" @click="activeTab = index"

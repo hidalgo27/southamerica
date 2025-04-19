@@ -43,6 +43,7 @@ const toggleReadMore = () => {
 </script>
 <template>
   <HeaderImgNav :header="header"></HeaderImgNav>
+
   <NavDestination></NavDestination>
   <section v-if="region" class="container my-20 px-6 py-12 flex flex-col justify-center md:flex-row gap-6 md:gap-20">
     <div class="w-full md:w-2/5">

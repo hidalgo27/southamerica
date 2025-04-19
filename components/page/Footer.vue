@@ -2,7 +2,7 @@
   <section class="container ">
     <div class="block border-b border-gray-200 w-full mb-8"></div>
   </section>
-  <section class="container my-20 text-left">
+  <section class="container my-20 hidden text-left">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="grid grid-cols-2">
         <NuxtImg src="https: //images.goway.com/production/footer_cta/2023-09/lighthouse_4.svg" alt="icon"
@@ -180,7 +180,7 @@
           <div class="bg-gray-900 p-4 rounded-lg shadow-inner">
             <p class="mb-2 text-gray-300 text-sm">
 
-              CONTACT US: <br> SALES: <br>info@gotoperu.com <br> OPERATIONS 24/7: <br> +1 (202) 4911478
+              CONTACT US: <br> SALES: <br>info@southamerica.company <br> OPERATIONS 24/7: <br> +1 (202) 491-1478
             </p>
           </div>
         </div>
@@ -194,7 +194,7 @@
 
       <div class="flex flex-col justify-between pt-5 border-t border-gray-500 sm:flex-row">
         <p class="text-sm dark:text-gray-300">
-          © Copyright 2022 Machu Picchu Company. All rights reserved. | GOTOPERU COMPANY EIRL - RUC 20609225441 -
+          © Copyright 2025 Machu Picchu Company. All rights reserved. | GOTOPERU COMPANY EIRL - RUC 20609225441 -
           Avenida El Sol 449 - Cusco - Cusco - Peru
         </p>
         <div class="flex items-center mt-4 space-x-4 sm:mt-0">

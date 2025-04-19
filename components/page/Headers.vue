@@ -334,8 +334,10 @@ const toggleDropdown = (index: number) => {
                 <span class="font-semibold block">+1 (202) 4911478</span>
                 <span class="text-sm">Or contact your travel advisor</span>
               </div>
-              <button @click="formStore.openInquireNowForm()" class="btn-primary-outline bg-orange-50 "
-                href="#form-dream-adventure">Inquire Now</button>
+              <a class="btn-primary-outline bg-orange-50 "
+                href="#form-dream-adventure">Inquire Now</a>
+<!--              <button @click="formStore.openInquireNowForm()" class="btn-primary-outline bg-orange-50 "-->
+<!--                      href="#form-dream-adventure">Inquire Now</button>-->
               <InquireNowForm :isOpen="formStore.InquireNowFormOpen" @close="formStore.closeInquireNowForm()">
               </InquireNowForm>
             </div>

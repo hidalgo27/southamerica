@@ -464,7 +464,7 @@ watch(() => formData.value.startDate, () => {
           </div>
 
           <!-- País de interés -->
-          <div v-if="!packageDetail">
+          <div v-if="!packageDetail" class="hidden">
             <label class="block text-sm font-medium">Destination of Interest *</label>
             <div class="overflow-y-auto h-48 max-h-48 border rounded p-2">
               <template v-for="country in countries" :key="country.codigo">
