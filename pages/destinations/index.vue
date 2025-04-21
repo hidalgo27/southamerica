@@ -24,7 +24,7 @@ const text = {
 const header = {
   miniTitle: 'Unforgettable Journeys',
   title: 'The wonders of SouthAmerica',
-  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/goway-travel-cappadocia-turkey.jpg?itok=w-AD9c_b',
+  url: '/images/banners/destinations/galapagos.webp',
 }
 
 onMounted(async () => {

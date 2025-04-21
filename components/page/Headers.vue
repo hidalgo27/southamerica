@@ -139,12 +139,12 @@ const updateMenu = () => {
         }, */
       ],
     },
-    {
-      title: "Inspiration",
-      items: [{ name: "All Inspirations", link: "/inspiration/" }],
-      image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
-      url: "/inspiration"
-    },
+    // {
+    //   title: "Inspiration",
+    //   items: [{ name: "All Inspirations", link: "/inspiration/" }],
+    //   image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
+    //   url: "/inspiration"
+    // },
     // {
     //   title: "Specials",
     //   items: countries.value.map((country: any) => ({
@@ -209,13 +209,13 @@ const updateMenu = () => {
     }, */
     {
       title: "About Us",
-      items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
+      items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
       image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg",
       url: "/about-us"
     },
   ]
 }
-
+// { name: "Meet the Team", link: "/about-us/meet-the-team" }
 const dropdownStates = ref(menus.value.map(() => false));
 const closeDropdowns = () => {
   dropdownStates.value = dropdownStates.value.map(() => false);
@@ -454,6 +454,9 @@ const toggleDropdown = (index: number) => {
                 </Dropdown>
               </client-only>
             </div>
+            <nuxt-link to="/inspiration" class="menu-list focus:outline-none">
+              Inspiration
+            </nuxt-link>
             <nuxt-link to="/special-offers" class="menu-list focus:outline-none">
               Specials
             </nuxt-link>
