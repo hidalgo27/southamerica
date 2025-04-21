@@ -2,11 +2,12 @@
 import { useFormStore } from '~/stores/form';
 
 const formStore = useFormStore();
+const route = useRoute();
 
 </script>
 <template>
   <div class="">
-    <div class="fixed bottom-0 right-0 z-40 py-2 px-4 sm:inline-flex md:mb-0 md:hidden">
+    <div v-if="!route.params.package" class="fixed bottom-0 right-0 z-40 py-2 px-4 sm:inline-flex md:mb-0 md:hidden">
       <button type="button" @click="formStore.openInquireNowForm()">
         <div class="flex items-center">
           <span class="bg-gray-800 text-white -mr-3 py-2 px-4 rounded-lg border-2 border-secondary">Start my

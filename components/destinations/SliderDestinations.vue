@@ -56,7 +56,7 @@ const breakpoints = {
         Explorar Destinos
       </nuxt-link>
     </div>
-    <Carousel wrap-around pause :transition="1000" :autoplay="1000" :items-to-scroll="1" :breakpoints="breakpoints"
+    <Carousel wrap-around :transition="1500" :autoplay="2000" :items-to-scroll="1" :breakpoints="breakpoints"
       pause-autoplay-on-hover>
       <Slide v-for="(destinations, index) in destinations" :key="index"
         class="justify-center items-center overflow-hidden p-6 w-full">

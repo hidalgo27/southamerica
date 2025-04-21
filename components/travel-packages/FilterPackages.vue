@@ -388,7 +388,7 @@ const onHide = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
               </svg>
               <span class="ml-2">
-                {{ priceRange.min === 100 && priceRange.max === 20000 ? "Budget (price per double)" :
+                {{ priceRange.min === 100 && priceRange.max === 20000 ? "Budget (price per person)" :
                   `$ ${priceRange.min} - $ ${priceRange.max}` }}
               </span>
             </button>
@@ -397,7 +397,7 @@ const onHide = () => {
                 class="v-popper md:w-48 lg:w-72 md:rounded-md shadow-lg max-h-64 overflow-y-auto bg-white text-gray-800 text-sm p-4 border">
                 <div class="relative w-full space-y-4">
                   <div>
-                    <span>Price per double</span>
+                    <span>price per person</span>
                   </div>
                   <div>
                     <input type="range" step="100" :min="min" :max="max" v-model="priceRange.min" @input="updateMin"
@@ -450,7 +450,7 @@ const onHide = () => {
                 class="v-popper md:w-48 lg:w-72 md:rounded-md shadow-lg max-h-64 overflow-y-auto bg-white text-gray-800 text-sm p-4 border">
                 <div class="relative w-full space-y-4">
                   <div>
-                    <span>Price per double</span>
+                    <span>price per person</span>
                   </div>
                   <div>
                     <input type="range" step="1" :min="minDuration" :max="maxDuration" v-model="durationRange.min"

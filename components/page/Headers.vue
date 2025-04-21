@@ -41,11 +41,11 @@ const categories = ref([])
 const getCategories = async () => {
   const res: any = await categoryStore.getCategories();
   categories.value = res
-      .filter((category: any) => category.estado === 1)
-      .map((category: any) => ({
-        nombre: category.nombre,
-        url: category.url,
-      }));
+    .filter((category: any) => category.estado === 1)
+    .map((category: any) => ({
+      nombre: category.nombre,
+      url: category.url,
+    }));
 };
 
 const position = ref('fixed');
@@ -66,14 +66,14 @@ const menus = ref([
     title: "Inspiration",
     items: [],
   },
-  {
-    title: "Specials",
-    items: [],
-  },
-  {
-    title: "Our Experts",
-    items: [],
-  },
+  // {
+  //   title: "Specials",
+  //   items: [],
+  // },
+  // {
+  //   title: "Our Experts",
+  //   items: [],
+  // },
   /* {
     title: "Groups Only",
     items: [],
@@ -334,10 +334,9 @@ const toggleDropdown = (index: number) => {
                 <span class="font-semibold block">+1 (202) 4911478</span>
                 <span class="text-sm">Or contact your travel advisor</span>
               </div>
-              <a class="btn-primary-outline bg-orange-50 "
-                href="#form-dream-adventure">Inquire Now</a>
-<!--              <button @click="formStore.openInquireNowForm()" class="btn-primary-outline bg-orange-50 "-->
-<!--                      href="#form-dream-adventure">Inquire Now</button>-->
+              <a class="btn-primary-outline bg-orange-50 " href="#form-dream-adventure">Inquire Now</a>
+              <!--              <button @click="formStore.openInquireNowForm()" class="btn-primary-outline bg-orange-50 "-->
+              <!--                      href="#form-dream-adventure">Inquire Now</button>-->
               <InquireNowForm :isOpen="formStore.InquireNowFormOpen" @close="formStore.closeInquireNowForm()">
               </InquireNowForm>
             </div>
@@ -359,22 +358,23 @@ const toggleDropdown = (index: number) => {
                   <template #popper="{ hide }">
                     <div
                       class="v-popper bg-white text-gray-800 rounded-t-md md:rounded-md  md:w-[80vh] lg:w-[100vh] 2xl:[70vh] flex md:flex-col lg:flex-row gap-6 text-sm"
-                      :class="!menu.items[0].firstTitle ? ' h-96 p-6 min-h-96' : ''">
+                      :class="!menu.items[0].firstTitle ? ' h-96 p-6 max-h-96' : ''">
                       <button v-if="isMobile" @click="hide()" class="absolute top-2 right-2 p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                           stroke="currentColor" class="w-5 h-5 text-gray-500 hover:text-gray-800 transition">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>
-                      <div class="w-full " :class="!menu.items[0].firstTitle ? '' : 'grid grid-flow-col grid-cols-4 '">
+                      <div class="w-full "
+                        :class="!menu.items[0].firstTitle ? '' : 'grid grid-flow-col md:grid-cols-4 '">
                         <div class="col-span-1 relative "
                           :class="!menu.items[0].firstTitle ? '' : 'py-6 px-2 md:p-6 border-gray-200 border-r'">
                           <span class="text-xs">{{ menu.title }}</span>
-                          <div :class="menu.image ? 'grid grid-cols-3 gap-x-10' : ''">
-                            <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800">
+                          <div :class="menu.image ? 'grid  md:grid-cols-3 gap-x-10 ' : 'overflow-scroll max-h-64'">
+                            <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800 ">
                               <template v-if="item.firstTitle">
                                 <button
-                                  class="w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-gray-100 group"
+                                  class="w-full text-start flex items-center p-2 rounded-md my-0.5 justify-between hover:bg-gray-100 group "
                                   @mouseover="setHoveredItem(item)">
                                   {{ item.name }}
                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -402,7 +402,7 @@ const toggleDropdown = (index: number) => {
                             <div class="flex flex-col relative w-full h-full">
                               <div v-if="hoveredItem.firstTitle">
                                 <span class="text-xs mb-12">{{ hoveredItem.firstTitle.name }}</span>
-                                <div class="grid grid-cols-3 gap-x-10">
+                                <div class="grid md:grid-cols-3 gap-x-10 overflow-scroll max-h-64">
                                   <div v-for="sub in hoveredItem.firstTitle.items" :key="sub.name"
                                     class="py-2 text-gray-800 hover:text-orange-500 duration-300">
                                     <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
@@ -457,7 +457,6 @@ const toggleDropdown = (index: number) => {
             <nuxt-link to="/special-offers" class="menu-list focus:outline-none">
               Specials
             </nuxt-link>
-
           </nav>
         </div>
       </div>
@@ -508,11 +507,17 @@ const toggleDropdown = (index: number) => {
             </svg>
           </button>
           <nav class="flex flex-col gap-4">
+            <nuxt-link to="/travel-packages" class="w-full text-left p-2 rounded-md" @click="toggleMobileMenu">
+              Travel Packages
+            </nuxt-link>
             <div v-for="(menu, index) in menus" :key="index">
               <button @click="toggleDropdown(index), handleDropdownOpen(menu)" class="w-full text-left p-2 rounded-md ">
                 {{ menu.title }}
               </button>
             </div>
+            <nuxt-link to="/special-offers" class="w-full text-left p-2 rounded-md" @click="toggleMobileMenu">
+              Specials
+            </nuxt-link>
           </nav>
         </div>
       </transition>

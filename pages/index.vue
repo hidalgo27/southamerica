@@ -242,7 +242,7 @@ const onHide = () => {
                         <div class="text-start ml-2">
                           <span class=" font-semibold">Budget</span>
                           <p class="text-xs lg:text-md">
-                            {{ selectedBudget || "Select price per double" }}
+                            {{ selectedBudget || "Select price per person" }}
                           </p>
                         </div>
                         <button v-if="selectedBudget" @click.stop="selectedBudget = null"
@@ -365,8 +365,8 @@ const onHide = () => {
   <SliderDestinations></SliderDestinations>
   <EspecialistLetter></EspecialistLetter>
   <TravelStories v-if="topBlogs.length > 0" :topBlogs="topBlogs"></TravelStories>
-<!--  <Newsletter></Newsletter>-->
+  <!--  <Newsletter></Newsletter>-->
   <section class="bg-gray-100 py-12">
-  <Reviews></Reviews>
+    <Reviews></Reviews>
   </section>
 </template>
