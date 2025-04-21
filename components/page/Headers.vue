@@ -346,6 +346,9 @@ const toggleDropdown = (index: number) => {
 
         <div>
           <nav class="flex flex-row gap-3 item-center justify-center text-start">
+            <nuxt-link to="/travel-packages" class="menu-list focus:outline-none">
+              Travel Packages
+            </nuxt-link>
             <div v-for="(menu, index) in menus" :key="index" class="relative">
               <client-only>
                 <Dropdown v-model:shown="dropdownStates[index]" :positioning-disabled="isMobile"
