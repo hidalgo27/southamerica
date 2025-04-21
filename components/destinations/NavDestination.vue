@@ -141,10 +141,14 @@ const onHide = () => {
         </client-only>
       </div>
     </div>
-    <button v-if="isFixed" @click="inquireFormStore.openInquireNowForm()"
+    <!-- <button v-if="isFixed" @click="inquireFormStore.openInquireNowForm()"
       class="py-3 px-5 text-primary border-2 border-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out bg-orange-50 rounded-md shadow-md hidden sm:flex">
       Inquire Now
-    </button>
+    </button> -->
+    <a v-if="isFixed" href="#form-dream-adventure"
+      class="py-3 px-5 text-primary border-2 border-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out bg-orange-50 rounded-md shadow-md hidden sm:flex">
+      Inquire Now
+    </a>
   </nav>
 </template>
 <style>

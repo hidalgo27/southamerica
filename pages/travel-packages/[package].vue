@@ -155,11 +155,15 @@ const onHide = () => {
     <div class="flex gap-2">
       <WeTravelCheckoutButton v-show="packageDetail?.[0]?.codigo_f" :tripUuid="packageDetail?.[0]?.codigo_f || ''">
       </WeTravelCheckoutButton>
-      <button
+      <!-- <button
         class="bg-white text-blue-900 font-semibold px-4 py-2 rounded-md hover:bg-gray-200 transition text-sm md:text-base"
         @click="inquireFormStore.openInquireNowForm()">
         Request a Quote
-      </button>
+      </button> -->
+      <a class="bg-white text-blue-900 font-semibold px-4 py-2 rounded-md hover:bg-gray-200 transition text-sm md:text-base"
+        href="#form-dream-adventure">
+        Request a Quote
+      </a>
     </div>
   </div>
   <nav class="py-4 sm:py-6 border-y-2 justify-around sm:px-4 flex text-xs mb-12" :class="{
@@ -233,10 +237,14 @@ const onHide = () => {
         </client-only>
       </div>
     </div>
-    <button v-if="isFixed" @click="inquireFormStore.openInquireNowForm()"
+    <!-- <button v-if="isFixed" @click="inquireFormStore.openInquireNowForm()"
       class="py-3 px-5 text-primary border-2 border-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out bg-orange-50 rounded-md shadow-md hidden sm:flex">
       Inquire Now
-    </button>
+    </button> -->
+    <a v-if="isFixed" href="#form-dream-adventure"
+      class="py-3 px-5 text-primary border-2 border-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out bg-orange-50 rounded-md shadow-md hidden sm:flex">
+      Inquire Now
+    </a>
   </nav>
   <div v-if="packageDetail && packageDetail.length > 0">
     <OverviewPackage :packageDetail="packageDetail[0]" id="overview" />
