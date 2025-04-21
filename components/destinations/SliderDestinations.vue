@@ -56,8 +56,8 @@ const breakpoints = {
         Explorar Destinos
       </nuxt-link>
     </div>
-    <Carousel wrap-around pause :transition="40000" :autoplay="1000" :items-to-scroll="destinations.length"
-      :breakpoints="breakpoints">
+    <Carousel wrap-around pause :transition="1000" :autoplay="1000" :items-to-scroll="1" :breakpoints="breakpoints"
+      pause-autoplay-on-hover>
       <Slide v-for="(destinations, index) in destinations" :key="index"
         class="justify-center items-center overflow-hidden p-6 w-full">
         <NuxtLink :to="'/destinations/' + destinations.url"

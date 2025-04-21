@@ -28,10 +28,10 @@ const reviews = ref([
 
 </script>
 <template>
-  <section class="container my-40 ">
-    <div class="flex flex-col md:flex-row items-center justify-center w-full h-[40vh] lg:h-96 ">
-      <div class="relative flex-1 w-full h-full">
-        <div class="w-full h-full">
+  <section class="container my-20">
+    <div class="flex flex-col lg:flex-row items-center justify-center w-full py-6 h-full ">
+      <div class="relative w-full h-full">
+        <div class="w-full h-[50vh] ">
           <NuxtImg alt="Hot air balloons over a rocky landscape" class="w-full h-full object-cover rounded-md"
             src="images\ice-colombia.webp" />
         </div>
@@ -90,7 +90,7 @@ const reviews = ref([
           </NuxtLink>
         </div>
       </div>
-      <div class="flex-1 w-full pt-8 xl:pt-0 xl:pl-8">
+      <div class="w-full pt-8 xl:pt-0 xl:pl-8">
         <Carousel ref="carouselRef" v-model="carouselSlide" wrap-around :autoplay="8000" :transition="2000"
           :items-to-show="1" class="my-2">
           <Slide v-for="(review, index) in reviews" :key="index" class="w-full px-1">

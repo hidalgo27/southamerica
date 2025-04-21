@@ -11,7 +11,7 @@ const isModalOpen = ref(false);
           <p class="mb-6 tracking-widest font-bold">Newsletter</p>
           <h1 class="font-semibold text-2xl md:text-5xl mb-6 title font-playfair-display tracking-wide">Unlock Even More
           </h1>
-          <p class="mb-20">Sign up to our newsletter to unlock travel Specials, Inspiration, and Expert
+          <p class="mb-6 md:mb-20">Sign up to our newsletter to unlock travel Specials, Inspiration, and Expert
             Guides right to your inbox.</p>
           <button @click="isModalOpen = true"
             class="btn-ternary py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700">
