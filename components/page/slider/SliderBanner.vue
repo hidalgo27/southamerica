@@ -2,15 +2,21 @@
 import { Carousel, Slide } from "vue3-carousel";
 const slides = [
   {
-    image: "https://images.goway.com/production/styles/hero_s1_xl/s3/hero/iStock-1919241099.jpeg?h=b631e5b1&itok=9LU4KnKh 1x",
-    title: "Escape to The Islands of Tahiti",
+    image: "/images/banners/destinations/rio.webp",
+    title: "Escape to Rio Janeiro",
     buttonText: "Explore Here",
   },
   {
-    image: "https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/iStock-157728558_0.jpg?h=99baf7c0&itok=TcVBqOWU 1x",
-    title: "Discover the Beauty of Bora Bora",
-    buttonText: "Learn More",
+    image: "/images/banners/destinations/uyuni.webp",
+    title: "Discover the Beauty of Uyuni",
+    buttonText: "View More",
   },
+  {
+    image: "/images/banners/destinations/cartagena.webp",
+    title: "Enjoy Cartagena",
+    buttonText: "Explore Here",
+  },
+
 ];
 </script>
 <template>

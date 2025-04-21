@@ -30,12 +30,22 @@ const getCountries = async () => {
 };
 
 const categories = ref([])
+// const getCategories = async () => {
+//   const res: any = await categoryStore.getCategories();
+//   categories.value = res.map((category: any) => ({
+//     nombre: category.nombre,
+//     url: category.url,
+//   }));
+// };
+
 const getCategories = async () => {
   const res: any = await categoryStore.getCategories();
-  categories.value = res.map((category: any) => ({
-    nombre: category.nombre,
-    url: category.url,
-  }));
+  categories.value = res
+      .filter((category: any) => category.estado === 1)
+      .map((category: any) => ({
+        nombre: category.nombre,
+        url: category.url,
+      }));
 };
 
 const position = ref('fixed');
@@ -135,24 +145,24 @@ const updateMenu = () => {
       image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
       url: "/inspiration"
     },
-    {
-      title: "Specials",
-      items: countries.value.map((country: any) => ({
-        name: country.nombre,
-        link: `/special-offers/${country.url}`,
-      })),
-      image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
-      url: "/special-offers"
-    },
-    {
-      title: "Our Experts",
-      items: countries.value.map((country: any) => ({
-        name: country.nombre,
-        link: `/our-experts/${country.url}`,
-      })),
-      image: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
-      url: "/our-experts"
-    },
+    // {
+    //   title: "Specials",
+    //   items: countries.value.map((country: any) => ({
+    //     name: country.nombre,
+    //     link: `/special-offers/${country.url}`,
+    //   })),
+    //   image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
+    //   url: "/special-offers"
+    // },
+    // {
+    //   title: "Our Experts",
+    //   items: countries.value.map((country: any) => ({
+    //     name: country.nombre,
+    //     link: `/our-experts/${country.url}`,
+    //   })),
+    //   image: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
+    //   url: "/our-experts"
+    // },
     /* {
       title: "Groups Only",
       items: [
@@ -324,8 +334,10 @@ const toggleDropdown = (index: number) => {
                 <span class="font-semibold block">+1 (202) 4911478</span>
                 <span class="text-sm">Or contact your travel advisor</span>
               </div>
-              <button @click="formStore.openInquireNowForm()" class="btn-primary-outline bg-orange-50 "
-                href="#form-dream-adventure">Inquire Now</button>
+              <a class="btn-primary-outline bg-orange-50 "
+                href="#form-dream-adventure">Inquire Now</a>
+<!--              <button @click="formStore.openInquireNowForm()" class="btn-primary-outline bg-orange-50 "-->
+<!--                      href="#form-dream-adventure">Inquire Now</button>-->
               <InquireNowForm :isOpen="formStore.InquireNowFormOpen" @close="formStore.closeInquireNowForm()">
               </InquireNowForm>
             </div>
@@ -334,6 +346,9 @@ const toggleDropdown = (index: number) => {
 
         <div>
           <nav class="flex flex-row gap-3 item-center justify-center text-start">
+            <nuxt-link to="/travel-packages" class="menu-list focus:outline-none">
+              Travel Packages
+            </nuxt-link>
             <div v-for="(menu, index) in menus" :key="index" class="relative">
               <client-only>
                 <Dropdown v-model:shown="dropdownStates[index]" :positioning-disabled="isMobile"
@@ -439,6 +454,10 @@ const toggleDropdown = (index: number) => {
                 </Dropdown>
               </client-only>
             </div>
+            <nuxt-link to="/special-offers" class="menu-list focus:outline-none">
+              Specials
+            </nuxt-link>
+
           </nav>
         </div>
       </div>

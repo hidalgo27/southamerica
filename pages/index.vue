@@ -38,7 +38,8 @@ const listCategories = ref([]);
 
 const getCategories = async () => {
   const res: any = await categoryStore.getCategories();
-  listCategories.value = res;
+  // listCategories.value = res;
+  listCategories.value = res.filter((category: any) => category.estado === 1)
 };
 
 const blogStore = useBlogStore();
@@ -364,6 +365,8 @@ const onHide = () => {
   <SliderDestinations></SliderDestinations>
   <EspecialistLetter></EspecialistLetter>
   <TravelStories v-if="topBlogs.length > 0" :topBlogs="topBlogs"></TravelStories>
-  <Newsletter></Newsletter>
+<!--  <Newsletter></Newsletter>-->
+  <section class="bg-gray-100 py-12">
   <Reviews></Reviews>
+  </section>
 </template>

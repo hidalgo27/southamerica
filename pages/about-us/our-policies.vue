@@ -5,12 +5,12 @@ import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 
 const header = ref({
   title: 'Our Policies',
-  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/italy_florence_duomo_aerial_iStock-912355896_0.jpg?VersionId=ugzrgq_j7rydks8_5PFpVn7tZIKOCYce&h=f183ff8f&itok=gIPibuJA'
+  url: 'https://s3.us-west-1.amazonaws.com/gotolatam/destinations/slider/1662919155852TOUR-A-TIWANAKU-BOLIVIA_1662919213.jpg'
 })
 const sections = [
   {
     title: "Consumer Protection Plans",
-    text: "When the unthinkable happens, you’re covered by SouthAmerica’s various consumer protection plans and programs across Canada and the United States. Rest easy when your travel.",
+    text: "When the unthinkable happens, you’re covered by SouthAmerica’s various consumer protection plans and programs. Rest easy when your travel.",
     imgSrc: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Read More",

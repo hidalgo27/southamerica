@@ -34,7 +34,7 @@ let player: any
 onMounted(async () => {
   onLoaded(({ Vimeo }) => {
     player = new Vimeo.Player(video.value, {
-      id: 1028540009,
+      id: 1075870759,
       autoplay: true,
       loop: true,
       controls: false,

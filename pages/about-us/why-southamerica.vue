@@ -9,29 +9,29 @@ import Benefits from '~/components/page/slider/Benefits.vue';
 const header = ref({
   miniTitle: 'The SouthAmerica Way',
   title: 'Why SouthAmerica',
-  url: 'https://images.goway.com/production/hero/iStock-1297807578.jpg'
+  url: 'http://gotoperu-mx.s3-us-west-1.amazonaws.com/destinations/slider/1574272727139montana7colores_1574272726.jpg'
 })
 const sections = [
   {
     title: "Our Story",
     text: "We are a team of travel enthusiasts who love to explore the world and share our experiences with others. Our mission is to help you plan your next adventure and make it a memorable one. Whether you are looking for a relaxing beach vacation or an action-packed adventure, we have you covered. Our team of experts will help you find the perfect destination and create a customized itinerary that suits your needs. So why wait? Start planning your next trip with us today!",
-    imgSrc: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg",
+    imgSrc: "http://gotoperu-mx.s3-us-west-1.amazonaws.com/destinations/slider/1574272629328AVX102-1_1574272629.jpg",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Discover Our Story",
     url: "/our-story"
   },
   {
     title: "Why SouthAmerica",
-    text: "We know a thing or two about travel at SouthAmerica. Our team of Destination Specialists have been tailoring dream vacations for nearly 55 years. We handle every part of the travel journey, from flights to tours to accommodations. Let us do the hard work so you can sit back, relax, and take in the world. Rely on personalized travel planning, elevated experiences, and legendary customer service.",
-    imgSrc: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
+    text: "We know a thing or two about travel at SouthAmerica. Our team of Destination Specialists have been tailoring dream vacations for nearly 20 years. We handle every part of the travel journey, from flights to tours to accommodations. Let us do the hard work so you can sit back, relax, and take in the world. Rely on personalized travel planning, elevated experiences, and legendary customer service.",
+    imgSrc: "https://s3.us-west-1.amazonaws.com/gotolatam/destinations/slider/1646603072184brazil_1646603078.jpg",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Learn More",
     url: "/why-southamerica"
   },
   {
     title: "Careers",
-    text: "Are you interested in an exciting career? Come work with us! We've spent over 50 years building a rich culture of passionate travel professionals. We accomplish this with values built upon taking care of our people, our customers and the communities in which we operate. We have remote opportunities, as well as in our offices in Toronto, Vancouver, Los Angeles, Manila, and Sydney. ",
-    imgSrc: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Auckland_Hotel_Wing/img_HeritageAuckland_Exterior.jpg",
+    text: "Are you interested in an exciting career? Come work with us! We've spent over 20 years building a rich culture of passionate travel professionals. We accomplish this with values built upon taking care of our people, our customers and the communities in which we operate. We have remote opportunities, as well as in our offices in Cusco, Lima, Bogota, Buenos Aires. ",
+    imgSrc: "https://s3.us-west-1.amazonaws.com/gotolatam/destinations/slider/1646602913420patagonia2_1646602918.jpg",
     alt: "A group of people enjoying a beach vacation",
     buttonLabel: "Explore Careers",
     url: "/careers"

@@ -124,24 +124,12 @@ const imagen_paquetes = [
           </h1>
           <p class="text-gray-600 mb-8">Dear Globetrotter,</p>
 
-          <p class="text-gray-600 mb-8">When I started this journey back in 1970, SouthAmerica was a one-man company
-            operating
-            out of a small apartment in
-            Toronto. Today, we have over 600 team members working across three continents. We’re also marking an
-            exciting new chapter for SouthAmerica with a completely new look, and an incredible new goway.com to serve
-            you
-            better.</p>
-          <p class="text-gray-600 mb-8">Consider this website your window into the world. As you explore its pages,
-            you’ll discover inspirational
-            stories, expert advice, and unforgettable trip ideas to over 100 countries worldwide.</p>
-
-          <p class="text-gray-600 mb-8">Remember that every SouthAmerica vacation is tailor-made. Join us on this new
-            journey,
-            and when you’re ready for
-            your own adventure, get in touch. We’d love to help turn your travel dreams into reality.</p>
+          <p class="text-gray-600 mb-8">When I started this journey back in 2010, SouthAmerica was a one-man company operating out of a small office at Cusco. Today, we have over 110 team members working across six countries. We’re also marking an exciting new chapter for SouthAmerica with a completely new look, and an incredible new goway.com to serve you better.</p>
+          <p class="text-gray-600 mb-8">Consider this website your window into the best of South America. As you explore its pages, you’ll discover inspirational stories, expert advice, and unforgettable trip ideas from Cartagena to Patagonia. The diversity of cultures, climates, and landscapes must be seen to be believed. Explore popular places like Machu Picchu, Iguazu Falls, Rio de Janeiro, and the Amazon, or discover rising gems such as Galapagos and Uyuni that are some of the most enticing tourism places.</p>
+          <p class="text-gray-600 mb-8">Remember that every SouthAmerica vacation is tailor-made. Join us on this new journey, and when you’re ready for your own adventure, get in touch. We’d love to help turn your travel dreams into reality.</p>
 
           <p class="text-gray-600 ">Sincerely,</p>
-          <p class="text-gray-600 ">Bruce Hodge</p>
+          <p class="text-gray-600 ">Paul Catano</p>
           <p class="text-gray-600 ">Founder & President</p>
         </div>
         <div class="relative w-full rounded-md h-full">
@@ -185,7 +173,7 @@ const imagen_paquetes = [
       </p>
     </div>
   </section>
-  <section class="container my-20">
+  <section class="container my-20 hidden">
     <!-- Botones de Navegación -->
     <div class="flex justify-center md:space-x-6 border-b text-sm md:text-lg">
       <button v-for="(item, index) in timeline" :key="item.year" @click="activeTab = index"
