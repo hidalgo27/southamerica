@@ -332,12 +332,12 @@ const onHide = () => {
                 </NuxtLink>
               </div>
             </div>
-            <div class="mt-6 justify-center flex">
+            <!-- <div class="mt-6 justify-center flex">
               <button class="bg-black text-white px-4 py-2 rounded-md flex items-center">
                 <span class="mr-2">See our 4,778 reviews on</span>
                 <span class="text-green-400 font-bold">Trustpilot</span>
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

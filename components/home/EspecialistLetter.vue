@@ -69,10 +69,13 @@ onMounted(async () => {
             expertise and a true passion for Latin America.
           </p>
           <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 text-sm md:text-md">
-            <button class="px-4 py-2 border btn-primary-outline text-start rounded-md"
+            <!-- <button class="px-4 py-2 border btn-primary-outline text-start rounded-md"
               @click="inquireFormStore.openInquireNowForm()">
               Request a Quote
-            </button>
+            </button> -->
+            <a class="px-4 py-2 border btn-primary-outline text-start rounded-md" href="#form-dream-adventure">
+              Request a Quote
+            </a>
             <NuxtLink to="/about-us/meet-the-team" class="px-4 py-2 border btn-secondary-outline rounded-md">
               Meet the Team
             </NuxtLink>

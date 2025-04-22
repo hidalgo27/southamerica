@@ -87,6 +87,11 @@ const menus = ref([
 const updateMenu = () => {
   menus.value = [
     {
+      title: "Travel Packages",
+      items: [],
+      url: "/travel-packages",
+    },
+    {
       title: "Destinations",
       items: countries.value.map((country: any) => ({
         name: country.nombre,
@@ -103,57 +108,23 @@ const updateMenu = () => {
     },
     {
       title: "Experiences",
-      items: [
-        {
-          name: "Travel Styles",
-          firstTitle: {
-            name: "Explore",
-            items: categories.value.map((category: any) => ({
-              name: category.nombre,
-              link: `/experiences/${category.url}`
-            }))
-          },
-          link: "/experiences",
-          image: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg"
-        },
-        /* {
-          name: "Ways to travel",
-          firstTitle: {
-            name: "Explore",
-            items: [
-              {
-                name: "Escorted Touring",
-                link: "/experiences/escorted-touring"
-              },
-              {
-                name: "Rail Vacations",
-                link: "/experiences/rail-vacations"
-              },
-              {
-                name: "Vacation Packages with Air",
-                link: "/experiences/vacation-packages-with-air"
-              },
-            ]
-          },
-          link: "/experiences",
-        }, */
-      ],
+      items: categories.value.map((category: any) => ({
+        name: category.nombre,
+        link: `/experiences/${category.url}`
+      })),
+      image: "https://plus.unsplash.com/premium_photo-1686507182176-7c32d2e8088b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c291dGhhbWVyaWNhfGVufDB8fDB8fHww",
+      url: "/experiences"
     },
     {
       title: "Inspiration",
-      items: [{ name: "All Inspirations", link: "/inspiration/" }],
-      image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
+      items: [],
       url: "/inspiration"
     },
-    // {
-    //   title: "Specials",
-    //   items: countries.value.map((country: any) => ({
-    //     name: country.nombre,
-    //     link: `/special-offers/${country.url}`,
-    //   })),
-    //   image: "https://images.goway.com/production/styles/content_highlight_3xl/s3/content-highlight/2024-02/iStock-1403046192.jpg?h=ecc2d3bd&itok=Yck4r6Gg",
-    //   url: "/special-offers"
-    // },
+    {
+      title: "Specials",
+      items: [],
+      url: "/special-offers"
+    },
     // {
     //   title: "Our Experts",
     //   items: countries.value.map((country: any) => ({
@@ -210,7 +181,7 @@ const updateMenu = () => {
     {
       title: "About Us",
       items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
-      image: "https://admin.goway.app/content/DataObjects/PropertyReference/Image/ext26/image_25013_v1.jpg",
+      image: "https://plus.unsplash.com/premium_photo-1661964374794-dccd9e44f357?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fHNvdXRoYW1lcmljYXxlbnwwfHwwfHx8MA%3D%3D",
       url: "/about-us"
     },
   ]
@@ -337,40 +308,45 @@ const toggleDropdown = (index: number) => {
               <a class="btn-primary-outline bg-orange-50 " href="#form-dream-adventure">Inquire Now</a>
               <!--              <button @click="formStore.openInquireNowForm()" class="btn-primary-outline bg-orange-50 "-->
               <!--                      href="#form-dream-adventure">Inquire Now</button>-->
-              <InquireNowForm :isOpen="formStore.InquireNowFormOpen" @close="formStore.closeInquireNowForm()">
-              </InquireNowForm>
+              <!-- <InquireNowForm :isOpen="formStore.InquireNowFormOpen" @close="formStore.closeInquireNowForm()">
+              </InquireNowForm> -->
             </div>
           </div>
         </div>
 
         <div>
           <nav class="flex flex-row gap-3 item-center justify-center text-start">
-            <nuxt-link to="/travel-packages" class="menu-list focus:outline-none">
-              Travel Packages
-            </nuxt-link>
             <div v-for="(menu, index) in menus" :key="index" class="relative">
               <client-only>
-                <Dropdown v-model:shown="dropdownStates[index]" :positioning-disabled="isMobile"
+                <NuxtLink v-if="!menu.items[0]" :to="menu.url" class="menu-list focus:outline-none flex">
+                  {{ menu.title }}
+                </NuxtLink>
+                <Dropdown v-else v-model:shown="dropdownStates[index]" :positioning-disabled="isMobile"
                   @apply-show="isMobile && onShow()" @apply-hide="isMobile && onHide()">
                   <button class="menu-list focus:outline-none" @click="handleDropdownOpen(menu)">
                     {{ menu.title }}
                   </button>
                   <template #popper="{ hide }">
                     <div
-                      class="v-popper bg-white text-gray-800 rounded-t-md md:rounded-md  md:w-[80vh] lg:w-[100vh] 2xl:[70vh] flex md:flex-col lg:flex-row gap-6 text-sm"
-                      :class="!menu.items[0].firstTitle ? ' h-96 p-6 max-h-96' : ''">
+                      class="v-popper bg-white text-gray-800 rounded-t-md md:rounded-md flex md:flex-col lg:flex-row text-sm"
+                      :class="[!menu.items[0].firstTitle ? ' h-96 p-6 max-h-96' : '', menu.title === 'Experiences' ? 'w-[50vh]' : 'md:w-[80vh] lg:w-[100vh] gap-6']">
                       <button v-if="isMobile" @click="hide()" class="absolute top-2 right-2 p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                           stroke="currentColor" class="w-5 h-5 text-gray-500 hover:text-gray-800 transition">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>
-                      <div class="w-full "
-                        :class="!menu.items[0].firstTitle ? '' : 'grid grid-flow-col md:grid-cols-4 '">
+                      <div :class="[
+                        !menu.items[0].firstTitle ? '' : 'grid grid-flow-col md:grid-cols-4',
+                        menu.title === 'Experiences' ? 'w-2/3' : 'w-full'
+                      ]">
                         <div class="col-span-1 relative "
                           :class="!menu.items[0].firstTitle ? '' : 'py-6 px-2 md:p-6 border-gray-200 border-r'">
                           <span class="text-xs">{{ menu.title }}</span>
-                          <div :class="menu.image ? 'grid  md:grid-cols-3 gap-x-10 ' : 'overflow-scroll max-h-64'">
+                          <div :class="[
+                            menu.title === 'Experiences' ? 'grid-cols-1' : '',
+                            menu.image && menu.title !== 'Experiences' ? 'grid grid-cols-3 overflow-x-scroll max-h-56 md:max-h-24 lg:max-h-56' : 'overflow-x-scroll max-h-64',
+                          ]">
                             <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800 ">
                               <template v-if="item.firstTitle">
                                 <button
@@ -399,10 +375,10 @@ const toggleDropdown = (index: number) => {
                         <div v-if="hoveredItem" class="col-span-3">
                           <div
                             class="rounded-md bg-white text-gray-800 p-6 gap-2 flex md:flex-col lg:flex-row justify-between h-96 min-h-96">
-                            <div class="flex flex-col relative w-full h-full">
+                            <div class="flex flex-col relative w-full h-full gap-2">
                               <div v-if="hoveredItem.firstTitle">
                                 <span class="text-xs mb-12">{{ hoveredItem.firstTitle.name }}</span>
-                                <div class="grid md:grid-cols-3 gap-x-10 overflow-scroll max-h-64">
+                                <div class="grid md:grid-cols-3 gap-x-6 overflow-scroll max-h-64 md:max-h-36 mb-2">
                                   <div v-for="sub in hoveredItem.firstTitle.items" :key="sub.name"
                                     class="py-2 text-gray-800 hover:text-orange-500 duration-300">
                                     <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
@@ -454,9 +430,6 @@ const toggleDropdown = (index: number) => {
                 </Dropdown>
               </client-only>
             </div>
-            <nuxt-link to="/special-offers" class="menu-list focus:outline-none">
-              Specials
-            </nuxt-link>
           </nav>
         </div>
       </div>
@@ -506,18 +479,17 @@ const toggleDropdown = (index: number) => {
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <nav class="flex flex-col gap-4">
-            <nuxt-link to="/travel-packages" class="w-full text-left p-2 rounded-md" @click="toggleMobileMenu">
-              Travel Packages
-            </nuxt-link>
+          <nav class="flex flex-col gap-2">
             <div v-for="(menu, index) in menus" :key="index">
-              <button @click="toggleDropdown(index), handleDropdownOpen(menu)" class="w-full text-left p-2 rounded-md ">
+              <NuxtLink v-if="!menu.items[0]" :to="menu.url" class="w-full text-left p-2 rounded-md flex"
+                @click="toggleMobileMenu">
+                {{ menu.title }}
+              </NuxtLink>
+              <button v-else @click="toggleDropdown(index), handleDropdownOpen(menu)"
+                class="w-full text-left p-2 rounded-md ">
                 {{ menu.title }}
               </button>
             </div>
-            <nuxt-link to="/special-offers" class="w-full text-left p-2 rounded-md" @click="toggleMobileMenu">
-              Specials
-            </nuxt-link>
           </nav>
         </div>
       </transition>
