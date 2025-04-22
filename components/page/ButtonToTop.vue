@@ -30,7 +30,7 @@ onMounted(() => {
 </script>
 <template>
   <button @click="scrollToTop"
-    class="button-float fixed bottom-5 left-6 md:left-12 lg:left-1/2 md:transform md:-translate-x-1/2 bg-orange-100 border-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-orange-200 transition-all z-10">
+    class="button-float fixed bottom-24 md:bottom-5 left-6 md:left-12 lg:left-1/2 md:transform md:-translate-x-1/2 bg-orange-100 border-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-orange-200 transition-all z-10">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
       class="size-6 text-gray-400">
       <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
