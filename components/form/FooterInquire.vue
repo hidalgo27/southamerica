@@ -25,7 +25,7 @@
         <div class="border-dashed border-b-2 my-6"></div>
 
         <h3 class="text-lg text-gray-800 font-semibold ">Hotel Category</h3>
-        <div class="grid grid-cols-12 gap-6  mt-4 overflow-x-scroll focus:touch-pan-x">
+        <div class="grid grid-cols-12 gap-6  mt-4 overflow-x-auto focus:touch-pan-x">
 
           <div
             class="col-span-12 hidden md:col-span-2 md:flex justify-center items-center rounded-l-md bg-secondary py-4">
@@ -35,7 +35,7 @@
                 d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
             </svg>
           </div>
-          <div class="col-span-12 md:col-span-10 grid grid-cols-3 gap-3 overflow-x-scroll focus:touch-pan-x">
+          <div class="col-span-12 md:col-span-10 grid grid-cols-3 gap-3 overflow-x-auto focus:touch-pan-x">
 
             <div class="flex">
               <input type="checkbox" id="hotel_5" class="peer hidden" value="5" v-model="hotel" />
@@ -167,7 +167,7 @@
 
             </div>
             <div
-              class="col-span-12 md:col-span-10 grid grid-cols-2 md:grid-cols-4 gap-3 overflow-x-scroll focus:touch-pan-x">
+              class="col-span-12 md:col-span-10 grid grid-cols-2 md:grid-cols-4 gap-3 overflow-x-auto focus:touch-pan-x">
               <div class="flex" v-for="destino in listDestination">
                 <input type="checkbox" :id="destino.id" class="peer hidden" :value="destino.url"
                   v-model="destination" />
@@ -201,7 +201,7 @@
           <h3 class="text-[12px] text-gray-400 font-semibold  mt-3" v-if="!isTravelPackagePage">You can choose one or
             more countries</h3>
           <h3 class="text-lg text-gray-800 font-semibold  my-5">Number of travelers</h3>
-          <div class="grid grid-cols-12 gap-6 my-6 overflow-x-scroll focus:touch-pan-x">
+          <div class="grid grid-cols-12 gap-6 my-6 overflow-x-auto focus:touch-pan-x">
 
             <div
               class="col-span-12 hidden md:col-span-2 md:flex justify-center items-center rounded-l-md bg-secondary py-4">
@@ -233,7 +233,7 @@
 
 
           <h3 class="text-lg text-gray-800 font-semibold  my-5" v-if="!isTravelPackagePage">Trip length</h3>
-          <div class="grid grid-cols-12 gap-6 my-6 overflow-x-scroll focus:touch-pan-x" v-if="!isTravelPackagePage">
+          <div class="grid grid-cols-12 gap-6 my-6 overflow-x-auto focus:touch-pan-x" v-if="!isTravelPackagePage">
 
             <div
               class="col-span-12 hidden md:col-span-2 md:flex justify-center items-center rounded-l-md bg-secondary py-4">
@@ -252,7 +252,7 @@
             <!--          </div>-->
 
             <div
-              class="col-span-12 md:col-span-10 grid grid-cols-4 md:grid-cols-6 gap-3 overflow-x-scroll focus:touch-pan-x">
+              class="col-span-12 md:col-span-10 grid grid-cols-4 md:grid-cols-6 gap-3 overflow-x-auto focus:touch-pan-x">
               <div class="flex items-center">
                 <input type="checkbox" :id="'radio_t_1'" class="peer hidden" value="3-7" v-model="trip_length" />
                 <label :for="'radio_t_1'"

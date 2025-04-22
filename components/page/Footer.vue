@@ -193,7 +193,7 @@
 
       <div class="flex flex-col justify-between pt-5 border-t border-gray-500 sm:flex-row">
         <p class="text-sm dark:text-gray-300">
-          © Copyright 2025 Machu Picchu Company. All rights reserved. | GOTOPERU COMPANY EIRL - RUC 20609225441 -
+          © Copyright 2025 South America Company. All rights reserved. | GOTOPERU COMPANY EIRL - RUC 20609225441 -
           Avenida El Sol 449 - Cusco - Cusco - Peru
         </p>
         <div class="flex items-center mt-4 space-x-4 sm:mt-0">

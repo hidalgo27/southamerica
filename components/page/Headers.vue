@@ -350,7 +350,7 @@ const toggleDropdown = (index: number) => {
                           <span class="text-xs">{{ menu.title }}</span>
                           <div :class="[
                             menu.title === 'Experiences' ? 'grid-cols-1' : '',
-                            menu.image && menu.title !== 'Experiences' ? 'grid grid-cols-3 overflow-x-scroll max-h-56 md:max-h-24 lg:max-h-56' : 'overflow-x-scroll max-h-64',
+                            menu.image && menu.title !== 'Experiences' ? 'grid grid-cols-3 overflow-x-auto max-h-56 md:max-h-24 lg:max-h-56' : 'overflow-x-auto max-h-64',
                           ]">
                             <div v-for="(item, idx) in menu.items" :key="idx" class="text-gray-800 ">
                               <template v-if="item.firstTitle">
@@ -384,7 +384,7 @@ const toggleDropdown = (index: number) => {
                               <div v-if="hoveredItem.firstTitle">
                                 <span class="text-xs mb-12">{{ hoveredItem.firstTitle.name }}</span>
                                 <div
-                                  class="grid md:grid-cols-3 gap-x-6 overflow-scroll max-h-64 md:max-h-36 lg:max-h-64 mb-2">
+                                  class="grid md:grid-cols-3 gap-x-6 overflow-auto max-h-64 md:max-h-36 lg:max-h-64 mb-2">
                                   <div v-for="sub in hoveredItem.firstTitle.items" :key="sub.name"
                                     class="py-2 text-gray-800 hover:text-orange-500 duration-300">
                                     <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>
