@@ -14,10 +14,13 @@ defineProps({
       :to="'/destinations/' + destination.url + '/' + country.url"
       class="bg-white grid grid-cols-2 items-center p-4 content-between overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out h-full">
       <div class="overflow-hidden relative rounded-md">
-        <NuxtImg :src="country.imagen" :alt="country.nombre"
+        <NuxtImg v-if="country.imagen" :src="country.imagen" :alt="country.nombre"
           class="w-full h-16 md:h-24 rounded-mg object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
+        <div v-else class="mask gradient-cicle-gray flex items-center justify-center w-full h-16 md:h-24">
+        </div>
       </div>
-      <h2 class="text-center mx-3 text-xl font-playfair-display font-semibold text-gray-800">
+      <h2
+        class="text-center mx-3 text-xl font-playfair-display font-semibold text-gray-800 items-center h-full flex justify-center">
         {{ country.nombre }}
       </h2>
     </NuxtLink>

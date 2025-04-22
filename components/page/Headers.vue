@@ -55,6 +55,11 @@ let lastScrollPosition = 0;
 let ticking = false;
 const menus = ref([
   {
+    title: "Travel Packages",
+    items: [],
+    url: "/travel-packages",
+  },
+  {
     title: "Destinations",
     items: [],
   },
@@ -66,10 +71,10 @@ const menus = ref([
     title: "Inspiration",
     items: [],
   },
-  // {
-  //   title: "Specials",
-  //   items: [],
-  // },
+  {
+    title: "Specials",
+    items: [],
+  },
   // {
   //   title: "Our Experts",
   //   items: [],
@@ -378,7 +383,8 @@ const toggleDropdown = (index: number) => {
                             <div class="flex flex-col relative w-full h-full gap-2">
                               <div v-if="hoveredItem.firstTitle">
                                 <span class="text-xs mb-12">{{ hoveredItem.firstTitle.name }}</span>
-                                <div class="grid md:grid-cols-3 gap-x-6 overflow-scroll max-h-64 md:max-h-36 mb-2">
+                                <div
+                                  class="grid md:grid-cols-3 gap-x-6 overflow-scroll max-h-64 md:max-h-36 lg:max-h-64 mb-2">
                                   <div v-for="sub in hoveredItem.firstTitle.items" :key="sub.name"
                                     class="py-2 text-gray-800 hover:text-orange-500 duration-300">
                                     <NuxtLink :to="sub.link">{{ sub.name }}</NuxtLink>

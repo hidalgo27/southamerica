@@ -12,7 +12,7 @@ const header = ref({
   miniTitle: '',
   title: 'Specials Offers',
   subTitle: '',
-  url: 'https://images.goway.com/production/hero/tanzania_serengeti_hot_air_balloon_iStock-472048307.jpg?VersionId=ZyJVpBhi.7W4lcaqefJxFJwlkpwHaHhT',
+  url: 'images/banners/specials-banner.webp',
 })
 
 const getPackage = async () => {

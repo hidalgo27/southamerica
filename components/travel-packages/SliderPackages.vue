@@ -122,7 +122,7 @@ const progressWidth = computed(() => {
     </div>
     <div class="text-center mt-6">
       <nuxt-link to="/travel-packages" class="px-6 py-3 btn-secondary-outline rounded-md w-full ">
-        Ver todos los paquetes
+        View All Packages
       </nuxt-link>
     </div>
   </section>

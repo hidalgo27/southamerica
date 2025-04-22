@@ -17,7 +17,7 @@ const categories = ref({
 const header = ref({
   title: 'Inspiration',
   subTitle: 'Travel Stories, Tips, and Guides',
-  url: 'https://www.goway.com/static/author-hero-bc1c42d3868a64f674a983f54bb90d51.jpeg'
+  url: 'images/banners/inspiration_banner.webp'
 })
 
 const articles = ref({});

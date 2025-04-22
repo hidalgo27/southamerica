@@ -53,7 +53,7 @@ const breakpoints = {
     </div>
     <div class="text-center my-6">
       <nuxt-link to="/destinations" class="btn-ternary rounded-md px-4 py-2 hover:bg-gray-100 hover:text-gray-700">
-        Explorar Destinos
+        Explore All Destinations
       </nuxt-link>
     </div>
     <Carousel wrap-around :transition="1500" :autoplay="2000" :items-to-scroll="1" :breakpoints="breakpoints"
@@ -63,9 +63,11 @@ const breakpoints = {
         <NuxtLink :to="'/destinations/' + destinations.url"
           class="p-2 gap-3 grid grid-cols-2 items-center overflow-hidden rounded-md group cursor-pointer hover:shadow-lg transition duration-500 ease-in-out text-center">
           <div class="overflow-hidden relative rounded-md w-full h-full">
-            <NuxtImg :src="destinations.image" :alt="destinations.title"
+            <NuxtImg v-if="destinations.image" :src="destinations.image" :alt="destinations.title"
               class="w-full h-full rounded-md transition duration-500 ease-in-out transform group-hover:scale-105"
               loading="lazy" />
+            <div v-else class="mask gradient-cicle-gray flex items-center justify-center">
+            </div>
           </div>
           <div class="w-full mx-auto items-center justify-center flex">
             <h2 class="text-center text-xl flex flex-wrap font-semibold text-gray-800 font-playfair-display">

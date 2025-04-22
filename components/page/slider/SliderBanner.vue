@@ -21,7 +21,7 @@ const slides = [
 </script>
 <template>
   <section class="my-20">
-    <carousel :items-to-show="1.1" :gap="200" :autoplay="5000" :transition="2000" pause-autoplay-on-hover>
+    <carousel wrap-around :items-to-show="1.1" :gap="200" :autoplay="5000" :transition="2000" pause-autoplay-on-hover>
       <slide v-for="(slide, index) in slides" :key="index" class="px-3">
         <NuxtImg :src="slide.image" alt="Slide Image" class="w-full h-[60vh] object-cover  rounded-md" loading="lazy"
           webp="" />
@@ -39,5 +39,4 @@ const slides = [
     </Carousel>
   </section>
 </template>
-
 <style></style>

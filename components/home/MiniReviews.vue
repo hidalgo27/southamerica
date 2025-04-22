@@ -83,9 +83,24 @@ const breakpoints = {
   },
 };
 
+onMounted(async () => {
+  if (process.client) {
+    // @ts-ignore
+    import('https://static.elfsight.com/platform/platform.js').then((module) => {
+
+    });
+  }
+});
+
 </script>
 <template>
-  <section class="container my-32">
+  <section class="py-24 bg-gray-100">
+    <div class="container">
+      <!--        <div class="elfsight-app-de637865-6596-4396-8bba-ef0f7b50bc9e"></div>-->
+      <div class="elfsight-app-0205a974-5637-4472-a992-5e12bca31e38" data-elfsight-app-lazy></div>
+    </div>
+  </section>
+  <!-- <section class="container my-32">
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-6 md:gap-6">
       <div class="md:col-span-1 ">
         <div class="bg-white p-8 rounded-md shadow-md ">
@@ -221,6 +236,6 @@ const breakpoints = {
         </template>
       </Carousel>
     </div>
-  </section>
+  </section> -->
 </template>
 <style></style>

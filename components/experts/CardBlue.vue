@@ -5,7 +5,7 @@
     <div class="px-4 py-8 flex flex-col lg:flex-row items-center relative w-full">
       <div class="w-full lg:w-9/12 mt-8 relative lg:left-1/4 z-0">
         <NuxtImg alt="Group of travelers taking a selfie" class="rounded-lg w-full h-auto object-cover"
-          src="https://images.goway.com/production/styles/hero_s1_3xl/s3/contact_cta/South%20Pacific%20-%20AdobeStock_234280596.jpeg?VersionId=5gLq1k8pBdbzBJqcnVlzQeL.1uVJeqtN&h=894b9109&itok=tLPUHzhf" />
+          src="images\banners\card-blue-bg.webp" />
       </div>
       <div
         class="bg-blue-100 rounded-md w-full lg:w-1/2 xl:w-1/3 p-8 xl:p-16 mt-8 lg:mt-0 lg:absolute lg:left-0 xl:-bottom-16 z-10">

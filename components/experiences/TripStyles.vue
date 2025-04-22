@@ -100,7 +100,6 @@ onMounted(() => {
             <NuxtImg v-if="trip.imagen" :alt="trip.nombre" :src="trip.imagen"
               class="w-full h-full rounded-md object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
             <div v-else class="mask gradient-cicle-gray flex items-center justify-center">
-              <span class="text-white">Imagen no disponible</span>
             </div>
           </div>
           <div
@@ -125,7 +124,7 @@ onMounted(() => {
 
       <div v-else class="text-center mt-6">
         <nuxt-link to="/experiences" class="px-6 py-3 btn-secondary-outline rounded-md">
-          Ver todas las experiencias
+          View All Experiences
         </nuxt-link>
       </div>
     </div>

@@ -22,13 +22,13 @@ const listCategories = ref([]);
 
 const getCategories = async () => {
   const res: any = await categoryStore.getCategories();
-  listCategories.value = res;
+  listCategories.value = res.filter((category: any) => category.estado === null || category.estado === 1);
 };
 
 const header = {
   miniTitle: 'Tailor-Made Travel',
   title: 'SouthAmerica Experiences',
-  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/tanzania_safari_tent_sunset_iStock-1212708184.jpg?VersionId=gttrpLF4n9YkeNsnSdPtL__8IzdPxUDC&h=460aa7b3&itok=63o7k8E1',
+  url: 'images/banners/beach-experiences-banner.webp',
 }
 
 onMounted(async () => {
