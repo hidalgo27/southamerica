@@ -139,7 +139,7 @@ const imagen_paquetes = [
       </div>
     </div>
   </section>
-  <section class="container my-20">
+  <section class="container my-20 hidden">
     <div class="w-2/3">
       <p class="text-gray-500 mb-6">
         About Us
@@ -205,7 +205,7 @@ const imagen_paquetes = [
       </div>
     </div>
   </section>
-  <ImgSlider :imagen_paquetes="imagen_paquetes"></ImgSlider>
+<!--  <ImgSlider :imagen_paquetes="imagen_paquetes"></ImgSlider>-->
   <EspecialistLetter></EspecialistLetter>
   <Newsletter></Newsletter>
   <Reviews></Reviews>

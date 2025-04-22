@@ -14,7 +14,7 @@ const header = ref({
   miniTitle: '',
   title: 'Travel Packages',
   subTitle: '',
-  url: 'https://www.goway.com/images/hero-default/trip-search-hero.jpeg',
+  url: '/images/banners/mapi2.webp',
 });
 
 // Obtaining packages
@@ -25,6 +25,12 @@ const getPackage = async () => {
 
 onMounted(async () => {
   await getPackage();
+  if (process.client) {
+    // @ts-ignore
+    import('https://static.elfsight.com/platform/platform.js').then((module) => {
+
+    });
+  }
 });
 
 // Filters obtained from the URL to be passed to the FilterPackages component
@@ -48,6 +54,12 @@ const filters = computed(() => ({
   <HeaderImgNav :header="header"></HeaderImgNav>
   <FilterPackages v-if="listPackages" :filters="filters" :package-data="listPackages"></FilterPackages>
   <Newsletter></Newsletter>
-  <MiniReviews></MiniReviews>
+<!--  <MiniReviews></MiniReviews>-->
+  <section class="py-24 bg-gray-100">
+    <div class="container">
+      <!--        <div class="elfsight-app-de637865-6596-4396-8bba-ef0f7b50bc9e"></div>-->
+      <div class="elfsight-app-0205a974-5637-4472-a992-5e12bca31e38" data-elfsight-app-lazy></div>
+    </div>
+  </section>
 </template>
 <style></style>

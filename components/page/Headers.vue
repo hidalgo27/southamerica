@@ -180,13 +180,13 @@ const updateMenu = () => {
     }, */
     {
       title: "About Us",
-      items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Meet the Team", link: "/about-us/meet-the-team" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
       image: "https://plus.unsplash.com/premium_photo-1661964374794-dccd9e44f357?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fHNvdXRoYW1lcmljYXxlbnwwfHwwfHx8MA%3D%3D",
+      items: [{ name: "Our Story", link: "/about-us/our-story" }, { name: "Why SouthAmerica", link: "/about-us/why-southamerica" }, { name: "Customer Service", link: "/about-us/customer-service" }, { name: "Contact Us", link: "/about-us/contact-us" }, { name: "Careers", link: "/about-us/careers" }, { name: "Our Policies", link: "/about-us/our-policies" }],
       url: "/about-us"
     },
   ]
 }
-
+// { name: "Meet the Team", link: "/about-us/meet-the-team" }
 const dropdownStates = ref(menus.value.map(() => false));
 const closeDropdowns = () => {
   dropdownStates.value = dropdownStates.value.map(() => false);
