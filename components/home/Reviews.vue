@@ -36,9 +36,8 @@ const reviews = ref([
             src="images\ice-colombia.webp" />
         </div>
         <div class="absolute inset-0 flex items-center justify-center">
-          <NuxtLink
-            to="https://www.tripadvisor.com.pe/Attraction_Review-g294314-d15202262-Reviews-Gotoperu-Cusco_Cusco_Region.html"
-            class="bg-white p-8 rounded-md shadow-md text-center">
+          <a href="https://www.tripadvisor.com.pe/Attraction_Review-g294314-d15202262-Reviews-Gotoperu-Cusco_Cusco_Region.html"
+            class="bg-white p-8 rounded-md shadow-md text-center" target="_blank" rel="noopener noreferrer">
             <p class="text-xl font-semibold mb-2">
               Excellent
             </p>
@@ -88,7 +87,7 @@ const reviews = ref([
             <p class="text-green-500 font-semibold">
               TripAdvisor
             </p>
-          </NuxtLink>
+          </a>
         </div>
       </div>
       <div class="w-full pt-8 xl:pt-0 xl:pl-8">
