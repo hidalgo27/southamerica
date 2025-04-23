@@ -16,7 +16,7 @@
               <NuxtImg :src="packageStore.imgPackages" alt="Trip Image" class="w-16 h-16 rounded-md object-cover" />
               <div class="ml-4 text-left">
                 <p class="text-xs text-gray-500">Selected Trip Itinerary</p>
-                <p class="text-md font-semibold font-playfair-display text-xl text-gray-800">{{
+                <p class="text-md font-semibold font-playfair-display md:text-xl text-gray-800">{{
                   packageStore.titlePackages }}</p>
               </div>
             </div>
