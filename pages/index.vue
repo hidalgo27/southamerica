@@ -16,6 +16,7 @@ import { usePackageStore } from '~/stores/packages'
 import { useCategoriesStore } from '~/stores/categories'
 import { useBlogStore } from '~/stores/blog'
 import { useDestinationStore } from '~/stores/destination'
+import StaticPackages from "~/components/travel-packages/StaticPackages.vue";
 
 const packageStore = usePackageStore()
 const destinationStore = useDestinationStore()
@@ -183,7 +184,7 @@ const onHide = () => {
             <p class="text-white text-sm md:text-xl 2xl:text-lg tracking-widest font-light mt-5 ">
               Curated Latin American Journeys: Where Luxury Meets Discovery
             </p>
-            <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center">
+            <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center hidden">
               <div class="grid grid-cols-3 w-full">
                 <client-only>
                   <Dropdown class="w-full border-r border-gray-300" :positioning-disabled="isMobile"
@@ -359,7 +360,8 @@ const onHide = () => {
         src="https://images.goway.com/dev/featured_in/smithsonian.svg" />
     </div>
   </div>
-  <SliderPackages :listPackages="listPackages"></SliderPackages>
+<!--  <SliderPackages :listPackages="listPackages"></SliderPackages>-->
+  <StaticPackages :list-packages="listPackages"></StaticPackages>
   <SliderBanner></SliderBanner>
   <TripStyles v-if="listCategories" :curatedTrips="listCategories"></TripStyles>
   <SliderDestinations></SliderDestinations>
