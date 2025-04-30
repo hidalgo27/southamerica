@@ -170,12 +170,19 @@ const onHide = () => {
   <section>
     <div class="relative w-full h-[80vh] md:h-screen 2xl:h-[70vh] px-3">
       <div class="overflow-hidden h-full relative rounded-md">
-        <div class="mask gradient-cicle-gray items-center flex justify-center">
-          <div v-if="loading" class="mt-40 text-center">
-            Cargando ..
+<!--        <div class="mask gradient-cicle-gray items-center flex justify-center">-->
+<!--          <div v-if="loading" class="mt-40 text-center">-->
+<!--            Cargando ..-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>-->
+        <div class="absolute inset-0 h-screen overflow- w-full bg-gray-100 -z-1 overflow-hidden">
+          <div class="vimeo-wrapper hidden sm:block">
+            <iframe src="https://player.vimeo.com/video/1075870759?background=1&autoplay=1&loop=1&title=0&byline=0&portrait=0&muted=1"  frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <div class="absolute inset-0 gradient-cicle-gray"></div>
           </div>
+          <img src="#" alt="" class="object-cover w-full h-full sm:hidden">
         </div>
-        <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>
         <div class="relative z-10 flex items-center  w-full h-full text-center">
           <div class=" container ">
             <h1

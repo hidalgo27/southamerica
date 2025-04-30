@@ -95,12 +95,12 @@ onMounted(() => {
           <span v-if="packageData.precio_paquetes && packageData.precio_paquetes[0].precio_d"
             class="block text-gray-700">
             <div class="flex items-center gap-2">
-
-              From <span class="text-orange-600">US${{ packageData.precio_paquetes[0].precio_d }}</span><span
-                class="text-xs leading-none">per person <span class="text-[10px] block text-right">based on 4 stars
-                  hotels</span></span>
+              From
+              <span class="text-orange-600">US${{ packageData.precio_paquetes[0].precio_d }}</span>
+              <span class="text-xs leading-none hidden md:block">per person <span class="text-[10px]  text-right ">based on 4 stars hotels</span></span>
 
             </div>
+            <span class="text-xs leading-none">per person <span class="text-[10px] block text-right md:hidden">based on 4 stars hotels</span></span>
           </span>
           <div v-else class="flex justify-between items-center">Please Inquire</div>
         </div>
