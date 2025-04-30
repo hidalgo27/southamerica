@@ -28,6 +28,3 @@ onMounted(() => {
     </button>
   </div>
 </template>
-<style>
-//@import "https://fonts.googleapis.com/css?family=Poppins"
-</style>
