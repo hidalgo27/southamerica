@@ -29,5 +29,5 @@ onMounted(() => {
   </div>
 </template>
 <style>
-@import "https://fonts.googleapis.com/css?family=Poppins"
+//@import "https://fonts.googleapis.com/css?family=Poppins"
 </style>
