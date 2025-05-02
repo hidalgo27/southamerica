@@ -9,11 +9,15 @@ const destinations = ref([]);
 const getDestinations = async () => {
   const res: any = await destinationStore.getCountries();
   destinations.value = res.flatMap((country: any) =>
-    country.destino ? country.destino.map((dest: any) => ({
-      title: dest.nombre,
-      image: dest.imagen,
-      url: country.url + "/" + dest.url,
-    })) : []
+    country.destino
+      ? country.destino
+          .filter((dest: any) => dest.imagen) // solo si tiene imagen
+          .map((dest: any) => ({
+            title: dest.nombre,
+            image: dest.imagen,
+            url: country.url + "/" + dest.url,
+          }))
+      : []
   );
 };
 

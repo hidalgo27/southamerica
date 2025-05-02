@@ -20,17 +20,14 @@ import StaticPackages from "~/components/travel-packages/StaticPackages.vue";
 
 const packageStore = usePackageStore()
 const destinationStore = useDestinationStore()
-const listPackagesTop = ref([])
-const getPackagesTop = async () => {
-  const res: any = await packageStore.getPackageTop()
-  listPackagesTop.value = res
-}
-
 const listPackages = ref([])
+const listPackagesTop = ref([])
+
 const getPackages = async () => {
   const res: any = await packageStore.getPackages()
   listPackages.value = res
-  console.log(listPackages.value)
+  listPackagesTop.value = res.filter((pkg: any) => pkg.estado === 1)
+  // console.log(listPackages.value)
 }
 
 const getCountries = async () => {
@@ -126,11 +123,10 @@ const welcome_text = {
 
 let player: any
 onMounted(async () => {
-  await getPackagesTop()
   await getPackages()
-  await getCategories()
+  // await getCategories()
   await getBlogs()
-  await getCountries()
+  // await getCountries()
   updateIsMobile();
   onLoaded(({ Vimeo }) => {
     player = new Vimeo.Player(video.value, {
@@ -188,7 +184,7 @@ const onHide = () => {
           <div class="vimeo-wrapper hidden sm:block">
             <iframe
               src="https://player.vimeo.com/video/1075870759?background=1&autoplay=1&loop=1&title=0&byline=0&portrait=0&muted=1"
-              frameborder="0" allow="autoplay; fullscreen"></iframe>
+              frameborder="0" allow="autoplay; fullscreen" class="h-full"></iframe>
             <div class="absolute inset-0 gradient-cicle-gray"></div>
           </div>
           <img src="/images/banners/mapi2.webp" alt="" class="object-cover w-full h-full sm:hidden">
@@ -197,13 +193,21 @@ const onHide = () => {
           <div class=" container ">
             <div class="bg-gray-800/50 p-6 rounded-md shadow-md md:bg-white/0 md:p-0 md:shadow-none">
               <h1
-                class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight md:text-5xl 2xl:text-7xl tracking-wide font-semibold font-playfair-display">
+                class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight text-3xl md:text-5xl 2xl:text-7xl tracking-wide font-semibold font-playfair-display">
                 Discover South America at your own terms.</h1>
               <p class="text-white text-sm md:text-xl 2xl:text-lg tracking-widest font-light mt-5 ">
                 Curated Latin American Journeys: Where Luxury Meets Discovery
               </p>
+              <div class="mt-8 flex flex-col md:flex-row items-center justify-center gap-4">
+                <NuxtLink to="/travel-packages" class="btn-secondary">
+                  Explore Top Experiences
+                </NuxtLink>
+                <a href="#form-dream-adventure" class="btn-primary">
+                  Customize your trips
+                </a>
+              </div>
             </div>
-            <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center hidden">
+            <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg items-center hidden">
               <div class="grid grid-cols-3 w-full">
                 <client-only>
                   <Dropdown class="w-full border-r border-gray-300" :positioning-disabled="isMobile"
