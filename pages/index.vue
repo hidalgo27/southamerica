@@ -19,10 +19,17 @@ import { useDestinationStore } from '~/stores/destination'
 
 const packageStore = usePackageStore()
 const destinationStore = useDestinationStore()
-const listPackages = ref([])
-const getPackage = async () => {
+const listPackagesTop = ref([])
+const getPackagesTop = async () => {
   const res: any = await packageStore.getPackageTop()
+  listPackagesTop.value = res
+}
+
+const listPackages = ref([])
+const getPackages = async () => {
+  const res: any = await packageStore.getPackages()
   listPackages.value = res
+  console.log(listPackages.value)
 }
 
 const getCountries = async () => {
@@ -118,7 +125,8 @@ const welcome_text = {
 
 let player: any
 onMounted(async () => {
-  await getPackage()
+  await getPackagesTop()
+  await getPackages()
   await getCategories()
   await getBlogs()
   await getCountries()
@@ -359,9 +367,11 @@ const onHide = () => {
         src="https://images.goway.com/dev/featured_in/smithsonian.svg" />
     </div>
   </div>
-  <SliderPackages :listPackages="listPackages"></SliderPackages>
+  <SliderPackages v-if="listPackagesTop" :listPackages="listPackagesTop" :isHome="true"></SliderPackages>
   <SliderBanner></SliderBanner>
-  <TripStyles v-if="listCategories" :curatedTrips="listCategories"></TripStyles>
+  <!-- <TripStyles v-if="listCategories" :curatedTrips="listCategories"></TripStyles> -->
+  <SliderPackages v-if="listPackages" :listPackages="listPackages" :isHome="false"
+    title="Our Top-Rated Adventures, Loved by Travelers Worldwide"></SliderPackages>
   <SliderDestinations></SliderDestinations>
   <EspecialistLetter></EspecialistLetter>
   <TravelStories v-if="topBlogs.length > 0" :topBlogs="topBlogs"></TravelStories>

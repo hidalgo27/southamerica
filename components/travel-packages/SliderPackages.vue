@@ -8,6 +8,13 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  isHome: {
+    type: Boolean,
+  },
+  title: {
+    type: String,
+    default: 'Most Popular Packages',
+  }
 });
 
 const breakpoints = {
@@ -73,57 +80,62 @@ const progressWidth = computed(() => {
     : '100';
 });
 
+const carouselRef = ref();
+const next = () => carouselRef.value.next();
+const prev = () => carouselRef.value.prev();
 </script>
 
 <template>
-  <section class="my-20 container">
-    <div class="container text-center tracking-widest font-bold pb-6">
-      <div class="border-title mb-2 mx-auto"></div>
-      <p class="mb-6 tracking-widest font-bold">Top Trip Experiences</p>
-      <h1 class="font-semibold text-5xl mb-6 title font-playfair-display tracking-wide">
-        Your next chapter starts here
-      </h1>
-    </div>
-    <div v-if="listPackages.length === 0" class="text-center text-gray-500 mt-4">
-      No packages available.
-    </div>
-    <div v-else-if="!showCarousel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <CardPackage v-for="(packages, index) in listPackages" :key="index" :packageData="packages" />
-    </div>
-    <carousel v-else :breakpoints="breakpoints" class="-m-3" @update:modelValue="updateProgress">
-      <slide v-for="(packages, index) in listPackages" :key="index" class="px-3 relative">
-        <CardPackage :packageData="packages"></CardPackage>
-      </slide>
-      <template #addons="{ currentSlide }">
-        <CarouselNavigation>
-          <template #prev>
-            <div v-if="currentSlide > 0"
-              class="absolute -translate-x-8 lg:-translate-x-10 p-1 lg:p-2 rounded-full border hidden md:block">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-4 lg:size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-              </svg>
-            </div>
-          </template>
-          <template #next>
-            <div v-if="progressWidth !== 100"
-              class="absolute translate-x-8 lg:translate-x-10 p-1 lg:p-2 rounded-full border hidden md:block">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-4 lg:size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
-            </div>
-          </template>
-        </CarouselNavigation>
-      </template>
-    </carousel>
-    <div class="progress-bar-container" v-if="showCarousel">
-      <div class="progress-bar" :style="{ width: progressWidth + '%' }"></div>
-    </div>
-    <div class="text-center mt-6">
-      <nuxt-link to="/travel-packages" class="px-6 py-3 btn-secondary-outline rounded-md w-full ">
-        View All Packages
-      </nuxt-link>
+  <section class="my-20 py-20 bg-opacity-30" :class="{ 'bg-secondary': title !== 'Most Popular Packages' }">
+    <div class="container">
+      <div class="text-center tracking-widest font-bold pb-6">
+        <div class="border-title mb-2 mx-auto"></div>
+        <!-- <p class="mb-6 tracking-widest font-bold">Top Trip Experiences</p> -->
+        <ClientOnly>
+          <h1 class="font-semibold text-5xl my-6 title font-playfair-display tracking-wide">{{ title }}</h1>
+        </ClientOnly>
+      </div>
+      <div v-if="listPackages.length === 0" class="text-center text-gray-500 mt-4">
+        No packages available.
+      </div>
+      <div v-if="isHome && listPackages.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <CardPackage v-for="(packages, index) in listPackages" :key="index" :packageData="packages" />
+      </div>
+      <div v-else-if="!showCarousel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <CardPackage v-for="(packages, index) in listPackages" :key="index" :packageData="packages" />
+      </div>
+      <div v-else class="relative">
+        <!-- Botón izquierdo -->
+        <button @click="prev" class="absolute top-1/2 -translate-y-1/2 left-1 md:left-6 z-10 p-2 bg-white/80 hover:bg-white rounded-full border shadow 
+            transition-opacity duration-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+        </button>
+
+        <!-- Botón derecho -->
+        <button @click="next" class="absolute top-1/2 -translate-y-1/2 right-1 md:right-6 z-10 p-2 bg-white/80 hover:bg-white rounded-full border shadow 
+            transition-opacity duration-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </button>
+        <carousel ref="carouselRef" :breakpoints="breakpoints" class="-m-3" @update:modelValue="updateProgress">
+          <slide v-for="(packages, index) in listPackages" :key="index" class="px-3 relative">
+            <CardPackage :packageData="packages"></CardPackage>
+          </slide>
+        </carousel>
+        <div class="progress-bar-container" v-if="showCarousel">
+          <div class="progress-bar" :style="{ width: progressWidth + '%' }"></div>
+        </div>
+      </div>
+      <div class="text-center mt-6">
+        <nuxt-link to="/travel-packages" class="px-6 py-3 btn-secondary-outline rounded-md w-full ">
+          View All Packages
+        </nuxt-link>
+      </div>
     </div>
   </section>
 </template>
