@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { email, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import { Dropdown } from "floating-vue";
 
 import { useFormStore } from "~/stores/form";
 import { useIpStore } from "~/stores/ip";
@@ -33,6 +34,7 @@ watchEffect(() => {
 
 const countryInputRef = ref<HTMLElement | null>(null);
 const companyCountryInputRef = ref<HTMLElement | null>(null);
+const phoneInputRef = ref<HTMLElement | null>(null);
 
 const showLoader = ref(false);
 const geoIp = ref();
@@ -55,19 +57,20 @@ const formData = ref({
   userType: "Consumer",
   agencyName: "",
   agencyCountry: "",
+  acceptedTerms: false,
 });
 
-/* const checkOptions = [
-  "Subscribe to our newsletter and other offers.",
+const checkOptions = [
+  `I accept the <a href='#' class='relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0'>Privacy Policy</a>`,
   "Monthly Newsletter Subscription",
-  "Special Offers (once a month)",
-  "Contest & Local Events (occasionally)",
-]; */
+];
+const selectedOptions = ref([]);
 
 const rules = computed(() => ({
   firstName: { required },
   lastName: { required },
   email: { required, email },
+  phone: { required },
   country: { required },
   destinations: { required },
   agencyName: formData.value.userType === "Agent" ? { required } : {},
@@ -93,9 +96,11 @@ const getIp = async () => {
 };
 
 const handleSubmit = async () => {
-  $v.value.$validate();
+  $v.value.$touch();
+  const isValid = await $v.value.$validate();
+  const termsAccepted = formData.value.acceptTerms;
 
-  if ($v.value.$invalid) {
+  if (!isValid || !termsAccepted) {
     console.log("Formulario no válido");
     return;
   }
@@ -154,6 +159,7 @@ const handleSubmit = async () => {
         userType: "Consumer",
         agencyName: "",
         agencyCountry: "",
+        acceptedTerms: false,
       };
       $v.value.$reset();
       closeModal();
@@ -182,7 +188,6 @@ const handleSubmit = async () => {
     }, 4000);
   });
 };
-
 
 const countries = ref([]);
 const categories = ref([]);
@@ -236,6 +241,10 @@ const setupIntlTelInput = async (inputElement: HTMLInputElement, type: "phone" |
     const testEvent = new Event("countrychange");
     inputElement.dispatchEvent(testEvent);
   }
+  if (type === "phone") {
+    const testEvent = new Event("countrychange");
+    inputElement.dispatchEvent(testEvent);
+  }
 };
 
 watch(() => props.isOpen, async (newVal) => {
@@ -243,6 +252,7 @@ watch(() => props.isOpen, async (newVal) => {
     await nextTick();
     if (process.client) {
       if (countryInputRef.value) await setupIntlTelInput(countryInputRef.value as HTMLInputElement, "country");
+      if (phoneInputRef.value) await setupIntlTelInput(phoneInputRef.value as HTMLInputElement, "phone");
     }
   }
 })
@@ -268,6 +278,32 @@ onMounted(async () => {
     intlTelInput = module.default;
   });
 });
+
+const isMobile = ref(false);
+
+const updateIsMobile = () => {
+  if (typeof window !== 'undefined') {
+    isMobile.value = window.innerWidth < 640;
+  }
+};
+
+const selectedTitle = ref('')
+const dropdownIsOpen = ref(false)
+
+let count = 0;
+const onShow = () => {
+  if (count === 0) {
+    document.body.classList.add('no-scroll');
+  }
+  count++;
+};
+
+const onHide = () => {
+  count--;
+  if (count === 0) {
+    document.body.classList.remove('no-scroll');
+  }
+};
 </script>
 <template>
   <div v-if="isOpen" class="fixed inset-0 flex items-center z-50 justify-center bg-gray-800 bg-opacity-50 scroll"
@@ -279,32 +315,10 @@ onMounted(async () => {
       </button>
 
       <div class="flex flex-col md:flex-row md:gap-6 md:h-full">
-        <div class="bg-gray-100  rounded-lg p-6 lg:p-20 md:w-1/3">
-          <h2 class="text-3xl font-bold mb-4 font-playfair-display">Sign Up</h2>
-          <p class="text-gray-600 mb-2 text-xs md:text-md md:mb-6">Join our newsletter to access Travel Specials,
-            Inspiration, and Expert Guides.
-          </p>
-          <ul class="md:space-y-4 text-gray-600 text-xs">
-            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke-width="1.5" stroke="currentColor" class="size-4 m-2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
-              </svg>
-              Exclusive Savings</li>
-            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke-width="1.5" stroke="currentColor" class="size-4 m-2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
-              </svg>
-              Insider Contests</li>
-            <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke-width="1.5" stroke="currentColor" class="size-4 m-2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
-              </svg>
-              Trending Guides</li>
-          </ul>
+        <div class="bg-gray-100  rounded-lg md:w-1/3">
+          <NuxtImg
+            src="https://images.unsplash.com/photo-1743507664175-e1a0ebccfcb3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0fHx8ZW58MHx8fHx8"
+            alt="Logo" class="w-full h-full object-cover" loading="lazy" />
         </div>
         <form @submit.prevent="handleSubmit" class="flex-auto p-6 md:p-10 text-xs ">
           <!-- Botones de título -->
@@ -316,27 +330,87 @@ onMounted(async () => {
               {{ title }}
             </button>
           </div> -->
+          <h2 class="text-2xl font-semibold mb-4 justify-self-center font-playfair-display tracking-wide">Start your
+            journey Today</h2>
+          <div
+            class="bg-primary bg-opacity-10 bg-rounded flex flex-col justify-center items-center p-4 mb-4 gap-2 text-md tracking-widest">
+            <span>Can we help? Call our Travel Experts at</span>
+            <span class="font-semibold inline-flex gap-1 items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M20.25 3.75v4.5m0-4.5h-4.5m4.5 0-6 6m3 12c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z" />
+              </svg>
+              +1 (202) 4911478
+            </span>
+          </div>
 
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label for="first-name" class="block text-gray-600 mb-1">First Name *</label>
-              <input v-model="formData.firstName" type="text" class="input-field" placeholder="John" />
+          <label for="title" class="block text-gray-600 mb-1">Guest Information*</label>
+          <div class="grid grid-cols-8 gap-2">
+            <!-- Title -->
+            <ClientOnly>
+              <Dropdown :positioning-disabled="isMobile" @apply-show="isMobile && onShow()"
+                @apply-hide="isMobile && onHide()" class="col-span-2">
+                <button type="button"
+                  class="input-field flex items-center justify-between w-full text-left text-gray-400"
+                  @click="dropdownIsOpen = !dropdownIsOpen">
+                  {{ selectedTitle || 'Title *' }}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                    stroke="currentColor" class="size-3 transition-transform duration-200 ml-2"
+                    :class="{ '-rotate-180': dropdownIsOpen }">
+                    <path fill-rule="evenodd"
+                      d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </button>
+                <template #popper="{ hide }">
+                  <div class="v-popper p-1 bg-white text-gray-800 rounded-md shadow-md border w-full md:w-40 text-xs">
+                    <button v-for="title in ['Mr.', 'Mrs.', 'Ms.']" :key="title"
+                      @click="() => { selectedTitle = title; hide(); dropdownIsOpen = false; }"
+                      class="block w-full text-left py-2 px-3 hover:bg-gray-100 rounded-md ">
+                      {{ title }}
+                    </button>
+                    <button v-if="isMobile" @click="hide()" class="absolute top-2 right-2 p-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-5 h-5 text-gray-500 hover:text-gray-800 transition">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                </template>
+              </Dropdown>
+            </ClientOnly>
+            <!-- First Name -->
+            <div class="col-span-3">
+              <input v-model="formData.firstName" type="text" class="input-field w-full" placeholder="First Name *" />
               <div v-if="$v.firstName.$error" class="text-xs text-red-500">First Name required</div>
             </div>
-            <div>
-              <label for="last-name" class="block text-gray-600 mb-1">Last Name *</label>
-              <input v-model="formData.lastName" type="text" class="input-field" placeholder="Smith" />
+
+            <!-- Last Name -->
+            <div class="col-span-3">
+              <input v-model="formData.lastName" type="text" class="input-field w-full" placeholder="Last Name *" />
               <div v-if="$v.lastName.$error" class="text-xs text-red-500">Last Name required</div>
             </div>
           </div>
 
-          <div class="mt-4">
-            <label for="email" class="block text-gray-600 mb-1">Email *</label>
-            <input v-model="formData.email" type="email" class="input-field" placeholder="Email address" />
-            <div v-if="$v.email.$error" class="text-xs text-red-500">
-              <span v-if="$v.email.email.$message">{{ $v.email.email.$message }}</span>
+          <div class="grid grid-cols-2 mt-2 gap-2">
+            <div class="">
+              <input v-model="formData.email" type="email" class="input-field" placeholder="Email address *" />
+              <div v-if="$v.email.$error" class="text-xs text-red-500">
+                <span v-if="$v.email.email.$message">{{ $v.email.email.$message }}</span>
+              </div>
+            </div>
+            <div class="relative ">
+              <div class="relative">
+                <input type="number"
+                  class="input-goto peer appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                  placeholder="Phone number *" autocomplete="off" v-model="formData.phone" ref="phoneInputRef"
+                  id="phoneNumber" />
+              </div>
+              <div v-if="$v.phone.$error" class="text-xs text-red-500">Phone Number requered</div>
             </div>
           </div>
+
 
           <div clas="mt-4">
             <label class="block text-gray-600 mb-1 mt-4">I am a(n): *</label>
@@ -388,7 +462,7 @@ onMounted(async () => {
           </div>
 
           <!-- Estilos de viaje -->
-          <div class="mt-4">
+          <!-- <div class="mt-4">
             <label class="block text-gray-600 mb-1">Which travel style(s) are you most interested in?
               (Max 3, Optional)</label>
             <div
@@ -404,18 +478,25 @@ onMounted(async () => {
                 </div>
               </template>
             </div>
-          </div>
+          </div> -->
 
           <!-- Checkboxes -->
-          <!-- <fieldset class="mb-6">
+          <fieldset class="mt-4 mb-6">
             <legend class="text-gray-600 mb-2">Preferences</legend>
             <div class="flex flex-col gap-2">
-              <label v-for="(option, index) in checkOptions" :key="index" class="flex items-center gap-2">
-                <input type="checkbox" v-model="selectedOptions" :value="option" class="h-5 w-5 text-red-500">
-                {{ option }}
+              <label class="flex items-center gap-2">
+                <input type="checkbox" v-model="formData.acceptTerms" class="h-5 w-5 text-red-500" />
+                <span class="text-gray-700" v-html="checkOptions[0]"></span>
+                <div v-if="!formData.acceptTerms" class="text-xs text-red-500">
+                  (Terms Accepted required)
+                </div>
+              </label>
+              <label v-for="(option, index) in checkOptions.slice(1)" :key="index" class="flex items-center gap-2">
+                <input type="checkbox" v-model="selectedOptions" :value="option" class="h-5 w-5 text-red-500" />
+                <span class="text-gray-700" v-html="option"></span>
               </label>
             </div>
-          </fieldset> -->
+          </fieldset>
 
           <div class="flex justify-center mt-6 relative ">
             <button type="submit"

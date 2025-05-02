@@ -20,8 +20,9 @@ const props = defineProps({
             Travel Packages</h1>
           <div class="text-sm md:text-lg" v-html="destination.resumen"></div>
           <NuxtLink :to="'/destinations/' + destination.url"
-            class="btn-ternary mt-6 py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700">Explore {{
-              destination.nombre }}</NuxtLink>
+            class="btn-ternary mt-6 py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700">
+            {{ destination.titulo }}
+          </NuxtLink>
         </div>
         <div class="relative w-full rounded-md h-full">
           <NuxtImg :alt="'Explore ' + destination.nombre" class="w-full h-full object-cover rounded-md"

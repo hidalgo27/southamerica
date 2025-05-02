@@ -17,12 +17,12 @@ const getCountries = async () => {
 };
 
 const text = {
-  title: 'Where Are You Headed To Next?',
-  description: 'Experience all that the world has to offer in just the way you want. Our team of Destination Specialists have been tailoring dream vacations for over 50 years. We handle every part of the travel journey, from flights to tours to accommodations to group travel. Let us do the hard work so you can sit back, relax, and take in the world. Rely on personalized travel planning and enjoy elevated experiences in destination. Follow your fancy and explore new parts of the world in new ways.',
+  title: 'Unveil South America’s most iconic places, each more breathtaking than the last.',
+  description: 'Each destination we offer has been thoughtfully chosen by regional experts who know not just the routes, but the heart of every place. Dive into experiences that go deeper than sightseeing — this is travel with soul, crafted by those who love the land.',
 }
 
 const header = {
-  miniTitle: 'Unforgettable Journeys',
+  miniTitle: 'The Epic Side of South America',
   title: 'The wonders of SouthAmerica',
   url: '/images/banners/destinations/galapagos.webp',
 }
