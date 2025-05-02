@@ -16,6 +16,7 @@ import { usePackageStore } from '~/stores/packages'
 import { useCategoriesStore } from '~/stores/categories'
 import { useBlogStore } from '~/stores/blog'
 import { useDestinationStore } from '~/stores/destination'
+import StaticPackages from "~/components/travel-packages/StaticPackages.vue";
 
 const packageStore = usePackageStore()
 const destinationStore = useDestinationStore()
@@ -177,21 +178,32 @@ const onHide = () => {
   <section>
     <div class="relative w-full h-[80vh] md:h-screen 2xl:h-[70vh] px-3">
       <div class="overflow-hidden h-full relative rounded-md">
-        <div class="mask gradient-cicle-gray items-center flex justify-center">
-          <div v-if="loading" class="mt-40 text-center">
-            Cargando ..
+        <!--        <div class="mask gradient-cicle-gray items-center flex justify-center">-->
+        <!--          <div v-if="loading" class="mt-40 text-center">-->
+        <!--            Cargando ..-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>-->
+        <div class="absolute inset-0 h-screen overflow- w-full bg-gray-100 -z-1 overflow-hidden">
+          <div class="vimeo-wrapper hidden sm:block">
+            <iframe
+              src="https://player.vimeo.com/video/1075870759?background=1&autoplay=1&loop=1&title=0&byline=0&portrait=0&muted=1"
+              frameborder="0" allow="autoplay; fullscreen"></iframe>
+            <div class="absolute inset-0 gradient-cicle-gray"></div>
           </div>
+          <img src="/images/banners/mapi2.webp" alt="" class="object-cover w-full h-full sm:hidden">
         </div>
-        <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>
         <div class="relative z-10 flex items-center  w-full h-full text-center">
           <div class=" container ">
-            <h1
-              class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight md:text-5xl 2xl:text-7xl tracking-wide font-semibold font-playfair-display">
-              Discover South America at your own terms.</h1>
-            <p class="text-white text-sm md:text-xl 2xl:text-lg tracking-widest font-light mt-5 ">
-              Curated Latin American Journeys: Where Luxury Meets Discovery
-            </p>
-            <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center">
+            <div class="bg-gray-800/50 p-6 rounded-md shadow-md md:bg-white/0 md:p-0 md:shadow-none">
+              <h1
+                class="text-white/80 drop-shadow-[0_0_1px_rgba(255,255,255,0.5)] leading-tight md:text-5xl 2xl:text-7xl tracking-wide font-semibold font-playfair-display">
+                Discover South America at your own terms.</h1>
+              <p class="text-white text-sm md:text-xl 2xl:text-lg tracking-widest font-light mt-5 ">
+                Curated Latin American Journeys: Where Luxury Meets Discovery
+              </p>
+            </div>
+            <div class="bg-white lg:w-2/3 mx-auto my-12 shadow-md rounded-lg flex items-center hidden">
               <div class="grid grid-cols-3 w-full">
                 <client-only>
                   <Dropdown class="w-full border-r border-gray-300" :positioning-disabled="isMobile"

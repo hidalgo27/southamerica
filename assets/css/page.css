@@ -167,7 +167,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -62%);
   @apply brightness-75;
   /*@apply object-none object-center h-[100vh] 2xl:h-[90vh]*/
   /*@apply object-fill h-[100vh] 2xl:h-[90vh]*/
