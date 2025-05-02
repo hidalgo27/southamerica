@@ -83,10 +83,8 @@ onUnmounted(() => {
 const buttons = ref([
   { name: 'Trip Overview', url: '#overview' },
   {
-    name: 'Vacation Packages',
-    items: [
-      { name: 'All Vacation Packages', url: 'vacation-packages' },
-    ]
+    name: 'Itinerary',
+    url: '#itinerary',
   },
   { name: 'Prices & Inclusions', url: '#packageDetail' },
   { name: 'Trips', url: 'vacation-packages' }
@@ -167,7 +165,6 @@ const onHide = () => {
     </div>
   </div>
   <nav class="py-4 sm:py-6 border-y-2 justify-around sm:px-4 flex text-xs mb-12" :class="{
-    'fixed top-0 w-full bg-white shadow-md z-20 py-1': isFixed,
     'relative': !isFixed
   }">
     <nuxt-link v-if="isFixed" to="/" class=" items-center hidden md:flex">
@@ -249,7 +246,7 @@ const onHide = () => {
   <div v-if="packageDetail && packageDetail.length > 0">
     <OverviewPackage :packageDetail="packageDetail[0]" id="overview" />
     <ImgSlider v-if="packageDetail[0].imagen_paquetes" :imagen_paquetes="packageDetail[0].imagen_paquetes.slice(1)" />
-    <Itinerary :packageDetail="packageDetail[0]" />
+    <Itinerary :packageDetail="packageDetail[0]" id="itinerary" />
     <PackageDetails :packageDetail="packageDetail[0]" id="packageDetail" />
   </div>
   <div v-else class="flex justify-center items-center ">

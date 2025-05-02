@@ -11,19 +11,19 @@ const items = ref([
   { name: 'All Vacation Packages', url: 'vacation-packages' },
 ])
 
-const getCategories = async () => {
-  const res: any = await useCategories.getCategories();
-  categories.value = res;
+// const getCategories = async () => {
+//   const res: any = await useCategories.getCategories();
+//   categories.value = res;
 
-  for (let i = 0; i < categories.value.length; i++) {
-    items.value.push({ name: categories.value[i].nombre, url: categories.value[i].url });
-  }
-};
+//   for (let i = 0; i < categories.value.length; i++) {
+//     items.value.push({ name: categories.value[i].nombre, url: categories.value[i].url });
+//   }
+// };
 const buttons = ref([
   { name: 'Overview', url: '' },
   {
     name: 'Vacation Packages',
-    items: items.value,
+    url: 'vacation-packages',
   },
   {
     name: 'Travel Information',
@@ -51,7 +51,7 @@ const handleScroll = () => {
 };
 
 onMounted(async () => {
-  await getCategories();
+  // await getCategories();
   updateIsMobile();
   window.addEventListener("scroll", handleScroll);
   window.addEventListener('resize', updateIsMobile);
@@ -86,10 +86,9 @@ const onHide = () => {
 </script>
 <template>
   <nav class="py-4 sm:py-6 border-y-2 justify-around sm:px-4 flex text-xs mb-12" :class="{
-    'fixed top-0 w-full bg-white shadow-md z-20 py-1': isFixed,
     'relative top-0 w-full bg-white shadow-md z-20 py-1': !isFixed
   }">
-    <nuxt-link v-if="isFixed" to="/" class="items-center hidden sm:flex">
+    <!-- <nuxt-link v-if="isFixed" to="/" class="items-center hidden sm:flex">
       <div class="font-playfair-display text-xl font-medium flex items-end">
         South
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -102,7 +101,7 @@ const onHide = () => {
           <span class="text-sm italic">company</span>
         </div>
       </div>
-    </nuxt-link>
+    </nuxt-link> -->
     <div class="flex justify-around items-center">
       <div v-for="(button, index) in buttons" :key="index" class="flex w-auto px-1 sm:px-4 ">
         <client-only>
@@ -145,10 +144,10 @@ const onHide = () => {
       class="py-3 px-5 text-primary border-2 border-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out bg-orange-50 rounded-md shadow-md hidden sm:flex">
       Inquire Now
     </button> -->
-    <a v-if="isFixed" href="#form-dream-adventure"
+    <!-- <a v-if="isFixed" href="#form-dream-adventure"
       class="py-3 px-5 text-primary border-2 border-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors duration-300 ease-in-out bg-orange-50 rounded-md shadow-md hidden sm:flex">
       Inquire Now
-    </a>
+    </a> -->
   </nav>
 </template>
 <style>

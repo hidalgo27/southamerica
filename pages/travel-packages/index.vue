@@ -21,7 +21,7 @@ const header = ref({
 const text = ref(
   {
     title: 'Iconic journeys through lands of ancient wonder, living culture, and breathtaking nature.',
-    description: "At Go To Colombia, we specialize in crafting unforgettable journeys across Colombia’s most breathtaking destinations. With a deep love for travel and local expertise, we curate experiences that blend culture, nature, and adventure. Whether you're dreaming of colorful colonial cities, lush coffee landscapes, or pristine Caribbean beaches, we make every moment seamless and extraordinary — all fueled by our genuine Colombian passion"
+    description: "From the ancient mysteries of Machu Picchu to the wild spirit of Patagonia, from Colombia’s Caribbean charm to the tango soul of Buenos Aires — South America is a land that stirs your senses and awakens your curiosity. We specialize in curating transformative journeys through this vibrant continent. Whether you're chasing waterfalls in Iguazú, sailing through the Galápagos, or sipping Malbec in Mendoza, every experience we create is crafted with depth, wonder, and connection. This is where your South American story begins."
   }
 )
 

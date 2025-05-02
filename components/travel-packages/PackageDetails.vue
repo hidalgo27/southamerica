@@ -20,9 +20,9 @@ const tabs = [
   <section class="container mb-20">
     <div class="w-full mx-auto">
       <!-- Tabs -->
-      <div class="flex justify-center md:space-x-6 border-b text-[0.65rem] md:text-lg">
+      <div class="flex justify-center md:space-x-6 border-b text-xs md:text-lg gap-4 md:gap-6 ">
         <button v-for="tab in tabs" :key="tab.key" @click="activeTab = tab.key"
-          class="p-6 text-center border-b-2 transition duration-300 ease-in-out hover:border-orange-500 hover:text-orange-500"
+          class="py-4 md:p-6 text-center border-b-2 transition duration-300 ease-in-out hover:border-orange-500 hover:text-orange-500"
           :class="activeTab === tab.key ? 'border-orange-500 text-orange-500' : 'border-transparent text-gray-500'">
           {{ tab.label }}
         </button>
