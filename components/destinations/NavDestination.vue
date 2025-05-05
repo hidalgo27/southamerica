@@ -43,11 +43,17 @@ const isFixed = ref(false);
 const dropdownStates = ref(buttons.value.map(() => false));
 
 const handleScroll = () => {
-  if (window.scrollY > window.screen.height - 100) {
-    isFixed.value = true;
-  } else {
-    isFixed.value = false;
-  }
+  const shouldBeFixed = window.scrollY > window.screen.height + 500;
+  isFixed.value = shouldBeFixed;
+
+  const shouldBeVisible = window.scrollY > 50;
+  // Animación con GSAP para mostrar u ocultar el elemento
+  $gsap.to('.floating-banner', {
+    opacity: shouldBeVisible ? 1 : 0,
+    y: shouldBeVisible ? 0 : 10, // Se desplaza ligeramente hacia abajo al ocultarse
+    duration: 0.5,
+    ease: 'power3.out'
+  });
 };
 
 onMounted(async () => {
@@ -86,6 +92,7 @@ const onHide = () => {
 </script>
 <template>
   <nav class="py-4 sm:py-6 border-y-2 justify-around sm:px-4 flex text-xs mb-12" :class="{
+    'md:fixed top-0 w-full bg-white shadow-md z-20 py-1': isFixed,
     'relative top-0 w-full bg-white shadow-md z-20 py-1': !isFixed
   }">
     <!-- <nuxt-link v-if="isFixed" to="/" class="items-center hidden sm:flex">
