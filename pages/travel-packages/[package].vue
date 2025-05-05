@@ -5,6 +5,7 @@ import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
 import MiniReviews from '~/components/home/MiniReviews.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import WeTravelCheckoutButton from '~/components/page/WeTravelCheckoutButton.vue';
+import FAQ from '~/components/travel-packages/FAQ.vue';
 import ImgSlider from '~/components/travel-packages/ImgSlider.vue';
 import Itinerary from '~/components/travel-packages/Itinerary.vue';
 import OverviewPackage from '~/components/travel-packages/OverviewPackage.vue';
@@ -249,6 +250,7 @@ const onHide = () => {
     <ImgSlider v-if="packageDetail[0].imagen_paquetes" :imagen_paquetes="packageDetail[0].imagen_paquetes.slice(1)" />
     <Itinerary :packageDetail="packageDetail[0]" id="itinerary" />
     <PackageDetails :packageDetail="packageDetail[0]" id="packageDetail" />
+    <FAQ></FAQ>
   </div>
   <div v-else class="flex justify-center items-center ">
     <p>Cargando datos del paquete...</p>
