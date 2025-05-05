@@ -232,8 +232,9 @@ onMounted(() => {
 </script>
 <template>
   <section class="container my-20">
-    <div ref="chartDiv" class="hidden md:block map-container rounded-md w-full h-[75vh]"></div>
-    <div class="flex flex-wrap  justify-center items-center text-center my-10 mx-auto gap-2 text-xs md:hidden">
+    <div v-if="pais.codigo" ref="chartDiv" class="hidden md:block map-container rounded-md w-full h-[75vh]"></div>
+    <div class="flex flex-wrap  justify-center items-center text-center my-10 mx-auto gap-2 text-xs"
+      :class="pais.codigo ? 'md:hidden' : 'md:flex'">
       <NuxtLink v-for="region in regions" class="rounded-full border py-2 px-4 flex flex-wrap"
         :to="'/destinations/peru/' + region.toLowerCase().replace(/ /g, '-')">
         {{ region }}
