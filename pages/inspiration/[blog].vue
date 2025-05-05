@@ -2,48 +2,40 @@
 import EspecialistLetter from '~/components/home/EspecialistLetter.vue';
 import MiniReviews from '~/components/home/MiniReviews.vue';
 import Newsletter from '~/components/home/Newsletter.vue';
+import TravelStories from '~/components/home/TravelStories.vue';
+import HeaderBlog from '~/components/inspiration/HeaderBlog.vue';
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 
 import { useBlogStore } from '~/stores/blog';
 
-const inspirationDetail = ref(null)
 const blogStore = useBlogStore();
+const blog = ref();
+const topBlogs = ref([]);
 const route = useRoute();
-const header = ref(
-  {
-    url: '',
-  }
-)
-const travelGuideHeader = ref([
-  {
-    titulo: '',
-    timeRead: 6,
-    categoria: '',
-  }
-]);
 
 const getBlog = async () => {
   const res: any = await blogStore.getBlog(route.params.blog as string);
-  inspirationDetail.value = res[0];
-  header.value.url = inspirationDetail.value?.imagenes.length > 0 ? inspirationDetail.value?.imagenes[0].nombre : '';
-  travelGuideHeader.value[0].titulo = inspirationDetail.value.titulo;
-  travelGuideHeader.value[0].categoria = inspirationDetail.value.categoria;
-  const date = new Date(inspirationDetail.value.created_at);
-  travelGuideHeader.value[0].published = date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+  blog.value = res[0];
+  console.log(blog);
+};
+
+const getBlogs = async () => {
+  const res: any = await blogStore.getBlogs();
+  topBlogs.value = res.blogs.filter((blog: any) => blog.estado == null || blog.estado === 0).slice(0, 3);
 };
 
 onMounted(async () => {
   await getBlog();
+  await getBlogs();
 })
 </script>
 <template>
-  <HeaderImgNav :packageDetail="travelGuideHeader" :header="header">
-  </HeaderImgNav>
+  <HeaderBlog v-if="blog" :blog="blog"></HeaderBlog>
   <section class="container my-20 text-sm">
-    <div class="md:w-2/3 mx-auto justify-center gap-6 flex-col flex" v-html="inspirationDetail?.detalle">
+    <div class="lg:w-2/3 mx-auto justify-center gap-6 flex-col flex" v-html="blog?.detalle">
     </div>
     <hr class="my-12 border-gray-300">
-    <div class="flex flex-wrap justify-center items-center gap-2 text-gray-600 text-xs">
+    <!-- <div class="flex flex-wrap justify-center items-center gap-2 text-gray-600 text-xs">
       <span class="text-gray-500">Related Topics</span>
       <button class="px-3 py-1 border rounded-full hover:bg-gray-200 transition">
         History & Culture
@@ -62,7 +54,7 @@ onMounted(async () => {
         </svg>
         Cusco
       </button>
-    </div>
+    </div> -->
   </section>
   <!-- <section class="bg-secondary bg-opacity-20 rounded-md p-6 flex items-center container w-2/3">
     Imagen del autor
@@ -92,6 +84,7 @@ onMounted(async () => {
       </div>
     </div>
   </section> -->
+  <TravelStories v-if="topBlogs.length > 0" :topBlogs="topBlogs"></TravelStories>
   <Newsletter></Newsletter>
   <MiniReviews></MiniReviews>
 </template>
