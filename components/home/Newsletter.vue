@@ -6,24 +6,29 @@ const isModalOpen = ref(false);
 <template>
   <section class="flex items-center justify-center my-20 container">
     <div class="bg-tertiary bg-opacity-10 p-10 md:p-20  rounded-md w-full">
-      <div class="flex flex-col md:flex-row items-center">
+      <div class="flex flex-col lg:flex-row items-center">
         <div class="flex-1">
           <p class="mb-6 tracking-widest font-bold">Newsletter</p>
           <h1 class="font-semibold text-2xl md:text-5xl mb-6 title font-playfair-display tracking-wide">
-            Discover Southamerica Like Never Before
+            Stay in the Soul of South America
           </h1>
-          <p class="mb-20">
-            Sign up for our newsletter and get access to exclusive travel deals, insider tips, and expert-curated guides
-            — all infused with the vibrant passion of Colombia, delivered straight to your inbox.</p>
+          <p class="font-semibold mb-6 text-sm md:text-base">
+            Travel news, epic inspiration, and exclusive offers — all in one unforgettable email.
+          </p>
+          <p class="mb-6 text-sm md:text-base">
+            Unlock the wonders of South America before anyone else. From Andes peaks to Amazon secrets, we’ll deliver
+            handpicked adventures, local stories, and limited-time deals straight to your inbox. Join our community of
+            passionate explorers and start dreaming bigger, bolder, and farther.
+          </p>
           <button @click="isModalOpen = true"
             class="btn-ternary py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700">
-            Subscribe Now
+            Join the Journey
           </button>
           <SignUpForm :isOpen="isModalOpen" @close="isModalOpen = false">
           </SignUpForm>
         </div>
-        <div class="hidden md:block border-l border-gray-200 h-96 mx-8"></div>
-        <div class="block md:hidden border-b border-gray-200 w-full my-8"></div>
+        <div class="hidden lg:block border-l border-gray-200 h-96 mx-8"></div>
+        <div class="block lg:hidden border-b border-gray-200 w-full my-8"></div>
         <div class="flex-1">
           <ul class="space-y-8">
             <li class="flex items-center">

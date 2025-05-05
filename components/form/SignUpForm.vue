@@ -306,23 +306,34 @@ const onHide = () => {
 };
 </script>
 <template>
-  <div v-if="isOpen" class="fixed inset-0 flex items-center z-50 justify-center bg-gray-800 bg-opacity-50 scroll"
+  <div v-if="isOpen" class="fixed inset-0 flex items-center z-50 justify-center bg-gray-800 bg-opacity-50"
     @click.self="closeModal">
     <div
-      class="bg-white md:rounded-lg shadow-lg md:w-5/6 h-screen md:h-auto relative overflow-y-auto sm:overflow-y-auto">
-      <button @click="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-        ✕
+      class="bg-white md:rounded-lg shadow-lg md:w-5/6 h-screen md:h-[90vh] relative overflow-hidden flex flex-col md:flex-row">
+      <button @click="closeModal"
+        class="absolute top-4 z-10 right-4 text-gray-700 rounded-full p-1 bg-white hover:text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
       </button>
 
-      <div class="flex flex-col md:flex-row md:gap-6 md:h-full">
-        <div class="bg-gray-100  rounded-lg md:w-1/3">
-          <NuxtImg
-            src="https://images.unsplash.com/photo-1743507664175-e1a0ebccfcb3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0fHx8ZW58MHx8fHx8"
-            alt="Logo" class="w-full h-full object-cover" loading="lazy" />
+      <div class="md:w-1/3 h-[30vh] md:h-screen relative bg-gray-100">
+        <!-- Imagen móvil -->
+        <div class="block md:hidden h-full relative shrink-0">
+          <NuxtImg src="/images/banners/suscripciones_SAC.webp" alt="suscripciones_SAC"
+            class="w-full h-full object-cover" />
         </div>
-        <form @submit.prevent="handleSubmit" class="flex-auto p-6 md:p-10 text-xs ">
-          <!-- Botones de título -->
-          <!-- <label for="title" class="block text-gray-600 mb-2">Title *</label>
+
+        <!-- Imagen tablet/desktop (sticky lateral) -->
+        <div class="hidden md:block sticky top-0 h-full">
+          <NuxtImg src="/images/banners/suscripciones_SAC.webp" alt="suscripciones_SAC"
+            class="w-full h-full object-cover" />
+        </div>
+      </div>
+      <form @submit.prevent="handleSubmit" class="flex-auto overflow-y-auto p-6 md:p-10 text-xs scroll max-h-full">
+        <!-- Botones de título -->
+        <!-- <label for="title" class="block text-gray-600 mb-2">Title *</label>
           <div id="title" class="flex gap-3 mb-4">
             <button v-for="title in ['Mr.', 'Mrs.', 'Ms.']" :key="title" type="button"
               class="border px-4 py-2 rounded-full" :class="{ 'bg-gray-200 duration-300': selectedTitle === title }"
@@ -330,139 +341,138 @@ const onHide = () => {
               {{ title }}
             </button>
           </div> -->
-          <h2 class="text-2xl font-semibold mb-4 justify-self-center font-playfair-display tracking-wide">Start your
-            journey Today</h2>
-          <div
-            class="bg-primary bg-opacity-10 bg-rounded flex flex-col justify-center items-center p-4 mb-4 gap-2 text-md tracking-widest">
-            <span>Can we help? Call our Travel Experts at</span>
-            <span class="font-semibold inline-flex gap-1 items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M20.25 3.75v4.5m0-4.5h-4.5m4.5 0-6 6m3 12c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z" />
-              </svg>
-              +1 (202) 4911478
-            </span>
-          </div>
+        <h2 class="text-2xl font-semibold mb-4 justify-self-center font-playfair-display tracking-wide">Start your
+          journey Today</h2>
+        <div
+          class="bg-primary bg-opacity-10 bg-rounded flex flex-col justify-center items-center p-4 mb-4 gap-2 text-md tracking-widest">
+          <span>Can we help? Call our Travel Experts at</span>
+          <span class="font-semibold inline-flex gap-1 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+              stroke="currentColor" class="size-4">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M20.25 3.75v4.5m0-4.5h-4.5m4.5 0-6 6m3 12c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z" />
+            </svg>
+            +1 (202) 4911478
+          </span>
+        </div>
 
-          <label for="title" class="block text-gray-600 mb-1">Guest Information*</label>
-          <div class="grid grid-cols-8 gap-2">
-            <!-- Title -->
-            <ClientOnly>
-              <Dropdown :positioning-disabled="isMobile" @apply-show="isMobile && onShow()"
-                @apply-hide="isMobile && onHide()" class="col-span-2">
-                <button type="button"
-                  class="input-field flex items-center justify-between w-full text-left text-gray-400"
-                  @click="dropdownIsOpen = !dropdownIsOpen">
-                  {{ selectedTitle || 'Title *' }}
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
-                    stroke="currentColor" class="size-3 transition-transform duration-200 ml-2"
-                    :class="{ '-rotate-180': dropdownIsOpen }">
-                    <path fill-rule="evenodd"
-                      d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                      clip-rule="evenodd" />
-                  </svg>
-                </button>
-                <template #popper="{ hide }">
-                  <div class="v-popper p-1 bg-white text-gray-800 rounded-md shadow-md border w-full md:w-40 text-xs">
-                    <button v-for="title in ['Mr.', 'Mrs.', 'Ms.']" :key="title"
-                      @click="() => { selectedTitle = title; hide(); dropdownIsOpen = false; }"
-                      class="block w-full text-left py-2 px-3 hover:bg-gray-100 rounded-md ">
-                      {{ title }}
-                    </button>
-                    <button v-if="isMobile" @click="hide()" class="absolute top-2 right-2 p-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="w-5 h-5 text-gray-500 hover:text-gray-800 transition">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
-                </template>
-              </Dropdown>
-            </ClientOnly>
-            <!-- First Name -->
-            <div class="col-span-3">
-              <input v-model="formData.firstName" type="text" class="input-field w-full" placeholder="First Name *" />
-              <div v-if="$v.firstName.$error" class="text-xs text-red-500">First Name required</div>
-            </div>
-
-            <!-- Last Name -->
-            <div class="col-span-3">
-              <input v-model="formData.lastName" type="text" class="input-field w-full" placeholder="Last Name *" />
-              <div v-if="$v.lastName.$error" class="text-xs text-red-500">Last Name required</div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 mt-2 gap-2">
-            <div class="">
-              <input v-model="formData.email" type="email" class="input-field" placeholder="Email address *" />
-              <div v-if="$v.email.$error" class="text-xs text-red-500">
-                <span v-if="$v.email.email.$message">{{ $v.email.email.$message }}</span>
-              </div>
-            </div>
-            <div class="relative ">
-              <div class="relative">
-                <input type="number"
-                  class="input-goto peer appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-                  placeholder="Phone number *" autocomplete="off" v-model="formData.phone" ref="phoneInputRef"
-                  id="phoneNumber" />
-              </div>
-              <div v-if="$v.phone.$error" class="text-xs text-red-500">Phone Number requered</div>
-            </div>
-          </div>
-
-
-          <div clas="mt-4">
-            <label class="block text-gray-600 mb-1 mt-4">I am a(n): *</label>
-            <div class="flex gap-4 ">
-              <button type="button" class="border px-4 py-2 rounded-full"
-                :class="{ 'bg-gray-200 duration-300': formData.userType === 'Consumer' }"
-                @click="formData.userType = 'Consumer'">Consumer</button>
-              <button type="button" class="border px-4 py-2 rounded-full"
-                :class="{ 'bg-gray-200 duration-300': formData.userType === 'Agent' }"
-                @click="formData.userType = 'Agent'">Agent</button>
-            </div>
-          </div>
-          <template v-if="formData.userType === 'Agent'">
-            <div class="mt-4">
-              <label class="block text-gray-600 mb-1">Agency Name *</label>
-              <input v-model="formData.agencyName" type="text" class="input-field" placeholder="Agency Name" />
-              <div v-if="$v.agencyName.$error" class="text-xs text-red-500">Agency Name required</div>
-            </div>
-            <div class="mt-4">
-              <label class="block text-gray-600 mb-1">Agency Country *</label>
-              <input type="text" class="input-goto peer" placeholder="" autocomplete="off"
-                v-model="formData.agencyCountry" ref="companyCountryInputRef" id="agencyName" @keydown.prevent />
-              <div v-if="$v.agencyCountry.$error" class="text-xs text-red-500">Agency Country required</div>
-            </div>
-          </template>
-
-          <div class="mt-4">
-            <label class="lock text-gray-600 mb-1">Where are you from? *</label>
-            <input type="text" class="input-goto peer" placeholder="" autocomplete="off" v-model="formData.country"
-              ref="countryInputRef" id="country_name" @keydown.prevent />
-            <div v-if="$v.country.$error" class="text-xs text-red-500">Country required</div>
-          </div>
-
-          <!-- País de interés -->
-          <div class="mt-4">
-            <label class="block text-gray-600 mb-1">Destination of Interest *</label>
-            <div class="overflow-y-auto h-24 max-h-24 border rounded p-3 space-y-1">
-              <template v-for="country in countries" :key="country.codigo">
-                <div class="font-semibold ">{{ country.nombre }}</div>
-                <div v-for="destination in country.destino" :key="destination.id" class="flex items-center">
-                  <input type="checkbox" :id="'destination-' + destination.id" :value="destination.nombre"
-                    v-model="formData.destinations"
-                    class="w-4 h-4 bg-gray-100 border-gray-100 rounded-md focus:ring-2  mr-2" />
-                  <label :for="'destination-' + destination.id">{{ destination.nombre }}</label>
+        <label for="title" class="block text-gray-600 mb-1">Guest Information*</label>
+        <div class="grid grid-cols-8 gap-2">
+          <!-- Title -->
+          <ClientOnly>
+            <Dropdown :positioning-disabled="isMobile" @apply-show="isMobile && onShow()"
+              @apply-hide="isMobile && onHide()" class="col-span-2">
+              <button type="button" class="input-field flex items-center justify-between w-full text-left text-gray-400"
+                @click="dropdownIsOpen = !dropdownIsOpen">
+                {{ selectedTitle || 'Title *' }}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1"
+                  stroke="currentColor" class="size-3 transition-transform duration-200 ml-2"
+                  :class="{ '-rotate-180': dropdownIsOpen }">
+                  <path fill-rule="evenodd"
+                    d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+              <template #popper="{ hide }">
+                <div class="v-popper p-1 bg-white text-gray-800 rounded-md shadow-md border w-full md:w-40 text-xs">
+                  <button v-for="title in ['Mr.', 'Mrs.', 'Ms.']" :key="title"
+                    @click="() => { selectedTitle = title; hide(); dropdownIsOpen = false; }"
+                    class="block w-full text-left py-2 px-3 hover:bg-gray-100 rounded-md ">
+                    {{ title }}
+                  </button>
+                  <button v-if="isMobile" @click="hide()" class="absolute top-2 right-2 p-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                      stroke="currentColor" class="w-5 h-5 text-gray-500 hover:text-gray-800 transition">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
                 </div>
               </template>
-            </div>
-            <div v-if="$v.destinations.$error" class="text-xs text-red-500">Destination required</div>
+            </Dropdown>
+          </ClientOnly>
+          <!-- First Name -->
+          <div class="col-span-3">
+            <input v-model="formData.firstName" type="text" class="input-field w-full" placeholder="First Name *" />
+            <div v-if="$v.firstName.$error" class="text-xs text-red-500">First Name required</div>
           </div>
 
-          <!-- Estilos de viaje -->
-          <!-- <div class="mt-4">
+          <!-- Last Name -->
+          <div class="col-span-3">
+            <input v-model="formData.lastName" type="text" class="input-field w-full" placeholder="Last Name *" />
+            <div v-if="$v.lastName.$error" class="text-xs text-red-500">Last Name required</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 mt-2 gap-2">
+          <div class="">
+            <input v-model="formData.email" type="email" class="input-field" placeholder="Email address *" />
+            <div v-if="$v.email.$error" class="text-xs text-red-500">
+              <span v-if="$v.email.email.$message">{{ $v.email.email.$message }}</span>
+            </div>
+          </div>
+          <div class="relative ">
+            <div class="relative">
+              <input type="number"
+                class="input-goto peer appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                placeholder="Phone number *" autocomplete="off" v-model="formData.phone" ref="phoneInputRef"
+                id="phoneNumber" />
+            </div>
+            <div v-if="$v.phone.$error" class="text-xs text-red-500">Phone Number requered</div>
+          </div>
+        </div>
+
+
+        <div clas="mt-4">
+          <label class="block text-gray-600 mb-1 mt-4">I am a(n): *</label>
+          <div class="flex gap-4 ">
+            <button type="button" class="border px-4 py-2 rounded-full"
+              :class="{ 'bg-gray-200 duration-300': formData.userType === 'Consumer' }"
+              @click="formData.userType = 'Consumer'">Consumer</button>
+            <button type="button" class="border px-4 py-2 rounded-full"
+              :class="{ 'bg-gray-200 duration-300': formData.userType === 'Agent' }"
+              @click="formData.userType = 'Agent'">Agent</button>
+          </div>
+        </div>
+        <template v-if="formData.userType === 'Agent'">
+          <div class="mt-4">
+            <label class="block text-gray-600 mb-1">Agency Name *</label>
+            <input v-model="formData.agencyName" type="text" class="input-field" placeholder="Agency Name" />
+            <div v-if="$v.agencyName.$error" class="text-xs text-red-500">Agency Name required</div>
+          </div>
+          <div class="mt-4">
+            <label class="block text-gray-600 mb-1">Agency Country *</label>
+            <input type="text" class="input-goto peer" placeholder="" autocomplete="off"
+              v-model="formData.agencyCountry" ref="companyCountryInputRef" id="agencyName" @keydown.prevent />
+            <div v-if="$v.agencyCountry.$error" class="text-xs text-red-500">Agency Country required</div>
+          </div>
+        </template>
+
+        <div class="mt-4">
+          <label class="lock text-gray-600 mb-1">Where are you from? *</label>
+          <input type="text" class="input-goto peer" placeholder="" autocomplete="off" v-model="formData.country"
+            ref="countryInputRef" id="country_name" @keydown.prevent />
+          <div v-if="$v.country.$error" class="text-xs text-red-500">Country required</div>
+        </div>
+
+        <!-- País de interés -->
+        <div class="mt-4">
+          <label class="block text-gray-600 mb-1">Destination of Interest *</label>
+          <div class="overflow-y-auto h-24 max-h-24 border rounded p-3 space-y-1">
+            <template v-for="country in countries" :key="country.codigo">
+              <div class="font-semibold ">{{ country.nombre }}</div>
+              <div v-for="destination in country.destino" :key="destination.id" class="flex items-center">
+                <input type="checkbox" :id="'destination-' + destination.id" :value="destination.nombre"
+                  v-model="formData.destinations"
+                  class="w-4 h-4 bg-gray-100 border-gray-100 rounded-md focus:ring-2  mr-2" />
+                <label :for="'destination-' + destination.id">{{ destination.nombre }}</label>
+              </div>
+            </template>
+          </div>
+          <div v-if="$v.destinations.$error" class="text-xs text-red-500">Destination required</div>
+        </div>
+
+        <!-- Estilos de viaje -->
+        <!-- <div class="mt-4">
             <label class="block text-gray-600 mb-1">Which travel style(s) are you most interested in?
               (Max 3, Optional)</label>
             <div
@@ -480,41 +490,40 @@ const onHide = () => {
             </div>
           </div> -->
 
-          <!-- Checkboxes -->
-          <fieldset class="mt-4 mb-6">
-            <legend class="text-gray-600 mb-2">Preferences</legend>
-            <div class="flex flex-col gap-2">
-              <label class="flex items-center gap-2">
-                <input type="checkbox" v-model="formData.acceptTerms" class="h-5 w-5 text-red-500" />
-                <span class="text-gray-700" v-html="checkOptions[0]"></span>
-                <div v-if="!formData.acceptTerms" class="text-xs text-red-500">
-                  (Terms Accepted required)
-                </div>
-              </label>
-              <label v-for="(option, index) in checkOptions.slice(1)" :key="index" class="flex items-center gap-2">
-                <input type="checkbox" v-model="selectedOptions" :value="option" class="h-5 w-5 text-red-500" />
-                <span class="text-gray-700" v-html="option"></span>
-              </label>
-            </div>
-          </fieldset>
-
-          <div class="flex justify-center mt-6 relative ">
-            <button type="submit"
-              class="btn-ternary py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700 w-full"
-              v-show="showLoader == false">Send Inquiry</button>
-            <button type="button" class="btn-disabled w-full justify-center flex" disabled v-show="showLoader == true">
-              <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-                </svg>
-              </svg>
-              Processing...
-            </button>
+        <!-- Checkboxes -->
+        <fieldset class="mt-4 mb-6">
+          <legend class="text-gray-600 mb-2">Preferences</legend>
+          <div class="flex flex-col gap-2">
+            <label class="flex items-center gap-2">
+              <input type="checkbox" v-model="formData.acceptTerms" class="h-5 w-5 text-red-500" />
+              <span class="text-gray-700" v-html="checkOptions[0]"></span>
+              <div v-if="!formData.acceptTerms" class="text-xs text-red-500">
+                (Terms Accepted required)
+              </div>
+            </label>
+            <label v-for="(option, index) in checkOptions.slice(1)" :key="index" class="flex items-center gap-2">
+              <input type="checkbox" v-model="selectedOptions" :value="option" class="h-5 w-5 text-red-500" />
+              <span class="text-gray-700" v-html="option"></span>
+            </label>
           </div>
-        </form>
-      </div>
+        </fieldset>
+
+        <div class="flex justify-center mt-6 relative ">
+          <button type="submit"
+            class="btn-ternary py-2 px-4 rounded shadow-md hover:bg-gray-100 hover:text-gray-700 w-full"
+            v-show="showLoader == false">Send Inquiry</button>
+          <button type="button" class="btn-disabled w-full justify-center flex" disabled v-show="showLoader == true">
+            <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+            </svg>
+            Processing...
+          </button>
+        </div>
+      </form>
     </div>
   </div>
   <NotificationGroup group="foo">
