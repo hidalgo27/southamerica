@@ -16,9 +16,9 @@ const blogs = ref([]);
 //   27: 'Travel Information',
 // });
 const header = ref({
-  title: 'Viva Colombia Journal',
+  title: 'South America Journal',
   subTitle: 'Travel Stories, Tips, and Guides',
-  url: 'images/banners/banners-destinations/SLIDE_1.webp'
+  url: 'images/banners/inspiration_banner.webp'
 })
 const text = ref(
   {
