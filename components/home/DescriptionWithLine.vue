@@ -11,7 +11,7 @@ const props = defineProps({
   },
   line: {
     type: Number,
-    default: false,
+    default: 0,
   }
 });
 

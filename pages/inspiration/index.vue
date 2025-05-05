@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import HeaderImgNav from '~/components/page/HeaderImgNav.vue';
 import TrendingCard from '~/components/inspiration/TrendingCard.vue';
+import DescriptionWithLine from '~/components/home/DescriptionWithLine.vue';
 import CardPackage from '~/components/travel-packages/CardPackage.vue';
 import Newsletter from '~/components/home/Newsletter.vue';
 import NavInspiration from '~/components/inspiration/NavInspiration.vue';
@@ -84,10 +85,18 @@ onMounted(async () => {
     author: "Christian Baines",
   },
 ] */
+
+const text = ref(
+  {
+    title: 'Breathe South America',
+    description: "A journey of discovery, where every breath you take is filled with the essence of South America. From the Amazon to Patagonia, we’ll guide you through the continent's untold stories, incredible landscapes, and hidden gems. Step into the rhythm of South America, where each experience is designed to ignite your passion for travel."
+  }
+)
 </script>
 
 <template>
   <HeaderImgNav :header="header" />
+  <DescriptionWithLine :text="text" :line="1"></DescriptionWithLine>
   <!--<NavInspiration></NavInspiration>-->
   <section v-for="(category, catIndex) in articles" :key="catIndex" class="container my-20">
     <div class="flex justify-between items-center mb-20">
