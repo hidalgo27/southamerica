@@ -180,11 +180,11 @@ const onHide = () => {
         <!--          </div>-->
         <!--        </div>-->
         <!--        <div v-show="!loading" ref="video" loading="lazy" class="vimeo-wrapper"></div>-->
-        <div class="absolute inset-0 h-screen overflow- w-full bg-gray-100 -z-1 overflow-hidden">
+        <div class="absolute inset-0 h-screen w-full bg-gray-100 -z-1 overflow-hidden">
           <div class="vimeo-wrapper hidden sm:block">
             <iframe
               src="https://player.vimeo.com/video/1075870759?background=1&autoplay=1&loop=1&title=0&byline=0&portrait=0&muted=1"
-              frameborder="0" allow="autoplay; fullscreen" class="h-full"></iframe>
+              frameborder="0" allow="autoplay; fullscreen" class="h-full z-10"></iframe>
             <div class="absolute inset-0 gradient-cicle-gray"></div>
           </div>
           <img src="/images/banners/mapi2.webp" alt="" class="object-cover w-full h-full sm:hidden">

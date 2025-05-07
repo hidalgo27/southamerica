@@ -8,18 +8,15 @@ const destinations = ref([]);
 
 const getDestinations = async () => {
   const res: any = await destinationStore.getCountries();
-  destinations.value = res.flatMap((country: any) =>
-    country.destino
-      ? country.destino
-          .filter((dest: any) => dest.imagen) // solo si tiene imagen
-          .map((dest: any) => ({
-            title: dest.nombre,
-            image: dest.imagen,
-            url: country.url + "/" + dest.url,
-          }))
-      : []
-  );
+  destinations.value = res
+    .filter((country: any) => country.imagen_s) // solo si el país tiene imagen
+    .map((country: any) => ({
+      title: country.nombre,
+      image: country.imagen_s,
+      url: country.url,
+    }));
 };
+
 
 onMounted(async () => {
   await getDestinations();
