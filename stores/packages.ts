@@ -227,6 +227,11 @@ export const usePackageStore = defineStore('PackageStore', () => {
 		})
 	}
 
+	const $reset = () => {
+		showModalInquireGlobal.value = false
+		titlePackages.value = ""
+		imgPackages.value = ""
+	}
 	return {
 		getPackageTop,
 		getPackages,
@@ -241,6 +246,7 @@ export const usePackageStore = defineStore('PackageStore', () => {
 		titlePackages,
 		imgPackages,
 		getFAQ,
+		$reset,
 	}
 
 }, { persist: true, })

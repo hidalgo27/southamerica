@@ -334,7 +334,7 @@
                     </svg>
                   </div>
                 </div>
-                <div v-if="$v.fullName.$error" class="text-xs text-red-500">Full Name requered</div>
+                <div v-if="$v.fullName.$error" class="text-xs text-red-500">Full Name required</div>
               </div>
 
               <div class="grid grid-cols-2 gap-3">
@@ -346,7 +346,7 @@
                     <label class="is-input-ico-label">Phone Number</label>
 
                   </div>
-                  <div v-if="$v.phone.$error" class="text-xs text-red-500">Phone Number requered</div>
+                  <div v-if="$v.phone.$error" class="text-xs text-red-500">Phone Number required</div>
                 </div>
 
 
@@ -536,6 +536,7 @@ const phoneInputRef = ref(null);
 const showModalProcess = ref(false)
 
 const route = useRoute()
+const router = useRouter()
 
 const formatter = ref({
   date: 'YYYY/MM/DD',
@@ -616,20 +617,21 @@ const handleSubmit = async () => {
       inquire_date: moment().tz('America/Lima').format('YYYY-MM-DD HH:mm:ss')
     }
 
-    await packageStore.getInquire(obj).then((res) => {
+    await packageStore.getInquire(obj).then(async (res) => {
       try {
         if (res) {
-          console.log("ress.dfmsdkfsdkfsdkfhsdkfhsdkfjhsdkfjhsdfkj")
+          // console.log("ress.dfmsdkfsdkfsdkfhsdkfhsdkfjhsdkfjhsdfkj")
           saveInquire(obj)
 
-          notify({
-            group: "foo",
-            title: 'Well done',
-            type: "success",
-            text: "Your trip has been successfully created 🙂",
-          }, 4000) // 4s
+          // notify({
+          //   group: "foo",
+          //   title: 'Well done',
+          //   type: "success",
+          //   text: "Your trip has been successfully created 🙂",
+          // }, 4000) // 4s
 
           showLoader.value = false
+          await router.push('/thank-you-form')
 
           packageStore.titlePackages = ''
 
@@ -648,9 +650,6 @@ const handleSubmit = async () => {
           packageStore.$reset()
 
           $v.value.$reset()
-
-
-
         } else {
           packageStore.$reset()
         }
