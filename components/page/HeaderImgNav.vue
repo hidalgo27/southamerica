@@ -79,7 +79,7 @@ const computedHeader = computed(() => props.header || defaultHeader);
       <div class="overflow-hidden h-full relative ">
         <div class="mask gradient-cicle-gray items-center flex justify-center -z-20">
           <NuxtImg v-if="computedHeader.url" :src="computedHeader.url" alt="Header Image"
-            class="absolute inset-0 w-full h-full object-cover" :class="{ 'brightness-75': !route.params.package }" />
+            class="absolute inset-0 w-full h-full object-cover" :class="{ 'brightness-90': !route.params.package }" />
           <div v-else>
             <div if=" loading" class="mt-40 text-center">
               Cargando ...

@@ -280,8 +280,8 @@ const toggleDropdown = (index: number) => {
 </script>
 <template>
   <header v-bind="$attrs" class="header-container">
-    <div class="top-0 left-0 w-full z-30 transition-transform duration-300"
-      :class="` ${isHeaderVisible ? 'fixed -translate-y-0' : '-translate-y-full'}`">
+    <div class="top-0 left-0 w-full z-30 transition-transform duration-300 fixed"
+      :class="` ${isHeaderVisible ? ' -translate-y-0' : '-translate-y-full'}`">
       <div :class="`rounded-md bg-orange-50 hidden sm:block m-3`">
         <div class="border-b border-secondary border-opacity-20">
           <div class="p-12 flex justify-between py-5 items-center">
