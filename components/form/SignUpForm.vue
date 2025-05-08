@@ -61,7 +61,7 @@ const formData = ref({
 });
 
 const checkOptions = [
-  `I accept the <a href='#' class='relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0'>Privacy Policy</a>`,
+  `I accept the <a href="/about-us/our-policies" target="_blank" rel="noopener noreferrer" class="relative inline-block after:block after:w-full after:h-[2px] after:bg-secondary after:transition-all after:duration-300 after:origin-left hover:after:w-0">Privacy Policy</a>`,
   "Monthly Newsletter Subscription",
 ];
 const selectedOptions = ref([]);
