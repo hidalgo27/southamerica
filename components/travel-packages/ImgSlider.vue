@@ -60,12 +60,19 @@ const progressWidth = computed(() => {
 const carouselRef = ref();
 const next = () => carouselRef.value.next();
 const prev = () => carouselRef.value.prev();
+
+const maxSlideIndex = computed(() => images.value.length - itemsToShow.value);
+
+const showPrev = computed(() => currentSlide.value > 0);
+const showNext = computed(() => currentSlide.value < maxSlideIndex.value);
+const showButtons = computed(() => images.value.length > itemsToShow.value);
+
 </script>
 <template>
   <section class="my-20" v-if="images.length > 0">
     <div v-if="images.length > 2" class="relative w-full">
       <!-- Botón izquierdo -->
-      <button @click="prev"
+      <button v-if="showButtons && showPrev" @click="prev"
         class="absolute top-1/2 -translate-y-1/2 left-6 z-10 p-2 bg-white/80 hover:bg-white rounded-full border shadow">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="size-6">
@@ -74,7 +81,7 @@ const prev = () => carouselRef.value.prev();
       </button>
 
       <!-- Botón derecho -->
-      <button @click="next"
+      <button v-if="showButtons && showNext" @click="next"
         class="absolute top-1/2 -translate-y-1/2 right-6 z-10 p-2 bg-white/80 hover:bg-white rounded-full border shadow">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
           class="size-6">
