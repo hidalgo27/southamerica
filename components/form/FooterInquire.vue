@@ -1,5 +1,5 @@
 <template>
-  <div class="container lg:w-5/6 xl:w-2/3 my-24" id="form-dream-adventure">
+  <div class="container  w-full md:w-[800px] my-24" id="form-dream-adventure">
     <div class="w-full">
       <div class="grid grid-cols-1">
 
@@ -339,16 +339,22 @@
 
               <div class="grid grid-cols-2 gap-3">
 
-                <div class="relative">
-                  <div class="relative">
-                    <input type="text" class="is-input-ico peer" placeholder=" " autocomplete="off" v-model="phone"
-                      ref="phoneInputRef" id="phoneNumber" />
-                    <label class="is-input-ico-label">Phone Number</label>
+<!--                <div class="relative">-->
+<!--                  <div class="relative">-->
+<!--                    <input type="text" class="is-input-ico peer" placeholder=" " autocomplete="off" v-model="phone"-->
+<!--                      ref="phoneInputRef" id="phoneNumber" />-->
+<!--                    <label class="is-input-ico-label">Phone Number</label>-->
 
-                  </div>
+<!--                  </div>-->
+<!--                  <div v-if="$v.phone.$error" class="text-xs text-red-500">Phone Number required</div>-->
+<!--                </div>-->
+
+
+                <div class="">
+                  <TelInput @updatePhone="handlePhoneChange"></TelInput>
                   <div v-if="$v.phone.$error" class="text-xs text-red-500">Phone Number required</div>
+                  <div v-if="phoneError" class="text-xs text-red-500">Número no válido</div>
                 </div>
-
 
                 <div class="relative">
                   <!--              <VMenu>-->
@@ -430,6 +436,7 @@
 
             </div>
 
+
             <div class="flex justify-center mt-12">
               <button type="submit" class="btn-primary" v-show="showLoader == false">Send</button>
               <button type="button" class="btn-disabled w-full justify-center flex" disabled
@@ -505,6 +512,7 @@ import { useVuelidate } from "@vuelidate/core";
 import { useIpStore } from "~/stores/ip";
 import { Notification, NotificationGroup, notify } from "notiwind";
 import moment from "moment-timezone";
+import TelInput from "~/components/form/TelInput.vue";
 
 const { dataLayer } = useScriptGoogleTagManager()
 
@@ -526,6 +534,9 @@ const fullName = ref('')
 const phone = ref('')
 const userEmail = ref('')
 const comment = ref('')
+
+const country_code2 = ref('')
+const country2 = ref('')
 
 const listDestination = ref([])
 
@@ -568,9 +579,16 @@ const onClickSomething = () => {
   showModalProcess.value = false
 }
 
-const saveInquire = async (obj: any) => {
-  await packageStore.saveInquire(obj)
+const saveInquire = async (obj: any, obj2: any) => {
+  try {
+    await packageStore.saveInquire(obj)
+    await packageStore.saveLead(obj2)
+  } catch (error) {
+    console.error("Error al guardar inquire o lead:", error)
+    throw error
+  }
 }
+
 
 function getBrowserName() {
   if ($device.isChrome) return 'Chrome'
@@ -607,8 +625,8 @@ const handleSubmit = async () => {
       el_telefono: phone.value,
       el_textarea: comment.value,
 
-      country: geoIp.value.country + " " + geoIp.value.country_calling_code,
-      codigo_pais: geoIp.value.country + " " + geoIp.value.country_calling_code,
+      country: country2.value,
+      codigo_pais: country_code2.value,
 
       producto: "southamerica.company",
       device: $device.isMobile ? 'Mobile' : $device.isTablet ? 'Tablet' : 'Desktop',
@@ -617,71 +635,87 @@ const handleSubmit = async () => {
       inquire_date: moment().tz('America/Lima').format('YYYY-MM-DD HH:mm:ss')
     }
 
-    await packageStore.getInquire(obj).then(async (res) => {
-      try {
-        if (res) {
-          // console.log("ress.dfmsdkfsdkfsdkfhsdkfhsdkfjhsdkfjhsdfkj")
-          saveInquire(obj)
+    const obj2 = {
+      product_id: 10,
+      package: packageStore.titlePackages,
+      hotel_category: hotel.value,
+      destinations: destination.value,
+      passengers: String(traveller.value),
+      duration: trip_length.value,
+      travel_date: travelDate.value ? moment(travelDate.value).format('YYYY-MM-DD') : null,
+      country: country2.value,
+      country_code: country_code2.value,
+      device: $device.isMobile ? 'Mobile' : $device.isTablet ? 'Tablet' : 'Desktop',
+      origin: 'Web',
+      browser: getBrowserName(),
+      name: fullName.value,
+      email: userEmail.value,
+      phone: phone.value,
+      comment: comment.value,
+      initial_price: 0,
+      inquiry_date: moment().tz('America/Lima').format('YYYY-MM-DD HH:mm:ss'),
+      dialCode: ''
+    }
 
-          // notify({
-          //   group: "foo",
-          //   title: 'Well done',
-          //   type: "success",
-          //   text: "Your trip has been successfully created 🙂",
-          // }, 4000) // 4s
+    await packageStore.getInquire(obj).then(async (res) => {
+      if (res) {
+        try {
+          await saveInquire(obj, obj2)
 
           showLoader.value = false
           await router.push('/thank-you-form')
 
+          // Reset
           packageStore.titlePackages = ''
-
           travelDate.value = ''
           traveller.value = ""
           hotel.value = []
           destination.value = []
-
           fullName.value = ""
           phone.value = ""
           trip_length.value = []
           userEmail.value = ""
           comment.value = ""
           packageStore.showModalInquireGlobal = false
-          // localStorage.clear()
           packageStore.$reset()
-
           $v.value.$reset()
-        } else {
-          packageStore.$reset()
+
+        } catch (error) {
+          console.error("Error en saveInquire", error)
+          notify({
+            group: "foo",
+            title: 'Error',
+            type: "error",
+            text: "Ocurrió un error al guardar los datos",
+          }, 4000)
         }
-      } catch (error) {
-        console.log(error)
+      } else {
+        packageStore.$reset()
       }
     }).catch((err) => {
+      console.error("Error en getInquire", err)
       showLoader.value = false
       packageStore.showModalInquireGlobal = false
-
       travelDate.value = ''
       traveller.value = ""
       hotel.value = []
       destination.value = []
-
       fullName.value = ""
       phone.value = ""
       trip_length.value = []
       userEmail.value = ""
       comment.value = ""
-      packageStore.showModalInquireGlobal = false
       packageStore.$reset()
-
       $v.value.$reset()
 
       notify({
         group: "foo",
         title: 'Error',
         type: "error",
-        text: "Error :(",
-      }, 4000) // 4s
+        text: "Error al enviar formulario",
+      }, 4000)
     })
+
 
 
 
@@ -714,54 +748,49 @@ watchEffect(() => {
   }
 })
 
+const phoneError = ref(false)
+
+const handlePhoneChange = ({ number, isValid, country, country_code, dialCode }) => {
+  // console.log(number, isValid, country, country_code, dialCode)
+  phone.value = number
+
+  country2.value = String(country)
+
+  country_code2.value = dialCode+' +'+country_code
+
+  phoneError.value = !isValid
+}
 
 onMounted(async () => {
-  // if (route.params.package){
-  //   console.log(route.params.package)
-  //
-  // }else {
-  //   packageStore.titlePackages = ''
-  // }
-
   await getIp()
 
   await getPais()
 
-
-
-
-
-  if (process.client) {
-    // if (!isTravelPackagePage.value){
-    //   packageStore.titlePackages = ''
-    // }
-    // @ts-ignore
-    import('intl-tel-input/build/js/intlTelInput.min.js').then((module) => {
-      const intlTelInput = module.default;
-      if (phoneInputRef.value) {
-
-        // if (res.token) {
-        //   policyStore['tokenLogin'] = res.token
-        //   loadingUser.value = false
-        // }
-
-        intlTelInput(phoneInputRef.value, {
-          initialCountry: "auto",
-          // @ts-ignore
-          geoIpLookup: function (callback) {
-            fetch("https://ipapi.co/json")
-              .then(function (res) { return res.json(); })
-              .then(function (data) { callback(data.country_code); })
-              .catch(function () { callback("us"); });
-          },
-        });
-      }
-    });
-  }
+  // if (process.client) {
+  //   // @ts-ignore
+  //   import('intl-tel-input/build/js/intlTelInput.min.js').then((module) => {
+  //     const intlTelInput = module.default;
+  //     if (phoneInputRef.value) {
+  //       intlTelInput(phoneInputRef.value, {
+  //         initialCountry: "auto",
+  //         // @ts-ignore
+  //         geoIpLookup: function (callback) {
+  //           fetch("https://ipapi.co/json")
+  //             .then(function (res) { return res.json(); })
+  //             .then(function (data) { callback(data.country_code); })
+  //             .catch(function () { callback("us"); });
+  //         },
+  //       });
+  //     }
+  //   });
+  // }
 
 })
 
 </script>
 <style>
-@import 'intl-tel-input/build/css/intlTelInput.css';
+
+.iti__selected-dial-code{
+  padding-top: 12px;
+}
 </style>
