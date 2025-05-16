@@ -75,8 +75,17 @@ const initIntlTelInput = async () => {
 
   const iti = intlTelInput(phoneInput.value, {
     preferredCountries: ['pe', 'us', 'mx'],
-    initialCountry: 'pe',
+    initialCountry: 'auto',
     separateDialCode: true,
+    geoIpLookup: (callback) => {
+      fetch('https://ipinfo.io/json?token=') // ← opcional: reemplaza YOUR_TOKEN si tienes uno
+          .then(resp => resp.json())
+          .then(data => {
+            const countryCode = data?.country || 'PE'
+            callback(countryCode.toLowerCase())
+          })
+          .catch(() => callback('pe'))
+    },
     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
   })
 

@@ -373,7 +373,7 @@
 
 
                   <client-only>
-                    <VDatePicker v-model="travelDate" mode="date" :min-date="today">
+                    <VDatePicker v-model="travelDate" mode="date" :min-date="today" locale="en">
                       <template #default="{ togglePopover }">
                         <button type="button" class="is-input-ico peer text-left relative" @click="togglePopover">
 
