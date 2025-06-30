@@ -86,7 +86,7 @@ const prev = () => carouselRef.value.prev();
 </script>
 
 <template>
-  <section class="my-20 py-20 bg-opacity-30" :class="{ 'bg-secondary': title !== 'Most Popular Packages' }">
+  <section class="py-20 bg-opacity-30" :class="{ 'bg-secondary': title !== 'Most Popular Packages' }">
     <div class="container">
       <div class="text-center tracking-widest font-bold pb-6">
         <div class="border-title mb-2 mx-auto"></div>
