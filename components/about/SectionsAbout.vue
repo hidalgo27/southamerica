@@ -15,7 +15,7 @@ const gridItems = [
     id: 2,
     imageUrl: "https://images.unsplash.com/photo-1620658927695-c33df6fb8130?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y29zdGElMjByaWNhfGVufDB8fDB8fHww",
     altText: "Group of elephants walking on grassy savannah under a clear sky",
-    title: "Colombia",
+    title: "South America",
     url: "/destinations",
     buttonText: "Discover Destinations",
   },
