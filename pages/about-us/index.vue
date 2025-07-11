@@ -12,35 +12,8 @@ definePageMeta({
 const header = ref({
   miniTitle: 'The SouthAmerica Way',
   title: 'About Us',
-  url: 'https://images.goway.com/production/styles/hero_s1_3xl/s3/hero/iStock-892407318_1.jpg?VersionId=6MqcaLqSEubKmLGfclwxia7APNn2A5AH&h=6c3b1055&itok=GtdZmeWC'
+  url: '/images/team/banner4.webp',
 })
-
-const sections = [
-  {
-    title: "Our Story",
-    text: "We are a team of travel enthusiasts who love to explore the world and share our experiences with others. Our mission is to help you plan your next adventure and make it a memorable one. Whether you are looking for a relaxing beach vacation or an action-packed adventure, we have you covered. Our team of experts will help you find the perfect destination and create a customized itinerary that suits your needs. So why wait? Start planning your next trip with us today!",
-    imgSrc: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Queenstown/img_HeritageQueenstown_Exterior.jpg",
-    alt: "A group of people enjoying a beach vacation",
-    buttonLabel: "Discover Our Story",
-    url: "/our-story"
-  },
-  {
-    title: "Why SouthAmerica",
-    text: "We know a thing or two about travel at SouthAmerica. Our team of Destination Specialists have been tailoring dream vacations for nearly 55 years. We handle every part of the travel journey, from flights to tours to accommodations. Let us do the hard work so you can sit back, relax, and take in the world. Rely on personalized travel planning, elevated experiences, and legendary customer service.",
-    imgSrc: "https://images.goway.com/production/styles/split_image_and_text_image_3xl/s3/split_image_and_text/bridge-crossing-a-body-of-water-at-sunset-in-sydne-2023-12-29-02-41-57-utc.jpeg?VersionId=sMlJcVKbDNWM_FCClfStBq_RQWMkbc9.&h=127ea6d3&itok=2GAvs1Zj",
-    alt: "A group of people enjoying a beach vacation",
-    buttonLabel: "Learn More",
-    url: "/why-southamerica"
-  },
-  {
-    title: "Careers",
-    text: "Are you interested in an exciting career? Come work with us! We've spent over 50 years building a rich culture of passionate travel professionals. We accomplish this with values built upon taking care of our people, our customers and the communities in which we operate. We have remote opportunities, as well as in our offices in Toronto, Vancouver, Los Angeles, Manila, and Sydney. ",
-    imgSrc: "https://admin.goway.app/content/DataObjects/TRAVERSE/accommodation_images/Heritage_Auckland_Hotel_Wing/img_HeritageAuckland_Exterior.jpg",
-    alt: "A group of people enjoying a beach vacation",
-    buttonLabel: "Explore Careers",
-    url: "/careers"
-  }
-]
 </script>
 <template>
   <HeaderImgNav :header="header"></HeaderImgNav>
@@ -49,126 +22,105 @@ const sections = [
       <h1 class="italic text-4xl mb-6 font-playfair">Our Story</h1>
       <div class="xl:w-2/3 gap-2 leading-relaxed">
         <p>
-          The vibrant tapestry of Latin America, with its ancient echoes and breathtaking landscapes, inspired a dream
-          in
-          the heart of one man, Paul Catano, our director. He visited Cusco, Perú, for a wedding and instantly fell in
-          love with the city's stunning beauty and lively energy. Captivated by the chance to share his country's rich
-          history with the world, he chose to stay, paving the way for a new journey. In 2013, we broadened our horizons
-          by opening our first office in the United States, signaling the start of a journey to connect people around
-          the
-          globe with the wonders of Latin America, especially of Perú.
+          <b>SouthAmerica.Company</b> was born with a bold ambition: to reimagine how travelers connect with the soul of
+          an
+          entire continent. As part of <b>GOTOGROUP</b>, we harness decades of experience crafting immersive journeys
+          that go
+          far beyond traditional tourism—journeys that are deeply personal, culturally rich, and rooted in the rhythm of
+          South America.
         </p>
         <p class="mt-4">
-          <b>Gotoperu</b>, motivated by a desire to revolutionize travel in South America, began discreetly with just
-          two
-          committed individuals. Our objective was clear: to go beyond standard tours and provide personal, immersive
-          experiences that would connect travelers with Peru's heart. As our objectives matured, we expanded our reach,
-          building on Peru's success and launching <b>Gotolatam</b> in 2019 before expanding into other attractive Latin
-          American
-          countries. A decisive moment occurred in 2024, when we teamed up with Hidalgo, a prized colleague who shared
-          our
-          vision, boosting <b>GOTOGROUP's</b> goal to new levels and facilitating expansion into exciting frontiers of
-          opportunity.
+          This is a land of contrasts: from the icy silence of Patagonia to the explosive joy of a Colombian fiesta,
+          from the echoes of Incan stones to the whisper of Amazonian rivers. South America pulses with life, diversity,
+          and stories waiting to be lived.
+        </p>
+        <p class="mt-4 font-bold">
+          Its energy, its soul, its truth.
         </p>
       </div>
     </main>
-    <NuxtImg src="https://cdn.vayaadventures.com/wp-content/uploads/Vaya_About-Us-Team-noresize.jpg" class="w-full">
+    <NuxtImg src="/images/team/portada-team.webp" class="w-full">
     </NuxtImg>
   </section>
   <section class="">
-    <main class="container py-24">
-      <h1 class="italic text-4xl mb-6 font-playfair">GOTOGROUP TODAY</h1>
+    <main class="container py-24 ">
+      <h1 class="italic text-4xl mb-6 font-playfair">Why Travel With Us?</h1>
       <div class="xl:w-2/3 gap-2 leading-relaxed">
         <p>
-          Today, GOTOGROUP stands as a dynamic network, a collection of specialized companies united by a passion for
-          crafting exceptional travel experiences across Latin America. With brands such as <b>Gotoperu, Gotolatam,
-            Gotocolombia, Gotoecuador, MachupicchuCompany, and SouthAmerica Company</b>, we provide a diverse array of
-          services tailored to meet the needs of every type of traveler—whether you're in search of adventure,
-          relaxation, or a luxurious escape.
+          Choosing <b>SouthAmerica.Company</b> means choosing to travel with depth, intention, and style. Backed by the
+          creative spirit of <b>GOTOGROUP</b> , we specialize in tailor-made experiences across the continent—each
+          crafted with
+          care, curiosity, and regional insight.
         </p>
         <p class="mt-4">
-          Our unwavering dedication to quality and our deep-rooted passion for the Latin American spirit remain the
-          driving forces behind everything we do. With a growing presence that encompasses offices in Peru and the USA,
-          along with an upcoming launch in Colombia this year and ambitious plans for Central America, <b>GOTOGROUP</b>
-          is
-          strategically positioned to continue delivering authentic, high-end travel experiences across the continent.
-          We are more than just a travel company; we are a family of passionate individuals collaborating to create
-          experiences that connect cultures, enrich lives, and leave lasting memories.
+          From your first message to the moment you return home, we handle every detail with precision and passion. We
+          work with trusted local partners, celebrate cultural authenticity, and are fiercely committed to sustainable
+          practices. Because real travel isn’t just about places—it’s about people, connection, and transformation.
+        </p>
+        <p class="mt-4">
+          Travel with us, and explore South America as it was meant to be experienced: vividly, meaningfully, and
+          entirely your own.
         </p>
       </div>
     </main>
   </section>
   <section class="bg-primary/10 flex flex-col xl:flex-row">
-    <main class="container xl:pl-26 xl:pr-24 py-20 order-2 xl:order-1">
-      <h1 class="italic text-4xl mb-6 font-playfair">WHAT'S NEXT FOR GOTO?</h1>
+    <main class="container xl:pl-26 xl:pr-24 py-20 order-2 xl:order-1 my-auto">
+      <h1 class="italic text-4xl mb-6 font-playfair">More Than Travel—A Way of Living</h1>
       <div class="gap-2 leading-relaxed xl:text-base">
         <p>
-          The future at GOTOGROUP is vibrant with possibilities. We are committed to continuous evolution, with exciting
-          new destinations and unique experiences constantly being developed. In 2025, we will continue to grow our
-          portfolio, adding <b>GotoCostaRica</b> to our list of destinations and expanding our luxury offerings across
-          Latin
-          America. We're also focused on enhancing our sustainability efforts, ensuring that each journey we create not
-          only delights our travelers but also respects the environment.
+          We believe great journeys should move you—emotionally, physically, spiritually. That’s why we design every
+          itinerary like a story: one where you are the main character, and the continent reveals itself moment by
+          moment.
         </p>
         <p class="mt-4">
-          We are committed to earning ISO certifications for quality, environmental sustainability, and safety, making
-          sure that every part of our operation meets the highest international standards. Our journey is just
-          beginning, and we can't wait to share more of what’s to come.
+          Whether you're trekking through the Andes, dining under the stars in the Atacama, or learning ancestral
+          traditions in the Amazon, we make sure each experience is grounded in truth and elevated by joy.
+        </p>
+        <p class="mt-4">
+          It’s about of transformation—written in landscapes, shared through encounters, and remembered for a lifetime.
         </p>
       </div>
     </main>
-    <NuxtImg src="https://cdn.vayaadventures.com/wp-content/uploads/Vaya_About-Us-Block-1-noresize.jpg"
-      class="h-[40vh] xl:h-full xl:w-1/2 object-cover order-1 xl:order-2">
+    <NuxtImg src="images/team/what-next.webp" class="h-[40vh] xl:h-full xl:w-1/2 object-cover order-1 xl:order-2">
     </NuxtImg>
   </section>
   <section class="flex flex-col xl:flex-row">
-    <NuxtImg src="https://cdn.vayaadventures.com/wp-content/uploads/Vaya_About-Us-Block-2-noresize.jpg"
-      class="h-[40vh] xl:h-full xl:w-1/2 object-cover">
+    <NuxtImg src="/images/team/image-logo.webp" class="h-[40vh] xl:h-full xl:w-1/2 object-cover">
     </NuxtImg>
-    <main class="container xl: xl:pl-24 py-20">
-      <h1 class="italic text-4xl mb-6 font-playfair">GOTO'S ICON</h1>
+    <main class="container xl: xl:pl-24 py-20 my-auto">
+      <h1 class="italic text-4xl mb-6 font-playfair">Part of GOTOGROUP</h1>
       <div class="gap-2 leading-relaxed xl:text-base">
         <p>
-          At the heart of <b>GOTOGROUP</b> lies our powerful symbol, the <b>Qente</b>. This symbol embodies our deep
-          connection
-          to
-          Andean culture, particularly the legacy of the ancient Incas. The Qente, a mythological and formidable bird,
-          represents freedom, knowledge, and protection—essential elements of the philosophy we embrace in our travels.
+          As part of <b>GOTOGROUP</b>, we carry the spirit of the <b>Qente</b>, the Andean hummingbird—symbol of
+          freedom,
+          wisdom, and
+          harmony between human beings and nature. This emblem guides our work across Latin America and the Caribbean:
+          creating meaningful journeys that honor local cultures, protect natural wonders, and build bridges between
+          travelers and the communities they visit.
         </p>
         <p class="mt-4">
-          In the Andean worldview, this renowned winged creature safeguards the delicate balance between nature and
-          humanity. It also symbolizes our unwavering commitment to authenticity and the creation of unique, meaningful
-          journeys for each visitor. The Qente signifies not only the splendor of South American landscapes but also the
-          potential to grow, reach new heights, and uncover the unknown. Like this bird, we at <b>GOTOGROUP</b> aspire
-          to
-          elevate our customers by connecting them with the most breathtaking places in Latin America, from the ancient
-          ruins of Machu Picchu to the vibrant landscapes of the Amazon jungle.
-        </p>
-        <p class="mt-4">
-          Our logo is more than just an image; it represents our mission: to serve as guardians of an authentic travel
-          experience, preserving traditions and protecting the environment while enabling our clients to uplift their
-          spirits and hearts with each excursion. When tourists travel with GOTOGROUP, they do more than merely explore
-          a destination; they immerse themselves in a vibrant culture rich with history, nature, and ancient wisdom.
+          With a strong presence in <b>Peru, Argentina, Colombia, Brazil, Ecuador, Costa Rica,</b> and now across
+          <b>South America</b>, GOTOGROUP leads a new generation of conscious travel: personal, responsible, and
+          soul-stirring.
         </p>
       </div>
     </main>
   </section>
   <section class="bg-primary/10 ">
     <main class="container py-24">
-      <h1 class="italic text-4xl mb-6 font-playfair">TAILORING YOUR PERFECT ADVENTURE</h1>
+      <h1 class="italic text-4xl mb-6 font-playfair">Let South America Change You</h1>
       <div class="xl:w-2/3 gap-2 leading-relaxed ">
         <p>
-          Every traveler is unique, and so is every journey we create. At GOTOGROUP, we specialize in designing
-          personalized travel experiences that reflect your desires, interests, and sense of adventure. Whether you’re
-          exploring the ruins of ancient civilizations, hiking through breathtaking landscapes, or indulging in
-          luxurious escapes, we work closely with you to craft an itinerary that fits your vision of the perfect
-          adventure.
+          No two journeys should ever be the same—because no two travelers are. That’s why every SouthAmerica.Company
+          experience is tailored to your pace, your passions, and your dreams.
         </p>
         <p class="mt-4">
-          From the moment you contact us, our team is dedicated to ensuring your experience exceeds your expectations.
-          We take the time to understand what makes your journey special and ensure that every detail is perfectly
-          tailored to your needs. With GOTOGROUP, you’ll discover the true spirit of Latin America in a way that’s as
-          unique as you are.
+          Let us guide you across a continent that will surprise you, teach you, and stay with you. With expert
+          knowledge, meticulous planning, and warm human touch, we bring your South American story to life.
+        </p>
+        <p class="mt-4 font-bold">
+          This is your continent. Your rhythm. Your journey. We’re just here to make it unforgettable.
         </p>
       </div>
     </main>
