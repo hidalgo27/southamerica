@@ -23,17 +23,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="container py-12">
+  <section class="bg-white ">
     <div v-if="isLoading" class="flex justify-center items-center py-20">
       <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
     </div>
 
-    <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div v-else class="container py-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
       <div v-for="member in team" :key="member.id" class="p-4">
         <NuxtLink :to="`/about-us/our-team/${member.id}`">
-          <div class="relative overflow-hidden mb-6 group">
-            <NuxtImg
-              :src="member.foto || 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGVyc29uYXxlbnwwfDJ8MHx8fDA%3D'"
+          <div class="relative overflow-hidden mb-6 group border-gray-200 rounded-lg shadow-lg">
+            <NuxtImg :src="member.imagen_perfil || '/images/team/members/member-icon.webp'" alt="Team Member"
               class="w-full h-full object-cover transition duration-500 ease-in-out transform group-hover:scale-105" />
           </div>
           <h3 class="md:text-lg font-semibold">{{ member.nombre }}</h3>

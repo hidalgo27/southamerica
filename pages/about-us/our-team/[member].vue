@@ -87,8 +87,7 @@ onMounted(async () => {
       </main>
 
       <aside class="lg:w-1/3 flex items-center justify-center">
-        <NuxtImg
-          :src="team?.foto || 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGVyc29uYXxlbnwwfDJ8MHx8fDA%3D'"
+        <NuxtImg v-if="team.imagen_perfil" :src="team?.imagen_perfil"
           class="w-full max-w-md h-auto rounded-sm object-cover"
           :alt="team?.nombre ? `${team.nombre} photo` : 'Team member photo'" />
       </aside>
