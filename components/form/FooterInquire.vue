@@ -680,6 +680,13 @@ const handleSubmit = async () => {
           packageStore.$reset()
           $v.value.$reset()
 
+          notify({
+            group: "foo",
+            title: 'Well done',
+            type: "success",
+            text: "Your trip has been successfully created 🙂",
+          }, 4000) // 4s
+
         } catch (error) {
           console.error("Error en saveInquire", error)
           notify({

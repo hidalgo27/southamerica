@@ -56,12 +56,12 @@ export default defineNuxtConfig({
   scripts: {
     registry: {
       googleTagManager: {
-        id: 'AW-382248808',
-      }
-    },
-    vimeo: {
-      src: 'https://player.vimeo.com/api/player.js',
-      async: true,
+        id: process.env.NUXT_PUBLIC_GTM_CONTAINER_ID || 'GTM-M4FTLKV3',
+        trigger: 'onNuxtReady',
+      },
+      vimeoPlayer: {
+        trigger: 'onNuxtReady',
+      },
     },
   },
   googleFonts: {
@@ -97,7 +97,7 @@ export default defineNuxtConfig({
       apiInquire: process.env.useNuxtApp || "https://api.gotoecuador.com/api/store/inquire",
       // apiBaseTest: process.env.API_BASE_TEST || "https://app.gotolatam.travel/api",
       apiBaseTest: '',
-      gtmContainerId: process.env.NUXT_PUBLIC_GTM_CONTAINER_ID || 'GTM-M4FTLKV3',
+      // gtmContainerId: process.env.NUXT_PUBLIC_GTM_CONTAINER_ID || 'GTM-M4FTLKV3',
       // apiBase: process.env.API_BASE_TEST || "http://localhost:8080/api",
     }
   },
