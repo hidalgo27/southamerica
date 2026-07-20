@@ -11,7 +11,7 @@ import { useCategoriesStore } from "~/stores/categories";
 import { email, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 
-const { dataLayer } = useScriptGoogleTagManager();
+// const { dataLayer } = useScriptGoogleTagManager();
 const { $device } = useNuxtApp();
 
 const formStore = useFormStore();
@@ -153,15 +153,15 @@ const handleSubmit = async () => {
     company_country: formData.value.agencyCountry,
   };
 
-  dataLayer.push({
-    user_properties: {
-      user_id: { value: crypto.randomUUID() },
-      email: { value: formData.value.email },
-      full_name: { value: formData.value.firstName + " " + formData.value.lastName },
-      tentative_date: { value: formData.value.startDate },
-    },
-    event: "generate_lead",
-  });
+  // dataLayer.push({
+  //   user_properties: {
+  //     user_id: { value: crypto.randomUUID() },
+  //     email: { value: formData.value.email },
+  //     full_name: { value: formData.value.firstName + " " + formData.value.lastName },
+  //     tentative_date: { value: formData.value.startDate },
+  //   },
+  //   event: "generate_lead",
+  // });
 
   await formStore.getInquire(obj).then((res) => {
     if (res) {

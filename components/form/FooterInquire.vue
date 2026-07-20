@@ -514,7 +514,7 @@ import { Notification, NotificationGroup, notify } from "notiwind";
 import moment from "moment-timezone";
 import TelInput from "~/components/form/TelInput.vue";
 
-const { dataLayer } = useScriptGoogleTagManager()
+// const { dataLayer } = useScriptGoogleTagManager()
 
 const { $device } = useNuxtApp()
 

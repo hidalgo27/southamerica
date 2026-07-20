@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       // meta: [
       //   { name: 'description', content: 'My amazing site.' }
       // ],
-      script: [{ src: 'https://cdn.wetravel.com/widgets/embed_checkout.js', async: true, defer: true }],
+      // script: [{ src: 'https://cdn.wetravel.com/widgets/embed_checkout.js', async: true, defer: true }],
       link: [
         { rel: 'apple-touch-icon', sizes: '48x48', href: '/favicon/favicon.png' },
         { rel: 'apple-touch-icon', sizes: '192x192', href: '/favicon/android-chrome-192x192.png' },
@@ -36,34 +36,34 @@ export default defineNuxtConfig({
   //   composables: true,
   //   provide: false,
   // },
-  render: {
-    csp: {
-      policies: {
-        'default-src': ["'self'"],
-        'script-src': [
-          "'self'",
-          "'unsafe-inline'", // Solo si es necesario
-          "https://player.vimeo.com",
-          "https://vimeo.com",
-        ],
-        'frame-src': ["'self'", "https://player.vimeo.com"],
-        'connect-src': ["'self'", "https://player.vimeo.com", "https://vimeo.com"],
-        'img-src': ["'self'", "data:", "https://i.vimeocdn.com"],
-        'style-src': ["'self'", "'unsafe-inline'"],
-      },
-    },
-  },
-  scripts: {
-    registry: {
-      googleTagManager: {
-        id: process.env.NUXT_PUBLIC_GTM_CONTAINER_ID || 'GTM-M4FTLKV3',
-        trigger: 'onNuxtReady',
-      },
-      vimeoPlayer: {
-        trigger: 'onNuxtReady',
-      },
-    },
-  },
+  // render: {
+  //   csp: {
+  //     policies: {
+  //       'default-src': ["'self'"],
+  //       'script-src': [
+  //         "'self'",
+  //         "'unsafe-inline'", // Solo si es necesario
+  //         "https://player.vimeo.com",
+  //         "https://vimeo.com",
+  //       ],
+  //       'frame-src': ["'self'", "https://player.vimeo.com"],
+  //       'connect-src': ["'self'", "https://player.vimeo.com", "https://vimeo.com"],
+  //       'img-src': ["'self'", "data:", "https://i.vimeocdn.com"],
+  //       'style-src': ["'self'", "'unsafe-inline'"],
+  //     },
+  //   },
+  // },
+  // scripts: {
+  //   registry: {
+  //     googleTagManager: {
+  //       id: process.env.NUXT_PUBLIC_GTM_CONTAINER_ID || 'GTM-M4FTLKV3',
+  //       trigger: 'onNuxtReady',
+  //     },
+  //     vimeoPlayer: {
+  //       trigger: 'onNuxtReady',
+  //     },
+  //   },
+  // },
   googleFonts: {
     families: {
       Lato: [100, 300, 400, 700, 900],  // Lato soporta estos pesos
